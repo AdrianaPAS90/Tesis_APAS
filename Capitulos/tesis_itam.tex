@@ -1,0 +1,264 @@
+%% Based on a TeXnicCenter-Template by Tino Weinkauf.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper,onside,11pt,review]{book}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+
+%% Packages
+\usepackage{breakcites}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+\usepackage{picture}
+\usepackage{mathrsfs}
+\usepackage{amssymb,amsthm,amsmath,latexsym}
+%\usepackage[round]{natbib}
+\theoremstyle{plain}
+\newtheorem{teo}{Teorema}
+\newtheorem{prop}[teo]{Proposicion}
+\newtheorem{defi}[teo]{Definicion}
+\newtheorem{obs}[teo]{Observacion}
+\newtheorem{lem}[teo]{Lema}
+\newtheorem{cor}[teo]{Corolario}
+\usepackage[pdftex]{color,graphicx}
+\newcommand{\sgn}{\mathop{\mathrm{sgn}}}
+\usepackage[paperwidth=17cm, paperheight=22.5cm, bottom=2.5cm, right=2.5cm]{geometry}
+\usepackage{algorithm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm} %paquete para s\'imbolo matem\'aticos
+\usepackage[spanish]{babel} %francais, polish, spanish, ...
+\usepackage{enumerate}
+\usepackage{fancyhdr} %%Fancy headings
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+%\usepackage{subfig} %%Subfigures inside a figure
+%\usepackage{pst-all} %%PSTricks - not useable with pdfLaTeX
+\usepackage[pdftex,
+            pdfauthor={Adriana P\'erez Arciniega Sober\'on},
+            pdftitle={T\'iTULO DE LA TESIS},
+            pdfsubject={\'aREA DE LA TESIS},
+            pdfkeywords={PALABRAS CLAVE},
+            pdfproducer={Latex con hyperref},
+            pdfcreator={pdflatex}]{hyperref}
+%\usepackage[ansinew]{inputenc}
+%\usepackage{lmodern} %Type1-font for non-english texts and characters
+%\usepackage{longtable} %%For tables, that exceed one page
+%\usepackage[round]{natbib}
+%\usepackage{subfig} %para poner subfiguras
+%\usepackage[nottoc]{tocbibind}
+\usepackage{url}
+%\usepackage{threeparttable}
+
+%% Espaciado
+\usepackage{setspace}
+%\singlespacing        %% 1-spacing (default)
+\onehalfspacing       %% 1,5-spacing
+%\doublespacing        %% 2-spacing
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{empty} %No headings for the first pages.
+
+\title{Tesis} %Con este nombre se guardar\'a el proyecto en writeLaTex
+
+\begin{titlepage}
+\begin{center}
+
+\textsc{\Large Instituto Tecnol\'ogico Aut\'onomo de M\'exico}\\[4em]
+
+%Figura
+\begin{center}
+	\includegraphics{DocumentosLaTex/ITAM_2016}
+\end{center}
+
+\vspace{4em}
+
+{\sc \huge {\bf T\'itulo}}\\[4em]
+
+\textsc{\large Tesis}\\[1em]
+
+\textsc{que para obtener el t\'itulo}\\[1em]
+
+\textsc{Licenciado en Actuar\'ia}\\[1em]
+
+\textsc{presenta}\\[1em]
+
+\textsc{\Large ADRIANA P\'EREZ ARCINIEGA SOBER\'ON }\\[1em]
+
+\textsc{\large Asesor: ...}
+
+\end{center}
+
+\vspace*{\fill}
+\textsc{M\'exico, D.F. \hspace*{\fill} 2016}
+
+\end{titlepage}
+
+
+%----------------------------------------------------------------------------------------
+%   DECLARACI\'oN
+%----------------------------------------------------------------------------------------
+\thispagestyle{empty}
+\vspace*{\fill}
+\begingroup
+"Con fundamento en los art\'iculos 21 y 27 de la Ley Federal del Derecho de Autor y como titular de los derechos moral y patrimonial de la obra titulada "\textbf{T\'ITULO DE LA TESIS}", otorgo de manera gratuita y permanente al Instituto Tecnol\'ogico Aut\'onomo de M\'exico y a la Biblioteca Ra\'ul Baill\'eres Jr., la autorizaci\'on para que fijen la obra en cualquier medio, incluido el electr\'onico, y la divulguen entre sus usuarios, profesores, estudiantes o terceras personas, sin que pueda percibir por tal divulgaci\'on una contraprestaci\'on".
+
+\centering
+
+\hspace{3em}
+
+\textsc{AUTOR}
+
+\vspace{5em}
+
+\rule[1em]{20em}{0.5pt} % L\'inea para la fecha
+
+\textsc{Fecha}
+ 
+\vspace{8em}
+
+\rule[1em]{20em}{0.5pt} % L\'inea para la firma
+
+\textsc{Firma}
+
+\endgroup
+\vspace*{\fill}
+
+%----------------------------------------------------------------------------------------
+%   DEDICATORIA
+%----------------------------------------------------------------------------------------
+%\pagestyle{empty}
+%\frontmatter
+%
+%\chapter*{}
+%\begin{flushright}
+%\textit{DEDICATORIA}
+%\end{flushright}
+
+
+%----------------------------------------------------------------------------------------
+%   AGRADECIMIENTOS
+%----------------------------------------------------------------------------------------
+\chapter*{Agradecimientos}
+%\markboth{AGRADECIMIENTOS23}{AGRADECIMIENTOS} % encabezado 
+
+Muchas gracias a todos!
+
+
+%----------------------------------------------------------------------------------------
+%   PREFACIO
+%----------------------------------------------------------------------------------------
+%\pagestyle{plain}
+%\chapter*{capitulo0}
+%\markboth{PREFACIO23}{PREFACIO} % encabezado 
+
+%%  Contenido
+%\addtocontents{toc}{\protect\vspace*{\baselineskip}}
+
+%%  Lista de figuras
+%\clearpage
+%\addcontentsline{toc}{chapter}{Lista de Figuras}
+%\listoffigures
+
+%%  Lista de cuadros
+%\clearpage
+%\addcontentsline{toc}{chapter}{Lista de Cuadros}
+%\listoftables
+
+%% Contenido
+%\chapter{capitulo1} 
+
+%\cite{Aalen_CuasalityMediationTime}
+
+%\chapter{Cap3}
+%
+%\citep{Abadie_DifferencesinDifferences}
+%
+%\citeauthor{AbadieGardeazabal_EconCostConflict}
+%
+%\citeyear{Abadie_etal_SyntheticControlComparative}
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\caption{Una gr\'afica....}
+%	\label{fig_ejemplo}
+%		\includegraphics[width=0.97\textwidth]{Figuras/Ejemplo_Figura.jpg}
+%\end{figure}
+%
+%%
+%%	Table 1.
+%%
+%\begin{table}[H]
+%\begin{center}
+%\begin{threeparttable}
+%	\caption{Una tabla}
+%	\label{tab_ejemplo}
+%	{\scriptsize
+%	\begin{tabular}{l c c c c c c c c c}
+%		\toprule
+%		\hline
+%										& \multicolumn{9}{c}{Year}  \\
+%		State		 			& 2003	& 2004	& 2005	& 2006	& 2007	& 2008	& 2009	& 2010	& 2011 \\
+%		\midrul
+%		\hline
+%		\hline
+%		Uno 		& 1.1	& 1.0	& 1.0	& 1.1	& 1.1	& 1.0	& 1.1	& 1.1	& 1.1 \\
+%		Dos 		& 3.0	& 3.0	& 3.0	& 3.0	& 2.9	& 2.8	& 2.8	& 2.7	& 2.7 \\
+%		\bottomrul
+%		\hline
+%	\end{tabular}
+%	\begin{tablenotes}
+%		\tiny
+%		\item Source: ...
+%		\item Note: ...
+%	\end{tablenotes}
+%	}			
+%\end{threeparttable}
+%\end{center}
+%\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Capitulos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{Cap1}
+\include{Cap2}
+\include{Cap3}
+\include{Cap4}
+\include{Cap5}
+%
+%\input{capitulo1}
+%
+%\input{capitulo2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Bibliografia
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\addcontentsline{toc}{chapter}{Bibliograf\'ia} %'Bibliography' into toc
+%\nocite{*} %Even non-cited BibTeX-Entries will be shown.
+\bibliographystyle{plainnat} %Style of Bibliography: plain / apalike / amsalpha / ...
+\bibliography{bib} %You need a file 'literature.bib' for this.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Apendices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\appendix
+
+%\input{apendice1}
+
+
+\end{document}
+

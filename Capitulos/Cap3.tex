@@ -1,0 +1,57 @@
+\chapter{Inferencia y Predicci\'on}
+\section{Introducci\'on}
+
+\section{Verosimilitud Extendida}
+De los par\'ametros y de las variables latentes.
+\begin{eqnarray}
+V(\{\theta_j\},\{\gamma_j\},\{d_j\},\{c_j\}) &=& f(d_1|\theta_1)f(c_1|d_1,\gamma_1)f(\gamma_1) \times\nonumber\\
+&& \times \prod_{j=2}^{N(t)} f(d_j|\theta_j)f(\theta_j|d_{j-1})f(c_j|d_j,\gamma_j)f(\gamma_j|c_{j-1})\nonumber
+\end{eqnarray}
+Dado el uso de las variables latentes, no existe un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos computacionales, por ejemplo el algoritmo EM o el Gibbs Sampler. En este trabajo se utilizar\'a el Gibbs Sampler...\\
+
+\section{Algoritmo Gibbs}
+Modelo de inferencia y el algoritmo JAGS.\\
+Entre los m\'etodos computacionales que han ayudado al desarrollo de la estad\'istica tenemos al Muestreador de Gibb, que es una t\'ecnica que genera variables aleatorias indirectamente de distribuciones marginales sin tener que calcular la densidad. Este algoritmo se basa en las propiedades principales de las Cadenas de Markov. Aunque normalmente realcionado con la estad\'istica Bayesiana, el Muestreador de Gibb tambi\'en es \'util en la visi\'on cl\'asica de la estad\'istica.\\
+\\
+Supongamos que tenemos una distribuci\'on conjunta $f(x,y_1,y_2,...,y_p)$\\
+\[f(x)=\int \cdots \int f(x,y_1,y_2,...,y_p) dy_1,dy_2,...,dy_p\]
+Y nos interesan las caracter\'isticas de la densidad marginal como la media o la varianza de $x$, con el Muestreador de Gibb podemos generar una muestra $X_1,...,X_m \sim f(x)$ sin requerir calcular $f(x)$ directamente y obteniendo la media o la varianza con suficiente precisi\'on.\\
+\\
+Para explorar con detalle como funciona el Muestreador de Gibb, se toman dos variables aleatorias $(X,Y)$ y el Muestreador de Gibb genera una muestra de $f(x)$ muestreando las distribuciones condicionales $f(x|y)$ y $f(y|x)$ que normalmente son conocidas en los modelos estad\'isticos. Esto se logra generando una "secuencia de Gibb" de variables aleatorias donde los valores iniciales son especificados y el resto se obtiene de manera iterativa generando as\'i valores para\\
+\begin{align*}
+X'_j \sim f(x|Y'_j=y'_j)\\
+Y'_{j+1} \sim f(y|X'_j=x'_j)
+\end{align*}
+Esto es lo que se llama muestreo de Gibb, si $k \rightarrow \infty$ la distribuci\'on de $X'_k$ converger\'a con la verdadera distribuci\'on marginal de $X$ ($f(x)$).\\
+\\
+El Muestreador de Gibb se puede pensar como una implementaci\'on pr\'actica del conocimiento de que el conocimiento de las distribuciones marginales es suficiente para conocer la distribici\'on conjunta y aunque esto parezca claro para casos bivariados no es tan directo para los casos multivariados.\\
+\\
+Suponemos dos variables aleatorias $X,Y$, de las cuales sabemos sus distribuciones condicionales $f_{X|Y}(x|y)$ y $f_{Y|X}(y|x)$. A partir de estas podr\'iamos calcular la funci\'on marginal de $X$ y la distribuci\'on conjunta de ambas variables, mediante  el siguiente argumento:\\
+\[f_X(x)=\int f_{XY}(x,y)\quad dy\]
+donde $f_{XY}(x,y)$ a\'un es desconocida. Si usamos el hecho que $f_{XY}(x,y)=f_{X|Y}(x|y)f_Y(y)$ tendr\'iamos que,\\
+\[f_X(x)=\int f_{X|Y}(x|y)f_Y(y) \quad dy\]
+asimismo, si sustituimos $f_Y(y)$,
+\begin{eqnarray*}
+f_X(x) &=& \int f_{X|Y}(x|y) f_{Y|X}(y|t) f_X(t) \quad dt dy\\
+       &=& \int [ \int  f_{X|Y}(x|y)f_{Y|X}(y|t) dy]  f_X(t) dt\\
+       &=& \int h(x,t) f_X(t) dt
+\end{eqnarray*}
+Esto se llama una ecuaci\'on integral con un punto fijo que tiene como soluci\'on $f_X(x)$. Esta ecuaci\'on es una forma limitada de la iteraci\'on de Gibbs, ilustrando como las distribuciones condicionales producen una distribuci\'on marginal. Aunque la distribuci\'on conjunta de $X,Y$ determinan las condicionales y las marginales, no siempre las condicionales determinen de manera tan directa la distribuci\'on marginal.\\
+\\
+En cuantas m\'as variables existan, el problema se vuelve m\'as complejo pues la relaci\'on entre las condicionales, marginales y conjuntas se vuelve m\'as intrincada. Por ejemplo, la relaci\'on $condicional \times marginal = conjunta$ no se sontiene para todas las condicionales y marginales. Pero se pueden hacer varios conjuntos de variables para construir las ecuaciones integrales con un punto fijo para calcular la distribuci\'on marginal de inter\'es.\\
+\\
+Supongamos que tenemos las variables aleatorias $X,Y,Z$ y queremos la distribuci\'on $f_X(x)$, la ecuaci\'on integral de punto fijo si tomamos $(Y,Z)$ como una sola variable, lo que resultar\'ia en,\\
+\[f_X(x)= \int [ \int \int f_{X|YX}(x|y,z)f_{YZ|X}(y,z|t)dy dz] f_X(t) dt\]
+De esta manera, muestreando iterativamente de $f_{X|YZ}$ y $f_{YZ|X}$ resultar\'ian en una serie de variables aleatorias que convergen en $f_X(x)$. Por otro lado, el Muestreador de Gibb muestrear\'ia iterativamente las distribuciones $f_{X|YZ}, f_{Y|XZ}, f_{Z|X}$ y en la j-\'esima iteraci\'on tendr\'iamos que,\\
+\begin{align*}
+X'_j \sim f(x|Y'_j = y'_j, Z'_j=z'_j)\\
+Y'_{j+1} \sim f(y|X'_j=x'_j, Z'_j=z'_j)\\
+Z'_{j+1} \sim f(z|X'_j=x'_j, Y'_{j+1}=y'_{j+1})
+\end{align*}
+Este esquema de iteraciones nos produce una secuencia de Gibbs,\\
+\[Y'_0,Z'_0,X'_0,Y'_1,Z'_1,X'_1,...\]
+con la propiedad de que ente m\'as grande es la $k$, $X'_k=x'_k$ es un punto de la distribuci\'on marginal $f(x)$ y resolver\'a la ecuaci\'on integral con punto fijo.\\
+\\
+En la estad\'istica bayesiana, el Muestreador de Gibbs se utiliza para calcular la distribuci\'on posterior mientras que en la estad\'istica cl\'asica se utiliza para calcular la funci\'on de verosimilitud. Es importante mencionar que tanto el Muestreador de Gibbsy el algoritmo EM tienen en com\'un el uso de una estructura subyacente, o variables no observables.\\
+\\
+La utilidad del Muestreador de Gibbs es m\'as evidente con problemas de mayor complejidad pues ahorra muchos c\'alculos engorrosos de una manera m\'as elegante y con igual de precisi\'on; adem\'as de su potencial pr\'actico.
