@@ -1,0 +1,129 @@
+\begin{thebibliography}{18}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[AHRQ()]{MEPSSummary}
+AHRQ.
+\newblock Medical expenditure panel survey, meps.
+\newblock
+  \url{https://meps.ahrq.gov/mepsweb/data_stats/quick_tables_search.jsp?component=2&subcomponent=1}.
+\newblock Accesed: 30-01-2017.
+
+\bibitem[AmericanDiabetesAssociation et~al.(2013)]{american2013economic}
+AmericanDiabetesAssociation et~al.
+\newblock Economic costs of diabetes in the us in 2012.
+\newblock \emph{Diabetes care}, 36\penalty0 (4):\penalty0 1033--1046, 2013.
+
+\bibitem[Barcelo et~al.(2003)Barcelo, Aedo, Rajpathak, and
+  Robles]{barcelo2003cost}
+Alberto Barcelo, Cristian Aedo, Swapnil Rajpathak, and Sylvia Robles.
+\newblock The cost of diabetes in latin america and the caribbean.
+\newblock \emph{Bulletin of the world health organization}, 81\penalty0
+  (1):\penalty0 19--27, 2003.
+
+\bibitem[Barraza-Llor{\'e}ns et~al.(2015)Barraza-Llor{\'e}ns,
+  Guajardo-Barr{\'o}n, Pic{\'o}, Garc{\'\i}a, Hern{\'a}ndez, Mora, Athi{\'e},
+  Crable, and Urtiz]{barraza2015carga}
+M~Barraza-Llor{\'e}ns, V~Guajardo-Barr{\'o}n, J~Pic{\'o}, R~Garc{\'\i}a,
+  C~Hern{\'a}ndez, F~Mora, J~Athi{\'e}, E~Crable, and A~Urtiz.
+\newblock Carga econ{\'o}mica de la diabetes mellitus en m{\'e}xico, 2013.
+\newblock \emph{M{\'e}xico, DF: Funsalud}, 2015.
+
+\bibitem[Bola{\~n}os et~al.(2010)Bola{\~n}os, Shigematsu, Ru{\'\i}z,
+  M{\'a}rquez, and {\'A}vila]{bolanos2010costos}
+Rosibel de los {\'A}ngeles~Rodr{\'\i}guez Bola{\~n}os, Luz Myriam~Reynales
+  Shigematsu, Jorge Alberto~Jim{\'e}nez Ru{\'\i}z, Sergio Arturo~Ju{\'a}rez
+  M{\'a}rquez, and Mauricio~Hern{\'a}ndez {\'A}vila.
+\newblock Costos directos de atenci{\'o}n m{\'e}dica en pacientes con diabetes
+  mellitus tipo 2 en m{\'e}xico: an{\'a}lisis de microcosteo.
+\newblock \emph{Rev Panam Salud Publica}, 28\penalty0 (6):\penalty0 412--20,
+  2010.
+
+\bibitem[CDC()]{CDCStatistics}
+CDC.
+\newblock National diabetes statistics report, 2014.
+\newblock
+  \url{https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf}.
+\newblock Accesed: 30-01-2017.
+
+\bibitem[Cichon et~al.(1999)Cichon, Newbrander, Yamabana, Weber, Normand, Dror,
+  and Preker]{cichon1999modelling}
+Michael Cichon, William Newbrander, Hiroshi Yamabana, Axel Weber, Charles
+  Normand, David Dror, and Alexander Preker.
+\newblock \emph{Modelling in health care finance: A compendium of quantitative
+  techniques for health care financing}.
+\newblock International Labour Organization, 1999.
+
+\bibitem[Daley and Vere-Jones(2003)]{daley2003}
+D.J. Daley and D.J. Vere-Jones.
+\newblock \emph{An Introduction to the Theory of Point Processes: Volume I:
+  Elementary Theory and Methods}.
+\newblock 2nd edition edition, 2003.
+
+\bibitem[Fader and Hardie(2013)]{fader2013gamma}
+Peter~S Fader and Bruce~GS Hardie.
+\newblock The gamma-gamma model of monetary value.
+\newblock 2013.
+
+\bibitem[Federaci\'on Internacional de~la
+  Diabetes(2015)]{atlas2015international}
+Brussels Federaci\'on Internacional de~la Diabetes.
+\newblock Atlas idf diabetes, 2015.
+\newblock \emph{Available from:[Last accessed: Enero 2017]}, 2015.
+
+\bibitem[Guti{\'e}rrez et~al.()Guti{\'e}rrez, Rivera-Dommarco, Shamah-Levy,
+  Villalpando-Hern{\'a}ndez, Franco, Cuevas-Nasu, et~al.]{gutierrezencuesta}
+JP~Guti{\'e}rrez, J~Rivera-Dommarco, T~Shamah-Levy,
+  S~Villalpando-Hern{\'a}ndez, A~Franco, L~Cuevas-Nasu, et~al.
+\newblock Encuesta nacional de salud y nutrici{\'o}n. ensanut 2012 resultados
+  nacionales. cuernavaca, m{\'e}xico: Instituto nacional de salud p{\'u}blica
+  (mx), 2012 [accedido en enero 2017].
+
+\bibitem[Hahn and Zhang(2012)]{hahn2012exchangeable}
+Marjorie~G Hahn and Gang Zhang.
+\newblock Exchangeable random variables.
+\newblock \emph{High Dimensional Probability}, 43:\penalty0 111, 2012.
+
+\bibitem[Hex et~al.(2012)Hex, Bartlett, Wright, Taylor, and
+  Varley]{hex2012estimating}
+N~Hex, C~Bartlett, D~Wright, M~Taylor, and D~Varley.
+\newblock Estimating the current and future costs of type 1 and type 2 diabetes
+  in the uk, including direct health costs and indirect societal and
+  productivity costs.
+\newblock \emph{Diabetic Medicine}, 29\penalty0 (7):\penalty0 855--862, 2012.
+
+\bibitem[OrganizacionMundialdelaSalud()]{FactSheetDiabetes}
+OrganizacionMundialdelaSalud.
+\newblock Diabetes. fact sheet.
+\newblock \url{http://www.who.int/mediacentre/factsheets/fs312/en/}.
+\newblock Accesed: 20-01-2017.
+
+\bibitem[Paik~Schoenberg(2000)]{intropp}
+Frederic Paik~Schoenberg.
+\newblock \emph{Introduction to Point Processes}.
+\newblock 2000.
+
+\bibitem[Pitt et~al.(2002)Pitt, Chatfield, and Walker]{pitt2002constructing}
+Michael~K Pitt, Chris Chatfield, and Stephen~G Walker.
+\newblock Constructing first order stationary autoregressive models via latent
+  processes.
+\newblock \emph{Scandinavian Journal of Statistics}, 29\penalty0 (4):\penalty0
+  657--663, 2002.
+
+\bibitem[Resnick(1999)]{resnickpath}
+Sidney~I. Resnick.
+\newblock \emph{A Probability Path}.
+\newblock Birkhauser, 1999.
+
+\bibitem[Zhuo et~al.(2014)Zhuo, Zhang, Barker, Albright, Thompson, and
+  Gregg]{zhuo2014lifetime}
+Xiaohui Zhuo, Ping Zhang, Lawrence Barker, Ann Albright, Theodore~J Thompson,
+  and Edward Gregg.
+\newblock The lifetime cost of diabetes and its implications for diabetes
+  prevention.
+\newblock \emph{Diabetes care}, 37\penalty0 (9):\penalty0 2557--2564, 2014.
+
+\end{thebibliography}
