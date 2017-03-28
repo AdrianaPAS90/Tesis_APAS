@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{21}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -42,6 +42,12 @@ Rosibel de los {\'A}ngeles~Rodr{\'\i}guez Bola{\~n}os, Luz Myriam~Reynales
 \newblock \emph{Rev Panam Salud Publica}, 28\penalty0 (6):\penalty0 412--20,
   2010.
 
+\bibitem[Casella and George(1992)]{casella1992explaining}
+George Casella and Edward~I George.
+\newblock Explaining the gibbs sampler.
+\newblock \emph{The American Statistician}, 46\penalty0 (3):\penalty0 167--174,
+  1992.
+
 \bibitem[CDC()]{CDCStatistics}
 CDC.
 \newblock National diabetes statistics report, 2014.
@@ -62,6 +68,12 @@ D.J. Daley and D.J. Vere-Jones.
 \newblock \emph{An Introduction to the Theory of Point Processes: Volume I:
   Elementary Theory and Methods}.
 \newblock 2nd edition edition, 2003.
+
+\bibitem[Dempster et~al.(1977)Dempster, Laird, and Rubin]{dempster1977maximum}
+Arthur~P Dempster, Nan~M Laird, and Donald~B Rubin.
+\newblock Maximum likelihood from incomplete data via the em algorithm.
+\newblock \emph{Journal of the royal statistical society. Series B
+  (methodological)}, pages 1--38, 1977.
 
 \bibitem[Fader and Hardie(2013)]{fader2013gamma}
 Peter~S Fader and Bruce~GS Hardie.
@@ -86,6 +98,11 @@ JP~Guti{\'e}rrez, J~Rivera-Dommarco, T~Shamah-Levy,
 Marjorie~G Hahn and Gang Zhang.
 \newblock Exchangeable random variables.
 \newblock \emph{High Dimensional Probability}, 43:\penalty0 111, 2012.
+
+\bibitem[Held and Saban{\'e}s~Bov{\'e}(2014)]{held2014applied}
+Leonhard Held and Daniel Saban{\'e}s~Bov{\'e}.
+\newblock \emph{Applied statistical inference}, volume~10.
+\newblock Springer, 2014.
 
 \bibitem[Hex et~al.(2012)Hex, Bartlett, Wright, Taylor, and
   Varley]{hex2012estimating}

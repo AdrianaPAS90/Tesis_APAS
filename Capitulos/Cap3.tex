@@ -1,19 +1,65 @@
 \chapter{Inferencia y Predicci\'on}
 \section{Introducci\'on}
-
+En el cap\'itulo anterior se describi\'o el modelo general de probabilidad que describe el proceso de duraciones y costos en un padecimiento cr\'onico degenerativo, por lo que el siguiente paso ser\'ia hacer inferencia sobre el mismo. El objetivo de hacer inferencia es predecir futuras observaciones en base a los datos ya observados. En este cap\'itulo se sentar\'an las bases para realizar esta inferencia.\\
+\\
+El primer paso para realizar inferencia es la construcci\'on de la funci\'on de verosimilitud, en este caso extendida a las variables latentes y a los par\'ametros correspondientes a sus distribuciones. Una vez que se determinaron las funciones de verosimilitud, se analizan los m\'etodos de estimaci\'on que se podr\'ian usar para la predicci\'on de futuras observaciones. De este modo se puede completar la parte te\'orica de este trabajo de investigaci\'on.
 \section{Verosimilitud Extendida}
-De los par\'ametros y de las variables latentes.
+Como especificado en la secci\'on anterior, una vez que el modelo de probabilidad describe de manera precisa los datos del problema podemos empezar a hacer inferencia sobre observaciones futuras. La base sobre la que se puede hacer inferencia en base a los datos ya observados es la funci\'on de verosimilitud de la funci\'on de probabilidad.\\
+\\
+La funci\'on de verosimilitud, seg\'un \cite{held2014applied}, se define como
+\begin{defi}
+La funci\'on de verosimilitud $V(\theta)$ es la funci\'on masa o la funci\'on de densidad de los datos observados $x$, entendidos en funci\'on del par\'ametro desconocido $\theta$.
+\end{defi}
+En este caso las variables observables se definen en funci\'on de las variables latentes, estas a su vez se describen en funci\'on de sus par\'ametros. De esto se desprende la noci\'on de verosimilitud extendida para incluir las variables latentes. Como se especifica en \cite{pitt2002constructing}, la construcci\'on de la funci\'on de verosimilitud resulta sencilla, incluso intuitiva. Sin embargo, la estimaci\'on de los par\'ametros mediante m\'axima verosimilitud no es tan sencilla pues no tiene una soluci\'on que se pueda solucionar de manera anal\'itica cerrada. Usando esta construcci\'on, se escribe una funci\'on de verosimilitud para el modelo general de probabilidad de duraciones y costos\\
 \begin{eqnarray}
 V(\{\theta_j\},\{\gamma_j\},\{d_j\},\{c_j\}) &=& f(d_1|\theta_1)f(c_1|d_1,\gamma_1)f(\gamma_1) \times\nonumber\\
 && \times \prod_{j=2}^{N(t)} f(d_j|\theta_j)f(\theta_j|d_{j-1})f(c_j|d_j,\gamma_j)f(\gamma_j|c_{j-1})\nonumber
 \end{eqnarray}
-Dado el uso de las variables latentes, no existe un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos computacionales, por ejemplo el algoritmo EM o el Gibbs Sampler. En este trabajo se utilizar\'a el Gibbs Sampler...\\
+Los par\'ametros a estimar son aquellos correspondientes a las variables latentes y a las variables observables del modelo. Dado el uso de las variables latentes no existir\'a un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos num\'ericos. \cite{pitt2002constructing} especifica que la estimaci\'on de m\'axima verosimilitud puede resolverse mediante el algoritmo EM, aunque tambi\'en, debido a que las densidades son dos condicionales de la densidad conjunta puede ligarse con el Muestreador Gibbs.\\
+\\
+El algoritmo EM es un algoritmo para calcular el estimador de m\'axima verosimilitud, que de acuerdo con \cite{held2014applied}, se define como
+\begin{defi}
+El Estimador de M\'axima Verosimilitud (EMV) $\hat{\theta}_{MV}$ del par\'ametro $\theta$ se obtiene maximizando la funci\'on de verosimilitud.
+\begin{align*}
+\hat{\theta}_{MV}=max_{\theta \in \Theta} L(\theta)
+\end{align*} 
+\end{defi}
+Seg\'un \cite{dempster1977maximum} el algoritmo EM calcula el EML mediante iteraciones, cada iteraci\'on consiste en un paso d\'onde se calcula la esperanza y en otro  se maximiza la misma, de ah\'i el nombre de EM. Este algoritmo se relaciona con las variables latentes suponiendo dos variables $x$ y $y$ las cuales se relacionan $x \to y(x)$, donde $y$ son los datos observables.\\
+\\
+De este modo, an\'alogamente a lo expresado en el cap\'itulo anterior por \cite{pitt2002constructing}, se proponen las siguientes funciones de densidad $f(x|\phi)$ y $g(y|\phi)$; en las cuales, de acuerdo a \cite{dempster1977maximum} los datos completos (variables latentes) $f(x|\cdot)$ se relacionan con los datos incompletos (variables observadas) $g(y|\cdot)$ mediante
+\begin{align*}
+g(y|\phi)=\int_{\chi(y)} f(x|\phi)dx
+\end{align*}
+El algoritmo EM se dedica a encontrar un valor de $\phi$ que maximice $g(y|\phi)$ dada la $y$ observada usando la familia asociada de $f(x|\phi)$. Una de las caracterizaciones m\'as simples supone $\phi^{(p)}$ es el valor actual de $\phi$ despu\'es de $p$ iteraciones y $t(x)$ como el estad\'istico suficientes de los datos completos, es decir, el estimador de la variable latente; por lo que la siguiente iteraci\'on se puede desglosar en los siguientes dos pasos:
+\begin{itemize}
+\item Paso E: Estimar los estad\'isticos suficientes de los datos completos.
+	\begin{align*}
+	t^{(p)}=E[t(x)|y,\phi^{(p)}]
+	\end{align*}
+\item Paso M: Determinar $\phi^{(p+1)}$ como soluci\'on a la ecuaci\'on
+	\begin{align*}
+	E[t(x)|\phi]=t^{(p)}
+	\end{align*}
+\end{itemize}
+Es decir, que si suponemos que $t^{(p)}$ es el estad\'istico suficiente calculado de $x$ observada en la distribuci\'on $f(x|\phi)$ entonces la ecuaci\'on definida en el Paso M se define como el EMV. Este concepto se hace general al definir la siguiente funci\'on
+\begin{align*}
+Q(\phi'|\phi)=E[log f(x|\phi')|y,\phi]
+\end{align*}
+Esta funci\'on se asume que existe para toda pareja $(\phi',\phi)$. Se define la iteraci\'on EM para $\phi^{(p)} \to \phi^{(p+1)}$,
+\begin{itemize}
+\item Calcular $Q(\phi,\phi^{(p)})$.
+\item Determinar $\phi^{(p+1)}$ tal que maximice $Q(\phi,\phi^{(p)})$.
+\end{itemize}
+La idea central es tomar una $\phi'$ que maximice $log f(x|\phi)$, dado que esta distribuci\'on y su correspondiente logaritmo no necesariamente se conoce, se puede maximizar los datos observados y $\phi^{(p)}$.\\
+\\
+El algoritmo EM es muy \'util pues por su estructura iterativa puede dar resultados a modelos de probabilidad muy complejos, adem\'as de que al igual que el Muestreador de Gibbs, utiliza una estructura subyacente o de variables latentes. En la siguiente secci\'on se explorar\'a con detalle el Muestreador de Gibbs y sus implicaciones con el modelo general de probabilidad relativo a este trabajo.
 
 \section{Algoritmo Gibbs}
-Modelo de inferencia y el algoritmo JAGS.\\
-Entre los m\'etodos computacionales que han ayudado al desarrollo de la estad\'istica tenemos al Muestreador de Gibb, que es una t\'ecnica que genera variables aleatorias indirectamente de distribuciones marginales sin tener que calcular la densidad. Este algoritmo se basa en las propiedades principales de las Cadenas de Markov. Aunque normalmente realcionado con la estad\'istica Bayesiana, el Muestreador de Gibb tambi\'en es \'util en la visi\'on cl\'asica de la estad\'istica.\\
+Como mencionado en la secci\'on anterior, la estimaci\'on de par\'ametros del modelo general de probabilidad que se utilizar\'a en este trabajo no se puede hacer a trav\'es de m\'etodos anal\'iticos tradicionales, por lo que se utilizar\'an m\'etodos num\'ericos. Entre estos se encuentran el algoritmo EM y el Muestreador de Gibbs, el algoritmo EM fue descrito en la secci\'on anterior y aunque \'util para el an\'alisis del modelo presentado, el Muestreador de Gibbs tiene una interpretaci\'on m\'as simple.\\
 \\
-Supongamos que tenemos una distribuci\'on conjunta $f(x,y_1,y_2,...,y_p)$\\
+Normalmente el Muestreador Gibbs se asocia con la estad\'istica bayesiana aunque puede ser \'util tambi\'en en la visi\'on cl\'asica de la estad\'istica, seg\'un \cite{casella1992explaining} este algoritmo es una t\'ecnica que genera variables aleatorias indirectamente de distribuciones marginales sin tener que calcular la densidad, debido a que se basa en las propiedades principales de las Cadenas de Markov como la estacionareidad para simplificar c\'alculos y tener estimados m\'as precisos.\\
+\\
+Siguiendo la ilustraci\'on de \cite{casella1992explaining}, supongamos que tenemos una distribuci\'on conjunta $f(x,y_1,y_2,...,y_p)$\\
 \[f(x)=\int \cdots \int f(x,y_1,y_2,...,y_p) dy_1,dy_2,...,dy_p\]
 Y nos interesan las caracter\'isticas de la densidad marginal como la media o la varianza de $x$, con el Muestreador de Gibb podemos generar una muestra $X_1,...,X_m \sim f(x)$ sin requerir calcular $f(x)$ directamente y obteniendo la media o la varianza con suficiente precisi\'on.\\
 \\
@@ -52,6 +98,6 @@ Este esquema de iteraciones nos produce una secuencia de Gibbs,\\
 \[Y'_0,Z'_0,X'_0,Y'_1,Z'_1,X'_1,...\]
 con la propiedad de que ente m\'as grande es la $k$, $X'_k=x'_k$ es un punto de la distribuci\'on marginal $f(x)$ y resolver\'a la ecuaci\'on integral con punto fijo.\\
 \\
-En la estad\'istica bayesiana, el Muestreador de Gibbs se utiliza para calcular la distribuci\'on posterior mientras que en la estad\'istica cl\'asica se utiliza para calcular la funci\'on de verosimilitud. Es importante mencionar que tanto el Muestreador de Gibbsy el algoritmo EM tienen en com\'un el uso de una estructura subyacente, o variables no observables.\\
+En la estad\'istica bayesiana, el Muestreador de Gibbs se utiliza para calcular la distribuci\'on posterior mientras que en la estad\'istica cl\'asica se utiliza para calcular la funci\'on de verosimilitud.\\
 \\
 La utilidad del Muestreador de Gibbs es m\'as evidente con problemas de mayor complejidad pues ahorra muchos c\'alculos engorrosos de una manera m\'as elegante y con igual de precisi\'on; adem\'as de su potencial pr\'actico.
