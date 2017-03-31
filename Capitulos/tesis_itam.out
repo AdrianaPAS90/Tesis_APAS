@@ -11,7 +11,7 @@
 \BOOKMARK [0][-]{chapter.3}{Inferencia y Predicci\363n}{}% 11
 \BOOKMARK [1][-]{section.3.1}{Introducci\363n}{chapter.3}% 12
 \BOOKMARK [1][-]{section.3.2}{Verosimilitud Extendida}{chapter.3}% 13
-\BOOKMARK [1][-]{section.3.3}{Algoritmo Gibbs}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.3}{El Muestreador de Gibbs}{chapter.3}% 14
 \BOOKMARK [0][-]{chapter.4}{Ilustraci\363n del Modelo con Datos}{}% 15
 \BOOKMARK [1][-]{section.4.1}{Diabetes Mellitus en el mundo: Costos y Prevalencia}{chapter.4}% 16
 \BOOKMARK [1][-]{section.4.2}{Descripci\363n de los datos}{chapter.4}% 17

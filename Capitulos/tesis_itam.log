@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.8.4)  29 MAR 2017 13:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.8.4)  30 MAR 2017 18:15
 entering extended mode
 **./tesis_itam.tex
 (tesis_itam.tex
@@ -1675,13 +1675,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 96--98
 
  []
 
-)
-Underfull \hbox (badness 10000) in paragraph at lines 98--239
+
+LaTeX Warning: Citation `plummer2003jags' on page 28 undefined on input line 10
+5.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--106
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--239
+Underfull \hbox (badness 10000) in paragraph at lines 98--106
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--106
 
  []
 
@@ -1689,55 +1698,58 @@ Underfull \hbox (badness 10000) in paragraph at lines 98--239
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 239.
- [28]
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 239.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 239.
+(babel)             in language  on input line 106.
+ [28])
+Underfull \hbox (badness 10000) in paragraph at lines 110--239
 
+ []
+
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 239.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 239.
 [29]
 \openout2 = `Cap4.aux'.
 
@@ -2425,15 +2437,25 @@ LaTeX Info: Redefining \% on input line 24.
 (Cap5.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 263.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 263.
-Package rerunfilecheck Info: File `tesis_itam.out' has not changed.
-(rerunfilecheck)             Checksum: 2E5D8F204E506CFFE1FE76ECCA05AE0B;1716.
+
+
+Package rerunfilecheck Warning: File `tesis_itam.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `tesis_itam.out':
+(rerunfilecheck)             Before: 2E5D8F204E506CFFE1FE76ECCA05AE0B;1716
+(rerunfilecheck)             After:  479B8887BE79E052A58F7E1873E20ABD;1724.
+
+LaTeX Warning: There were undefined references.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 263.
  ) 
 Here is how much of TeX's memory you used:
- 9307 strings out of 493335
- 135901 string characters out of 3136684
+ 9308 strings out of 493335
+ 135918 string characters out of 3136684
  260267 words of memory out of 3000000
- 12525 multiletter control sequences out of 15000+200000
+ 12526 multiletter control sequences out of 15000+200000
  20538 words of font info for 54 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  36i,14n,43p,1731b,474s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2460,7 +2482,7 @@ mr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6
 C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/
 Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb>
 
-Output written on tesis_itam.pdf (44 pages, 355525 bytes).
+Output written on tesis_itam.pdf (44 pages, 356695 bytes).
 PDF statistics:
  903 PDF objects out of 1000 (max. 8388607)
  108 named destinations out of 1000 (max. 500000)

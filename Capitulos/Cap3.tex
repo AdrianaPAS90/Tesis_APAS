@@ -54,7 +54,7 @@ La idea central es tomar una $\phi'$ que maximice $log f(x|\phi)$, dado que esta
 \\
 El algoritmo EM es muy \'util pues por su estructura iterativa puede dar resultados a modelos de probabilidad muy complejos, adem\'as de que al igual que el Muestreador de Gibbs, utiliza una estructura subyacente o de variables latentes. En la siguiente secci\'on se explorar\'a con detalle el Muestreador de Gibbs y sus implicaciones con el modelo general de probabilidad relativo a este trabajo.
 
-\section{Algoritmo Gibbs}
+\section{El Muestreador de Gibbs}
 Como mencionado en la secci\'on anterior, la estimaci\'on de par\'ametros del modelo general de probabilidad que se utilizar\'a en este trabajo no se puede hacer a trav\'es de m\'etodos anal\'iticos tradicionales, por lo que se utilizar\'an m\'etodos num\'ericos. Entre estos se encuentran el algoritmo EM y el Muestreador de Gibbs, el algoritmo EM fue descrito en la secci\'on anterior y aunque \'util para el an\'alisis del modelo presentado, el Muestreador de Gibbs tiene una interpretaci\'on m\'as simple.\\
 \\
 Normalmente el Muestreador Gibbs se asocia con la estad\'istica bayesiana aunque puede ser \'util tambi\'en en la visi\'on cl\'asica de la estad\'istica, seg\'un \cite{casella1992explaining} este algoritmo es una t\'ecnica que genera variables aleatorias indirectamente de distribuciones marginales sin tener que calcular la densidad, debido a que se basa en las propiedades principales de las Cadenas de Markov como la estacionareidad para simplificar c\'alculos y tener estimados m\'as precisos.\\
@@ -99,3 +99,14 @@ Este esquema de iteraciones nos produce una secuencia de Gibbs,\\
 con la misma propiedad de convergencia que en el caso bivariado, ente m\'as grande es la $k$, $X'_k=x'_k$ es un punto de la distribuci\'on marginal $f(x)$.\\
 \\
 De este modo queda evidenciada la utilidad del Muestreador de Gibbs en el ahorro de c\'alculos y la precisi\'on de sus resultados. Como mencionado en la secci\'on anterior, esta t\'ecnica inferencial es muy \'util tanto en la estad\'istica bayesiana como en la cl\'asica, en la primera para calcular la distribuci\'on posterior y en la \'ultima, para calcular la funci\'on de verosimilitud.\\
+\\
+Para la implementaci\'on del Muestreador de Gibbs en este trabajo se utilizar\'a el programa JAGS (Solo Otro Muestreador de Gibbs, por sus siglas en ingl\'es). Este programa es una extensi\'on del programa BUGS (Inferencia Bayesiana Usando el Muestreador de Gibbs, por sus siglas en ingl\'es), que normalmente es utilizado para la exploraci\'on de modelos Markov multivariados en el contexto de estad\'istica actuarial.\\
+\\
+Para lograr expresar estos problemas con BUGS, explicado por sus creadores \cite{plummer2003jags}, se necesitan tomar en cuenta dos distribuciones:
+\begin{itemize}
+\item Una distribuci\'on que describa la probabilidad de estar en el estado $j$ en el tiempo $t$ dado que el sujeto estaba en el estado $i$ al tiempo $0$.
+\item Una distribuci\'on de supervivencia que describa el tiempo en un estado absorbente, que bien, es conocida o censorada a la derecha.
+\end{itemize}
+La necesidad de estas distribuciones aunado a la necesidad de una herramienta que ayude a explorar modelos gr\'aficos es lo que da origen a JAGS.\\
+\\
+De este modo, se establece no solo las bases para la inferencia y predicci\'on de futuras observaciones en base a la verosimilud extendida y la resoluci\'on de su funci\'on sino tambi\'en la implementaci\'on num\'erica de la misma. Una vez que se definieron estas herramientas, lo que resta es la adaptaci\'on del modelo a la ilustraci\'on con los datos, esto se explorar\'a en el siguiente cap\'itulo.  
