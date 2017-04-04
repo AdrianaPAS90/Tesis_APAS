@@ -1,4 +1,4 @@
-\begin{thebibliography}{21}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -86,6 +86,12 @@ Brussels Federaci\'on Internacional de~la Diabetes.
 \newblock Atlas idf diabetes, 2015.
 \newblock \emph{Available from:[Last accessed: Enero 2017]}, 2015.
 
+\bibitem[Gelman et~al.(2014)Gelman, Carlin, Stern, and
+  Rubin]{gelman2014bayesian}
+Andrew Gelman, John~B Carlin, Hal~S Stern, and Donald~B Rubin.
+\newblock \emph{Bayesian data analysis}, volume~2.
+\newblock Chapman \& Hall/CRC Boca Raton, FL, USA, 2014.
+
 \bibitem[Guti{\'e}rrez et~al.()Guti{\'e}rrez, Rivera-Dommarco, Shamah-Levy,
   Villalpando-Hern{\'a}ndez, Franco, Cuevas-Nasu, et~al.]{gutierrezencuesta}
 JP~Guti{\'e}rrez, J~Rivera-Dommarco, T~Shamah-Levy,
@@ -112,6 +118,12 @@ N~Hex, C~Bartlett, D~Wright, M~Taylor, and D~Varley.
   productivity costs.
 \newblock \emph{Diabetic Medicine}, 29\penalty0 (7):\penalty0 855--862, 2012.
 
+\bibitem[Kruschke(2014)]{kruschke2014doing}
+John Kruschke.
+\newblock \emph{Doing Bayesian data analysis: A tutorial with R, JAGS, and
+  Stan}.
+\newblock Academic Press, 2014.
+
 \bibitem[OrganizacionMundialdelaSalud()]{FactSheetDiabetes}
 OrganizacionMundialdelaSalud.
 \newblock Diabetes. fact sheet.
@@ -129,6 +141,13 @@ Michael~K Pitt, Chris Chatfield, and Stephen~G Walker.
   processes.
 \newblock \emph{Scandinavian Journal of Statistics}, 29\penalty0 (4):\penalty0
   657--663, 2002.
+
+\bibitem[Plummer et~al.(2003)]{plummer2003jags}
+Martyn Plummer et~al.
+\newblock Jags: A program for analysis of bayesian graphical models using gibbs
+  sampling.
+\newblock In \emph{Proceedings of the 3rd international workshop on distributed
+  statistical computing}, volume 124, page 125. Vienna, 2003.
 
 \bibitem[Resnick(1999)]{resnickpath}
 Sidney~I. Resnick.

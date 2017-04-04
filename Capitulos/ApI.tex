@@ -1,0 +1,41 @@
+\chapter{Paradigma Bayesiano}
+El paradigma bayesiano se refiere a una manera de hacer inferencia basado en el trabajo del ingl\'es Thomas Bayes. En este paradigma se establece que la hip\'otesis se va actualizando de acuerdo a la nueva informaci\'on  relevante. Seg\'un \cite{kruschke2014doing} al principio la distribuci\'on de probabilidades entre las opciones posibles se realiza al conocimiento previo que se tenga de la situaci\'on; por lo que la inferencia bayesiana consiste en la relocaci\'on o actualizaci\'on de las probabilidades entre las opciones conforme se vayan realizando nuevas observaciones.\\
+\\
+De acuerdo con \cite{gelman2014bayesian} la inferencia bayesiana se hace en base en una evaluaci\'on retrospectiva del procedimiento utilizado para estimar el par\'ametro sobre la distribuci\'on de todas las posibles observaciones. Es decir, que mediante la regla de Bayes se describe la relaci\'on entre la asiganci\'on previa de la probabilidad y la reasignaci\'on de esta misma condicionada a los datos observados. El paradigma est\'a basado en la regla o teorema de Bayes.\\
+\\
+Una definici\'on de la probabilidad condicional de $y$ dado $x$  ser\'a la divisi\'on de la funci\'on conjunta de probabilidad entre la funci\'on de probabilidad de $x$. Es decir,
+\begin{align*}
+p(y|x)=\frac{p(x,y)}{p(x)}
+\end{align*}
+O en otras palabras, la probabilidad de $y$ `\ suceda'\ dado $x$ es la probabilidad de que `\ sucedan'\ ambos eventos relativo a que $x$ `\ suceda'\ en absoluto.\\
+\\
+Tomando en cuenta esta definici\'on de la probabilidad condicional, el teorema de Bayes, conforme a \cite{kruschke2014doing}, se define como
+\begin{align*}
+p(y|x)=\frac{p(x|y)p(y)}{p(x)}
+\end{align*}
+El Teorema de Bayes resulta muy \'util cuando el modelo de probabilidad se basa en variables observables y  par\'ametros, $D$ y $\theta$ respectivamente. De este modo, el modelo se escribe como
+\begin{align*}
+p(\theta|D)=\frac{p(D|\theta)p(\theta)}{p(D)}
+\end{align*}
+Donde los elementos de esta ecuaci\'on significan
+\begin{itemize}
+\item $p(\theta|D)=$ la distribuci\'on posterior, es decir, la probabilidad de $\theta$ tomando en cuenta las observaciones.
+\item $p(D|\theta)=$ la verosimilitud, es decir, la probabilidad de los datos generados por el modelo con el par\'ametro $\theta$.
+\item $p(\theta)=$ la distribuci\'on previa, es decir, la probabilidad de $\theta$ sin tomar en cuenta las observaciones $D$.
+\item $p(D)=$ la distribuci\'on de las observaciones, es decir, la probabilidad total de las observaciones, ponderadas por todos los valores que puede tomar el par\'ametro de acuerdo al peso que se le asigna.
+\end{itemize}
+Esta misma ecuaci\'on se puede reescribir como,
+\begin{eqnarray*}
+p(\theta|D)&=&\frac{p(D|\theta)p(\theta)}{p(D)}\\
+		   &\propto & p(D|\theta)p(\theta)\\
+		   &\propto & verosimilitud \times inicial
+\end{eqnarray*}
+La distribuci\'on posterior est\'a en funci\'on del par\'ametro, por lo que la distribuci\'on posterior es proporcional a la multiplicaci\'on de la funci\'on de verosimilitud por la distribuci\'on inicial del par\'ametro. En otras palabras, la distribuci\'on previa del par\'ametro es la informaci\'on a priori del mismo, que se va actualizando con las observaciones, tomando la informaci\'on relevante al par\'ametro. Este mismo principio puede extenderse para varios par\'ametros.\\
+\\
+Como describe \cite{gelman2014bayesian}, esta l\'ogica es similar para hacer inferencias sobre futuras observaciones. Una vez que se tienen todas las observaciones $D=(d_1,...,d_n)$ se quiere inferir la siguiente observaci\'on $d_{n+1}$. La distribuci\'on de esta observaci\'on se llama la distribuci\'on llamada distribuci\'on posterior predictiva, posterior porque toma la informaci\'on de las observaciones pasadas y predictiva porque predice la siguiente observaci\'on,
+\begin{eqnarray*}
+p(d_{n+1}|D)&=&\int p(d_{n+1},\theta|D) d\theta \\
+			&=& \int p(d_{n+1}|\theta,D)p(\theta|D)d\theta \\
+			&=& \int p(d_{n+1}|\theta)p(\theta|D)d\theta
+\end{eqnarray*}
+En la segunda y tercera l\'inea de la ecuaci\'on se muestra la distribuci\'on posterior predictiva como un promedio de las distribuciones predictivas condicionales de la distribuci\'on posterior del par\'ametro $\theta$. En la \'ultima l\'inea se asume la independencia condicional de $D$ y $d_{n+1}$ dado $\theta$.
