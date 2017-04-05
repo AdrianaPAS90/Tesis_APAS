@@ -57,30 +57,32 @@ El algoritmo EM es muy \'util pues por su estructura iterativa puede dar resulta
 \section{El Muestreador de Gibbs}
 Como mencionado en la secci\'on anterior, la estimaci\'on de par\'ametros del modelo general de probabilidad que se utilizar\'a en este trabajo no se puede hacer a trav\'es de m\'etodos anal\'iticos tradicionales, por lo que se utilizar\'an m\'etodos num\'ericos. Entre estos se encuentran el algoritmo EM y el Muestreador de Gibbs, el algoritmo EM fue descrito en la secci\'on anterior y aunque \'util para el an\'alisis del modelo presentado, el Muestreador de Gibbs tiene una interpretaci\'on m\'as simple.\\
 \\
+De acuerdo con \cite{gelman2014bayesian}, la simulaci\'on a trav\'es de las cadenas de Markov tambi\'en llamadas Cadenas de Markov v\'ia simulaci\'on Monte Carlo (MCMC, por sus siglas en ingl\'es) es un m\'etodo basado en las realizaciones de los valores de $\theta$ de distribuciones aproximadas y despu\'es corrigiendo esas realizaciones para poder mejorar la distribuci\'on posterior de $p(\theta|y)$. Estas realizaciones se realizan de manera iterativa. Una de estas simulaciones MCMC es el Muestreador de Gibbs.\\
+\\
 Normalmente el Muestreador Gibbs se asocia con la estad\'istica bayesiana aunque puede ser \'util tambi\'en en la visi\'on cl\'asica de la estad\'istica, seg\'un \cite{casella1992explaining} este algoritmo es una t\'ecnica que genera variables aleatorias indirectamente de distribuciones marginales sin tener que calcular la densidad, debido a que se basa en las propiedades principales de las Cadenas de Markov como la estacionareidad para simplificar c\'alculos y tener estimados m\'as precisos.\\
 \\
-Siguiendo la ilustraci\'on de \cite{casella1992explaining}, supongamos que tenemos una distribuci\'on conjunta $f(x,y_1,y_2,...,y_p)$\\
-\[f(x)=\int \cdots \int f(x,y_1,y_2,...,y_p) dy_1,dy_2,...,dy_p\]
-Si el inter\'es se encuentra en la marginal $f(x)$ y \'esta es demasiado complicada para calcularse directamente, con el Muestreador de Gibb se puede generar una muestra $X_1,...,X_m \sim f(x)$ sin la necesidad de calcular la distribuci\'on marginal. Esto permite obtener informaci\'on de la misma con alto grado de precisi\'on.\\
+Siguiendo la ilustraci\'on de \cite{casella1992explaining}, supongamos que tenemos una distribuci\'on conjunta $f(\theta,y_1,y_2,...,y_p)$\\
+\[f(\theta)=\int \cdots \int f(\theta,y_1,y_2,...,y_p) dy_1,dy_2,...,dy_p\]
+Si el inter\'es se encuentra en la marginal $f(\theta)$ y \'esta es demasiado complicada para calcularse directamente, con el Muestreador de Gibb se puede generar una muestra $\theta_1,...,\theta_m \sim f(\theta)$ sin la necesidad de calcular la distribuci\'on marginal. Esto permite obtener informaci\'on de la misma con alto grado de precisi\'on.\\
 \\
-Para ejemplificar mejor el mecanismo del Muestreador de Gibbs se toman dos variables aleatorias $(X,Y)$. El algoritmo genera una muestra de $f(x)$ muestreando de las distribuciones condicionales $f(x|y)$ y $f(y|x)$ que son la que normalmente se conocen en los modelos estad\'isticos. Esta muestra se obtiene mediante, lo que \cite{casella1992explaining} nombra como, una secuencia de Gibbs $(Y'_0,X'_0,Y'_1,X'_1,...,Y'_k,X'_k)$ que de manera iterativa genera variables aleatorias a partir de valores iniciales especificados $(Y'_0=y'_0)$.\\
+Para ejemplificar mejor el mecanismo del Muestreador de Gibbs se toman dos variables aleatorias $(\Theta,Y)$. El algoritmo genera una muestra de $f(\theta)$ muestreando de las distribuciones condicionales $f(\theta|y)$ y $f(y|\theta)$ que son la que normalmente se conocen en los modelos estad\'isticos. Esta muestra se obtiene mediante, lo que \cite{casella1992explaining} nombra como, una secuencia de Gibbs $(Y'_0,\theta'_0,Y'_1,\theta'_1,...,Y'_k,\theta'_k)$ que de manera iterativa genera variables aleatorias a partir de valores iniciales especificados $(Y'_0=y'_0)$.\\
 \\El proceso iterativo es como sigue\\
 \begin{align*}
-X'_j \sim f(x|Y'_j=y'_j)\\
-Y'_{j+1} \sim f(y|X'_j=x'_j)
+\theta'_j \sim f(\theta|Y'_j=y'_j)\\
+Y'_{j+1} \sim f(y|\theta'_j=x'_j)
 \end{align*}
-Si la muestra es suficientemente grande, es decir, que si $k \rightarrow \infty$ la distribuci\'on de $X'_k$ converger\'a con la verdadera distribuci\'on marginal de $X$.\\
+Si la muestra es suficientemente grande, es decir, que si $k \rightarrow \infty$ la distribuci\'on de $\theta'_k$ converger\'a con la verdadera distribuci\'on marginal de $\theta$.\\
 \\
 El Muestreador de Gibbs puede pensarse como una implementaci\'on pr\'actica del concepto de que solo conociendo las distribuciones marginales se puede determinar la distribici\'on conjunta. Esto ser\'ia cierto en la mayor\'ia de los casos bivariados, el procedamiento no es tan directo para los casos multivariados.\\
 \\
-De acuerdo con \cite{casella1992explaining} para el caso bivariado, suponemos dos variables aleatorias $X,Y$, de las cuales se conocen sus distribuciones condicionales $f_{X|Y}(x|y)$ y $f_{Y|X}(y|x)$. A partir de estas podr\'iamos calcular la funci\'on marginal de $X$ y la distribuci\'on conjunta de ambas variables, mediante  el siguiente argumento:\\
-\[f_X(x)=\int f_{XY}(x,y)dy\]
-donde la distribuci\'on conjunta es a\'un desconocida, tomando el hecho que $f_{XY}(x,y)=f_{X|Y}(x|y)f_Y(y)$ tendr\'iamos que,\\
-\[f_X(x)=\int f_{X|Y}(x|y)f_Y(y) dy\]
-Asimismo, si sustituimos la distribuci\'on marginal de $y$ ($f_Y(y)$) con el mismo argumento utilizado para la distribuci\'on marginal de $x$, se tiene que
+De acuerdo con \cite{casella1992explaining} para el caso bivariado, suponemos dos variables aleatorias $\theta,Y$, de las cuales se conocen sus distribuciones condicionales $f_{\Theta|Y}(\theta|y)$ y $f_{Y|\Theta}(y|\theta)$. A partir de estas podr\'iamos calcular la funci\'on marginal de $\theta$ y la distribuci\'on conjunta de ambas variables, mediante  el siguiente argumento:\\
+\[f_\theta(\theta)=\int f_{\theta Y}(\theta,y)dy\]
+donde la distribuci\'on conjunta es a\'un desconocida, tomando el hecho que $f_{\theta Y}(\theta,y)=f_{\theta|Y}(\theta|y)f_Y(y)$ tendr\'iamos que,\\
+\[f_\theta(\theta)=\int f_{\theta|Y}(\theta|y)f_Y(y) dy\]
+Asimismo, si sustituimos la distribuci\'on marginal de $y$ ($f_Y(y)$) con el mismo argumento utilizado para la distribuci\'on marginal de $\theta$, se tiene que
 \begin{eqnarray*}
-f_X(x) &=& \int f_{X|Y}(x|y) f_{Y|X}(y|t) f_X(t)dt dy\\
-       &=& \int [ \int  f_{X|Y}(x|y)f_{Y|X}(y|t) dy]  f_X(t) dt
+f_\theta(\theta) &=& \int f_{\theta|Y}(\theta|y) f_{Y|\theta}(y|t) f_\theta(t)dt dy\\
+       &=& \int [ \int  f_{\theta|Y}(\theta|y)f_{Y|\theta}(y|t) dy]  f_\theta(t) dt
 \end{eqnarray*}
 Esta ecuaci\'on es una forma limitada de la iteraci\'on de Gibbs, ilustrando como las distribuciones condicionales producen una distribuci\'on marginal. Aunque la distribuci\'on conjunta de las variables determinan las distribuciones condicionales y marginales, no siempre las condicionales determinen de manera tan directa la distribuci\'on marginal. Esto es cierto no solo para los casos bivariados, sino que se extiende a los multivariados.\\
 \\
@@ -98,15 +100,15 @@ Este esquema de iteraciones nos produce una secuencia de Gibbs,\\
 \[Y'_0,Z'_0,X'_0,Y'_1,Z'_1,X'_1,...\]
 con la misma propiedad de convergencia que en el caso bivariado, ente m\'as grande es la $k$, $X'_k=x'_k$ es un punto de la distribuci\'on marginal $f(x)$.\\
 \\
-De este modo queda evidenciada la utilidad del Muestreador de Gibbs en el ahorro de c\'alculos y la precisi\'on de sus resultados. Como mencionado en la secci\'on anterior, esta t\'ecnica inferencial es muy \'util tanto en la estad\'istica bayesiana como en la cl\'asica, en la primera para calcular la distribuci\'on posterior y en la \'ultima, para calcular la funci\'on de verosimilitud.\\
+De este modo queda evidenciada la utilidad del Muestreador de Gibbs en el ahorro de c\'alculos y la precisi\'on de sus resultados. Como mencionado en la secci\'on anterior, esta t\'ecnica inferencial es muy \'util tanto en la estad\'istica bayesiana como en la cl\'asica, en la primera para calcular la distribuci\'on posterior y en la \'ultima, para calcular la funci\'on de verosimilitud. Seg\'un \cite{gelman2014bayesian}, la clave del \'exito de este m\'etodo es la iteraci\'on en la cual las distribuciones aproximadas mejoran hasta converger en la distribuci\'on deseada.\\
 \\
-Para la implementaci\'on del Muestreador de Gibbs en este trabajo se utilizar\'a el programa JAGS (Solo Otro Muestreador de Gibbs, por sus siglas en ingl\'es). Este programa es una extensi\'on del programa BUGS (Inferencia Bayesiana Usando el Muestreador de Gibbs, por sus siglas en ingl\'es), que normalmente es utilizado para la exploraci\'on de modelos Markov multivariados en el contexto de estad\'istica actuarial.\\
+Para la implementaci\'on del Muestreador de Gibbs en este trabajo se utilizar\'a el programa JAGS (Solo Otro Muestreador de Gibbs, por sus siglas en ingl\'es). Este programa es una extensi\'on del programa BUGS (Inferencia Bayesiana Usando el Muestreador de Gibbs, por sus siglas en ingl\'es), que normalmente es utilizado para la exploraci\'on de modelos Markov multivariados en el contexto de estad\'istica actuarial. JAGS es un programa que autom\'aticamente construye las cadenas de Matkov v\'ia simulaci\'on Monte Carlo (MCMC) para modelos multivariados.\\
 \\
 Para lograr expresar estos problemas con BUGS, explicado por sus creadores \cite{plummer2003jags}, se necesitan tomar en cuenta dos distribuciones:
 \begin{itemize}
 \item Una distribuci\'on que describa la probabilidad de estar en el estado $j$ en el tiempo $t$ dado que el sujeto estaba en el estado $i$ al tiempo $0$.
 \item Una distribuci\'on de supervivencia que describa el tiempo en un estado absorbente, que bien, es conocida o censorada a la derecha.
 \end{itemize}
-La necesidad de estas distribuciones aunado a la necesidad de una herramienta que ayude a explorar modelos gr\'aficos es lo que da origen a JAGS.\\
+La necesidad de estas distribuciones aunado a la necesidad de una herramienta que ayude a explorar modelos gr\'aficos es lo que da origen a JAGS. Es decir, el programa toma la descripci\'on del modelo general de probabilidad multivariado y regresa un muestreo de MCMC de la distribuci\'on posterior.\\
 \\
 De este modo, se establece no solo las bases para la inferencia y predicci\'on de futuras observaciones en base a la verosimilud extendida y la resoluci\'on de su funci\'on sino tambi\'en la implementaci\'on num\'erica de la misma. Una vez que se definieron estas herramientas, lo que resta es la adaptaci\'on del modelo a la ilustraci\'on con los datos, esto se explorar\'a en el siguiente cap\'itulo.  

@@ -1,4 +1,4 @@
-\begin{thebibliography}{24}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -153,6 +153,11 @@ Martyn Plummer et~al.
 Sidney~I. Resnick.
 \newblock \emph{A Probability Path}.
 \newblock Birkhauser, 1999.
+
+\bibitem[Smith(2010)]{smith2010bayesian}
+Jim~Q Smith.
+\newblock \emph{Bayesian decision analysis: principles and practice}.
+\newblock Cambridge University Press, 2010.
 
 \bibitem[Zhuo et~al.(2014)Zhuo, Zhang, Barker, Albright, Thompson, and
   Gregg]{zhuo2014lifetime}
