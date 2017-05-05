@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{28}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -75,6 +75,12 @@ Arthur~P Dempster, Nan~M Laird, and Donald~B Rubin.
 \newblock \emph{Journal of the royal statistical society. Series B
   (methodological)}, pages 1--38, 1977.
 
+\bibitem[Engle and Russell(1998)]{engle1998autoregressive}
+Robert~F Engle and Jeffrey~R Russell.
+\newblock Autoregressive conditional duration: a new model for irregularly
+  spaced transaction data.
+\newblock \emph{Econometrica}, pages 1127--1162, 1998.
+
 \bibitem[Fader and Hardie(2013)]{fader2013gamma}
 Peter~S Fader and Bruce~GS Hardie.
 \newblock The gamma-gamma model of monetary value.
@@ -92,6 +98,12 @@ Andrew Gelman, John~B Carlin, Hal~S Stern, and Donald~B Rubin.
 \newblock \emph{Bayesian data analysis}, volume~2.
 \newblock Chapman \& Hall/CRC Boca Raton, FL, USA, 2014.
 
+\bibitem[Ghahramani(2001)]{ghahramani2001introduction}
+Zoubin Ghahramani.
+\newblock An introduction to hidden markov models and bayesian networks.
+\newblock \emph{International journal of pattern recognition and artificial
+  intelligence}, 15\penalty0 (01):\penalty0 9--42, 2001.
+
 \bibitem[Guti{\'e}rrez et~al.()Guti{\'e}rrez, Rivera-Dommarco, Shamah-Levy,
   Villalpando-Hern{\'a}ndez, Franco, Cuevas-Nasu, et~al.]{gutierrezencuesta}
 JP~Guti{\'e}rrez, J~Rivera-Dommarco, T~Shamah-Levy,
@@ -104,6 +116,11 @@ JP~Guti{\'e}rrez, J~Rivera-Dommarco, T~Shamah-Levy,
 Marjorie~G Hahn and Gang Zhang.
 \newblock Exchangeable random variables.
 \newblock \emph{High Dimensional Probability}, 43:\penalty0 111, 2012.
+
+\bibitem[Harrison and West(1999)]{harrison1999bayesian}
+Jeff Harrison and Mike West.
+\newblock \emph{Bayesian forecasting \& dynamic models}.
+\newblock Springer New York, 1999.
 
 \bibitem[Held and Saban{\'e}s~Bov{\'e}(2014)]{held2014applied}
 Leonhard Held and Daniel Saban{\'e}s~Bov{\'e}.

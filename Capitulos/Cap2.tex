@@ -75,15 +75,37 @@ Definimos las siguientes variables para un individuo $n_i$:
 \\
 De este modo,
 \begin{align}
-P(t_{i1},...,t_{ik},p_{i1},...,p_{ik}|N(t)) \cong P(d_{i1},...,d_{ik},c_{i1},...,c_{ik}|N(t))
+P(t_{i1},...,t_{ik},p_{i1},...,p_{ik}|N(t)=k) \cong P(d_{i1},...,d_{ik},c_{i1},...,c_{ik}|N(t)=k)
 \end{align}
 Esto quiere decir que calcular la funci\'on de distribuci\'on conjunta de los tiempos de ocurrencia y los precios asociados a \'estos es an\'alogo a a calcular la funci\'on de distribuci\'on conjunta de las duraciones y los costos asociados condicionados a la variable aleatoria del n\'umero de eventos en el intervalo de tiempo. As\'i pasamos de un proceso puntual marcado a uno de duraci\'on marcada.\\
+\\
+El modelo de probabilidad consiste en dos variables, duraci\'on y costo. La relaci\'on entre estas dos variables es una de las siguientes opciones,
+\begin{itemize}
+\item Las variables son independientes entre si, es decir,
+\begin{eqnarray*}
+P(d_{i1},...,d_{ik},c_{i1},...,c_{ik}|N(t)=k)&=&P(d_{i1},...,d_{ik}|N(t)=k)\\
+&&\times P(c_{i1},...,c_{ik}|N(t)=k)P(N(t)=k)
+\end{eqnarray*}
+\item Las variables no son independientes entre si, esto a su vez puede tener dos maneras de expresar la dependencia,
+	\begin{itemize}
+	\item Las duraciones dependen de los costos. Es decir,
+	\begin{eqnarray*}
+	P((d_1,c_1),...,(d_k,c_k)|N(T)=k)&=& P(d_1,...,d_k|N(T)=k,c_1,...,c_k)\times \\
+								 && \times P(c_1,...,ck|N(T)=k)\times P(N(T)=k)
+	\end{eqnarray*}
+	\item Los costos dependen de las duraciones, como en el art\'iculo de \cite{engle1998autoregressive}. Es decir,
+	\begin{eqnarray*}
+     P((d_1,c_1),...,(d_k,c_k)|N(T)=k)&=& P(c_1,...,c_k|N(T)=k,d_1,...,d_k)\times \\
+								 && \times P(d_1,...,d_k|N(T)=k)\times P(N(T)=k)
+    \end{eqnarray*}	
+	\end{itemize}
+\end{itemize}
+En este caso, los precios dependen del cambio de tratamiento, de manera an\'aloga, la variable costo est\'a asociada a la variable de duraci\'on. Es decir, que aunque la marca se localice en otro espacio m\'etrico, esta sigue anclada al proceso puntual primario.\\
 \\
 Por la estructura de construcci\'on del modelo este se puede pensar,para un solo momento $k$ en el tiempo de un individuo $i$, como
 \begin{align}
 P(t_{ik},p_{ik}|N(t))\cong P(d_{ik},c_{ik}|N(t)) = P(c_{ik}|d_{ik})P(d_{ik})
 \end{align}
-Los precios dependen del cambio de tratamiento, de manera an\'aloga, la variable costo est\'a asociada a la variable de duraci\'on. Es decir, que aunque la marca se localice en otro espacio m\'etrico, esta sigue anclada al proceso puntual primario.
 
 \section{Propiedades del Proceso de Duraci\'on Marcada}
 Una vez que hemos definido qu\'e es el proceso de duraci\'on y de duraci\'on marcada y c\'omo es que los datos que tenemos para este estudio se adaptan a este modelo, necesitamos especificar las propiedades que van a hacer posible la inferencia y la predicci\'on. Estas propiedades son la independencia, la intercambiabilidad y, principalmente, la estacionareidad.
@@ -177,31 +199,159 @@ donde $\lambda(\theta)$ es una medida de probabilidad correspondiente a la varia
 \\
 El punto crucial para asegurar la distribuci\'on de trancisi\'on es construir una distribuci\'on conjunta $f_{Y,\Theta}(y,\theta)$, tal que las densidades condicionales sean $f_{Y|\Theta}(y|\theta)$ y $f_{\Theta|z}(\theta|z)$ y con una distribuci\'on marginal $f_Y(y)$. Es decir, el proceso de trancisi\'on se logra mediante el proceso de la variable latente, que aunque no es observable, este es conocido.\\
 \\
-El proceso de la variable latente, para el caso de las duraciones, ser\'ia
+Seg\'un lo anterior, vemos que para conocer la distribuci\'on de una observaci\'on condicionada a la observaci\'on anterior se necesita introducir una variable no observable o latente. La introducci\'on de esta variable se puede hacer mediante el Modelo Oculto de Markov, que de acuerdo con \cite{ghahramani2001introduction}, es un modelo donde la variable observable $y_t$ y la variable no observable $\theta_t$ son independientes y la variable no observable cumple la propiedad markoviana. Es decir, que dado el valor de $\theta_{t-1}$, el estado actual $\theta_t$ es independiente de todos aquellos estados previos a $t-1$. La funci\'on de distribuci\'on conjunta ser\'ia
 \begin{align*}
-d_{j}|\theta_j \sim f_{d|\Theta}(\cdot|\theta_j)\\
-\theta_j|d_{j-1} \sim f_{\Theta|d}(\cdot|d_{j-1})
+P((y_i,\theta_i)_{i=1}^t)=P(y_1|\theta_1)P(\theta_1)\prod_{i=2}^{N(t)} P(y_i|\theta_i)P(\theta_i|\theta_{i-1})
 \end{align*}
+El Modelo Oculto de Markov se puede representar gr\'aficamente como,\\
+\begin{center}
+\begin{picture}(200,50)
+\put(0,50){$y_1$}
+\put(30,50){$y_2$}
+\put(60,50){$y_3$}
+\put(110,50){$\ldots$}
+\put(150,50){$\ldots$}
+\put(200,50){$y_t$}
+\put(5,10){\vector(0,1){35}}
+\put(35,10){\vector(0,1){35}}
+\put(65,10){\vector(0,1){35}}
+\put(205,10){\vector(0,1){35}}
+\put(0,0){$\theta_1$}
+\put(30,0){$\theta_2$}
+\put(60,0){$\theta_3$}
+\put(110,5){$\ldots$}
+\put(150,5){$\ldots$}
+\put(200,0){$\theta_t$}
+\put(10,5){\vector(1,0){20}}
+\put(40,5){\vector(1,0){20}}
+\put(70,5){\vector(1,0){20}}
+\put(180,5){\vector(1,0){20}}
+\end{picture}
+\end{center}
+El Modelo Oculto de Markov es un modelo muy flexible, seg\'un \cite{ghahramani2001introduction}, puede ser utilizado para modelar cualquier distribuci\'on con un n\'umero infinito de componentes y con las adecuaciones correspondientes se pueden modelar un sinn\'umero de de problemas din\'amicos no-lineales; esta misma flexibilidad es lo que le resta fiabilidad a la inferencia. Aunado a esto, el modelo se basa en la relaci\'on existente entre los estados en el tiempo del par\'ametro, es decir, $P(\theta_i|\theta_{i-1})$, esta relaci\'on no es conocida en el problema de estudio del presente trabajo por lo que el Modelo Oculto de Markov no es el que mejor se adapta.\\
+\\
+Tomando como base los Modelos Din\'amicos Lineales descritos por \cite{harrison1999bayesian}, el proceso de la variable latente para el caso de las duraciones, ser\'ia
+\begin{itemize}
+\item Ecuaci\'on de Observaci\'on: $d_{j}|\theta_j \sim f_{d|\Theta}(\cdot|\theta_j)$
+\item Ecuaci\'on de Sistema: $\theta_j|d_{j-1} \sim f_{\Theta|d}(\cdot|d_{j-1})$
+\end{itemize}
 Una vez que tenemos el modelo para la variable de las duraciones, lo hacemos extensivo para los costos. De este modo, el proceso de variables latentes quedar\'ia
-\begin{align*}
-c_{j}|\gamma_j \sim f_{d|\gamma}(\cdot|\gamma_j)\\
-\gamma_j|c_{j-1} \sim f_{\gamma|d}(\cdot|c_{j-1})
-\end{align*}
-Por lo que el proceso de trancisi\'on para el modelo general de probabilidad con procesos de variables latentes se escribe
-\begin{eqnarray}
-P((d_j,c_j)_{j=1}^k|N(t)=k)&=& \int f(d_1|\theta_1)f(\theta_1)d(\theta_1) \int f(c_1|d_1,\gamma_1 ) f(\gamma_1)d(\gamma_1) \times \nonumber \\ 
-&& \times \prod_{j=2}^{N(t)} \int f(d_j|\theta_j) f(\theta_j|d_{j-1}) d(\theta_j) \times \nonumber\\
-&&\times \int f(c_j|d_j,\gamma_j)f(\gamma_j|c_{j-1})d(\gamma_j)  \nonumber
-\end{eqnarray}
+\begin{itemize}
+\item Ecuaci\'on de Observaci\'on: $c_{j}|\gamma_j \sim f_{d|\gamma}(\cdot|\gamma_j)$\\
+\item Ecuaci\'on de Sistema: $\gamma_j|c_{j-1} \sim f_{\gamma|d}(\cdot|c_{j-1})$
+\end{itemize}
+Dado que el Modelo Oculto de Markov no necesariamente es estacionario afectando as\'i la capacidad inferencial del mismo, el modelo que se construye a trav\'es de las estructuras de ecuaciones de observaci\'on y sistema que se acaban de definir, es estacionario por construcci\'on y es capaz de modelar la observaci\'on actual en relaci\'on a la observaci\'on anterior. Tomando solamnete la variable duraci\'on junto con su par\'ametro $\theta$, la representaci\'on gr\'afica de ambos modelos se compara del siguiente modo,\\
+\begin{center}
+\begin{picture}(200,100)
+\put(0,100){$d_1$}
+\put(50,100){$d_2$}
+\put(100,100){$\ldots$}
+\put(200,100){$d_t$}
+\put(5,60){\vector(0,1){30}}
+\put(55,60){\vector(0,1){30}}
+\put(205,60){\vector(0,1){30}}
+\put(0,50){$\theta_1$}
+\put(50,50){$\theta_2$}
+\put(100,50){$\ldots$}
+\put(200,50){$\theta_t$}
+\put(15,50){\vector(1,0){35}}
+\put(65,50){\vector(1,0){35}}
+\put(170,50){\vector(1,0){30}}
+\color{green}{\put(15,90){\vector(1,-1){30}}}
+\put(58,60){\vector(0,1){30}}
+\put(65,90){\vector(1,-1){30}}
+\put(165,90){\vector(1,-1){30}}
+\put(210,60){\vector(0,1){30}}
+\end{picture}
+\end{center}
+Donde las flechas negras representan un Modelo Oculto de Markov, donde la relaci\'on con el estado anterior se presenta solamente en los par\'ametros $\theta_i|\theta_{i-1}$; mientras que las flechas amarillas representan el modelo construido donde los observaciones est\'an condicionadas al par\'ametro y el par\'ametro est\'a condicionado por la observaci\'on anterior.\\
+\\
+Ahora bien, utilizando las relaciones entre las variables observables y latentes, el proceso de trancisi\'on para una observaci\'on en el modelo general de probabilidad con procesos de variables latentes se escribe asegurando la estacionariedad desde la construcci\'on,
+\begin{eqnarray*}
+P(c_i,d_|c_{i-1},d_{i-1}) &=&\int P(c_i,d_i|\gamma,\theta)P(\gamma,\theta|c_{i-1},d_{i-1})\\
+&=&\int \int F(c_i,d_i|\gamma,\theta)\pi(\gamma|d_i,c_{i-1})\pi(\theta|d_{i-1})\\
+&=&\int \int F(c_i|\gamma,d_k) F(d_i|\theta)\pi(\gamma|d_i,c_{i-1})\pi(\theta|d_{i-1})\\
+&=&\int F(c_i|\gamma,d_i)\pi(\gamma|d_i,c_{i-1}) \int F(d_i|\theta)\pi(\theta|d_{i-1})\\
+&=&P(c_i|d_i,c_{i-1})P(d_i|d_{i-1})
+\end{eqnarray*}
+De este modo, el modelo general de la probabilidad es
+\begin{eqnarray*}
+P((d_i,c_i)_{i=1}^k|N(t)=k)&=& P(c_1|d_1)P(d_1) \prod_{i=2}^k P(c_i|d_i,c_{i-1})P(d_i|d_{i-1}) \times P(N(t)=k)
+\end{eqnarray*}
 Este es el modelo general de probabilidad del proceso puntual marcado de las duraciones y costos de las enfermedades cr\'onico degenerativas. Al introducir las variables latentes se construyen funciones de trancisi\'on m\'as s\'olidas, tomando en cuenta los par\'ametros que influyen en el mismo proceso.\\
 \\
+Como se ve en el modelo general de probabilidad, la estructura de dependencia con las variables latentes y como, aunque los valores de estas variables no son observables, son influenciados por los valores de las variables observables. Esta estructura de dependencia, seg\'un \cite{gelman2014bayesian}, puede denorminarse como un modelo jer\'arquico con resultados observables condicionados a ciertos par\'ametros, los cuales, a su vez, est\'an dados como variables aleatorias definidos a su vez con otros par\'ametros. La estructura jer\'arquica de manera gr\'afica de este modelo general es,\\
+\begin{center}
+\begin{picture}(200,100)
+\put(0,100){$c_1$}
+\put(40,100){$c_2$}
+\put(80,100){$\ldots$}
+\put(200,100){$c_t$}
+\put(0,65){$d_1$}
+\put(40,65){$d_2$}
+\put(80,65){$\ldots$}
+\put(200,65){$d_t$}
+\put(0,35){$\gamma_1$}
+\put(40,35){$\gamma_2$}
+\put(80,35){$\ldots$}
+\put(200,35){$\gamma_t$}
+\put(140,100){$\ldots$}
+\put(140,65){$\ldots$}
+\put(140,35){$\ldots$}
+\put(140,0){$\ldots$}
+\put(0,0){$\theta_1$}
+\put(40,0){$\theta_2$}
+\put(80,0){$\ldots$}
+\put(200,0){$\theta_t$}
+\put(5,75){\vector(0,1){20}}
+\put(45,75){\vector(0,1){20}}
+\put(205,75){\vector(0,1){20}}
+\put(10,93){\vector(1,-2){25}}
+\put(50,93){\vector(1,-2){25}}
+\put(170,98){\vector(1,-2){27}}
+\put(10,60){\vector(1,-2){25}}
+\put(50,60){\vector(1,-2){25}}
+\put(170,60){\vector(1,-2){27}}
+\color{green}\qbezier(0,35)(-25,65)(0,100)
+\put(-4,93){\vector(2,3){5}}
+\qbezier(40,35)(5,65)(40,100)
+\put(36,93){\vector(2,3){5}}
+\qbezier(200,35)(165,65)(200,100)
+\put(196,93){\vector(2,3){5}}
+\color{red}\qbezier(0,5)(-25,40)(0,65)
+\put(-4,58){\vector(2,3){5}}
+\qbezier(40,5)(0,40)(40,65)
+\put(36,58){\vector(2,3){5}}
+\qbezier(200,5)(160,40)(200,65)
+\put(196,58){\vector(2,3){5}}
+\end{picture}
+\end{center}
 Es importante notar que la distribuci\'on de las variables latentes es arbitrario, por lo que con este modelo general de probabilidad resta determinar las distribuciones que mejor describan las caracter\'isticas de la relaci\'on entre las variables latentes. En la siguiente secci\'on se relizar\'a una comparaci\'on entre las distintas distribuciones que trabajar\'ian mejor con las caracter\'isticas particulares de los datos para su modelado.\\
 
 \section{Construcci\'on del Modelo de Marcas}
 Con el modelo general de probabilidad formulado en la secci\'on anterior se sientan las bases para hacer inferencia sobre duraci\'on y costos de padecimientos cr\'onico degenerativos. Igualmente, la determinaci\'on de las distribuciones de las variables latentes son cruciales para la predicci\'on sobre futuras observaciones.\\
 \\
-Seg\'un \cite{fader2013gamma} la distribuci\'on Gamma es muy \'util para modelar gasto como en el campo actuarial son los siniestros, pues estos normalmente tienden a estar sesgados a la derecha adem\'as de que las propiedades de las convoluciones siguen los patrones de gasto si los siniestros se distribuyen Gamma. Aunado a esto, en una \'optica bayesiana, la distribuci\'on Gamma tiene mcuhas distribuciones conjugadas como la distribuci\'on Poisson, la distribuci\'on exponencial, la distribuci\'on normal con media conocida, la distribuci\'on Pareto entre otras; que ayudan a la linealidad del modelo general de probabilidad \\
+Seg\'un \cite{fader2013gamma} la distribuci\'on Gamma es muy \'util para modelar gasto como en el campo actuarial son los siniestros, pues estos normalmente tienden a estar sesgados a la derecha adem\'as de que las propiedades de las convoluciones siguen los patrones de gasto si los siniestros se distribuyen Gamma. Aunado a esto, en una \'optica bayesiana, la distribuci\'on Gamma tiene muchas distribuciones conjugadas como la distribuci\'on Poisson, la distribuci\'on exponencial, la distribuci\'on normal con media conocida, la distribuci\'on Pareto entre otras; que ayudan a la linealidad del modelo general de probabilidad.\\
 \\
-\textbf{Gamma-Weibull}
+Las duraciones se modelan mediante un modelo Gamma-Gamma, mientras que los costos con un modelo Gamma-Weibull. El modelo Gamma-Gamma de las duraciones se deriva del propio proceso de conteo que es una distribuci\'on conjugada.
+\begin{align*}
+P(d_i|d_{i-1})=\int P(d_i|\theta_i) P(\theta_i|d_{i-1}) \quad i \neq 1
+\end{align*}
+Donde,
+\begin{align*}
+P(d|\theta) \sim Gamma(d|\alpha_d,\theta)\\
+P(\theta) \sim Gamma(\theta|\alpha_{\theta},\beta_\theta)\\
+P(\theta|d) \sim Gamma(\theta|\alpha_d+\alpha_\theta, d+\beta_\theta)
+\end{align*}
+De manera an\'aloga, para los costos el modelo es Gamma-Weibull, ambas distribuciones usadas com\'unmente para el modelado de siniestros en el campo actuarial,
+\begin{align*}
+P(c_i|c_{i-1})=\int P(c_i|\gamma_i,d_i)P(\gamma_i|d_i,c_{i-1}) \quad i \neq 1
+\end{align*}
+Donde,
+\begin{align*}
+P(c|\gamma,d) \sim Weibull(c|d,\gamma)\\
+P(\gamma) \sim Gamma(\gamma|\alpha_\gamma,\beta_\gamma)\\
+P(\gamma|d) \sim Gamma-Weibull(\gamma|\alpha_\gamma+d,\beta_\gamma,c^d,-d)
+\end{align*}
 \section{Discusi\'on}
 ?`Por qu\'e estos modelos son convenientes para modelar los costos de los padecimientos? Procesos Puntuales Marcados con Variables Latentes.
