@@ -10,11 +10,29 @@ La funci\'on de verosimilitud, seg\'un \cite{held2014applied}, se define como
 \begin{defi}
 La funci\'on de verosimilitud $V(\theta)$ es la funci\'on masa o la funci\'on de densidad de los datos observados $x$, entendidos en funci\'on del par\'ametro desconocido $\theta$.
 \end{defi}
-En este caso las variables observables se definen en funci\'on de las variables latentes, estas a su vez se describen en funci\'on de sus par\'ametros. De esto se desprende la noci\'on de verosimilitud extendida para incluir las variables latentes. Como se especifica en \cite{pitt2002constructing}, la construcci\'on de la funci\'on de verosimilitud resulta sencilla, incluso intuitiva. Sin embargo, la estimaci\'on de los par\'ametros mediante m\'axima verosimilitud no es tan sencilla pues no tiene una soluci\'on que se pueda solucionar de manera anal\'itica cerrada. Usando esta construcci\'on, se escribe una funci\'on de verosimilitud para el modelo general de probabilidad de duraciones y costos\\
+En este caso las variables observables se definen en funci\'on de las variables latentes, estas a su vez se describen en funci\'on de sus par\'ametros. De esto se desprende la noci\'on de verosimilitud extendida para incluir las variables latentes. Como se especifica en \cite{pitt2002constructing}, la construcci\'on de la funci\'on de verosimilitud resulta sencilla, incluso intuitiva. Sin embargo, la estimaci\'on de los par\'ametros mediante m\'axima verosimilitud no es tan sencilla pues no tiene una soluci\'on que se pueda expresar de manera anal\'itica cerrada. Usando esta construcci\'on, se escribe una funci\'on de verosimilitud para el modelo general de probabilidad de duraciones y costos\\
 \begin{eqnarray}
 V(\{\theta_j\},\{\gamma_j\},\{d_j\},\{c_j\}) &=& f(d_1|\theta_1)f(c_1|d_1,\gamma_1)f(\gamma_1) \times\nonumber\\
 && \times \prod_{j=2}^{N(t)} f(d_j|\theta_j)f(\theta_j|d_{j-1})f(c_j|d_j,\gamma_j)f(\gamma_j|c_{j-1})\nonumber
 \end{eqnarray}
+Para poder calcular la funci\'on de verosiimilitud que permite hacer inferencia, es necesario conocer las distribuciones de las variables latentes en base a las observaciones anteriores para ambas variables observables, duraciones y costos.\\
+\\Para la primera variable observable se toma en cuenta la relaci\'on $f_{\theta|d}(\theta|d)\propto f_{d|\theta}(d|\theta)f(\theta)$ y que $d|\theta \sim Gamma(d|\alpha_d,\theta)$ y $\theta \sim Gamma(\theta|\alpha_\theta,\beta_\theta)$
+\begin{eqnarray*}
+f_{\theta|d}(\theta|d) &\propto& \frac{\theta^{\alpha_d}}{\Gamma(\alpha_d)} d^{\alpha_d-1} \exp{-\{\theta d\}} \times \frac{\beta_\theta^{\alpha_\theta}}{\Gamma(\alpha_\theta)} \theta^{\alpha_\theta-1} \exp{-\{-\beta_\theta \theta\}}\\
+&=&\frac{\beta_\theta^{\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_\theta)} \quad d^{\alpha_d-1} \quad\theta^{\alpha_d+\alpha_\theta-1} \quad \exp{\{-\theta(d+\beta_\theta)\}}\\
+&\propto& \theta^{\alpha_d+\alpha_\theta-1} \quad \exp{\{-\theta(d+\beta_\theta)\}}\\
+&\Rightarrow& \theta|d \sim Gamma(\alpha_d+\alpha_\theta,d+\beta_\theta)
+\end{eqnarray*}
+\\
+Para la variable de duraciones, la distribuci\'on de la variable latente que depende de la observaci\'on se puede expresar de una manera anal\'itica cerrada como la distribuci\'on Gamma. An\'alogamente, para la variable de costos se vuelve a tomar en cuenta la misma relaci\'on y las distribuciones $c|d,\gamma \sim Weibull(c|d,\gamma)$ y $\gamma \sim InvGamma(\gamma|\alpha_\gamma,\beta_\gamma)$
+\begin{eqnarray*}
+f_{\gamma|d,c}(\gamma|d,c) &\propto& \frac{d}{\gamma^d}\quad c^{d-1} \exp{\{-(\frac{c}{\gamma})^d\}} \times \frac{\beta_\gamma^{\alpha_\gamma}}{\Gamma(\alpha_\gamma)}\quad (\frac{1}{\gamma})^{\alpha_\gamma+1} \exp{\{-(\frac{\beta_\gamma}{\gamma})\}}\\
+&=&\frac{d\beta_\gamma^{\alpha_\gamma} c^{d-1}}{\Gamma(\alpha_\gamma)}\quad (\frac{1}{\gamma})^{d+\alpha_\gamma+1}\exp{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}\\
+&\propto&(\frac{1}{\gamma})^{d+\alpha_\gamma+1}\exp{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}
+\end{eqnarray*}
+\\
+Para la variable de costos, la distribuci\'on de la variable latente seg\'un la observaci\'on anterior no tiene una forma anal\'itica cerrada como distribuci\'on, sin embargo, el kernel se puede simular con un slice sampler; este m\'etodo se explicar\'a con detalle en la siguiente secci\'on. \\
+\\
 Los par\'ametros a estimar son aquellos correspondientes a las variables latentes y a las variables observables del modelo. Dado el uso de las variables latentes no existir\'a un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos num\'ericos. \cite{pitt2002constructing} especifica que la estimaci\'on de m\'axima verosimilitud puede resolverse mediante el algoritmo EM, aunque tambi\'en, debido a que las densidades son dos condicionales de la densidad conjunta puede ligarse con el Muestreador Gibbs.\\
 \\
 El algoritmo EM es un algoritmo para calcular el estimador de m\'axima verosimilitud, que de acuerdo con \cite{held2014applied}, se define como
@@ -53,6 +71,8 @@ Esta funci\'on se asume que existe para toda pareja $(\phi',\phi)$. Se define la
 La idea central es tomar una $\phi'$ que maximice $log f(x|\phi)$, dado que esta distribuci\'on y su correspondiente logaritmo no necesariamente se conoce, se puede maximizar los datos observados y $\phi^{(p)}$.\\
 \\
 El algoritmo EM es muy \'util pues por su estructura iterativa puede dar resultados a modelos de probabilidad muy complejos, adem\'as de que al igual que el Muestreador de Gibbs, utiliza una estructura subyacente o de variables latentes. En la siguiente secci\'on se explorar\'a con detalle el Muestreador de Gibbs y sus implicaciones con el modelo general de probabilidad relativo a este trabajo.
+
+\section{Slice Sampler}
 
 \section{El Muestreador de Gibbs}
 Como mencionado en la secci\'on anterior, la estimaci\'on de par\'ametros del modelo general de probabilidad que se utilizar\'a en este trabajo no se puede hacer a trav\'es de m\'etodos anal\'iticos tradicionales, por lo que se utilizar\'an m\'etodos num\'ericos. Entre estos se encuentran el algoritmo EM y el Muestreador de Gibbs, el algoritmo EM fue descrito en la secci\'on anterior y aunque \'util para el an\'alisis del modelo presentado, el Muestreador de Gibbs tiene una interpretaci\'on m\'as simple.\\

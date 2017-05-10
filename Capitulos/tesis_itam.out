@@ -11,15 +11,16 @@
 \BOOKMARK [0][-]{chapter.3}{Inferencia y Predicci\363n}{}% 11
 \BOOKMARK [1][-]{section.3.1}{Introducci\363n}{chapter.3}% 12
 \BOOKMARK [1][-]{section.3.2}{Verosimilitud Extendida}{chapter.3}% 13
-\BOOKMARK [1][-]{section.3.3}{El Muestreador de Gibbs}{chapter.3}% 14
-\BOOKMARK [0][-]{chapter.4}{Ilustraci\363n del Modelo con Datos}{}% 15
-\BOOKMARK [1][-]{section.4.1}{Introducci\363n}{chapter.4}% 16
-\BOOKMARK [1][-]{section.4.2}{Diabetes Mellitus en el mundo: Costos y Prevalencia}{chapter.4}% 17
-\BOOKMARK [1][-]{section.4.3}{Descripci\363n de los datos}{chapter.4}% 18
-\BOOKMARK [1][-]{section.4.4}{An\341lisis Descriptivo}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.5}{Resultados}{chapter.4}% 20
-\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 21
-\BOOKMARK [1][-]{section.5.1}{Qu\351 me deja este trabajo?}{chapter.5}% 22
-\BOOKMARK [1][-]{section.5.2}{Visi\363n Cr\355tica Aut\363noma}{chapter.5}% 23
-\BOOKMARK [1][-]{section.5.3}{Trabajo Futuro}{chapter.5}% 24
-\BOOKMARK [0][-]{appendix.Alph1}{Paradigma Bayesiano}{}% 25
+\BOOKMARK [1][-]{section.3.3}{Slice Sampler}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.4}{El Muestreador de Gibbs}{chapter.3}% 15
+\BOOKMARK [0][-]{chapter.4}{Ilustraci\363n del Modelo con Datos}{}% 16
+\BOOKMARK [1][-]{section.4.1}{Introducci\363n}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.2}{Diabetes Mellitus en el mundo: Costos y Prevalencia}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.3}{Descripci\363n de los datos}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.4}{An\341lisis Descriptivo}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.5}{Resultados}{chapter.4}% 21
+\BOOKMARK [0][-]{chapter.5}{Conclusiones}{}% 22
+\BOOKMARK [1][-]{section.5.1}{Qu\351 me deja este trabajo?}{chapter.5}% 23
+\BOOKMARK [1][-]{section.5.2}{Visi\363n Cr\355tica Aut\363noma}{chapter.5}% 24
+\BOOKMARK [1][-]{section.5.3}{Trabajo Futuro}{chapter.5}% 25
+\BOOKMARK [0][-]{appendix.Alph1}{Paradigma Bayesiano}{}% 26

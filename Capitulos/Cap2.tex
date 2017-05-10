@@ -257,11 +257,17 @@ Dado que el Modelo Oculto de Markov no necesariamente es estacionario afectando 
 \put(15,50){\vector(1,0){35}}
 \put(65,50){\vector(1,0){35}}
 \put(170,50){\vector(1,0){30}}
+%\put(95,10){\vector(-3,1){90}}
+%\put(95,10){\vector(-1,1){37}}
+%\put(95,10){\vector(3,1){110}}
 \color{green}{\put(15,90){\vector(1,-1){30}}}
 \put(58,60){\vector(0,1){30}}
 \put(65,90){\vector(1,-1){30}}
 \put(165,90){\vector(1,-1){30}}
 \put(210,60){\vector(0,1){30}}
+%\put(95,15){\vector(-3,1){85}}
+%\put(95,15){\vector(-1,1){32}}
+%\put(95,15){\vector(3,1){105}}
 \end{picture}
 \end{center}
 Donde las flechas negras representan un Modelo Oculto de Markov, donde la relaci\'on con el estado anterior se presenta solamente en los par\'ametros $\theta_i|\theta_{i-1}$; mientras que las flechas amarillas representan el modelo construido donde los observaciones est\'an condicionadas al par\'ametro y el par\'ametro est\'a condicionado por la observaci\'on anterior.\\
@@ -276,7 +282,9 @@ P(c_i,d_|c_{i-1},d_{i-1}) &=&\int P(c_i,d_i|\gamma,\theta)P(\gamma,\theta|c_{i-1
 \end{eqnarray*}
 De este modo, el modelo general de la probabilidad es
 \begin{eqnarray*}
-P((d_i,c_i)_{i=1}^k|N(t)=k)&=& P(c_1|d_1)P(d_1) \prod_{i=2}^k P(c_i|d_i,c_{i-1})P(d_i|d_{i-1}) \times P(N(t)=k)
+P((d_i,c_i)_{i=1}^k|N(t)=k)&=& P(c_1|d_1)P(d_1) \prod_{i=2}^k P(c_i|d_i,c_{i-1})P(d_i|d_{i-1}) \times P(N(t)=k)%\int f(d_1|\theta_1)f(\theta_1)d\theta_1 \int f(c_1|d_1,\gamma_1 ) f(\gamma_1)d\gamma_1 \times \nonumber \\ 
+%&& %\times \prod_{j=2}^{N(t)} \int f(d_j|\theta_j) f(\theta_j|d_{j-1}) d\theta_j \times \nonumber\\
+%&&%\times \int f(c_j|d_j,\gamma_j)f(\gamma_j|c_{j-1})d\gamma_j \times P(N(t)=k) \nonumber
 \end{eqnarray*}
 Este es el modelo general de probabilidad del proceso puntual marcado de las duraciones y costos de las enfermedades cr\'onico degenerativas. Al introducir las variables latentes se construyen funciones de trancisi\'on m\'as s\'olidas, tomando en cuenta los par\'ametros que influyen en el mismo proceso.\\
 \\
@@ -333,7 +341,7 @@ Con el modelo general de probabilidad formulado en la secci\'on anterior se sien
 \\
 Seg\'un \cite{fader2013gamma} la distribuci\'on Gamma es muy \'util para modelar gasto como en el campo actuarial son los siniestros, pues estos normalmente tienden a estar sesgados a la derecha adem\'as de que las propiedades de las convoluciones siguen los patrones de gasto si los siniestros se distribuyen Gamma. Aunado a esto, en una \'optica bayesiana, la distribuci\'on Gamma tiene muchas distribuciones conjugadas como la distribuci\'on Poisson, la distribuci\'on exponencial, la distribuci\'on normal con media conocida, la distribuci\'on Pareto entre otras; que ayudan a la linealidad del modelo general de probabilidad.\\
 \\
-Las duraciones se modelan mediante un modelo Gamma-Gamma, mientras que los costos con un modelo Gamma-Weibull. El modelo Gamma-Gamma de las duraciones se deriva del propio proceso de conteo que es una distribuci\'on conjugada.
+Las duraciones se modelan mediante un modelo Gamma-Gamma, mientras que los costos con un modelo Gamma Inversa-Weibull. El modelo Gamma-Gamma de las duraciones se deriva del propio proceso de conteo que es una distribuci\'on conjugada.
 \begin{align*}
 P(d_i|d_{i-1})=\int P(d_i|\theta_i) P(\theta_i|d_{i-1}) \quad i \neq 1
 \end{align*}
@@ -341,17 +349,18 @@ Donde,
 \begin{align*}
 P(d|\theta) \sim Gamma(d|\alpha_d,\theta)\\
 P(\theta) \sim Gamma(\theta|\alpha_{\theta},\beta_\theta)\\
-P(\theta|d) \sim Gamma(\theta|\alpha_d+\alpha_\theta, d+\beta_\theta)
 \end{align*}
-De manera an\'aloga, para los costos el modelo es Gamma-Weibull, ambas distribuciones usadas com\'unmente para el modelado de siniestros en el campo actuarial,
+De manera an\'aloga, para los costos el modelo es Gamma Inversa-Weibull, la distribuci\'on Weibull es usada frecuentemente en el campo actuarial para modelar los siniestros, esto es porque al ser una distribuci\'on relacionada con la distribuci\'on exponencial, es \'util tambi\'en en la modelaci\'on de valores extremos. Por estas caracter\'isticas, la distribuci\'on Weibull es la que modelar\'a los costos en este trabajo, as\'i se asegura que si alguno de los costos del modelo llegar\'a a diferir mucho del resto, el modelo tenga la flexibilidad para incluir los datos. Tomando en cuenta que los costos se modelan con la distribuci\'on Weibull, por conveniencia, la variable latente se distribuye Gamma Inversa.
 \begin{align*}
 P(c_i|c_{i-1})=\int P(c_i|\gamma_i,d_i)P(\gamma_i|d_i,c_{i-1}) \quad i \neq 1
 \end{align*}
 Donde,
 \begin{align*}
 P(c|\gamma,d) \sim Weibull(c|d,\gamma)\\
-P(\gamma) \sim Gamma(\gamma|\alpha_\gamma,\beta_\gamma)\\
-P(\gamma|d) \sim Gamma-Weibull(\gamma|\alpha_\gamma+d,\beta_\gamma,c^d,-d)
+P(\gamma) \sim Inv-Gamma(\gamma|\alpha_\gamma,\beta_\gamma)\\
 \end{align*}
+Con el modelo general de probabilidad y las distribuciones designadas ya es posible hacer inferencia sobre observaciones futuras, como se demostrar\'a en el siguiente cap\'itulo.
 \section{Discusi\'on}
-?`Por qu\'e estos modelos son convenientes para modelar los costos de los padecimientos? Procesos Puntuales Marcados con Variables Latentes.
+?`Por qu\'e estos modelos son convenientes para modelar los costos de los padecimientos? Procesos Puntuales Marcados con Variables Latentes.\\
+\\
+Los beneficios que presentan los modelos de Procesos Puntuales Marcados con Variables Latentes para la estimaci\'on de costos totales de enfermedades cr\'onico-degenerativas son
