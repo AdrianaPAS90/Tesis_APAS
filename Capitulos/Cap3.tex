@@ -33,7 +33,73 @@ f_{\gamma|d,c}(\gamma|d,c) &\propto& \frac{d}{\gamma^d}\quad c^{d-1} \exp{\{-(\f
 \\
 Para la variable de costos, la distribuci\'on de la variable latente seg\'un la observaci\'on anterior no tiene una forma anal\'itica cerrada como distribuci\'on, sin embargo, el kernel se puede simular con un slice sampler; este m\'etodo se explicar\'a con detalle en la siguiente secci\'on. \\
 \\
-Los par\'ametros a estimar son aquellos correspondientes a las variables latentes y a las variables observables del modelo. Dado el uso de las variables latentes no existir\'a un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos num\'ericos. \cite{pitt2002constructing} especifica que la estimaci\'on de m\'axima verosimilitud puede resolverse mediante el algoritmo EM, aunque tambi\'en, debido a que las densidades son dos condicionales de la densidad conjunta puede ligarse con el Muestreador Gibbs.\\
+Las distribuciones que resultan de los c\'alculos anteriores son la llave que se necesita para empezar a hacer inferencia, tomando estas distrbuciones se redefine la verosimilitud como
+\begin{eqnarray*}
+&&V(\{\alpha_d,\alpha_\theta,\beta_\theta,\alpha_\gamma,\beta_\gamma\},\{\theta_i,\gamma_i\}_{i=1}^{N(t)}|\{d_j,c_j\}_{i=1}^{N(t)})=\\ 
+&&\prod_{i=1}^{N(t)} Gamma(d_i|\alpha_d,\theta_i) Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times \\
+&&Weibull(c_i|d_i,\gamma_i)(\frac{1}{\gamma})^{d_{i-1}+\alpha_\gamma+1}\exp\{-(\frac{\beta_\gamma}{\gamma}+(\frac{c_{i-1}}{\gamma})^{d_i})\} \times \\
+&&\times \pi(\alpha_d)\pi(\alpha_\theta)\pi(\beta_\theta)\pi(\alpha_\gamma)\pi(\beta_\gamma)
+\end{eqnarray*}
+Donde para las variables latentes,
+\begin{eqnarray*}
+\pi(\theta_i|\alpha_d,\alpha_\theta,\beta_\theta)&\propto& Gamma(d_i|\alpha_d,\theta_i)\times Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\\
+\\
+&=&\frac{\theta_i^{\alpha_d}}{\Gamma(\alpha_d)} d_i^{\alpha_d-1} \exp{\{-\theta_id_i\}}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)}\theta_i^{\alpha_d+\alpha_\theta}\exp{\{d_{i-1}+\beta_\theta\}}\\
+\\
+&=&\frac{d_i^{\alpha_d-1}(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{2\alpha_d+\alpha_\theta-1}\exp{\{-\theta_i(d_{i-1}+d_i+\beta_\theta)\}}\\
+\\
+&\propto& \theta_i^{2\alpha_d+\alpha_\theta-1}\exp{\{-\theta_i(d_{i-1}+d_i+\beta_\theta)\}}\\
+\\
+&\Rightarrow& \theta_i \sim Gamma(2\alpha_d+\alpha_\theta,d_i+d_{i-1}+\beta_\theta)
+\end{eqnarray*}
+Y,
+\begin{eqnarray*}
+\pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})&\propto& Weibull(c_i|d_i,\gamma_i)\times (\frac{1}{\gamma_i})^{d_i +\alpha_\gamma+1}\exp\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i}\}\\
+&=&\frac{d_i}{\gamma_i^{d_i}}c_i^{d_i-1}\exp{\{-(\frac{c_i}{\gamma_i})\}}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}\exp\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i}\}\\
+&=&d_i c_i^{d_i-1}(\frac{1}{\gamma_i})^{2d_i+\alpha_\gamma+1}\exp\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i}\}\exp{\{-(\frac{c_i}{\gamma_i})^{d_i}\}}\\
+&\propto&(\frac{1}{\gamma_i})^{2d_i+\alpha_\gamma+1}\exp\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}+c_i}{\gamma_i})^{d_i}\}
+\end{eqnarray*}
+Las distribuciones que corresponden a los par\'ametros son,
+\begin{eqnarray*}
+\pi(\alpha_d|...)&\propto& \prod_{i=2}^{N(t)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\alpha_d|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} \exp{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_d^{\alpha_0-1}\exp{\{-\alpha_d\beta_0\}}\\
+\\
+&\propto&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d}\alpha_d^{\alpha_0-1}\exp{\{-\alpha_d\beta_0\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\alpha_\theta|...)&\propto&\prod_{i=2}^{N(t)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\alpha_\theta|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} \exp{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\theta^{\alpha_0-1}\exp{\{-\alpha_\theta\beta_0\}}\\
+\\
+&\propto& \prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}\exp{\{-\alpha_\theta\beta_0\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\beta_\theta|...)&\propto&\prod_{i=2}^{N(t)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\beta_\theta|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} \exp{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\theta^{\alpha_0-1}\exp{\{-\beta_\theta\beta_0\}}\\
+\\
+&\propto&\prod_{i=2}^{N(t)}(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} \exp{\{-\beta_\theta(\theta_i+\beta_0)\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\alpha_\gamma|...)&\propto&\prod_{i=2}^{N(t)} \pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})\times Gamma(\alpha_\gamma|\alpha_0,\beta_0)\\
+&=&\prod_{i=2}^{N(t)}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}\exp{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\gamma^{\alpha_0-1}\exp{\{-\alpha_\gamma\beta_0\}}\\
+\\
+&\propto&\prod_{i=2}^{N(t)} (\frac{1}{\gamma_i})^{\alpha_\gamma}\alpha_\gamma^{\alpha_0-1}\exp{\{-\alpha_\gamma\beta_0\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\beta_\gamma|...)&\propto&\prod_{i=2}^{N(t)} \pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})\times Gamma(\beta_\gamma|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{i=2}^{N(t)}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}\exp{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\gamma^{\alpha_0-1}\exp{\{-\beta_\gamma\beta_0\}}\\
+&\propto&\beta_\gamma^{\alpha_0-1}\exp{\{-\beta_\gamma(\frac{1}{\gamma_i}+\beta_0)\}}\\
+\\
+&\Rightarrow& \beta_\gamma \sim Gamma(\alpha_0,\frac{1}{\gamma_i}+\beta_0)
+\end{eqnarray*}
+Los par\'ametros a estimar son aquellos correspondientes a las variables latentes, cuyo kernel se estima para cada momento $i$ ($i=1,...,N(t)$), y a las variables observables del modelo. Dado el uso de las variables latentes no existir\'a un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos num\'ericos no solo para la estimaci\'on de los par\'ametros y variables latentes sino para analizar las distribuciones que no tienen expresi\'on anal\'itica cerrada, como aquellas de los par\'ametros $\alpha_d,\alpha_\theta,\alpha_\gamma$ y la variable latente $\gamma_i$. \cite{pitt2002constructing} especifica que la estimaci\'on de m\'axima verosimilitud puede resolverse mediante el algoritmo EM, aunque tambi\'en, debido a que las densidades son dos condicionales de la densidad conjunta puede ligarse con el Muestreador Gibbs.\\
 \\
 El algoritmo EM es un algoritmo para calcular el estimador de m\'axima verosimilitud, que de acuerdo con \cite{held2014applied}, se define como
 \begin{defi}
@@ -71,9 +137,8 @@ Esta funci\'on se asume que existe para toda pareja $(\phi',\phi)$. Se define la
 La idea central es tomar una $\phi'$ que maximice $log f(x|\phi)$, dado que esta distribuci\'on y su correspondiente logaritmo no necesariamente se conoce, se puede maximizar los datos observados y $\phi^{(p)}$.\\
 \\
 El algoritmo EM es muy \'util pues por su estructura iterativa puede dar resultados a modelos de probabilidad muy complejos, adem\'as de que al igual que el Muestreador de Gibbs, utiliza una estructura subyacente o de variables latentes. En la siguiente secci\'on se explorar\'a con detalle el Muestreador de Gibbs y sus implicaciones con el modelo general de probabilidad relativo a este trabajo.
-
 \section{Slice Sampler}
-
+En la funci\'on de verosimilitus definida en la secci\'on anterior, las distribuciones de la variable latente $\gamma_i$ y de los par\'ametros $\alpha_d,\alpha_\theta,\alpha_\gamma$ no se pueden expresar de una forma anal\'itica cerrada. Es por esto que antes de empezar a estimar la funci\'on de verosimilitud es necesario muestrear primero estas distribuciones para lograr que los m\'etodos de estimaci\'on funcionen de la mejor manera. 
 \section{El Muestreador de Gibbs}
 Como mencionado en la secci\'on anterior, la estimaci\'on de par\'ametros del modelo general de probabilidad que se utilizar\'a en este trabajo no se puede hacer a trav\'es de m\'etodos anal\'iticos tradicionales, por lo que se utilizar\'an m\'etodos num\'ericos. Entre estos se encuentran el algoritmo EM y el Muestreador de Gibbs, el algoritmo EM fue descrito en la secci\'on anterior y aunque \'util para el an\'alisis del modelo presentado, el Muestreador de Gibbs tiene una interpretaci\'on m\'as simple.\\
 \\
