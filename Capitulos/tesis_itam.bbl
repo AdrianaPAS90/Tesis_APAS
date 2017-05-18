@@ -1,4 +1,4 @@
-\begin{thebibliography}{28}
+\begin{thebibliography}{30}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -16,6 +16,11 @@ AHRQ.
 AmericanDiabetesAssociation et~al.
 \newblock Economic costs of diabetes in the us in 2012.
 \newblock \emph{Diabetes care}, 36\penalty0 (4):\penalty0 1033--1046, 2013.
+
+\bibitem[Bagnoli and Bergstrom(2005)]{bagnoli2005log}
+Mark Bagnoli and Ted Bergstrom.
+\newblock Log-concave probability and its applications.
+\newblock \emph{Economic theory}, 26\penalty0 (2):\penalty0 445--469, 2005.
 
 \bibitem[Barcelo et~al.(2003)Barcelo, Aedo, Rajpathak, and
   Robles]{barcelo2003cost}
@@ -140,6 +145,11 @@ John Kruschke.
 \newblock \emph{Doing Bayesian data analysis: A tutorial with R, JAGS, and
   Stan}.
 \newblock Academic Press, 2014.
+
+\bibitem[Neal(2003)]{neal2003slice}
+Radford~M Neal.
+\newblock Slice sampling.
+\newblock \emph{Annals of statistics}, pages 705--741, 2003.
 
 \bibitem[OrganizacionMundialdelaSalud()]{FactSheetDiabetes}
 OrganizacionMundialdelaSalud.
