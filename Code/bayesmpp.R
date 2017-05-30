@@ -11,11 +11,14 @@ bayesmpp <- function(...,datos, M){
 	#	Inicio-Repositorios
 	#	Parametros
 	alpha_d_rep <- array(NaN,M,1)
-	...
+  alpha_theta_rep <- array(NaN,M,1)
+  beta_theta_rep <- array(NaN,M,1)
+  alpha_gamma_rep <- array(NaN,M,1)
+  beta_gamma_rep <- array(NaN,M,1)
 
 	# Latentes
-	theta_rep <- array(NaN,M,n)
-	...
+	theta_rep <- matrix(NaN,n,M)
+	gamma_rep <- matrix(NaN,n,M)
 
 	#	Valores iniciales
 	alpha_d_sim <- 1 # (o cualquiera)
@@ -24,22 +27,37 @@ bayesmpp <- function(...,datos, M){
 	#	Gibbs sampler, per se
 	m <- 1	
 	for(m in 1:M){
-		#	Simular de la final completa de "alpha_d"
-		alpha_d_sim <- bayesmpp_alpha_d(..., alpha_theta_sim) 
+		#	Simular de la final completa de los parametros
+		alpha_d_sim <- bayesmpp_alpha_d(..., alpha_d_sim) 
+	
+		alpha_theta_sim <- bayesmpp_alpha_theta(..., alpha_theta_sim)
+
+		beta_theta_sim <- bayesmpp_beta_theta(...,beta_theta_sim)
+	
+		alpha_gamma_sim <- bayesmpp_alpha_gamma(...,alpha_gamma_sim)
 		
-		#	Simular de la final completa de "alpha_theta"
-		alpha_theta_sim <- bayesmpp_alpha_theta(..., alpha_d_sim)
+		beta_gamma_sim <- bayesmpp_beta_gamma(...,beta_gamma_sim)
 
-		...
-
+		
+		#Simular la final completa de variables latentes
+		theta_sim <- bayesmpp_theta_sim(...,theta_sim)
+		
+		gamma_sim <- bayesmpp_gamma_sim(...,gamma_sim)
+		
+		
 		#	Almacenamos en el repositorio
 		alpha_d_rep[m,1] <- alpha_d_sim
 		alpha_theta_rep[m,1] <- alpha_theta_sim
-		...
-
+		beta_theta_rep[m,1] <- beta_theta_sim
+		alpha_gamma_rep[m,1] <- alpha_gamma_sim
+		beta_gamma_rep[m,1] <- beta_gamma_sim
+		
+		theta_rep[n,m] <- theta_sim
+    gamma_rep[n,m] <- gamma_sim
+    
 	}
 
 	# Output
-	bayesmpp_out <- list(alpha_d_rep,alpha_theta_rep, ...)
+	bayesmpp_out <- list(alpha_d_rep,alpha_theta_rep,beta_theta_rep,alpha_gamma_rep,beta_gamma_rep,theta_rep,gamma_rep)
 	return(bayesmpp_out)
 }
