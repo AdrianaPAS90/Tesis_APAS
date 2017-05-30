@@ -1,4 +1,4 @@
-bayesmpp_alpha_d <- function(..., alpha_d_sim){
+bayesmpp_alpha_d <- function(alpha_d,alpha_theta, d,beta_theta, theta, alpha_0,beta_0, alpha_d_sim){
 	#
 	# Simula datos de la distribucion condicional completa de "alpha_d"
 	#

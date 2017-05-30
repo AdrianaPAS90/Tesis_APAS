@@ -23,12 +23,15 @@ bayesmpp <- function(...,datos, M){
 	#	Valores iniciales
 	alpha_d_sim <- 1 # (o cualquiera)
 	alpha_theta_sim <- 1 # (o cualquiera)
+	beta_theta_sim <- 1
+	alpha_gamma_sim <- 1
+	beta_gamma_sim <- 1
 
 	#	Gibbs sampler, per se
 	m <- 1	
 	for(m in 1:M){
 		#	Simular de la final completa de los parametros
-		alpha_d_sim <- bayesmpp_alpha_d(..., alpha_d_sim) 
+		alpha_d_sim <- bayesmpp_alpha_d(alpha_d,alpha_theta, d,beta_theta, theta, alpha_0,beta_0, alpha_d_sim) 
 	
 		alpha_theta_sim <- bayesmpp_alpha_theta(..., alpha_theta_sim)
 
@@ -36,11 +39,11 @@ bayesmpp <- function(...,datos, M){
 	
 		alpha_gamma_sim <- bayesmpp_alpha_gamma(...,alpha_gamma_sim)
 		
-		beta_gamma_sim <- bayesmpp_beta_gamma(...,beta_gamma_sim)
+		beta_gamma_sim <- rgamma(1, alpha_0,(1/gamma_sim)+beta_0)
 
 		
 		#Simular la final completa de variables latentes
-		theta_sim <- bayesmpp_theta_sim(...,theta_sim)
+		theta_sim <- rgamma(1, alpha_d_sim + alpha_theta_sim, d + beta_theta_sim)
 		
 		gamma_sim <- bayesmpp_gamma_sim(...,gamma_sim)
 		
