@@ -3,7 +3,7 @@
 #
 #
 bayesmpp <- function(...,datos, M){
-	# datops - arreglo de nx3 (col1-individuo, col2-duraciones, col3-costos)
+	# datos - arreglo de nx3 (col1-individuo, col2-duraciones, col3-costos)
  	# M - numero de simulacion del gibbs sampler
 	#
 	
@@ -26,12 +26,15 @@ bayesmpp <- function(...,datos, M){
 	beta_theta_sim <- 1
 	alpha_gamma_sim <- 1
 	beta_gamma_sim <- 1
+	
+	theta_sim <- 1
+	gamma_sim <- 1
 
 	#	Gibbs sampler, per se
 	m <- 1	
 	for(m in 1:M){
 		#	Simular de la final completa de los parametros
-		alpha_d_sim <- bayesmpp_alpha_d(alpha_d,alpha_theta, d,beta_theta, theta, alpha_0,beta_0, alpha_d_sim) 
+		alpha_d_sim <- bayesmpp_alpha_d(x0) 
 	
 		alpha_theta_sim <- bayesmpp_alpha_theta(..., alpha_theta_sim)
 
