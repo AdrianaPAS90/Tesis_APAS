@@ -2,19 +2,30 @@
 #	Implementacion del Gibbs sampler
 #
 #
+rm(list = ls())
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/slice.sampler/uni.slice.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_d_demo.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_theta_demo.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_beta_theta_demo.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_gamma_demo.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_gamma.R")
+
 bayesmpp <- function(...,datos, M){
 	# datos - arreglo de nx3 (col1-individuo, col2-duraciones, col3-costos)
  	# M - numero de simulacion del gibbs sampler
 	#
 	
+  alpha_0 =2
+  beta_0 = 0.3
+  
 	n <- nrow(datos)
 	#	Inicio-Repositorios
 	#	Parametros
-	alpha_d_rep <- array(NaN,M,1)
-  alpha_theta_rep <- array(NaN,M,1)
-  beta_theta_rep <- array(NaN,M,1)
-  alpha_gamma_rep <- array(NaN,M,1)
-  beta_gamma_rep <- array(NaN,M,1)
+	alpha_d_rep <- array(NaN,M)
+  alpha_theta_rep <- array(NaN,M)
+  beta_theta_rep <- array(NaN,M)
+  alpha_gamma_rep <- array(NaN,M)
+  beta_gamma_rep <- array(NaN,M)
 
 	# Latentes
 	theta_rep <- matrix(NaN,n,M)
@@ -36,11 +47,11 @@ bayesmpp <- function(...,datos, M){
 		#	Simular de la final completa de los parametros
 		alpha_d_sim <- bayesmpp_alpha_d(x0) 
 	
-		alpha_theta_sim <- bayesmpp_alpha_theta(..., alpha_theta_sim)
+		alpha_theta_sim <- bayesmpp_alpha_theta(x0, alpha_d_sim)
 
-		beta_theta_sim <- bayesmpp_beta_theta(...,beta_theta_sim)
+		beta_theta_sim <- bayesmpp_beta_theta(x0, alpha_d_sim, alpha_theta_sim)
 	
-		alpha_gamma_sim <- bayesmpp_alpha_gamma(...,alpha_gamma_sim)
+		alpha_gamma_sim <- bayesmpp_alpha_gamma(x0)
 		
 		beta_gamma_sim <- rgamma(1, alpha_0,(1/gamma_sim)+beta_0)
 
@@ -48,15 +59,15 @@ bayesmpp <- function(...,datos, M){
 		#Simular la final completa de variables latentes
 		theta_sim <- rgamma(1, alpha_d_sim + alpha_theta_sim, d + beta_theta_sim)
 		
-		gamma_sim <- bayesmpp_gamma_sim(...,gamma_sim)
+		gamma_sim <- bayesmpp_gamma_(x0, alpha_gamma_sim, beta_gamma_sim)
 		
 		
 		#	Almacenamos en el repositorio
-		alpha_d_rep[m,1] <- alpha_d_sim
-		alpha_theta_rep[m,1] <- alpha_theta_sim
-		beta_theta_rep[m,1] <- beta_theta_sim
-		alpha_gamma_rep[m,1] <- alpha_gamma_sim
-		beta_gamma_rep[m,1] <- beta_gamma_sim
+		alpha_d_rep[m] <- alpha_d_sim
+		alpha_theta_rep[m] <- alpha_theta_sim
+		beta_theta_rep[m] <- beta_theta_sim
+		alpha_gamma_rep[m] <- alpha_gamma_sim
+		beta_gamma_rep[m] <- beta_gamma_sim
 		
 		theta_rep[n,m] <- theta_sim
     gamma_rep[n,m] <- gamma_sim
@@ -65,5 +76,5 @@ bayesmpp <- function(...,datos, M){
 
 	# Output
 	bayesmpp_out <- list(alpha_d_rep,alpha_theta_rep,beta_theta_rep,alpha_gamma_rep,beta_gamma_rep,theta_rep,gamma_rep)
-	return(bayesmpp_out)
+	
 }
