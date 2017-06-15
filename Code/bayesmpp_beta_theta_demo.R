@@ -14,7 +14,7 @@ source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/slice.sampler/uni.slice.R
 #beta_theta_sim = 1
 
 
-bayesmpp_beta_theta <- function(x0=3, alpha_d, alpha_theta){
+bayesmpp_beta_theta <- function(x0=3, alpha_d, alpha_theta, d){
   
   g<- function(beta_theta,alpha_d=1,alpha_theta=2,d=5,theta=3,alpha_0=2,beta_0=0.3){
     (alpha_d+alpha_theta)*log(d+beta_theta)+(alpha_0-1)*log(beta_theta)-beta_theta*(theta+beta_0)
