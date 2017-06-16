@@ -1,0 +1,60 @@
+---
+title: "Tesis Adriana Perez-Arciniega"
+author: "Juan Carlos Martinez-Ovando"
+date: "15 June 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Comentarios
+
+* `p.9`  Titulo:
+
+**Procesos marcados**
+
+* `p.10` Titula la `Seccion 2.2` como **Definiciones**
+
+* `p.10` Menciona que aunque las variables sociodemograficas de los pacientes estaran presentes, el alcance de tu tesis no cubira su incrporacion en la modelacion. Es un tema que podra explorarse como trabajo futuro (tuyo o de alguien mas).
+
+* `p.10` Completa la especificacion del objetivo mencionando que no solo es el proposito modelar la uracion y los costos, sino introducir una estructura de dependencia entre ellos. Refiere al libro de Dalye & Vere-Jones (2003), quienes mencionan que eso es complicado de ejecutar.
+
+* Etiqueta a los individuos con el indice $i$, para $i=1, \ldots, I$ (no con $n_i$) donde $I$ es el numero total de individuos.
+
+* Esta bien que menciones espacios metricos... Solo ten cuidado, pues abriraras una puerta de discusion interesante.. Te dare una referencia para comprender esa nocion...
+
+* $Z^{+}$ puede incluir al infinito... mas no ser infinito, cuando defines $N(t)$
+
+* Se consistene con la notacion del tiempo... Refiere a $t_{ij}$ el tiempo del $j$-esimo cambio del $i$-esimo individuo
+
+* **Platicaremos acerca de la separabilidad de espacios metricos...** Recuerdame esto, por favor.
+
+* Todas las figuras en tu tesis deben incluir un `Caption`, i.e.
+
+```
+\begin{figure}
+  \caption{La figura tal...}
+  \includegraphics{...}
+  \label{fig_tal}
+\ènd{figure}
+```
+
+* Marca una referencia a la `ecuacion (2.2)` en el libro de Daley & Vere-Jones (2003)
+
+* **Por favor, incluye numeros de pagina**
+
+* Evita usar `bullets`... Estos son utiles para esquematizar ideas, pero no para presentarlas en un documento de tesis
+
+* La `Seccion 2.3` titulala **Procesos de duracion marcados**
+
+* En la `Definicion 2` menciona ... 
+
+> ... para todo operador de permutacion $\sigma(\cdot)$ de $\{1,\ldots, n\}$
+
+* La `Seccion 2.4` podria titularse **Contrucción de procesos via variables latentes**
+
+* Dentro de la definicion de modelos con variables latentes, evita el uso de `bullets`
+
