@@ -1,30 +1,30 @@
 \select@language {spanish}
-\contentsline {chapter}{\numberline {1}Introducci\'on}{7}{chapter.1}
-\contentsline {subsection}{\numberline {1.0.1}Introducci\'on}{7}{subsection.1.0.1}
-\contentsline {subsection}{\numberline {1.0.2}Definici\'on de Variables Latentes}{7}{subsection.1.0.2}
-\contentsline {chapter}{\numberline {2}Procesos Puntuales Marcados o Procesos de Duraci\'on Marcada}{9}{chapter.2}
-\contentsline {section}{\numberline {2.1}Introducci\'on}{9}{section.2.1}
-\contentsline {section}{\numberline {2.2}Definici\'on del proceso de Duraci\'on y Duraci\'on Marcada}{10}{section.2.2}
-\contentsline {section}{\numberline {2.3}Propiedades del Proceso de Duraci\'on Marcada}{14}{section.2.3}
-\contentsline {subsubsection}{Independencia}{14}{section*.3}
-\contentsline {subsubsection}{Intercambiabilidad}{15}{section*.4}
-\contentsline {subsubsection}{Estacionareidad}{16}{section*.5}
-\contentsline {section}{\numberline {2.4}Introducci\'on de las variables latentes en el PPM}{18}{section.2.4}
-\contentsline {section}{\numberline {2.5}Construcci\'on del Modelo de Marcas}{23}{section.2.5}
-\contentsline {section}{\numberline {2.6}Discusi\'on}{25}{section.2.6}
-\contentsline {chapter}{\numberline {3}Inferencia y Predicci\'on}{27}{chapter.3}
-\contentsline {section}{\numberline {3.1}Introducci\'on}{27}{section.3.1}
-\contentsline {section}{\numberline {3.2}Verosimilitud Extendida}{28}{section.3.2}
-\contentsline {section}{\numberline {3.3}Slice Sampler}{37}{section.3.3}
-\contentsline {section}{\numberline {3.4}El Muestreador de Gibbs}{40}{section.3.4}
-\contentsline {chapter}{\numberline {4}Ilustraci\'on del Modelo con Datos}{47}{chapter.4}
-\contentsline {section}{\numberline {4.1}Introducci\'on}{47}{section.4.1}
-\contentsline {section}{\numberline {4.2}Diabetes Mellitus en el mundo: Costos y Prevalencia}{47}{section.4.2}
-\contentsline {section}{\numberline {4.3}Descripci\'on de los datos}{55}{section.4.3}
-\contentsline {section}{\numberline {4.4}An\'alisis Descriptivo}{55}{section.4.4}
-\contentsline {section}{\numberline {4.5}Resultados}{55}{section.4.5}
-\contentsline {chapter}{\numberline {5}Conclusiones}{57}{chapter.5}
-\contentsline {section}{\numberline {5.1}Qu\'e me deja este trabajo?}{57}{section.5.1}
-\contentsline {section}{\numberline {5.2}Visi\'on Cr\'itica Aut\'onoma}{57}{section.5.2}
-\contentsline {section}{\numberline {5.3}Trabajo Futuro}{57}{section.5.3}
-\contentsline {chapter}{\numberline {A}Paradigma Bayesiano}{65}{appendix.Alph1}
+\contentsline {chapter}{\numberline {1}Introducci\'on}{5}{chapter.1}
+\contentsline {subsection}{\numberline {1.0.1}Introducci\'on}{5}{subsection.1.0.1}
+\contentsline {subsection}{\numberline {1.0.2}Definici\'on de Variables Latentes}{5}{subsection.1.0.2}
+\contentsline {chapter}{\numberline {2}Procesos de Duraci\'on Marcada}{6}{chapter.2}
+\contentsline {section}{\numberline {2.1}Introducci\'on}{6}{section.2.1}
+\contentsline {section}{\numberline {2.2}Definiciones}{7}{section.2.2}
+\contentsline {section}{\numberline {2.3}Procesos de Duraci\'on Marcada}{11}{section.2.3}
+\contentsline {subsubsection}{Independencia}{11}{section*.4}
+\contentsline {subsubsection}{Intercambiabilidad}{12}{section*.5}
+\contentsline {subsubsection}{Estacionareidad}{14}{section*.6}
+\contentsline {section}{\numberline {2.4}Construcci\'on de Procesos v\'ia Variables Latentes}{16}{section.2.4}
+\contentsline {section}{\numberline {2.5}Construcci\'on del Modelo de Marcas}{22}{section.2.5}
+\contentsline {section}{\numberline {2.6}Discusi\'on}{23}{section.2.6}
+\contentsline {chapter}{\numberline {3}Inferencia y Predicci\'on}{24}{chapter.3}
+\contentsline {section}{\numberline {3.1}Introducci\'on}{24}{section.3.1}
+\contentsline {section}{\numberline {3.2}Verosimilitud Extendida}{25}{section.3.2}
+\contentsline {section}{\numberline {3.3}Slice Sampler}{34}{section.3.3}
+\contentsline {section}{\numberline {3.4}El Muestreador de Gibbs}{37}{section.3.4}
+\contentsline {chapter}{\numberline {4}Ilustraci\'on del Modelo con Datos}{43}{chapter.4}
+\contentsline {section}{\numberline {4.1}Introducci\'on}{43}{section.4.1}
+\contentsline {section}{\numberline {4.2}Diabetes Mellitus en el mundo: Costos y Prevalencia}{43}{section.4.2}
+\contentsline {section}{\numberline {4.3}Descripci\'on de los datos}{51}{section.4.3}
+\contentsline {section}{\numberline {4.4}An\'alisis Descriptivo}{51}{section.4.4}
+\contentsline {section}{\numberline {4.5}Resultados}{51}{section.4.5}
+\contentsline {chapter}{\numberline {5}Conclusiones}{52}{chapter.5}
+\contentsline {section}{\numberline {5.1}Qu\'e me deja este trabajo?}{52}{section.5.1}
+\contentsline {section}{\numberline {5.2}Visi\'on Cr\'itica Aut\'onoma}{52}{section.5.2}
+\contentsline {section}{\numberline {5.3}Trabajo Futuro}{52}{section.5.3}
+\contentsline {chapter}{\numberline {A}Paradigma Bayesiano}{58}{appendix.Alph1}
