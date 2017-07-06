@@ -7,17 +7,17 @@ Una vez que se tiene definido el proceso puntual se introduce el concepto de var
 Es importante remarcar que la historia de los procesos puntuales siempre ha estado unida a aquella de la estad\'istica actuarial y de seguros, como nos mencionan \cite{daley2003} al referirse a las tablas de mortalidad como el primer estudio de procesos de intervalos. Por lo que el empleo de estos procesos como un m\'etodo de tarificaci\'on es solamente otra colaboraci\'on en la larga lista de estas dos disciplinas.
 \\
 \section{Definiciones}
-Para el objeto de este estudio tenemos una muestra de microcostos de enfermedades cr\'onicas de un cierto n\'umero de individuos a los que se les ha observado durante un per\'iodo de tiempo. A su vez, cada uno de los individuos tiene asociadas covariables sociodemogr\'aficas, socioecon\'omicas y m\'edicas; estas covariables, por el alcance del trabajo no est\'an incluidas en la modelaci\'on. Aunque las covariables asociadas a los individuos inciden en el diagn\'ostico, es un tema a explorarse en un trabajo de investigaci\'on futuro.\\
+Para el objeto de este estudio tenemos una muestra de microcostos de enfermedades cr\'onicas de un cierto n\'umero de individuos a los que se les ha observado durante un per\'iodo de tiempo. A su vez, cada uno de los individuos tiene asociadas covariables sociodemogr\'aficas, socioecon\'omicas y m\'edicas; estas covariables, por el alcance del trabajo no est\'an incluidas en la modelaci\'on. Aunque las covariables asociadas a los individuos inciden en la trayectoria del padecimiento, estas relaciones son un tema a explorarse en un trabajo de investigaci\'on futuro.\\
 \\
 De este modo, podr\'iamos decir que tenemos $i=1,...,I$ individuos, donde $I$ es el n\'umero total de individuos observados por un per\'iodo de tiempo con costos asociados a su padecimiento. El objetivo es no solo modelar y predecir la duraci\'on y el costo de las etapas de estos padecimientos por individuo, sino tambi\'en, introducir la estructura de dependencia entre \'estas. De acuerdo a \cite{daley2003}, las relaciones de dependencia entre las variables pueden llegar a ser muy complejas, por lo que la ejecuci\'on del modelo se vuelve m\'as complicada.\\ 
 \\
-Entonces, supongamos que empezamos el estudio de un individuo $i$ en el tiempo $t_{i0}=0$, es decir, este es el tiempo en el que el individuo entra al panel de estudio. La duraci\'on del estudio para el individuo es $T_i$, esto no quiere decir que no puedan ocurrir observaciones posteriores a $T_i$, a esto se le conoce como censuramiento de datos por la derecha.\\
+Entonces, supongamos que empezamos el estudio de un individuo $i$ en el tiempo $t_{i0}=0$, es decir, este es el tiempo en el que el individuo $i$ entra al panel de estudio. La duraci\'on del estudio para el individuo es $T_i$, esto no quiere decir que no puedan ocurrir observaciones posteriores a $T_i$, a esto se le conoce como censuramiento de datos por la derecha.\\
 \\
 Seg\'un \cite{intropp}, un proceso puntual es una medida aleatoria en un espacio m\'etrico separado $S$ tomando valores en los enteros no negativos $Z^+$ donde $N(t)$, en un caso particular, es un proceso de conteo del n\'umero de puntos que ocurren antes del tiempo $t$.\\
 \\
 Sea $t_{ij} \in (t_{i0},T_i]$ el momento en el que ocurre el $j$-\'esimo cambio de tratamiento del $i$-\'esimo individuo, por lo que definimos la variable aleatoria $N(t)$ que cuenta el n\'umero de cortes o cambios en el intervalo.\\
 \\
-Dado que la muestra consiste en microcostos a trav\'es del tiempo de un individuo $i$, decimos que a cada $t_ij$ se le asocia la variable costo de tratamiento; es decir, a cada momento en que ocurre un cambio de tratamiento le corresponde un nuevo precio $p_ij$. De este modo, para cualquier $i$ tenemos una sucesi\'on de variables asociadas $\{t_{i1},p_{i1}\},\{t_{i2},p_{i2}\},...,\{t_{ik},p_{ik}\}$. De este modo la sucesi\'on de variables es una colecci\'on aleatoria de puntos en un espacio con una marca asociada a cada punto, as\'i ya se pueden modelar los datos como en un proceso puntual marcado.\\
+Dado que la muestra consiste en microcostos a trav\'es del tiempo de un individuo $i$, decimos que a cada $t_{ij}$ se le asocia la variable costo de tratamiento; es decir, a cada momento en que ocurre un cambio de tratamiento le corresponde un nuevo precio $p_{ij}$. De este modo, para cualquier $i$ tenemos una sucesi\'on de variables asociadas $\{t_{i1},p_{i1}\},\{t_{i2},p_{i2}\},...,\{t_{ik},p_{ik}\}$. De este modo la sucesi\'on de variables es una colecci\'on aleatoria de puntos en un espacio con una marca asociada a cada punto, as\'i ya se pueden modelar los datos como en un proceso puntual marcado.\\
 \\
 \cite{daley2003} definen el proceso puntual marcado como un proceso localizado en un espacio m\'etrico completamente separado $\chi$ y las marcas en otro espacio m\'etrico completamente separado $\kappa$, entonces $\{(\chi_i,\kappa_i)\}$ en $\chi \times \kappa$ es un proceso puntual marcado con la propiedad adicional de que el proceso primario $N(t)$ es a su vez un proceso puntual.\\
 \\
@@ -119,16 +119,16 @@ Una vez que hemos definido qu\'e es el proceso de duraci\'on y de duraci\'on mar
 En una concepci\'on tradicional, \cite{resnickpath} define la independencia de un n\'umero finito de eventos como:\\
 \begin{defi}
 Los eventos $A_1$, ... , $A_n$ (n$\geq$ 2) son independientes si
-\begin{align}
-P(\bigcap_{i \in I} A_i) = \prod_{i \in I} P(A_i), \qquad I \subset\{1,...,n\} \nonumber
-\end{align}
+\begin{align*}
+P(\bigcap_{i \in I} A_i) = \prod_{i \in I} P(A_i), \qquad I \subset\{1,...,n\}
+\end{align*}
 \end{defi}
 Los eventos son independientes si la probabilidad de la intersecci\'on de estos eventos o la probabilidad conjunta de los eventos es igual a la multiplicaci\'on de la probabilidad de los mismos.\\
 \\
 An\'alogamente, podemos hacer la definici\'on de independencia para el proceso de duraci\'on marcada. Recordemos que tenemos la funci\'on de probabilidad conjunta de las duraciones y los costos, por lo que la independencia en el proceso es:
-\begin{align}
+\begin{align*}
 P(d_1,c_1,...,d_k,c_k|N(t)=k)=\prod_{j=1}^{N(t)} P(d_j,c_j)
-\end{align}
+\end{align*}
 En este caso, la \'unica diferencia reside en el hecho de que el n\'umero de funciones de probabilidad a multiplicar es a su vez una variable aleatoria, la cual se encarga de contar los cambios en el costo de tratamiento en el tiempo. El supuesto de independencia es \'util para la inferencia de futuras observaciones.
 \subsubsection{Intercambiabilidad}
 Otra propiedad muy importante para la inferencia y predicci\'on de variables en un proceso de duraci\'on marcada es la intercambiabilidad que, de acuerdo a \cite{hahn2012exchangeable}, se define como:
@@ -149,9 +149,9 @@ P(\bar{X} \in B)=\int_U P(\bar{X}(u) \in B) \Theta(du)   \nonumber
 donde $\bar{X}(u)=(X_1(u),X_2(u),...)$ es una secuencia de variables aleatorias i.i.d. y $\Theta(\cdot)$ es una medida de probabilidad.
 \end{teo}
 Esto se puede adaptar al proceso de duraci\'on marcada correspondiente a este an\'alisis de la siguiente manera, tomando el Teorema de Fenetti
-\begin{align}
+\begin{align*}
 P(d_1,c_1,...,d_k,c_k|N(t)=k)=\int_\Theta \prod_{j=1}^{N(t)} P(d_j,c_j|\theta) \pi(\theta) d(\theta)
-\end{align}
+\end{align*}
 donde $\theta$ es una variable aleatoria no observable y $\pi(\theta)$ es una medida de probabilidad com\'un a todas las variables aleatorias. Es decir, que a lo postulado en el apartado de independencia le agregamos la variable no observable con su respectiva medida de probabilidad, sobre cuyo espacio de probabilidad est\'a definida la integral. La variable no observable com\'un a todas las variables aleatorias es un tema que se posteriormente se desarrollar\'a con mayor profundidad.
 \subsubsection{Estacionareidad}
 Una vez que han sido definidas la independencia y la intercambiabilidad faltar\'ia definir la estacionareidad para poder hacer predicciones sobre futuras observaciones.\\
@@ -167,7 +167,7 @@ P(X_n,...,X_1)&=&P(X_n|X_{n-1},...,X_1)\times P(X_{n-1}|X_{n-2},...,X_1)\times \
 \end{eqnarray*}	
 As\'i si la variable aleatoria depende de su historia, podr\'iamos entonces predecir observaciones futuras. Es decir, que para toda $s \geq 0$
 \begin{eqnarray*}
-P(X_{n+1},X_n,...,X_1)&=&P(X_{n+1})|X_n,...,X_1)\\
+P(X_{n+1},X_n,...,X_1)&=&P(X_{n+1}|X_n,...,X_1)\\
                       &=&P(X_{n+s+1}|X_{n+s},...,X_{1+s}) \nonumber
 \end{eqnarray*}
 De este modo, para el proceso de duraci\'on marcada la estacionareidad, junto con la noci\'on desarrollada en la ecuaci\'on $(3)$ sobre la relaci\'on de las marcas con el proceso de duraci\'on, se podr\'ia plantear como
@@ -247,9 +247,9 @@ Ecuaci\'on de Sistema: $\theta_j|d_{j-1} \sim f_{\Theta|d}(\cdot|d_{j-1})$\\
 \\
 Una vez que tenemos el modelo para la variable de las duraciones, lo hacemos extensivo para los costos. De este modo, el proceso de variables latentes quedar\'ia\\
 \\
-Ecuaci\'on de Observaci\'on: $c_{j}|\gamma_j \sim f_{d|\gamma}(\cdot|\gamma_j)$\\
+Ecuaci\'on de Observaci\'on: $c_{j}|\gamma_j \sim f_{c|\gamma}(\cdot|\gamma_j)$\\
 \\
-Ecuaci\'on de Sistema: $\gamma_j|c_{j-1} \sim f_{\gamma|d}(\cdot|c_{j-1})$\\
+Ecuaci\'on de Sistema: $\gamma_j|c_{j-1} \sim f_{\gamma|c}(\cdot|c_{j-1})$\\
 \\
 Dado que el Modelo Oculto de Markov no necesariamente es estacionario afectando as\'i la capacidad inferencial del mismo, el modelo que se construye a trav\'es de las estructuras de ecuaciones de observaci\'on y sistema que se acaban de definir, es estacionario por construcci\'on y es capaz de modelar la observaci\'on actual en relaci\'on a la observaci\'on anterior. Tomando solamente la variable duraci\'on junto con su par\'ametro $\theta$, la representaci\'on gr\'afica de ambos modelos se compara del siguiente modo,\\
 \begin{figure}[h!]
@@ -289,9 +289,9 @@ Donde las flechas negras representan un Modelo Oculto de Markov, donde la relaci
 \\
 Ahora bien, utilizando las relaciones entre las variables observables y latentes, el proceso de trancisi\'on para una observaci\'on en el modelo general de probabilidad con procesos de variables latentes se escribe asegurando la estacionariedad desde la construcci\'on,
 \begin{eqnarray*}
-P(c_i,d_|c_{i-1},d_{i-1}) &=&\int P(c_i,d_i|\gamma,\theta)P(\gamma,\theta|c_{i-1},d_{i-1})\\
+P(c_i,d_i|c_{i-1},d_{i-1}) &=&\int P(c_i,d_i|\gamma,\theta)P(\gamma,\theta|c_{i-1},d_{i-1})\\
 &=&\int \int F(c_i,d_i|\gamma,\theta)\pi(\gamma|d_i,c_{i-1})\pi(\theta|d_{i-1})\\
-&=&\int \int F(c_i|\gamma,d_k) F(d_i|\theta)\pi(\gamma|d_i,c_{i-1})\pi(\theta|d_{i-1})\\
+&=&\int \int F(c_i|\gamma,d_i) F(d_i|\theta)\pi(\gamma|d_i,c_{i-1})\pi(\theta|d_{i-1})\\
 &=&\int F(c_i|\gamma,d_i)\pi(\gamma|d_i,c_{i-1}) \int F(d_i|\theta)\pi(\theta|d_{i-1})\\
 &=&P(c_i|d_i,c_{i-1})P(d_i|d_{i-1})
 \end{eqnarray*}
@@ -369,7 +369,7 @@ Donde,
 P(d|\theta) \sim Gamma(d|\alpha_d,\theta)\\
 P(\theta) \sim Gamma(\theta|\alpha_{\theta},\beta_\theta)\\
 \end{align*}
-De manera an\'aloga, para los costos el modelo es Gamma Inversa-Weibull, la distribuci\'on Weibull es usada frecuentemente en el campo actuarial para modelar los siniestros, esto es porque al ser una distribuci\'on relacionada con la distribuci\'on exponencial, es \'util tambi\'en en la modelaci\'on de valores extremos. Por estas caracter\'isticas, la distribuci\'on Weibull es la que modelar\'a los costos en este trabajo, as\'i se asegura que si alguno de los costos del modelo llegar\'a a diferir mucho del resto, el modelo tenga la flexibilidad para incluir los datos. Tomando en cuenta que los costos se modelan con la distribuci\'on Weibull, por conveniencia, la variable latente se distribuye Gamma Inversa.
+De manera an\'aloga, para los costos el modelo es Gamma Inversa-Weibull, la distribuci\'on Weibull es usada frecuentemente en el campo actuarial para modelar los siniestros, esto es porque al ser una distribuci\'on relacionada con la distribuci\'on exponencial, es \'util tambi\'en en la modelaci\'on de valores extremos. Por estas caracter\'isticas, la distribuci\'on Weibull es la que modelar\'a los costos en este trabajo, as\'i se asegura que si alguno de los costos del modelo llegara a diferir mucho del resto, el modelo tenga la flexibilidad para incluir los datos. Tomando en cuenta que los costos se modelan con la distribuci\'on Weibull, por conveniencia, la variable latente se distribuye Gamma Inversa.
 \begin{align*}
 P(c_i|c_{i-1})=\int P(c_i|\gamma_i,d_i)P(\gamma_i|d_i,c_{i-1}) \quad i \neq 1
 \end{align*}
@@ -382,4 +382,6 @@ Con el modelo general de probabilidad y las distribuciones designadas ya es posi
 \section{Discusi\'on}
 %?`Por qu\'e estos modelos son convenientes para modelar los costos de los padecimientos? Procesos Puntuales Marcados con Variables Latentes.\\
 %\\
-Los beneficios que presentan los modelos de Procesos Puntuales Marcados con Variables Latentes para la estimaci\'on de costos totales de enfermedades cr\'onico-degenerativas son, la flexibilidad que brindan para modelar las estructuras de dependencia entre las marcar y el proceso puntual. 
+Los beneficios que presentan los modelos de Procesos Puntuales Marcados con Variables Latentes para la estimaci\'on de costos totales de enfermedades cr\'onico-degenerativas son la flexibilidad que brindan para modelar las estructuras de dependencia entre las marcas y el proceso puntual. Es decir, que es un modelo construido de manera espec\'ifica para ajustarse a las trayectorias de cada paciente con un padecimiento cr\'onico degenerativo.\\
+\\ 
+La especificidad del modelo aunado a la estacionareidad asegurada por construcci\'on, se puede asegurar la inferencia de observaciones futuras. Aunque fuera del alcance de este proyecto de investigaci\'on, la inferencia es una herramienta poderosa para un estudio riguroso de tarificaci\'on en el sector asegurador para seguros de gastos m\'edicos mayores. La verosimilitud del modelo y la manera de hacer inferencia se desarrollar\'an a profundidad en el siguiente cap\'itulo, de acuerdo a las distribuciones designadas.

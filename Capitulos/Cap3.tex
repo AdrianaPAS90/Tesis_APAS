@@ -16,19 +16,24 @@ V(\{\theta_j\},\{\gamma_j\},\{d_j\},\{c_j\}) &=& f(d_1|\theta_1)f(c_1|d_1,\gamma
 && \times \prod_{j=2}^{N(t)} f(d_j|\theta_j)f(\theta_j|d_{j-1})f(c_j|d_j,\gamma_j)f(\gamma_j|c_{j-1})\nonumber
 \end{eqnarray}
 Para poder calcular la funci\'on de verosiimilitud que permite hacer inferencia, es necesario conocer las distribuciones de las variables latentes en base a las observaciones anteriores para ambas variables observables, duraciones y costos.\\
-\\Para la primera variable observable se toma en cuenta la relaci\'on $f_{\theta|d}(\theta|d)\propto f_{d|\theta}(d|\theta)f(\theta)$ y que $d|\theta \sim Gamma(d|\alpha_d,\theta)$ y $\theta \sim Gamma(\theta|\alpha_\theta,\beta_\theta)$
+\\Para la primera variable observable se toma en cuenta la relaci\'on 
+\[f_{\theta|d}(\theta|d)\propto f_{d|\theta}(d|\theta)f(\theta)\]
+y que $d|\theta \sim Gamma(d|\alpha_d,\theta)$ y $\theta \sim Gamma(\theta|\alpha_\theta,\beta_\theta)$.
+
 \begin{eqnarray*}
-f_{\theta|d}(\theta|d) &\propto& \frac{\theta^{\alpha_d}}{\Gamma(\alpha_d)} d^{\alpha_d-1} \exp{-\{\theta d\}} \times \frac{\beta_\theta^{\alpha_\theta}}{\Gamma(\alpha_\theta)} \theta^{\alpha_\theta-1} \exp{-\{-\beta_\theta \theta\}}\\
-&=&\frac{\beta_\theta^{\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_\theta)} \quad d^{\alpha_d-1} \quad\theta^{\alpha_d+\alpha_\theta-1} \quad \exp{\{-\theta(d+\beta_\theta)\}}\\
-&\propto& \theta^{\alpha_d+\alpha_\theta-1} \quad \exp{\{-\theta(d+\beta_\theta)\}}\\
+f_{\theta|d}(\theta|d) &\propto& \frac{\theta^{\alpha_d}}{\Gamma(\alpha_d)}\quad d^{\alpha_d-1} e^{-\{\theta d\}} \times \frac{\beta_\theta^{\alpha_\theta}}{\Gamma(\alpha_\theta)}\quad \theta^{\alpha_\theta-1} e^{-\{-\beta_\theta \theta\}}\\
+&=&\frac{\beta_\theta^{\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_\theta)} \quad d^{\alpha_d-1} \quad\theta^{\alpha_d+\alpha_\theta-1} \quad e^{\{-\theta(d+\beta_\theta)\}}\\
+\\
+&\propto& \theta^{\alpha_d+\alpha_\theta-1} \quad e^{\{-\theta(d+\beta_\theta)\}}\\
 &\Rightarrow& \theta|d \sim Gamma(\alpha_d+\alpha_\theta,d+\beta_\theta)
 \end{eqnarray*}
 \\
-Para la variable de duraciones, la distribuci\'on de la variable latente que depende de la observaci\'on se puede expresar de una manera anal\'itica cerrada como la distribuci\'on Gamma. An\'alogamente, para la variable de costos se vuelve a tomar en cuenta la misma relaci\'on y las distribuciones $c|d,\gamma \sim Weibull(c|d,\gamma)$ y $\gamma \sim InvGamma(\gamma|\alpha_\gamma,\beta_\gamma)$
+Para la variable de duraciones, la distribuci\'on de la variable latente que depende de la observaci\'on se puede expresar de una manera anal\'itica cerrada como la distribuci\'on Gamma. An\'alogamente, para la variable de costos se vuelve a tomar en cuenta la misma relaci\'on y las distribuciones 
+\[c|d,\gamma \sim Weibull(c|d,\gamma) \qquad \gamma \sim InvGamma(\gamma|\alpha_\gamma,\beta_\gamma)\]
 \begin{eqnarray*}
-f_{\gamma|d,c}(\gamma|d,c) &\propto& \frac{d}{\gamma^d}\quad c^{d-1} \exp{\{-(\frac{c}{\gamma})^d\}} \times \frac{\beta_\gamma^{\alpha_\gamma}}{\Gamma(\alpha_\gamma)}\quad (\frac{1}{\gamma})^{\alpha_\gamma+1} \exp{\{-(\frac{\beta_\gamma}{\gamma})\}}\\
-&=&\frac{d\beta_\gamma^{\alpha_\gamma} c^{d-1}}{\Gamma(\alpha_\gamma)}\quad (\frac{1}{\gamma})^{d+\alpha_\gamma+1}\exp{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}\\
-&\propto&(\frac{1}{\gamma})^{d+\alpha_\gamma+1}\exp{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}
+f_{\gamma|d,c}(\gamma|d,c) &\propto& \frac{d}{\gamma^d}\quad c^{d-1} e^{\{-(\frac{c}{\gamma})^d\}} \times \frac{\beta_\gamma^{\alpha_\gamma}}{\Gamma(\alpha_\gamma)}\quad (\frac{1}{\gamma})^{\alpha_\gamma+1} \quad e^{\{-(\frac{\beta_\gamma}{\gamma})\}}\\
+&=&\frac{d\beta_\gamma^{\alpha_\gamma} c^{d-1}}{\Gamma(\alpha_\gamma)}\quad (\frac{1}{\gamma})^{d+\alpha_\gamma+1}\quad e^{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}\\
+&\propto&(\frac{1}{\gamma})^{d+\alpha_\gamma+1}\quad e^{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}
 \end{eqnarray*}
 \\
 Para la variable de costos, la distribuci\'on de la variable latente seg\'un la observaci\'on anterior no tiene una forma anal\'itica cerrada como distribuci\'on, sin embargo, el kernel se puede simular con un slice sampler; este m\'etodo se explicar\'a con detalle en la siguiente secci\'on. \\
@@ -37,65 +42,65 @@ Las distribuciones que resultan de los c\'alculos anteriores son la llave que se
 \begin{eqnarray*}
 &&V(\{\alpha_d,\alpha_\theta,\beta_\theta,\alpha_\gamma,\beta_\gamma\},\{\theta_i,\gamma_i\}_{i=1}^{N(t)}|\{d_j,c_j\}_{i=1}^{N(t)})=\\ 
 &&\prod_{i=1}^{N(t)} Gamma(d_i|\alpha_d,\theta_i) Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times \\
-&&Weibull(c_i|d_i,\gamma_i)(\frac{1}{\gamma})^{d_{i-1}+\alpha_\gamma+1}\exp\{-(\frac{\beta_\gamma}{\gamma}+(\frac{c_{i-1}}{\gamma})^{d_i})\} \times \\
+&&Weibull(c_i|d_i,\gamma_i)(\frac{1}{\gamma})^{d_{i-1}+\alpha_\gamma+1}e^\{-(\frac{\beta_\gamma}{\gamma}+(\frac{c_{i-1}}{\gamma})^{d_i})\} \times \\
 &&\times \pi(\alpha_d)\pi(\alpha_\theta)\pi(\beta_\theta)\pi(\alpha_\gamma)\pi(\beta_\gamma)
 \end{eqnarray*}
 Donde para las variables latentes,
 \begin{eqnarray*}
 \pi(\theta_i|\alpha_d,\alpha_\theta,\beta_\theta)&\propto& Gamma(d_i|\alpha_d,\theta_i)\times Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\\
 \\
-&=&\frac{\theta_i^{\alpha_d}}{\Gamma(\alpha_d)} d_i^{\alpha_d-1} \exp{\{-\theta_id_i\}}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)}\theta_i^{\alpha_d+\alpha_\theta}\exp{\{d_{i-1}+\beta_\theta\}}\\
+&=&\frac{\theta_i^{\alpha_d}}{\Gamma(\alpha_d)} d_i^{\alpha_d-1} e^{\{-\theta_id_i\}}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)}\theta_i^{\alpha_d+\alpha_\theta}e^{\{d_{i-1}+\beta_\theta\}}\\
 \\
-&=&\frac{d_i^{\alpha_d-1}(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{2\alpha_d+\alpha_\theta-1}\exp{\{-\theta_i(d_{i-1}+d_i+\beta_\theta)\}}\\
+&=&\frac{d_i^{\alpha_d-1}(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{2\alpha_d+\alpha_\theta-1}e^{\{-\theta_i(d_{i-1}+d_i+\beta_\theta)\}}\\
 \\
-&\propto& \theta_i^{2\alpha_d+\alpha_\theta-1}\exp{\{-\theta_i(d_{i-1}+d_i+\beta_\theta)\}}\\
+&\propto& \theta_i^{2\alpha_d+\alpha_\theta-1}e^{\{-\theta_i(d_{i-1}+d_i+\beta_\theta)\}}\\
 \\
 &\Rightarrow& \theta_i \sim Gamma(2\alpha_d+\alpha_\theta,d_i+d_{i-1}+\beta_\theta)
 \end{eqnarray*}
 Y,
 \begin{eqnarray*}
-\pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})&\propto& Weibull(c_i|d_i,\gamma_i)\times (\frac{1}{\gamma_i})^{d_i +\alpha_\gamma+1}\exp\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i}\}\\
-&=&\frac{d_i}{\gamma_i^{d_i}}c_i^{d_i-1}\exp{\{-(\frac{c_i}{\gamma_i})\}}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}\exp\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i}\}\\
-&=&d_i c_i^{d_i-1}(\frac{1}{\gamma_i})^{2d_i+\alpha_\gamma+1}\exp\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i}\}\exp{\{-(\frac{c_i}{\gamma_i})^{d_i}\}}\\
-&\propto&(\frac{1}{\gamma_i})^{2d_i+\alpha_\gamma+1}\exp\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}+c_i}{\gamma_i})^{d_i}\}
+\pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})&\propto& Weibull(c_i|d_i,\gamma_i)\times (\frac{1}{\gamma_i})^{d_i +\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i}\}}\\
+&=&\frac{d_i}{\gamma_i^{d_i}}c_i^{d_i-1}e^{\{-(\frac{c_i}{\gamma_i})\}}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\\
+&=&d_i c_i^{d_i-1}(\frac{1}{\gamma_i})^{2d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i}+(\frac{c_i}{\gamma_i})^{d_i})\}}\\
+&\propto&(\frac{1}{\gamma_i})^{2d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}+c_i}{\gamma_i})^{d_i}\}}
 \end{eqnarray*}
 Las distribuciones que corresponden a los par\'ametros son,
 \begin{eqnarray*}
 \pi(\alpha_d|...)&\propto& \prod_{i=2}^{N(t)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\alpha_d|\alpha_0,\beta_0)\\
 \\
-&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} \exp{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_d^{\alpha_0-1}\exp{\{-\alpha_d\beta_0\}}\\
+&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
 \\
-&\propto&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d}\alpha_d^{\alpha_0-1}\exp{\{-\alpha_d\beta_0\}}
+&\propto&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
 \pi(\alpha_\theta|...)&\propto&\prod_{i=2}^{N(t)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\alpha_\theta|\alpha_0,\beta_0)\\
 \\
-&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} \exp{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\theta^{\alpha_0-1}\exp{\{-\alpha_\theta\beta_0\}}\\
+&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
 \\
-&\propto& \prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}\exp{\{-\alpha_\theta\beta_0\}}
+&\propto& \prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
 \pi(\beta_\theta|...)&\propto&\prod_{i=2}^{N(t)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\beta_\theta|\alpha_0,\beta_0)\\
 \\
-&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} \exp{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\theta^{\alpha_0-1}\exp{\{-\beta_\theta\beta_0\}}\\
+&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\theta^{\alpha_0-1}e^{\{-\beta_\theta\beta_0\}}\\
 \\
-&\propto&\prod_{i=2}^{N(t)}(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} \exp{\{-\beta_\theta(\theta_i+\beta_0)\}}
+&\propto&\prod_{i=2}^{N(t)}(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_i+\beta_0)\}}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
 \pi(\alpha_\gamma|...)&\propto&\prod_{i=2}^{N(t)} \pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})\times Gamma(\alpha_\gamma|\alpha_0,\beta_0)\\
-&=&\prod_{i=2}^{N(t)}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}\exp{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\gamma^{\alpha_0-1}\exp{\{-\alpha_\gamma\beta_0\}}\\
+&=&\prod_{i=2}^{N(t)}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
 \\
-&\propto&\prod_{i=2}^{N(t)} (\frac{1}{\gamma_i})^{\alpha_\gamma}\alpha_\gamma^{\alpha_0-1}\exp{\{-\alpha_\gamma\beta_0\}}
+&\propto&\prod_{i=2}^{N(t)} (\frac{1}{\gamma_i})^{\alpha_\gamma}\alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
 \pi(\beta_\gamma|...)&\propto&\prod_{i=2}^{N(t)} \pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})\times Gamma(\beta_\gamma|\alpha_0,\beta_0)\\
 \\
-&=&\prod_{i=2}^{N(t)}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}\exp{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\gamma^{\alpha_0-1}\exp{\{-\beta_\gamma\beta_0\}}\\
-&\propto&\beta_\gamma^{\alpha_0-1}\exp{\{-\beta_\gamma(\frac{1}{\gamma_i}+\beta_0)\}}\\
+&=&\prod_{i=2}^{N(t)}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma\beta_0\}}\\
+&\propto&\beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_i}+\beta_0)\}}\\
 \\
 &\Rightarrow& \beta_\gamma \sim Gamma(\alpha_0,\frac{1}{\gamma_i}+\beta_0)
 \end{eqnarray*}

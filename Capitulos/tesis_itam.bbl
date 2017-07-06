@@ -1,197 +1,171 @@
-\begin{thebibliography}{30}
-\providecommand{\natexlab}[1]{#1}
-\providecommand{\url}[1]{\texttt{#1}}
-\expandafter\ifx\csname urlstyle\endcsname\relax
-  \providecommand{\doi}[1]{doi: #1}\else
-  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+\begin{thebibliography}{}
 
-\bibitem[AHRQ()]{MEPSSummary}
+\bibitem[AHRQ, ]{MEPSSummary}
 AHRQ.
 \newblock Medical expenditure panel survey, meps.
 \newblock
   \url{https://meps.ahrq.gov/mepsweb/data_stats/quick_tables_search.jsp?component=2&subcomponent=1}.
 \newblock Accesed: 30-01-2017.
 
-\bibitem[AmericanDiabetesAssociation et~al.(2013)]{american2013economic}
-AmericanDiabetesAssociation et~al.
+\bibitem[AmericanDiabetesAssociation et~al., 2013]{american2013economic}
+AmericanDiabetesAssociation et~al. (2013).
 \newblock Economic costs of diabetes in the us in 2012.
-\newblock \emph{Diabetes care}, 36\penalty0 (4):\penalty0 1033--1046, 2013.
+\newblock {\em Diabetes care}, 36(4):1033--1046.
 
-\bibitem[Bagnoli and Bergstrom(2005)]{bagnoli2005log}
-Mark Bagnoli and Ted Bergstrom.
+\bibitem[Bagnoli and Bergstrom, 2005]{bagnoli2005log}
+Bagnoli, M. and Bergstrom, T. (2005).
 \newblock Log-concave probability and its applications.
-\newblock \emph{Economic theory}, 26\penalty0 (2):\penalty0 445--469, 2005.
+\newblock {\em Economic theory}, 26(2):445--469.
 
-\bibitem[Barcelo et~al.(2003)Barcelo, Aedo, Rajpathak, and
-  Robles]{barcelo2003cost}
-Alberto Barcelo, Cristian Aedo, Swapnil Rajpathak, and Sylvia Robles.
+\bibitem[Barcelo et~al., 2003]{barcelo2003cost}
+Barcelo, A., Aedo, C., Rajpathak, S., and Robles, S. (2003).
 \newblock The cost of diabetes in latin america and the caribbean.
-\newblock \emph{Bulletin of the world health organization}, 81\penalty0
-  (1):\penalty0 19--27, 2003.
+\newblock {\em Bulletin of the world health organization}, 81(1):19--27.
 
-\bibitem[Barraza-Llor{\'e}ns et~al.(2015)Barraza-Llor{\'e}ns,
-  Guajardo-Barr{\'o}n, Pic{\'o}, Garc{\'\i}a, Hern{\'a}ndez, Mora, Athi{\'e},
-  Crable, and Urtiz]{barraza2015carga}
-M~Barraza-Llor{\'e}ns, V~Guajardo-Barr{\'o}n, J~Pic{\'o}, R~Garc{\'\i}a,
-  C~Hern{\'a}ndez, F~Mora, J~Athi{\'e}, E~Crable, and A~Urtiz.
+\bibitem[Barraza-Llor{\'e}ns et~al., 2015]{barraza2015carga}
+Barraza-Llor{\'e}ns, M., Guajardo-Barr{\'o}n, V., Pic{\'o}, J., Garc{\'\i}a,
+  R., Hern{\'a}ndez, C., Mora, F., Athi{\'e}, J., Crable, E., and Urtiz, A.
+  (2015).
 \newblock Carga econ{\'o}mica de la diabetes mellitus en m{\'e}xico, 2013.
-\newblock \emph{M{\'e}xico, DF: Funsalud}, 2015.
+\newblock {\em M{\'e}xico, DF: Funsalud}.
 
-\bibitem[Bola{\~n}os et~al.(2010)Bola{\~n}os, Shigematsu, Ru{\'\i}z,
-  M{\'a}rquez, and {\'A}vila]{bolanos2010costos}
-Rosibel de los {\'A}ngeles~Rodr{\'\i}guez Bola{\~n}os, Luz Myriam~Reynales
-  Shigematsu, Jorge Alberto~Jim{\'e}nez Ru{\'\i}z, Sergio Arturo~Ju{\'a}rez
-  M{\'a}rquez, and Mauricio~Hern{\'a}ndez {\'A}vila.
+\bibitem[Bola{\~n}os et~al., 2010]{bolanos2010costos}
+Bola{\~n}os, R. d. l. {\'A}.~R., Shigematsu, L. M.~R., Ru{\'\i}z, J. A.~J.,
+  M{\'a}rquez, S. A.~J., and {\'A}vila, M.~H. (2010).
 \newblock Costos directos de atenci{\'o}n m{\'e}dica en pacientes con diabetes
   mellitus tipo 2 en m{\'e}xico: an{\'a}lisis de microcosteo.
-\newblock \emph{Rev Panam Salud Publica}, 28\penalty0 (6):\penalty0 412--20,
-  2010.
+\newblock {\em Rev Panam Salud Publica}, 28(6):412--20.
 
-\bibitem[Casella and George(1992)]{casella1992explaining}
-George Casella and Edward~I George.
+\bibitem[Casella and George, 1992]{casella1992explaining}
+Casella, G. and George, E.~I. (1992).
 \newblock Explaining the gibbs sampler.
-\newblock \emph{The American Statistician}, 46\penalty0 (3):\penalty0 167--174,
-  1992.
+\newblock {\em The American Statistician}, 46(3):167--174.
 
-\bibitem[CDC()]{CDCStatistics}
+\bibitem[CDC, ]{CDCStatistics}
 CDC.
 \newblock National diabetes statistics report, 2014.
 \newblock
   \url{https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf}.
 \newblock Accesed: 30-01-2017.
 
-\bibitem[Cichon et~al.(1999)Cichon, Newbrander, Yamabana, Weber, Normand, Dror,
-  and Preker]{cichon1999modelling}
-Michael Cichon, William Newbrander, Hiroshi Yamabana, Axel Weber, Charles
-  Normand, David Dror, and Alexander Preker.
-\newblock \emph{Modelling in health care finance: A compendium of quantitative
+\bibitem[Cichon et~al., 1999]{cichon1999modelling}
+Cichon, M., Newbrander, W., Yamabana, H., Weber, A., Normand, C., Dror, D., and
+  Preker, A. (1999).
+\newblock {\em Modelling in health care finance: A compendium of quantitative
   techniques for health care financing}.
-\newblock International Labour Organization, 1999.
+\newblock International Labour Organization.
 
-\bibitem[Daley and Vere-Jones(2003)]{daley2003}
-D.J. Daley and D.J. Vere-Jones.
-\newblock \emph{An Introduction to the Theory of Point Processes: Volume I:
+\bibitem[Daley and Vere-Jones, 2003]{daley2003}
+Daley, D. and Vere-Jones, D. (2003).
+\newblock {\em An Introduction to the Theory of Point Processes: Volume I:
   Elementary Theory and Methods}.
-\newblock 2nd edition edition, 2003.
+\newblock 2nd edition edition.
 
-\bibitem[Dempster et~al.(1977)Dempster, Laird, and Rubin]{dempster1977maximum}
-Arthur~P Dempster, Nan~M Laird, and Donald~B Rubin.
+\bibitem[Dempster et~al., 1977]{dempster1977maximum}
+Dempster, A.~P., Laird, N.~M., and Rubin, D.~B. (1977).
 \newblock Maximum likelihood from incomplete data via the em algorithm.
-\newblock \emph{Journal of the royal statistical society. Series B
-  (methodological)}, pages 1--38, 1977.
+\newblock {\em Journal of the royal statistical society. Series B
+  (methodological)}, pages 1--38.
 
-\bibitem[Engle and Russell(1998)]{engle1998autoregressive}
-Robert~F Engle and Jeffrey~R Russell.
+\bibitem[Engle and Russell, 1998]{engle1998autoregressive}
+Engle, R.~F. and Russell, J.~R. (1998).
 \newblock Autoregressive conditional duration: a new model for irregularly
   spaced transaction data.
-\newblock \emph{Econometrica}, pages 1127--1162, 1998.
+\newblock {\em Econometrica}, pages 1127--1162.
 
-\bibitem[Fader and Hardie(2013)]{fader2013gamma}
-Peter~S Fader and Bruce~GS Hardie.
+\bibitem[Fader and Hardie, 2013]{fader2013gamma}
+Fader, P.~S. and Hardie, B.~G. (2013).
 \newblock The gamma-gamma model of monetary value.
-\newblock 2013.
 
-\bibitem[Federaci\'on Internacional de~la
-  Diabetes(2015)]{atlas2015international}
-Brussels Federaci\'on Internacional de~la Diabetes.
+\bibitem[Federaci\'on Internacional de~la Diabetes,
+  2015]{atlas2015international}
+Federaci\'on Internacional de~la Diabetes, B. (2015).
 \newblock Atlas idf diabetes, 2015.
-\newblock \emph{Available from:[Last accessed: Enero 2017]}, 2015.
+\newblock {\em Available from:[Last accessed: Enero 2017]}.
 
-\bibitem[Gelman et~al.(2014)Gelman, Carlin, Stern, and
-  Rubin]{gelman2014bayesian}
-Andrew Gelman, John~B Carlin, Hal~S Stern, and Donald~B Rubin.
-\newblock \emph{Bayesian data analysis}, volume~2.
-\newblock Chapman \& Hall/CRC Boca Raton, FL, USA, 2014.
+\bibitem[Gelman et~al., 2014]{gelman2014bayesian}
+Gelman, A., Carlin, J.~B., Stern, H.~S., and Rubin, D.~B. (2014).
+\newblock {\em Bayesian data analysis}, volume~2.
+\newblock Chapman \& Hall/CRC Boca Raton, FL, USA.
 
-\bibitem[Ghahramani(2001)]{ghahramani2001introduction}
-Zoubin Ghahramani.
+\bibitem[Ghahramani, 2001]{ghahramani2001introduction}
+Ghahramani, Z. (2001).
 \newblock An introduction to hidden markov models and bayesian networks.
-\newblock \emph{International journal of pattern recognition and artificial
-  intelligence}, 15\penalty0 (01):\penalty0 9--42, 2001.
+\newblock {\em International journal of pattern recognition and artificial
+  intelligence}, 15(01):9--42.
 
-\bibitem[Guti{\'e}rrez et~al.()Guti{\'e}rrez, Rivera-Dommarco, Shamah-Levy,
-  Villalpando-Hern{\'a}ndez, Franco, Cuevas-Nasu, et~al.]{gutierrezencuesta}
-JP~Guti{\'e}rrez, J~Rivera-Dommarco, T~Shamah-Levy,
-  S~Villalpando-Hern{\'a}ndez, A~Franco, L~Cuevas-Nasu, et~al.
+\bibitem[Guti{\'e}rrez et~al., ]{gutierrezencuesta}
+Guti{\'e}rrez, J., Rivera-Dommarco, J., Shamah-Levy, T.,
+  Villalpando-Hern{\'a}ndez, S., Franco, A., Cuevas-Nasu, L., et~al.
 \newblock Encuesta nacional de salud y nutrici{\'o}n. ensanut 2012 resultados
   nacionales. cuernavaca, m{\'e}xico: Instituto nacional de salud p{\'u}blica
   (mx), 2012 [accedido en enero 2017].
 
-\bibitem[Hahn and Zhang(2012)]{hahn2012exchangeable}
-Marjorie~G Hahn and Gang Zhang.
+\bibitem[Hahn and Zhang, 2012]{hahn2012exchangeable}
+Hahn, M.~G. and Zhang, G. (2012).
 \newblock Exchangeable random variables.
-\newblock \emph{High Dimensional Probability}, 43:\penalty0 111, 2012.
+\newblock {\em High Dimensional Probability}, 43:111.
 
-\bibitem[Harrison and West(1999)]{harrison1999bayesian}
-Jeff Harrison and Mike West.
-\newblock \emph{Bayesian forecasting \& dynamic models}.
-\newblock Springer New York, 1999.
+\bibitem[Harrison and West, 1999]{harrison1999bayesian}
+Harrison, J. and West, M. (1999).
+\newblock {\em Bayesian forecasting \& dynamic models}.
+\newblock Springer New York.
 
-\bibitem[Held and Saban{\'e}s~Bov{\'e}(2014)]{held2014applied}
-Leonhard Held and Daniel Saban{\'e}s~Bov{\'e}.
-\newblock \emph{Applied statistical inference}, volume~10.
-\newblock Springer, 2014.
+\bibitem[Held and Saban{\'e}s~Bov{\'e}, 2014]{held2014applied}
+Held, L. and Saban{\'e}s~Bov{\'e}, D. (2014).
+\newblock {\em Applied statistical inference}, volume~10.
+\newblock Springer.
 
-\bibitem[Hex et~al.(2012)Hex, Bartlett, Wright, Taylor, and
-  Varley]{hex2012estimating}
-N~Hex, C~Bartlett, D~Wright, M~Taylor, and D~Varley.
+\bibitem[Hex et~al., 2012]{hex2012estimating}
+Hex, N., Bartlett, C., Wright, D., Taylor, M., and Varley, D. (2012).
 \newblock Estimating the current and future costs of type 1 and type 2 diabetes
   in the uk, including direct health costs and indirect societal and
   productivity costs.
-\newblock \emph{Diabetic Medicine}, 29\penalty0 (7):\penalty0 855--862, 2012.
+\newblock {\em Diabetic Medicine}, 29(7):855--862.
 
-\bibitem[Kruschke(2014)]{kruschke2014doing}
-John Kruschke.
-\newblock \emph{Doing Bayesian data analysis: A tutorial with R, JAGS, and
-  Stan}.
-\newblock Academic Press, 2014.
-
-\bibitem[Neal(2003)]{neal2003slice}
-Radford~M Neal.
+\bibitem[Neal, 2003]{neal2003slice}
+Neal, R.~M. (2003).
 \newblock Slice sampling.
-\newblock \emph{Annals of statistics}, pages 705--741, 2003.
+\newblock {\em Annals of statistics}, pages 705--741.
 
-\bibitem[OrganizacionMundialdelaSalud()]{FactSheetDiabetes}
+\bibitem[OrganizacionMundialdelaSalud, ]{FactSheetDiabetes}
 OrganizacionMundialdelaSalud.
 \newblock Diabetes. fact sheet.
 \newblock \url{http://www.who.int/mediacentre/factsheets/fs312/en/}.
 \newblock Accesed: 20-01-2017.
 
-\bibitem[Paik~Schoenberg(2000)]{intropp}
-Frederic Paik~Schoenberg.
-\newblock \emph{Introduction to Point Processes}.
-\newblock 2000.
+\bibitem[Paik~Schoenberg, 2000]{intropp}
+Paik~Schoenberg, F. (2000).
+\newblock {\em Introduction to Point Processes}.
 
-\bibitem[Pitt et~al.(2002)Pitt, Chatfield, and Walker]{pitt2002constructing}
-Michael~K Pitt, Chris Chatfield, and Stephen~G Walker.
+\bibitem[Pitt et~al., 2002]{pitt2002constructing}
+Pitt, M.~K., Chatfield, C., and Walker, S.~G. (2002).
 \newblock Constructing first order stationary autoregressive models via latent
   processes.
-\newblock \emph{Scandinavian Journal of Statistics}, 29\penalty0 (4):\penalty0
-  657--663, 2002.
+\newblock {\em Scandinavian Journal of Statistics}, 29(4):657--663.
 
-\bibitem[Plummer et~al.(2003)]{plummer2003jags}
-Martyn Plummer et~al.
+\bibitem[Plummer et~al., 2003]{plummer2003jags}
+Plummer, M. et~al. (2003).
 \newblock Jags: A program for analysis of bayesian graphical models using gibbs
   sampling.
-\newblock In \emph{Proceedings of the 3rd international workshop on distributed
-  statistical computing}, volume 124, page 125. Vienna, 2003.
+\newblock In {\em Proceedings of the 3rd international workshop on distributed
+  statistical computing}, volume 124, page 125. Vienna.
 
-\bibitem[Resnick(1999)]{resnickpath}
-Sidney~I. Resnick.
-\newblock \emph{A Probability Path}.
-\newblock Birkhauser, 1999.
+\bibitem[Resnick, 1999]{resnickpath}
+Resnick, S.~I. (1999).
+\newblock {\em A Probability Path}.
+\newblock Birkhauser.
 
-\bibitem[Smith(2010)]{smith2010bayesian}
-Jim~Q Smith.
-\newblock \emph{Bayesian decision analysis: principles and practice}.
-\newblock Cambridge University Press, 2010.
+\bibitem[Smith, 2010]{smith2010bayesian}
+Smith, J.~Q. (2010).
+\newblock {\em Bayesian decision analysis: principles and practice}.
+\newblock Cambridge University Press.
 
-\bibitem[Zhuo et~al.(2014)Zhuo, Zhang, Barker, Albright, Thompson, and
-  Gregg]{zhuo2014lifetime}
-Xiaohui Zhuo, Ping Zhang, Lawrence Barker, Ann Albright, Theodore~J Thompson,
-  and Edward Gregg.
+\bibitem[Zhuo et~al., 2014]{zhuo2014lifetime}
+Zhuo, X., Zhang, P., Barker, L., Albright, A., Thompson, T.~J., and Gregg, E.
+  (2014).
 \newblock The lifetime cost of diabetes and its implications for diabetes
   prevention.
-\newblock \emph{Diabetes care}, 37\penalty0 (9):\penalty0 2557--2564, 2014.
+\newblock {\em Diabetes care}, 37(9):2557--2564.
 
 \end{thebibliography}

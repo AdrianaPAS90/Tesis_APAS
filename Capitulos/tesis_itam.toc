@@ -12,19 +12,19 @@
 \contentsline {section}{\numberline {2.4}Construcci\'on de Procesos v\'ia Variables Latentes}{16}{section.2.4}
 \contentsline {section}{\numberline {2.5}Construcci\'on del Modelo de Marcas}{22}{section.2.5}
 \contentsline {section}{\numberline {2.6}Discusi\'on}{23}{section.2.6}
-\contentsline {chapter}{\numberline {3}Inferencia y Predicci\'on}{24}{chapter.3}
-\contentsline {section}{\numberline {3.1}Introducci\'on}{24}{section.3.1}
-\contentsline {section}{\numberline {3.2}Verosimilitud Extendida}{25}{section.3.2}
-\contentsline {section}{\numberline {3.3}Slice Sampler}{34}{section.3.3}
-\contentsline {section}{\numberline {3.4}El Muestreador de Gibbs}{37}{section.3.4}
-\contentsline {chapter}{\numberline {4}Ilustraci\'on del Modelo con Datos}{43}{chapter.4}
-\contentsline {section}{\numberline {4.1}Introducci\'on}{43}{section.4.1}
-\contentsline {section}{\numberline {4.2}Diabetes Mellitus en el mundo: Costos y Prevalencia}{43}{section.4.2}
-\contentsline {section}{\numberline {4.3}Descripci\'on de los datos}{51}{section.4.3}
-\contentsline {section}{\numberline {4.4}An\'alisis Descriptivo}{51}{section.4.4}
-\contentsline {section}{\numberline {4.5}Resultados}{51}{section.4.5}
-\contentsline {chapter}{\numberline {5}Conclusiones}{52}{chapter.5}
-\contentsline {section}{\numberline {5.1}Qu\'e me deja este trabajo?}{52}{section.5.1}
-\contentsline {section}{\numberline {5.2}Visi\'on Cr\'itica Aut\'onoma}{52}{section.5.2}
-\contentsline {section}{\numberline {5.3}Trabajo Futuro}{52}{section.5.3}
-\contentsline {chapter}{\numberline {A}Paradigma Bayesiano}{58}{appendix.Alph1}
+\contentsline {chapter}{\numberline {3}Inferencia y Predicci\'on}{25}{chapter.3}
+\contentsline {section}{\numberline {3.1}Introducci\'on}{25}{section.3.1}
+\contentsline {section}{\numberline {3.2}Verosimilitud Extendida}{26}{section.3.2}
+\contentsline {section}{\numberline {3.3}Slice Sampler}{36}{section.3.3}
+\contentsline {section}{\numberline {3.4}El Muestreador de Gibbs}{39}{section.3.4}
+\contentsline {chapter}{\numberline {4}Ilustraci\'on del Modelo con Datos}{45}{chapter.4}
+\contentsline {section}{\numberline {4.1}Introducci\'on}{45}{section.4.1}
+\contentsline {section}{\numberline {4.2}Diabetes Mellitus en el mundo: Costos y Prevalencia}{45}{section.4.2}
+\contentsline {section}{\numberline {4.3}Descripci\'on de los datos}{53}{section.4.3}
+\contentsline {section}{\numberline {4.4}An\'alisis Descriptivo}{53}{section.4.4}
+\contentsline {section}{\numberline {4.5}Resultados}{53}{section.4.5}
+\contentsline {chapter}{\numberline {5}Conclusiones}{54}{chapter.5}
+\contentsline {section}{\numberline {5.1}Qu\'e me deja este trabajo?}{54}{section.5.1}
+\contentsline {section}{\numberline {5.2}Visi\'on Cr\'itica Aut\'onoma}{54}{section.5.2}
+\contentsline {section}{\numberline {5.3}Trabajo Futuro}{54}{section.5.3}
+\contentsline {chapter}{\numberline {A}Paradigma Bayesiano}{59}{appendix.Alph1}
