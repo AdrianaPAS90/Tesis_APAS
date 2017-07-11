@@ -3,30 +3,27 @@
 #
 #
 rm(list = ls())
-source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/slice.sampler/uni.slice.R")
-source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_d_demo.R")
-source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_theta_demo.R")
-source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_beta_theta_demo.R")
-source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_gamma_demo.R")
-source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_gamma.R")
+source("Code/slice.sampler/uni.slice.R")
+source("Code/bayesmpp_alpha_d_demo.R")
+source("Code/bayesmpp_alpha_theta_demo.R")
+source("Code/bayesmpp_beta_theta_demo.R")
+source("Code/bayesmpp_alpha_gamma_demo.R")
+source("Code/bayesmpp_gamma.R")
 
 #datos<-read.csv...
 #n <-nrow(datos)
-bayesmpp <- function(...d, c, n, M){
+bayesmpp <- function(alpha_0 =2,beta_0 = 0.3,  d, c, n, M){
 	# datos - arreglo de nx3 (col1-individuo, col2-duraciones, col3-costos)
  	# M - numero de simulacion del gibbs sampler
 	#
-	
-  alpha_0 =2
-  beta_0 = 0.3
 
 	#	Inicio-Repositorios
 	#	Parametros
 	alpha_d_rep <- array(NaN,M)
-  alpha_theta_rep <- array(NaN,M)
-  beta_theta_rep <- array(NaN,M)
-  alpha_gamma_rep <- array(NaN,M)
-  beta_gamma_rep <- array(NaN,M)
+	alpha_theta_rep <- array(NaN,M)
+	beta_theta_rep <- array(NaN,M)
+	alpha_gamma_rep <- array(NaN,M)
+	beta_gamma_rep <- array(NaN,M)
 
 	# Latentes
 	theta_rep <- matrix(NaN,M,n)
@@ -55,12 +52,11 @@ bayesmpp <- function(...d, c, n, M){
 		alpha_gamma_sim <- bayesmpp_alpha_gamma(x0)
 		
 		beta_gamma_sim <- rgamma(1, alpha_0,(1/gamma_sim)+beta_0)
-
 		
 		#Simular la final completa de variables latentes
-		theta_sim <- rgamma(1, alpha_d_sim + alpha_theta_sim, d + beta_theta_sim)
+		theta_sim <- bayesmpp_theta(d, alpha_d_sim, alpha_theta_sim, beta_theta_sim)
 		
-		gamma_sim <- bayesmpp_gamma_(x0, alpha_gamma_sim, beta_gamma_sim, d, c)
+		gamma_sim <- bayesmpp_gamma(alpha_gamma_sim, beta_gamma_sim, d, c)
 		
 		
 		#	Almacenamos en el repositorio
