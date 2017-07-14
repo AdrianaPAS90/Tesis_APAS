@@ -15,12 +15,25 @@ source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/slice.sampler/uni.slice.R
 
 
 bayesmpp_alpha_theta <- function(x0=2, alpha_d, d){
-  
-  g<- function(alpha_theta,alpha_d=1,d=5,beta_theta=1,theta=3,alpha_0=2,beta_0=0.3){
-    g<- (alpha_d+alpha_theta)*log(d+beta_theta)-log(gamma(alpha_d+alpha_theta))+alpha_theta*log(theta)+(alpha_0-1)*log(alpha_theta)-alpha_theta*beta_0
+  if(j == 1){
+    d_var <- d[j,]
+    
+    g<- function(alpha_theta,alpha_d=1,d_var=5,beta_theta=1,theta=3,alpha_0=2,beta_0=0.3){
+      g<- (alpha_d+alpha_theta)*log(d_var+beta_theta)-log(gamma(alpha_d+alpha_theta))+alpha_theta*log(theta)+(alpha_0-1)*log(alpha_theta)-alpha_theta*beta_0
   }
   
   
   bat <- uni.slice(x0=2, g, w=1, m=Inf, lower=0, upper=+Inf, gx0=NULL)
   return(bat)
+  
+  }else{
+    d_var_2<-d[j-1,]
+    
+    g <- function(alpha_theta,alpha_d=1,d_var_2=5,beta_theta=1,theta=3,alpha_0=2,beta_0=0.3){
+      g<-(alpha_d+alpha_theta)*log(d_var_2+beta_theta)-log(gamma(alpha_d+alpha_theta))+alpha_theta*log(theta)+(alpha_0-1)*log(alpha_theta)-alpha_theta*beta_0
+    }
+    
+    bat<-uni.slice(x0=2, g, w=1, m=Inf, lower=0, upper=+Inf, gx0=NULL)
+    return(bat)
+  }
 }

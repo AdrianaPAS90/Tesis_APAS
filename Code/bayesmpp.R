@@ -3,12 +3,14 @@
 #
 #
 rm(list = ls())
-source("Code/slice.sampler/uni.slice.R")
-source("Code/bayesmpp_alpha_d_demo.R")
-source("Code/bayesmpp_alpha_theta_demo.R")
-source("Code/bayesmpp_beta_theta_demo.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/slice.sampler/uni.slice.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_d_demo.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_theta_demo.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_beta_theta_demo.R")
 source("Code/bayesmpp_alpha_gamma_demo.R")
 source("Code/bayesmpp_gamma.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_theta.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_beta_gamma.R")
 
 #datos<-read.csv...
 #n <-nrow(datos)
@@ -42,35 +44,33 @@ bayesmpp <- function(alpha_0 =2,beta_0 = 0.3,  d, c, n, M){
 	#	Gibbs sampler, per se
 	m <- 1	
 	for(m in 1:M){
-		#	Simular de la final completa de los parametros
-		alpha_d_sim <- bayesmpp_alpha_d(x0, d) 
-	
-		alpha_theta_sim <- bayesmpp_alpha_theta(x0, alpha_d_sim, d)
-
-		beta_theta_sim <- bayesmpp_beta_theta(x0, alpha_d_sim, alpha_theta_sim, d)
-	
+		#	Simular de la final completa de los parametros que solo dependen de otros parametros.
+	 
 		alpha_gamma_sim <- bayesmpp_alpha_gamma(x0)
 		
-		beta_gamma_sim <- rgamma(1, alpha_0,(1/gamma_sim)+beta_0)
+		beta_gamma_sim <- bayesmpp_beta_gamma(gamma_sim, alpha_0, beta_0)
 		
-		#Simular la final completa de variables latentes
-		theta_sim <- bayesmpp_theta(d, alpha_d_sim, alpha_theta_sim, beta_theta_sim)
+		#Simular la final completa de parámetros y variables que dependen de costos o duraciones anteriores.
+		j <- 1
+		for (j in 1:n){
+		  
+		  alpha_d_sim <- bayesmpp_alpha_d(x0, d)
+		  alpha_theta_sim <- bayesmpp_alpha_theta(x0, alpha_d_sim, d)
+		  beta_theta_sim <- bayesmpp_beta_theta(x0, alpha_d_sim, alpha_theta_sim, d)
 		
-		gamma_sim <- bayesmpp_gamma(alpha_gamma_sim, beta_gamma_sim, d, c)
+		  theta_sim <- bayesmpp_theta(d, alpha_d_sim, alpha_theta_sim, beta_theta_sim)
+		  theta_rep[m,j] <- theta_sim
 		
+		  gamma_sim <- bayesmpp_gamma(alpha_gamma_sim, beta_gamma_sim, d, c)
+		  gamma_rep[m,j] <- gamma_sim
+		}
 		
-		#	Almacenamos en el repositorio
+		#	Almacenamos en el repositorio los parametros.
 		alpha_d_rep[m] <- alpha_d_sim
 		alpha_theta_rep[m] <- alpha_theta_sim
 		beta_theta_rep[m] <- beta_theta_sim
 		alpha_gamma_rep[m] <- alpha_gamma_sim
 		beta_gamma_rep[m] <- beta_gamma_sim
-		
-		j <- 1
-		  for (j in 1:n){
-		theta_rep[m,j] <- theta_sim
-    gamma_rep[m,j] <- gamma_sim
-		  }
 		
 	}
 
