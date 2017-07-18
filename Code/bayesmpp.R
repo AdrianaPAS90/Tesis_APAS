@@ -8,7 +8,7 @@ source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_d_demo.R")
 source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_theta_demo.R")
 source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_beta_theta_demo.R")
 source("Code/bayesmpp_alpha_gamma_demo.R")
-source("Code/bayesmpp_gamma.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_gamma.R")
 source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_theta.R")
 source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_beta_gamma.R")
 
@@ -61,7 +61,7 @@ bayesmpp <- function(alpha_0 =2,beta_0 = 0.3,  d, c, n, M){
 		  theta_sim <- bayesmpp_theta(d, alpha_d_sim, alpha_theta_sim, beta_theta_sim)
 		  theta_rep[m,j] <- theta_sim
 		
-		  gamma_sim <- bayesmpp_gamma(alpha_gamma_sim, beta_gamma_sim, d, c)
+		  gamma_sim <- bayesmpp_gamma(d, c, alpha_gamma_sim, beta_gamma_sim)
 		  gamma_rep[m,j] <- gamma_sim
 		}
 		
