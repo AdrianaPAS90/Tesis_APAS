@@ -1,40 +1,162 @@
-\chapter{Ilustraci\'on del Modelo con Datos}
+\chapter{Inferencia y Predicci\'on}
 \section{Introducci\'on}
-En los cap\'itulos anteriores se define el modelo general de probabilidad y c\'omo este puede hacer inferencia sobre observaciones. El modelo est\'a definido para describir padecimientos cr\'onico degenerativas, sus duraciones y los costos asociados a las mismas. En este cap\'itulo, este modelo ser\'a aplicado al padecimiento espec\'ifico de diabetes mellitus tipo II con datos de...\\
-\section{Diabetes Mellitus en el mundo: Costos y Prevalencia}
-En el panorama de salud mundial actual, las enfermedades cr\'onicas han tomado un papel preponderante al ser padecimientos que no tienen cura, que se pueden prolongar de manera indefinida y requieren monitoreo y atenci\'on constante. Uno de los principales problemas de estos padecimientos consiste en la gran carga econ\'omica que estos presentan, junto con sus complicaciones; tanto a pacientes como a los proveedores de servicios de salud. Adem\'as de la decreciente calidad de vida que experimenta el paciente, aunado a la cantidad de procedimientos m\'edicos que va necesitando y que muchas veces, su proveedor de servicios de salud ya no es capaz de suministrar.\\
+En el cap\'itulo anterior se describi\'o el modelo general de probabilidad que describe el proceso de duraciones y costos en un padecimiento cr\'onico degenerativo, por lo que el siguiente paso ser\'ia hacer inferencia sobre el mismo. El objetivo de hacer inferencia es predecir futuras observaciones en base a los datos ya observados. En este cap\'itulo se sentar\'an las bases para realizar esta inferencia.\\
 \\
-Uno de los padecimientos con m\'as prevalencia y que es m\'as propenso a complicaciones es la diabetes mellitus. La insulina es la hormona que regula el az\'ucar en la sangre, entonces la diabetes mellitus es un padecimiento en el cual el p\'ancreas no produce o produce poca insulina, o bien, las c\'elulas del cuerpo no responden de manera normal a la insulina que se produce. Un elevado nivel de glucosa en la sangre puede, a largo plazo, derivar en una serie de complicaciones oftalmol\'ogicas, renales, cardiacas y de circulaci\'on.\\
+El primer paso para realizar inferencia es la construcci\'on de la funci\'on de verosimilitud, en este caso extendida a las variables latentes y a los par\'ametros correspondientes a sus distribuciones. Una vez que se determinaron las funciones de verosimilitud, se analizan los m\'etodos de estimaci\'on que se podr\'ian usar para la predicci\'on de futuras observaciones. De este modo se puede completar la parte te\'orica de este trabajo de investigaci\'on.
+\section{Verosimilitud Extendida}
+Como especificado en la secci\'on anterior, una vez que el modelo de probabilidad describe de manera precisa los datos del problema podemos empezar a hacer inferencia sobre observaciones futuras. La base sobre la que se puede hacer inferencia en base a los datos ya observados es la funci\'on de verosimilitud de la funci\'on de probabilidad.\\
 \\
-La \cite{FactSheetDiabetes} %Organizaci\'on Mundial de la Salud
- (OMS) reconoce dos tipos de diabetes: Tipo I y Tipo II. La diabetes mellitus Tipo I (DM-TI) consiste en la falta de producci\'on de insulina en el cuerpo, normalmente se diagnostica en edades tempranas y sus causas a\'un son desconocidas, por lo que no existe ninguna clase de tratamiento preventivo. La diabetes mellitus Tipo II (DM-TII) se debe a que el cuerpo no puede procesar correctamente la insulina, esto debido la combinaci\'on de sobrepeso y falta de actividad f\'isica; antes este padecimiento era exclusivo de la edad adulta, sin embargo, ahora se observa tambi\'en en ni$\tilde{n}$os. La mayor\'ia de enfermos son de tipo dos seg\'un el Atlas de la Diabetes publicado por \cite{atlas2015international}, donde se reporta que entre el 87\% y el 91\% de los enfermos de diabetes tiene DM-TII; esto provoca que no solo sea mayor la carga econ\'omica asociada a ellos, sino que adem\'as son m\'as propensas a desarrollar complicaciones, aunados a la falta de autocuidado del paciente.\\
-\\
-Seg\'un la OMS, la prevalencia mundial de esta enfermedad casi se duplic\'o en las personas mayores de 18 a$\tilde{n}$os, de 4.7\% en 1980 a 8.5\% en 2014; adem\'as de provocar m\'as de 2.2 millones de muertes tan solo en el a$\tilde{n}$o 2016 y ser una de las mayores causas de ceguera, fallas renales y amputaci\'on de extremidades. En las estad\'isticas reportadas por la OMS, la diabetes es la cuarta enfermedad que causa m\'as muertes entre las no transmisibles mediante alg\'un agente infeccioso, con un 6.01\% de la mortalidad.\\
-\\
-De manera particular, se puede ver la prevalencia de la diabetes en los distintos pa\'ises. En el Reino Unido la prevalencia en el a$\tilde{n}$o 2010/2011 fue de 3,818,545 personas de las cuales el 89.6\% se refieren a un diagn\'ostico de DM-TII; y seg\'un el estudio realizado por \cite{hex2012estimating} en el a$\tilde{n}$o 2035/2036 esta prevalencia aumentar\'a a 6,289,925 mientras que las proporciones entre tipos de diabetes se mantienen. De acuerdo a datos de la OMS, de los 172 pa\'ises en los que se analizan las estad\'isticas de mortalidad debido a diabetes mellitus, el Reino Unido ocupa el lugar 167 con 4.2 muertes por 100,000 personas. A pesar de que sus \'indices de mortalidad son relativamente bajos, comparados con el resto de los pa\'ises, el problema con la creciente prevalencia de la enfermedad radica tambi\'en en las complicaciones asociadas a la misma.\\
-\\
-De acuerdo con \cite{bolanos2010costos} para el a$\tilde{n}$o 2030 habr\'an alrededor de 366 millones de pacientes diagn\'osticados con diabetes en el mundo, de los cuales el 70\% se encontrar\'an en pa\'ises de ingresos de medios a bajos, entre ellos los pa\'ises de Latinoam\'erica. En espec\'ifico en M\'exico se observan resultados preocupantes, en la Encuesta Nacional de Salud y Nutrici\'on (ENSANUT) (\cite{gutierrezencuesta}) de 2012 la prevalencia de diabetes se reporta de 9.2\%, lo cual es un aumento considerable con lo reportado en la ENSANUT 2006 (7\%) y la ENSANUT 2000 (5.8\%). Viendo estos resultados, el aceleramiento en las tasas de obesidad y los padecimientos asociados el Instituto Nacional de Salud P\'ublica decidi\'o hacer otra encuesta intermedia a la que denomin\'o ENSANUT de Medio Camino, la cual se realiz\'o en el a$\tilde{n}$o 2016 con un resultado en la prevalencia de 9.4\%, el cual confirma la tendencia creciente de la misma. En las estad\'isticas de mortalidad de la OMS, M\'exico ocupa el d\'ecimo lugar con 90.5 muertes derivadas del diagn\'ostico de diabetes mellitus por 100,000 personas y las estad\'isticas nacionales muestran que la diabetes mellitus es la tercera causa de mortalidad. En nuestro pa\'is, este padecimiento toma un cariz m\'as apremiante debido a la cantidad de gente diagnosticada y el porcentaje de mortalidad asociado.\\
-\\
-A pesar que se preve\'e que la mayor\'ia de los enfermos de diabetes se encuentren en pa\'ises en v\'ias de desarrollo, tambi\'en hay que tomar en cuenta que dado los factores de riesgo que facilitan el desarrollo de DM-TII, la m\'as com\'un; son un estilo de vida sedentario y obesidad. Estos factores normalmente se pueden encontrar en pa\'ises con econom\'ias desarrolladas, tales como EE.UU. Tomando como referencia el reporte elaborado en 2014 por el Centro para el Control y Prevenci\'on de Enfermedades (\cite{CDCStatistics}, por sus siglas en ingl\'es) la prevalencia de diabetes es de 9.3\% de la poblaci\'on, es decir, 29.1 millones de personas; aunque el 27.8\% de estas personas a\'un no est\'en diagnosticadas. Por otro lado, el estudio de \cite{american2013economic} (ADA, por sus siglas en ingl\'es) estima que la prevalencia de este padecimiento para el a$\tilde{n}$o 2012 sea de 7\%, que aunque difiere de lo reportado por la CDC, sigue siendo consistente con las mismas proyecciones. Se estima que cada a$\tilde{n}$o se diagnostican 1.4 millones de pacientes con diabetes. Este padecimiento est\'a listado como la s\'eptima causa de muerte en EE.UU., ya sea como causa principal del deceso o como causa subyacente. En relaci\'on a lo reportado por la OMS, EE.UU. se coloca en la posici\'on 124 con 13.40 muertes entre 100,000 personas. \\
-\\
-Independientemente del pa\'is del que se hable, se puede concluir que la diabetes mellitus, particularmente la Tipo II, es uno de los m\'as grandes retos de salud p\'ublica que se enfrentan actualmente. Lo amenazante del padecimiento no es s\'olo el crecimiento constante en sus tasas de prevalencia sino tambi\'en las complicaciones que \'este presenta y que conducen, eventualmente, a la muerte. Como consecuencia, se tiene que el gasto asociado a este padecimiento y a sus complicaciones se vuelve cada vez m\'as grande y muchas veces imposible de sostener por las instituciones proveedoras de servicios de salud.\\
-\\
-En el \'ultimo Atlas de la Diabetes elaborado por la \cite{atlas2015international} (IDF, por sus siglas en ingl\'es), se estima que el gasto asociado a la diabetes mellitus es de USD 673,000 millones, es decir, el 12\% del total del gasto mundial en salud. Esto quiere decir que en la mayor\'ia de los pa\'ises gastan entre un 5\% y 20\% de su presupuesto de salud, exclusivamente en el tratamiento de la diabetes mellitus. Esto debido a que los gastos en servicios de salud promedios de las personas con diabetes es entre dos y tres veces mayores que aquellos de las personas sin diabetes. En cara a estos datos, se vuelven prioritaras las estrategias de prevenci\'on y reducci\'on de costos. Es importante destacar que los costos asociados a cualquier padecimiento, particularmente a la diabetes, deben tomarse en cuenta los costos directos del padecimiento (diagn\'ostico inicial, consultas, medicamentos, hospitalizaciones), los costos de las complicaciones (consultas, medicamentos, hospitalizaciones) y los costos indirectos (costos en productividad, muerte prematura, ausentismo, etc.).\\
-\\
-En el an\'alisis realizado por \cite{hex2012estimating} sobre la prevalencia y costos de la diabetes mellitus en el Reino Unido se estima un costo total de la diabetes en el a$\tilde{n}$o 2010/2011 de \pounds 23,631 millones, con una proyecci\'on de costos para el a$\tilde{n}$o 2035/2036 de \pounds 39,753 millones. El gasto de 2010/2011 es el 10\% del presupuesto asignado al Servicio Nacional de Salud (NHS, por sus siglas en ingl\'es); mientras que la proyecci\'on de 2035/2036 llega hasta el 17\% de este mismo presupuesto. Lo que se muestra revelador de este estudio, en el c\'alculo de los costos de 2010/2011, son las diferencias entre los costos directos, de complicaciones e indirectos. Los costos directos son solo el 9\% de los costos totales, los costos de complicaciones 33\% mientras que lo m\'as oneroso son los costos indirectos con una participaci\'on del 59\%; estas proporciones se mantienen con una leve variaci\'on para las proyecciones de 2035/2036. Igualmente se mantiene el supuesto que la DM-TII es mucho m\'as costosa, pues el gasto total calculado en este tipo espec\'ifico de diabetes oscila entre el 89\% y 92\%. Esto quiere decir que aunque el padecimiento en sí no tenga la mayor parte asociada de la carga econ\'omica, es la causa subyacente de muchas complicaciones y diagn\'osticos m\'as costosos.\\
-\\
-La regi\'on de Norteam\'erica y el Caribe tienen la mayor prevalencia de diabetes con un 12.9\% de la poblaci\'on adulta afectada, esto de acuerdo a la \cite{atlas2015international}. En esta regi\'on el gasto total asociado est\'a entre los USD 348,000 y USD 610,000 millones, este gasto representa m\'as de la mitad del presupuesto mundial para la diabetes. Particularmente en M\'exico, seg\'un el estudio de \cite{barcelo2003cost}, M\'exico es el pa\'is con los costos anuales m\'as elevados en comparaci\'on con el resto de Latinoam\'erica. Al igual, que el an\'alisis realizado para el Reino Unido, el costo anual de M\'exico de USD 15,118 millones, este se puede dividir entre USD 1,974 millones de costos directos (diabetes y complicaciones) y USD 13,144 millones de costos indirectos. Estos costos asociados fueron calculados con una prevalencia del 4.1\%, la cual est\'a desactualizada, por lo que se podr\'ia asumir que el gasto actual est\'a por arriba. De nuevo y de manera m\'as actual, el minucioso reporte de FUNSALUD realizado por \cite{barraza2015carga}, estima que los costos asociados, particularmente para la DM-TII, sean de \$362,800 millones de pesos en el a$\tilde{n}$o base, de los cuales el 49\% se refieren a costos directos y el 51\% a costos indirectos. Para el a$\tilde{n}$o 2018, este mismo estudio proyecta un gasto total de \$506,000 millones de pesos; el aumento se explica con las proyecciones demogr\'aficas y de prevalencia estimada. Este estudio confirma que la DM-TII es mucho m\'as cara y com\'un que la Tipo I y pone en evidencia la importancia de mejor planeaci\'on financiera para hacer frente a esta epidemia de salud p\'ublica.\\
-\\   
-Seg\'un la FID, del gasto asociado a la regi\'on de Norteam\'erica, los EE.UU. representan la mayor parte del mismo con un gasto estimado en 2015 de USD 320,000 millones. De igual modo, el estudio de la \cite{american2013economic} estima que el gasto asociado con la diabetes mellitus en el 2012 es de USD 245,000 millones, de este monto el 72\% son costos directos del padecimiento y sus complicaciones y el 28\% restante se refiere a los costos indirectos; a diferencia del Reino Unido o M\'exico donde los costos indirectos sobrepasaban los costos directos. Los costos en salud de las personas diagnosticadas con diabetes son 2.3 veces m\'as altos que los de aquellos no diagnosticados y seg\'un la Agencia para la Investigaci\'on y Calidad para el Servicios de Salud (\cite{MEPSSummary}, por sus siglas en ingl\'es), la diabetes mellitus es el cuarto padecimiento m\'as costoso en los EE.UU. Adem\'as, de acuerdo al estudio de \cite{zhuo2014lifetime}, entre m\'as joven sea el paciente a la edad de diagn\'ostico mucho mayor ser\'a el costo de salud acumulado. Debido a que EE.UU. es uno de los pa\'ises con mayor prevalencia y costos asociados a la diabetes mellitus en el mundo, la correcta cuantificaci\'on de los mismos es crucial para la correcta planeaci\'on financiera de los proveedores de salud.\\
-\\
-Como podemos ver por las cifras reportadas, el problema del gasto asociado a la diabetes mellitus es uno de los m\'as grandes retos que existen en el horizonte de la salud p\'ublica. Uno de los mecanismos principales para disminuir la prevalencia y por ende los gastos, se reducen a la prevenci\'on y a la procuraci\'on de un estilo de vida m\'as sano; sobre todo para la DM-TII. Sin embargo, aunado a las recomendaciones para el paciente tambi\'en se necesitan nuevas maneras de hacer estos gastos m\'as efectivos mediante la correcta localizaci\'on del rubro que genera m\'as presi\'on en el gasto y el uso m\'as eficiente de los recursos existentes, para as\'i poder hacerlos m\'as accesibles tanto a los pacientes como a las instituciones proveedoras de salud.\\
-\\
-Como se menciona en \cite{cichon1999modelling} las herramientas estad\'isticas son de gran ayuda para entender la realidad actual y poder elaborar proyecciones futuras, especialmente en el campo de la medici\'on de costos en el sector salud. Son muchas las preguntas que rodean la diabetes mellitus, acerca de su prevalencia, su morbilidad; sin embargo, la que se intenta contestar es cu\'anto cuesta la enfermedad? o cu\'anto costar\'a?. Como respuesta a estas preguntas necesitamos no solo cuantificar los gastos asociados, sino hacer un an\'alisis m\'as profundo sobre la naturaleza de los mismos, para as\'i poder pensar en estrategias para reducirlos y generar mayor bienestar en la poblaci\'on. En este trabajo de investigaci\'on se propone un nuevo modelo estad\'istico para modelar los gastos asociados a la diabetes mellitus, el cual se describe en el siguiente cap\'itulo.\\
-\\
-\section{Descripci\'on de los datos}
-Descripci\'on del comportamienro de los datos con estos modelos, particularmente los datos de diabetes mellitus en el estado de Michigan EEUU.
+La funci\'on de verosimilitud, seg\'un \cite{held2014applied}, se define como
+\begin{defi}
+La funci\'on de verosimilitud $V(\theta)$ es la funci\'on masa o la funci\'on de densidad de los datos observados $x$, entendidos en funci\'on del par\'ametro desconocido $\theta$.
+\end{defi}
+En este caso las variables observables se definen en funci\'on de las variables latentes, estas a su vez se describen en funci\'on de sus par\'ametros. De esto se desprende la noci\'on de verosimilitud extendida para incluir las variables latentes. Como se especifica en \cite{pitt2002constructing}, la construcci\'on de la funci\'on de verosimilitud resulta sencilla, incluso intuitiva. Sin embargo, la estimaci\'on de los par\'ametros mediante m\'axima verosimilitud no es tan sencilla pues no tiene una soluci\'on que se pueda expresar de manera anal\'itica cerrada. Usando esta construcci\'on, se escribe una funci\'on de verosimilitud para el modelo general de probabilidad de duraciones y costos\\
+\begin{eqnarray}
+V(\{\theta_j\},\{\gamma_j\},\{d_j\},\{c_j\}) &=& f(d_1|\theta_1)f(c_1|d_1,\gamma_1)f(\gamma_1) \times\nonumber\\
+&& \times \prod_{j=2}^{N(t)} f(d_j|\theta_j)f(\theta_j|d_{j-1})f(c_j|d_j,\gamma_j)f(\gamma_j|c_{j-1})\nonumber
+\end{eqnarray}
+Para poder calcular la funci\'on de verosiimilitud que permite hacer inferencia, es necesario conocer las distribuciones de las variables latentes en base a las observaciones anteriores para ambas variables observables, duraciones y costos.\\
+\\Para la primera variable observable se toma en cuenta la relaci\'on 
+\[f_{\theta|d}(\theta|d)\propto f_{d|\theta}(d|\theta)f(\theta)\]
+y que $d|\theta \sim Gamma(d|\alpha_d,\theta)$ y $\theta \sim Gamma(\theta|\alpha_\theta,\beta_\theta)$.
 
-\section{An\'alisis Descriptivo}
-
-\section{Resultados}
-Descripci\'on de los resultados inferenciales y predictivos.
+\begin{eqnarray*}
+f_{\theta|d}(\theta|d) &\propto& \frac{\theta^{\alpha_d}}{\Gamma(\alpha_d)}\quad d^{\alpha_d-1} e^{-\{\theta d\}} \times \frac{\beta_\theta^{\alpha_\theta}}{\Gamma(\alpha_\theta)}\quad \theta^{\alpha_\theta-1} e^{-\{-\beta_\theta \theta\}}\\
+&=&\frac{\beta_\theta^{\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_\theta)} \quad d^{\alpha_d-1} \quad\theta^{\alpha_d+\alpha_\theta-1} \quad e^{\{-\theta(d+\beta_\theta)\}}\\
+\\
+&\propto& \theta^{\alpha_d+\alpha_\theta-1} \quad e^{\{-\theta(d+\beta_\theta)\}}\\
+&\Rightarrow& \theta|d \sim Gamma(\alpha_d+\alpha_\theta,d+\beta_\theta)
+\end{eqnarray*}
+\\
+Para la variable de duraciones, la distribuci\'on de la variable latente que depende de la observaci\'on se puede expresar de una manera anal\'itica cerrada como la distribuci\'on Gamma. An\'alogamente, para la variable de costos se vuelve a tomar en cuenta la misma relaci\'on y las distribuciones 
+\[c|d,\gamma \sim Weibull(c|d,\gamma) \qquad \gamma \sim InvGamma(\gamma|\alpha_\gamma,\beta_\gamma)\]
+\begin{eqnarray*}
+f_{\gamma|d,c}(\gamma|d,c) &\propto& \frac{d}{\gamma^d}\quad c^{d-1} e^{\{-(\frac{c}{\gamma})^d\}} \times \frac{\beta_\gamma^{\alpha_\gamma}}{\Gamma(\alpha_\gamma)}\quad (\frac{1}{\gamma})^{\alpha_\gamma+1} \quad e^{\{-(\frac{\beta_\gamma}{\gamma})\}}\\
+&=&\frac{d\beta_\gamma^{\alpha_\gamma} c^{d-1}}{\Gamma(\alpha_\gamma)}\quad (\frac{1}{\gamma})^{d+\alpha_\gamma+1}\quad e^{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}\\
+&\propto&(\frac{1}{\gamma})^{d+\alpha_\gamma+1}\quad e^{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}
+\end{eqnarray*}
+\\
+Para la variable de costos, la distribuci\'on de la variable latente seg\'un la observaci\'on anterior no tiene una forma anal\'itica cerrada como distribuci\'on, sin embargo, el kernel se puede simular con un slice sampler; este m\'etodo se explicar\'a con detalle en la siguiente secci\'on. \\
+\\
+Las distribuciones que resultan de los c\'alculos anteriores son la llave que se necesita para empezar a hacer inferencia, tomando estas distrbuciones se redefine la verosimilitud como
+\begin{eqnarray*}
+&&V(\{\alpha_d,\alpha_\theta,\beta_\theta,\alpha_\gamma,\beta_\gamma\},\{\theta_i,\gamma_i\}_{i=1}^{N(t)}|\{d_j,c_j\}_{i=1}^{N(t)})=\\ 
+&&\prod_{i=1}^{N(t)} Gamma(d_i|\alpha_d,\theta_i) Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times \\
+&&Weibull(c_i|d_i,\gamma_i)(\frac{1}{\gamma})^{d_{i-1}+\alpha_\gamma+1}e^\{-(\frac{\beta_\gamma}{\gamma}+(\frac{c_{i-1}}{\gamma})^{d_i})\} \times \\
+&&\times \pi(\alpha_d)\pi(\alpha_\theta)\pi(\beta_\theta)\pi(\alpha_\gamma)\pi(\beta_\gamma)
+\end{eqnarray*}
+Donde para las variables latentes,
+\begin{eqnarray*}
+\pi(\theta_i|\alpha_d,\alpha_\theta,\beta_\theta)&\propto& Gamma(d_i|\alpha_d,\theta_i)\times Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\\
+\\
+&=&\frac{\theta_i^{\alpha_d}}{\Gamma(\alpha_d)} d_i^{\alpha_d-1} e^{\{-\theta_id_i\}}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)}\theta_i^{\alpha_d+\alpha_\theta}e^{\{d_{i-1}+\beta_\theta\}}\\
+\\
+&=&\frac{d_i^{\alpha_d-1}(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{2\alpha_d+\alpha_\theta-1}e^{\{-\theta_i(d_{i-1}+d_i+\beta_\theta)\}}\\
+\\
+&\propto& \theta_i^{2\alpha_d+\alpha_\theta-1}e^{\{-\theta_i(d_{i-1}+d_i+\beta_\theta)\}}\\
+\\
+&\Rightarrow& \theta_i \sim Gamma(2\alpha_d+\alpha_\theta,d_i+d_{i-1}+\beta_\theta)
+\end{eqnarray*}
+Y,
+\begin{eqnarray*}
+\pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})&\propto& Weibull(c_i|d_i,\gamma_i)\times (\frac{1}{\gamma_i})^{d_i +\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i}\}}\\
+&=&\frac{d_i}{\gamma_i^{d_i}}c_i^{d_i-1}e^{\{-(\frac{c_i}{\gamma_i})\}}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\\
+&=&d_i c_i^{d_i-1}(\frac{1}{\gamma_i})^{2d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i}+(\frac{c_i}{\gamma_i})^{d_i})\}}\\
+&\propto&(\frac{1}{\gamma_i})^{2d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}+c_i}{\gamma_i})^{d_i}\}}
+\end{eqnarray*}
+Las distribuciones que corresponden a los par\'ametros son,
+\begin{eqnarray*}
+\pi(\alpha_d|...)&\propto& \prod_{i=2}^{N(t)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\alpha_d|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
+\\
+&\propto&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\alpha_\theta|...)&\propto&\prod_{i=2}^{N(t)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\alpha_\theta|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
+\\
+&\propto& \prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\beta_\theta|...)&\propto&\prod_{i=2}^{N(t)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\beta_\theta|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\theta^{\alpha_0-1}e^{\{-\beta_\theta\beta_0\}}\\
+\\
+&\propto&\prod_{i=2}^{N(t)}(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_i+\beta_0)\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\alpha_\gamma|...)&\propto&\prod_{i=2}^{N(t)} \pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})\times Gamma(\alpha_\gamma|\alpha_0,\beta_0)\\
+&=&\prod_{i=2}^{N(t)}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
+\\
+&\propto&\prod_{i=2}^{N(t)} (\frac{1}{\gamma_i})^{\alpha_\gamma}\alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\beta_\gamma|...)&\propto&\prod_{i=2}^{N(t)} \pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})\times Gamma(\beta_\gamma|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{i=2}^{N(t)}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma\beta_0\}}\\
+&\propto&\beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_i}+\beta_0)\}}\\
+\\
+&\Rightarrow& \beta_\gamma \sim Gamma(\alpha_0,\frac{1}{\gamma_i}+\beta_0)
+\end{eqnarray*}
+Los par\'ametros a estimar son aquellos correspondientes a las variables latentes, cuyo kernel se estima para cada momento $i$ ($i=1,...,N(t)$), y a las variables observables del modelo. Dado el uso de las variables latentes no existir\'a un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos num\'ericos no solo para la estimaci\'on de los par\'ametros y variables latentes sino para analizar las distribuciones que no tienen expresi\'on anal\'itica cerrada, como aquellas de los par\'ametros $\alpha_d,\alpha_\theta,\alpha_\gamma$ y la variable latente $\gamma_i$.\\
+\\
+Es importante mencionar que estas distribuciones que no tienen forma anal\'itica cerrada son funcioones log-c\'oncavas. Las funcionas log-c\'oncavas son, de acuerdo con \cite{bagnoli2005log}, funciones que se grafican con una curva c\'oncava en los n\'umeros reales positivos y cuyo logaritmo es tambi\'en una funci\'on c\'oncava. Estas funciones tienen el siguiente teorema\\
+\begin{teo}
+Sea $F$ sea una funci\'on doblemente diferenciable que toma valores positivos con soporte en $(a,b)$ y sea $t$ una funci\'on doblemente diferenciable y monot\'onica que va de $(a',b')$ a $(a,b)=(t(a'),t(b'))$. Se define la funci\'on $\hat{F}$ con soporte en $(a',b')$ para toda $x \in (a',b'), \quad \hat{F}(x)=F(t(x))$. Si F es log-c\'oncava y t una funci\'on c\'oncava, entonces $\hat{F}$ es log-c\'oncava.
+\end{teo}
+Este teorema tiene como corolario,
+\begin{cor}
+Sea F una funci\'on con soporte en (a,b). Sea $t$ una transformaci\'on lineal de la l\'inea real hacia si misma, y se define una funci\'on $\hat{F}$ con soporte en $(t(a),t(b))$ tal que $\hat{F}(x)=F(t(x))$. Si F es log-c\'oncava entonces $\hat{F}$ es log-c\'oncava. 
+\end{cor}
+Seg\'un \cite{bagnoli2005log}, la distribuci\'on Weibull cumple con las caracter\'isticas de log-concavidad si su par\'ametro de forma es mayor o igual a uno, para el caso de la distribuci\'on de los costos este par\'ametro corresponde a la duraci\'on, que por definici\'on es mayor a uno. Tambi\'en la distribuci\'on Gamma de $\alpha_d,\alpha_\theta, \alpha_\gamma$ debe tener el par\'ametro de forma mayor a uno, como sucede para la distribuci\'on Weibull, esta condici\'on se cumple por construcci\'on. De este modo aseguramos la log-concavidad para estas distribuciones que no tienen una f\'ormula anal\'itica cerrada y que se muestrearan de manera previa a la estimaci\'on de par\'ametros para el modelo general de probabilidad.\\
+\\
+\cite{pitt2002constructing} especifica que la estimaci\'on de m\'axima verosimilitud puede resolverse mediante el algoritmo EM, aunque tambi\'en, debido a que las densidades son dos condicionales de la densidad conjunta puede ligarse con el Muestreador Gibbs.\\
+\\
+El algoritmo EM es un algoritmo para calcular el estimador de m\'axima verosimilitud, que de acuerdo con \cite{held2014applied}, se define como
+\begin{defi}
+El Estimador de M\'axima Verosimilitud (EMV) $\hat{\theta}_{MV}$ del par\'ametro $\theta$ se obtiene maximizando la funci\'on de verosimilitud.
+\begin{align*}
+\hat{\theta}_{MV}=max_{\theta \in \Theta} L(\theta)
+\end{align*} 
+\end{defi}
+Seg\'un \cite{dempster1977maximum} el algoritmo EM calcula el EML mediante iteraciones, cada iteraci\'on consiste en un paso d\'onde se calcula la esperanza y en otro  se maximiza la misma, de ah\'i el nombre de EM. Este algoritmo se relaciona con las variables latentes suponiendo dos variables $x$ y $y$ las cuales se relacionan $x \to y(x)$, donde $y$ son los datos observables.\\
+\\
+De este modo, an\'alogamente a lo expresado en el cap\'itulo anterior por \cite{pitt2002constructing}, se proponen las siguientes funciones de densidad $f(x|\phi)$ y $g(y|\phi)$; en las cuales, de acuerdo a \cite{dempster1977maximum} los datos completos (variables latentes) $f(x|\cdot)$ se relacionan con los datos incompletos (variables observadas) $g(y|\cdot)$ mediante
+\begin{align*}
+g(y|\phi)=\int_{\chi(y)} f(x|\phi)dx
+\end{align*}
+El algoritmo EM se dedica a encontrar un valor de $\phi$ que maximice $g(y|\phi)$ dada la $y$ observada usando la familia asociada de $f(x|\phi)$. Una de las caracterizaciones m\'as simples supone $\phi^{(p)}$ es el valor actual de $\phi$ despu\'es de $p$ iteraciones y $t(x)$ como el estad\'istico suficientes de los datos completos, es decir, el estimador de la variable latente; por lo que la siguiente iteraci\'on se puede desglosar en los siguientes dos pasos:
+\begin{itemize}
+\item Paso E: Estimar los estad\'isticos suficientes de los datos completos.
+	\begin{align*}
+	t^{(p)}=E[t(x)|y,\phi^{(p)}]
+	\end{align*}
+\item Paso M: Determinar $\phi^{(p+1)}$ como soluci\'on a la ecuaci\'on
+	\begin{align*}
+	E[t(x)|\phi]=t^{(p)}
+	\end{align*}
+\end{itemize}
+Es decir, que si suponemos que $t^{(p)}$ es el estad\'istico suficiente calculado de $x$ observada en la distribuci\'on $f(x|\phi)$ entonces la ecuaci\'on definida en el Paso M se define como el EMV. Este concepto se hace general al definir la siguiente funci\'on
+\begin{align*}
+Q(\phi'|\phi)=E[log f(x|\phi')|y,\phi]
+\end{align*}
+Esta funci\'on se asume que existe para toda pareja $(\phi',\phi)$. Se define la iteraci\'on EM para $\phi^{(p)} \to \phi^{(p+1)}$,
+\begin{itemize}
+\item Calcular $Q(\phi,\phi^{(p)})$.
+\item Determinar $\phi^{(p+1)}$ tal que maximice $Q(\phi,\phi^{(p)})$.
+\end{itemize}
+La idea central es tomar una $\phi'$ que maximice $log f(x|\phi)$, dado que esta distribuci\'on y su correspondiente logaritmo no necesariamente se conoce, se puede maximizar los datos observados y $\phi^{(p)}$.\\
+\\
+El algoritmo EM es muy \'util pues por su estructura iterativa puede dar resultados a modelos de probabilidad muy complejos, adem\'as de que al igual que el Muestreador de Gibbs, utiliza una estructura subyacente o de variables latentes.\\
+\\
+A pesar de reconocer la utilidad del algoritmo EM, como definido en el cap\'itulo anterior, el m\'etodo num\'erico que se utilizar\'a para la estimaci\'on en este trabajo ser\'a el Muestreador de Gibbs. De este modo, tomando la verosimilitud extendida definida anteriormente se fijan los valores iniciales para los par\'ametros $\alpha_d^{(0)},\alpha_\theta^{(0)},\beta_\theta^{(0)},\alpha_\gamma^{(0)},\beta_\gamma^{(0)}$ y para las variables latentes $\{\theta_i^{(0)}\}_{i=1}^{N(t)},\{\gamma_i^{(0)}\}_{i=1}^{N(t)}$ y para cada $k=1,...,N(t)$ tenemos la siguiente distribuci\'on que ses proporcional a la verosimilitud,
+\begin{align*}
+\pi(\alpha_d^{(k)},\alpha_\theta^{(k)},\beta_\theta^{(k)},\alpha_\gamma^{(k)},\beta_\gamma^{(k)}|\{\theta_i^{(k-1)}\}_{i=1}^{N(t)},\{\gamma_i^{(k-1)}\}_{i=1}^{N(t)},\{d_i,c_i\}_{i=1}^{N(t)})
+\end{align*}
+Este es el principio necesario para utilizar el Muestreador de Gibbs de modo que se estimen los par\'ametros en base a las variables latentes que a su vez se estiman en base a las observaciones para que con los par\'ametros estimados se estimen las variables latentes que ayuden a predecir futuras observaciones. Una vez que se tiene el concepto general de la aplicaci\'on de esta t\'ecnica de muestreo para el objetivo de este trabajo, es necesario considerar las maneras de implementarlo.\\
