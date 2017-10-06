@@ -1,12 +1,12 @@
 \chapter{Inferencia y Predicci\'on}
 \section{Introducci\'on}
-En el cap\'itulo anterior se describi\'o el modelo general de probabilidad que describe el proceso de duraciones y costos en un padecimiento cr\'onico degenerativo, por lo que el siguiente paso ser\'ia hacer inferencia sobre el mismo. El objetivo de hacer inferencia es predecir futuras observaciones en base a los datos ya observados. En este cap\'itulo se sentar\'an las bases para realizar esta inferencia.\\
+En el cap\'itulo anterior se describi\'o el modelo general de probabilidad que describe el proceso de duraciones y costos en un padecimiento cr\'onico degenerativo, por lo que el siguiente paso ser\'ia hacer inferencia sobre el mismo. En este tipo de modelos, el objetivo de hacer inferencia es predecir futuras observaciones en base a los datos ya observados. En este cap\'itulo se sentar\'an las bases para realizar esta inferencia.\\
 \\
 El primer paso para realizar inferencia es la construcci\'on de la funci\'on de verosimilitud, en este caso extendida a las variables latentes y a los par\'ametros correspondientes a sus distribuciones de todos los individuos de la poblaci\'on. Una vez que se determinaron las funciones de verosimilitud, se analizan los m\'etodos de estimaci\'on que se podr\'ian usar para la predicci\'on de futuras observaciones. %De este modo se puede completar la parte te\'orica de este trabajo de investigaci\'on.
 \section{Verosimilitud Extendida}
-Como especificado en la secci\'on anterior, una vez que el modelo de probabilidad describe de manera precisa los datos del problema podemos empezar a hacer inferencia sobre observaciones futuras. La base sobre la que se puede hacer inferencia en base a los datos ya observados es la funci\'on de verosimilitud de la funci\'on de probabilidad.\\
+Como especificado en la secci\'on anterior, una vez que el modelo de probabilidad describe de manera precisa los datos del problema podemos empezar a hacer inferencia sobre observaciones futuras. La base sobre la que se puede hacer predicci\'on en base a los datos ya observados es la funci\'on de verosimilitud definida como la funci\'on de de distribuci\'on conjunta de los datos.\\
 \\
-La funci\'on de verosimilitud, seg\'un \cite{held2014applied}, se define como
+As\'i, para un modelo de probabilidad donde los datos se caracterizan mediante $p(x_j|\theta)$; la funci\'on de verosimilitud seg\'un \cite{held2014applied}, se define como
 \begin{defi}
 La funci\'on de verosimilitud $V(\theta)$ es la funci\'on masa o la funci\'on de densidad de los datos observados $x$, entendidos en funci\'on del par\'ametro desconocido $\theta$.
 \end{defi}
@@ -134,39 +134,41 @@ De manera an\'aloga, las distribuciones que corresponden a los par\'ametros para
 \end{eqnarray*}
 Los par\'ametros a estimar son aquellos correspondientes a las variables latentes, cuyo kernel se estima para cada momento $j$ ($j=1,...,N(t)$), y a las variables observables del modelo. Las verosimilitudes mostradas para los par\'ametros deben ser extendidas para incluir toda la poblaci\'on muestreada, de este modo,%Dado el uso de las variables latentes no existir\'a un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos num\'ericos no solo para la estimaci\'on de los par\'ametros y variables latentes sino para analizar las distribuciones que no tienen expresi\'on anal\'itica cerrada, como aquellas de los par\'ametros $\alpha_d,\alpha_\theta,\alpha_\gamma$ y la variable latente $\gamma_i$.\\
 \begin{eqnarray*}
-\pi(\alpha_d|\theta_{11},...,\theta_{1N(t_1),...,\theta_{I1},...,\theta_{IN(t_I)}})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_d|\theta_{ij},...)\\
+\pi(\alpha_d|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_d|\theta_{ij},...)\\
 &\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
 &\propto & (\frac{\alpha_d^{\alpha_0 -1}}{\Gamma(\alpha_d+\alpha_\theta)})^{\sum_{i=1}^I N(t_i)} (\sum_{i=1}^I N(t_i) e^{\{-\alpha_d\beta_0\}}) \times \\
 &\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d} \theta_{ij}^{\alpha_d}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\alpha_\theta|\theta_{11},...,\theta_{1N(t_1)},...,\theta_{I1},...,\theta_{IN(t_I)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_\theta|\theta_{ij},...)\\
+\pi(\alpha_\theta|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_\theta|\theta_{ij},...)\\
 &\propto &\prod_{i=1}^I \prod_{j=1}^{N(t_i)} \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
 &\propto & (\frac{\alpha_\theta^{\alpha_0 -1}}{\Gamma(\alpha_d+\alpha_\theta)})^{\sum_{i=1}^I N(t_i)} (\sum_{i=1}^I N(t_i) e^{\{-\alpha_\theta\beta_0\}}) \times \\
 &\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d} \theta_{ij}^{\alpha_\theta}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\beta_\theta|\theta_{11},...,\theta_{1N(t_1)},...,\theta_{I1},...,\theta_{IN(t_I)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\beta_\theta|\theta_{ij},...)\\
+\pi(\beta_\theta|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\beta_\theta|\theta_{ij},...)\\
 &\propto &\prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_ij+\beta_0)\}}\\
 &\propto & (\beta_\theta^{\alpha_0-1})^{\sum_{i=1}^I N(t_i)} e^{\{-\beta_\theta(\sum_{i=1}^I \sum_{j=1}^{N(t_i)}(\theta_ij+\beta_0))\}} \times \\
 &\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\alpha_\gamma|\gamma_{11},...,\gamma_{1N(t_1)},\gamma_{I1},...,\gamma_{IN(t_I)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_\gamma|\gamma_{ij},...)\\
+\pi(\alpha_\gamma|(\gamma_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_\gamma|\gamma_{ij},...)\\
 &\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (\frac{1}{\gamma_ij})^{\alpha_\gamma} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
 &\propto & (\alpha_\gamma^{\alpha_0-1})^{\sum_{i=1}^I N(t_i)} (\sum_{i=1}^I N(t_i) e^{\{-\alpha_\gamma \beta_0\}}) \times \\
 &\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)}(\frac{1}{\gamma_ij})^{\alpha_\gamma}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\beta_\gamma|\gamma_{11},...,\gamma_{1N(t_1)},\gamma_{I1},...,\gamma_{IN(t_I)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\beta_\gamma|\gamma_{ij},...)\\
+\pi(\beta_\gamma|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\beta_\gamma|\gamma_{ij},...)\\
 &\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_{ij}}+\beta_0)\}}\\
 &\propto & (\beta_\gamma^{\alpha_0-1})^{\sum_{i=1}^I N(t_i)} e^{\{-\beta_\gamma(\sum_{i=1}^I \sum_{j=1}^{N(t_i)}\frac{1}{\gamma_{ij}}+\beta_0)\}}
 \end{eqnarray*}
-Es importante mencionar que estas distribuciones que no tienen forma anal\'itica cerrada son funciones log-c\'oncavas. Las funciones log-c\'oncavas son, de acuerdo con \cite{bagnoli2005log}, funciones que se grafican con una curva c\'oncava en los n\'umeros reales positivos y cuyo logaritmo es tambi\'en una funci\'on c\'oncava; o bien, seg\'un \cite{an1996log} un vector aleatorio se distribuye de manera log-c\'oncava  si es logaritmo de la distribuci\'on de densidad es c\'oncavo en su soporte, es decir
+Es importante mencionar que estas distribuciones que no tienen forma anal\'itica cerrada son funciones log-c\'oncavas. Esta propiedad se explorar\'a con mayor detalle en la siguiente secci\'on.
+\section{Log-concavidad en las funciones de distribuci\'on}
+Las funciones log-c\'oncavas son, de acuerdo con \cite{bagnoli2005log}, funciones que se grafican con una curva c\'oncava en los n\'umeros reales positivos y cuyo logaritmo es tambi\'en una funci\'on c\'oncava; o bien, seg\'un \cite{an1996log} un vector aleatorio se distribuye de manera log-c\'oncava  si es logaritmo de la distribuci\'on de densidad es c\'oncavo en su soporte, es decir
 \begin{defi}
 Un vector de variables aleatorias, $X$, est\'a distribuido de manera log-c\'oncava si para cada $x_1, x_2 \in \Omega$ y cualquiera $\lambda \in [0,1]$,
 \[f(\lambda x_1+(1-\lambda)x_2) \geq [f(x_1)]^\lambda [f(x_2)]^{1-\lambda}\] 
@@ -176,7 +178,7 @@ Estas funciones tienen el siguiente teorema,
 \begin{teo}
 Sea $F$ sea una funci\'on doblemente diferenciable que toma valores positivos con soporte en $(a,b)$ y sea $t$ una funci\'on doblemente diferenciable y monot\'onica que va de $(a',b')$ a $(a,b)=(t(a'),t(b'))$. Se define la funci\'on $\hat{F}$ con soporte en $(a',b')$ para toda $x \in (a',b'), \quad \hat{F}(x)=F(t(x))$. Si F es log-c\'oncava y t una funci\'on c\'oncava, entonces $\hat{F}$ es log-c\'oncava.
 \end{teo}
-Este teorema tiene como corolario,
+Este teorema tiene el siguiente corolario,
 \begin{cor}
 Sea F una funci\'on con soporte en (a,b). Sea $t$ una transformaci\'on lineal de la l\'inea real hacia si misma, y se define una funci\'on $\hat{F}$ con soporte en $(t(a),t(b))$ tal que $\hat{F}(x)=F(t(x))$. Si F es log-c\'oncava entonces $\hat{F}$ es log-c\'oncava. 
 \end{cor}
@@ -188,8 +190,8 @@ Es decir, que toda transformaci\'on lineal de la variable aleatoria no afecta su
 \begin{prop}
 Sea $X = (X_1,...,X_k)$. Si las $X_i$'s son independientes y cada una de ellas tiene una funci\'on de densidad log-c\'oncava, entonces su densidad conjunta tambi\'en es log-c\'oncava.
 \end{prop}
-Esto quiere decir que si podemos demostrar log-concavidad para una de las distribuciones, esta propiedad se extiende a la distribuci\'on conjunta. De este modo aseguramos la log-concavidad para estas distribuciones que no tienen una f\'ormula anal\'itica cerrada y que se muestrearan de manera previa a la estimaci\'on de par\'ametros para el modelo general de probabilidad.\\
-\\
+Esto quiere decir que si podemos demostrar log-concavidad para una de las distribuciones, esta propiedad se extiende a la distribuci\'on conjunta. De este modo aseguramos la log-concavidad para estas distribuciones que no tienen una f\'ormula anal\'itica cerrada y que se muestrearan de manera previa a la estimaci\'on de par\'ametros para el modelo general de probabilidad.
+\section{Inferencia en modelos con variables latentes.}
 Una vez que se especifican las distribuciones de los par\'ametros a estimar y las propiedades de los mismos, se necesitan m\'etodos que los puedan estimar. \cite{pitt2002constructing} especifica que la estimaci\'on de m\'axima verosimilitud puede resolverse mediante el algoritmo EM, aunque tambi\'en, debido a que las densidades son dos condicionales de la densidad conjunta puede ligarse con el Muestreador Gibbs.\\
 \\
 El algoritmo EM es un algoritmo para calcular el estimador de m\'axima verosimilitud, que de acuerdo con \cite{held2014applied}, se define como
@@ -229,8 +231,8 @@ La idea central es tomar una $\phi'$ que maximice $log f(x|\phi)$, dado que esta
 \\
 El algoritmo EM es muy \'util pues por su estructura iterativa puede dar resultados a modelos de probabilidad muy complejos, adem\'as de que al igual que el Muestreador de Gibbs, utiliza una estructura subyacente o de variables latentes.\\
 \\
-A pesar de reconocer la utilidad del algoritmo EM, el m\'etodo num\'erico que se utilizar\'a para la estimaci\'on en este trabajo ser\'a el Muestreador de Gibbs, el cual se explicar\'a con m\'as detalle en el capi\'itulo siguiente. De este modo, tomando la verosimilitud extendida definida anteriormente se fijan los valores iniciales para los par\'ametros $\alpha_d^{(0)},\alpha_\theta^{(0)},\beta_\theta^{(0)},\alpha_\gamma^{(0)},\beta_\gamma^{(0)}$ y para las variables latentes $\{\theta_i^{(0)}\}_{i=1}^{N(t)},\{\gamma_i^{(0)}\}_{i=1}^{N(t)}$ y para cada $k=1,...,N(t)$ tenemos la siguiente distribuci\'on que es proporcional a la verosimilitud,
+A pesar de reconocer la utilidad del algoritmo EM, el m\'etodo num\'erico que se utilizar\'a para la estimaci\'on en este trabajo ser\'a el Muestreador de Gibbs, el cual se explicar\'a con m\'as detalle en el capi\'itulo siguiente. De manera general, tomando la verosimilitud extendida definida anteriormente se fijan los valores iniciales para los par\'ametros $\alpha_d^{(0)},\alpha_\theta^{(0)},\beta_\theta^{(0)},\alpha_\gamma^{(0)},\beta_\gamma^{(0)}$ y para las variables latentes $\{\theta_i^{(0)}\}_{i=1}^{N(t)},\{\gamma_i^{(0)}\}_{i=1}^{N(t)}$ y para cada $k=1,...,N(t)$ tenemos la siguiente distribuci\'on que es proporcional a la verosimilitud,
 \begin{align*}
-\pi(\alpha_d^{(k)},\alpha_\theta^{(k)},\beta_\theta^{(k)},\alpha_\gamma^{(k)},\beta_\gamma^{(k)}|\{\theta_i^{(k-1)}\}_{i=1}^{N(t)},\{\gamma_i^{(k-1)}\}_{i=1}^{N(t)},\{d_i,c_i\}_{i=1}^{N(t)})
+\pi(\alpha_d^{(k)},\alpha_\theta^{(k)},\beta_\theta^{(k)},\alpha_\gamma^{(k)},\beta_\gamma^{(k)}|\{\theta_i^{(k-1)}\}_{i=2}^{N(t)},\{\gamma_i^{(k-1)}\}_{i=2}^{N(t)},\{d_i,c_i\}_{i=1}^{N(t)})
 \end{align*}
 Este es el principio necesario para utilizar el Muestreador de Gibbs de modo que se estimen los par\'ametros en base a las variables latentes que a su vez se estiman en base a las observaciones para que con los par\'ametros estimados se estimen las variables latentes que ayuden a predecir futuras observaciones. %Una vez que se tiene el concepto general de la aplicaci\'on de esta t\'ecnica de muestreo para el objetivo de este trabajo, es necesario considerar las maneras de implementarlo.\\
