@@ -1,0 +1,13 @@
+Prescription Category,Code
+Total primary care (all BNF),1
+Drugs used for Diabetes (BNF 6.1) ,2
+Insulins (BNF 6.1.1) ,3
+Short-acting insulins (BNF 6.1.1.1) ,4
+Intermediate and long-acting insulins (BNF 6.1.1.2) ,5
+Antidiabetic drugs (BNF 6.1.2) ,6
+Sulfonylureas (BNF 6.1.2.1) ,7
+Biguanides (BNF 6.1.2.2) ,8
+Other antidiabetic drugs (BNF 6.1.2.3) ,9
+Diagnostic and monitoring devices (BNF 6.1.6) ,10
+Human analogue insulins ,11
+Other insulins ,12

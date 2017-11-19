@@ -1,0 +1,50 @@
+---
+title: "Marked Process Simulation"
+author: "JCMO"
+date: "15 de noviembre de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+```
+
+
+# Parametros
+
+**Catálogo**
+
+```{r}
+catalogo <- read.csv(file="Diabetes.Marked.Catalogo.csv",header=TRUE, sep=",") 
+
+catalogo
+```
+
+**Distriución marginal de prescripciones**
+
+```{r}
+marginal <- read.csv(file="Diabetes.Marked.Marginal.csv",header=TRUE, sep=",") 
+
+marginal
+```
+
+**Distribuciones de transición de prescripciones**
+
+```{r}
+transicion <- read.csv(file="Diabetes.Marked.Transicion.csv",header=TRUE, sep=",") 
+
+transicion
+```
+
+**Costos**
+
+```{r}
+costos <- read.csv(file="Diabetes.Marked.Costos.csv",header=TRUE, sep=",") 
+
+costos
+```
+
+# Prescripciones
+
+# Costos
