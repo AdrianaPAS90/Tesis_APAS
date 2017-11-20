@@ -8,12 +8,13 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 rm(list=ls())
+set.seed(12345)
 ```
 
 
 # Parametros
 
-**Catálogo**
+## Catálogo
 
 ```{r}
 catalogo <- read.csv(file="Diabetes.Marked.Catalogo.csv",header=TRUE, sep=",") 
@@ -21,7 +22,7 @@ catalogo <- read.csv(file="Diabetes.Marked.Catalogo.csv",header=TRUE, sep=",")
 catalogo
 ```
 
-**Distriución marginal de prescripciones**
+## Distriución marginal de prescripciones
 
 ```{r}
 marginal <- read.csv(file="Diabetes.Marked.Marginal.csv",header=TRUE, sep=",") 
@@ -29,7 +30,7 @@ marginal <- read.csv(file="Diabetes.Marked.Marginal.csv",header=TRUE, sep=",")
 marginal
 ```
 
-**Distribuciones de transición de prescripciones**
+## Distribuciones de transición de prescripciones
 
 ```{r}
 transicion <- read.csv(file="Diabetes.Marked.Transicion.csv",header=TRUE, sep=",") 
@@ -37,7 +38,7 @@ transicion <- read.csv(file="Diabetes.Marked.Transicion.csv",header=TRUE, sep=",
 transicion
 ```
 
-**Costos**
+## Costos
 
 ```{r}
 costos <- read.csv(file="Diabetes.Marked.Costos.csv",header=TRUE, sep=",") 
@@ -45,6 +46,90 @@ costos <- read.csv(file="Diabetes.Marked.Costos.csv",header=TRUE, sep=",")
 costos
 ```
 
-# Prescripciones
+# Simulación
 
-# Costos
+## Simulation of prescribing diabetes
+
+```{r}
+T.sim <- 10 
+presc.diabetes.sim <- function(T.sim,marginal,transicion){
+  output <- array(NA,dim=c(T.sim,1))
+  
+  output[1,1] <- as.numeric(
+              sample(x=marginal[,"Code"], 
+                  size=1, 
+                  replace=TRUE, 
+                  prob=marginal[,"Prob.Margin"])
+            )
+  t <- 2
+  for(t in 2:T.sim){
+  output[t,1] <- as.numeric(
+              sample(x=transicion[,"Code"], 
+                  size=1, 
+                  replace=TRUE, 
+                  prob=transicion[output[(t-1),1],c(2:13)])
+            )
+  }
+  return(output)
+
+  }
+
+output <- presc.diabetes.sim(T.sim,marginal,transicion)
+output
+```
+
+## Simulation of prescribed costs
+
+```{r}
+presc.costs.sim <- function(output,costos){
+  costs.sim <- NA * output
+  D.sim <- dim(output)[1]
+  d <- 1
+  for(d in 1:D.sim){
+    presc.index <- which(costos[,1]==output[d,1])
+    costs.sim[d,1] <- as.matrix(costos[presc.index,3])
+  }
+  return(costs.sim)
+  }
+
+costs.sim <- presc.costs.sim(output,costos)
+costs.sim
+```
+
+
+```{r}
+P.sim <- 500 # Número de pacientes simulados
+
+diabetes.marked <- as.data.frame(matrix(NA,nrow=1,ncol=4))
+colnames(diabetes.marked) <- c("paciente","num.obs","presc.code","presc.cost")
+
+diabetes.marked
+
+p <- 1
+for(p in 1:P.sim){
+  T.sim <- as.numeric(
+              sample(x=c(9,10,11,12,13,14,15,16,17), 
+                  size=1, 
+                  replace=TRUE, 
+                  prob=c(0.5/9,1/9,0.3/9,1.5/9,1/9,1.7/9,1/9,0.1/9,1.9/9))
+            )
+  data.aux <- as.data.frame(matrix(NA,nrow=T.sim,ncol=4))
+  colnames(data.aux) <- c("paciente","num.obs","presc.code","presc.cost")
+  data.aux[,1] <- p
+  data.aux[,2] <- c(1:T.sim)
+  data.aux[,3] <- presc.diabetes.sim(T.sim,marginal,transicion)
+  data.aux[,4] <- presc.costs.sim(data.aux[,3],costos) 
+  
+  diabetes.marked <- rbind(diabetes.marked,data.aux)  
+
+}
+
+diabetes.marked <- diabetes.marked[-1,]
+diabetes.marked$paciente <- as.factor(diabetes.marked$paciente)
+diabetes.marked$num.obs <- as.factor(diabetes.marked$num.obs)
+diabetes.marked$presc.code <- as.factor(diabetes.marked$presc.code)
+
+summary(diabetes.marked)
+
+write.csv(diabetes.marked,file="diabetes.marked.datos.sim.csv")
+```
