@@ -1,4 +1,4 @@
-\chapter{Estad\'istica Bayesiana}
+\chapter{Inferencia Bayesiana}
 \section{Introducci\'on}
 En los cap\'itulos anteriores se determinaron el modelo general de probabilidad y las distribuciones de los par\'ametros sobre las que se busca hacer inferencia. Existen varios m\'etodos de estimaci\'on que se podr\'ian utilizar en la inferencia de este trabajo de investigaci\'on, en este cap\'itulo se pretende desarrollar la justificaci\'on para la utilizaci\'on de un enfoque bayesiano para la estimaci\'on.\\
 \\
@@ -46,81 +46,25 @@ p(d_{n+1}|D)&=&\int p(d_{n+1},\theta|D) d\theta \\
 \end{eqnarray*}
 En la segunda y tercera l\'inea de la ecuaci\'on se muestra la distribuci\'on posterior predictiva como un promedio de las distribuciones predictivas condicionales de la distribuci\'on posterior del par\'ametro $\theta$. En la \'ultima l\'inea se asume la independencia condicional de $D$ y $d_{n+1}$ dado $\theta$.\\
 \\
-Como enunciado en \cite{smith2010bayesian}, en el modelo bayesiano de inferencia, como descrito anteriormente; la evidencia, las observaciones y los argumentos cient\'ificos se utilizan para soportar la distribuci\'on de probabilidad del modelo propuesto. Por otro lado, en el an\'alisis bayesiano de decisi\'on el Tomador de Decisiones debe tomar este sustento evidencial y cient\'ifico para resolver el problema espec\'ifico que se encuentre.\\
+Tomando estas mismas ideas en un conexto m\'as general, como el planteado por \cite{goldstein2013observables}, donde la incertidumbre espist\'emica se expresa a trav\'es la distribui\'on previa del par\'ametro y la incertidumbre aleatoria como la funci\'on de verosimilitud dada por las observaciones. Por lo que se podr\'ia decir que la distribuci\'on posterior, es una mezcla entre ambas incertidumbres. En el an\'alisis estad\'istico, se necesitan construir modelos basados en los valores desconocidos de la distribuci\'on de las observaciones, es decir, de incertidumbre espist\'emica pero tomando valores de un modelo param\'etrico o de incertidumbre aleatoria; esto se logra mediante el concepto de intercambiabilidad.\\
 \\
-Es decir, en un ambiente de incertidumbre tenemos el espacio de decisi\'on $A$ donde cualquier decisi\'on puede ser tomada por el Tomador de Decisi\'on y $\Phi$ es el espacio de posibles resultados $\phi$. El Tomador de Decisiones debe cuantificar las consecuencias de elegir cada decisi\'on $a \in A$ para todos los posibles resultados $\phi \in \Phi$. Con esta informaci\'on se deben especificar la funci\'on de p\'erdida $L(a,\phi)$, en la cual se mide la p\'erdida de tomar la decisi\'on $a$ con el resultado $\phi$. Otra funci\'on a especificar es la funci\'on de probabilidad $p(\phi)$ que da las probabilidades de los posibles resultados $\phi$ antes de tomar la decisi\'on $a$; esta funci\'on representa la incertidumbre que enfrenta el Tomador de Decisi\'on. De este modo, la mejor decisi\'on que se puede tomar es aquella que minimice la p\'erdida esperada,
-\begin{align*}
-\bar{L}(a)= \int_{\phi \in \Phi} L(a,\phi)p(\phi)
-\end{align*}
-Con el enfoque del an\'alisis bayesiano de decisi\'on los problemas cl\'asicos de inferencia como la estimaci\'on puntual, estimaci\'on por regiones y contraste de hip\'otesis pueden resolverse de esta manera. Adem\'as, los estimadores obtenidos no solo suelen coincidir con los estimadores cl\'asicos en algunos casos, sino en otros casos de hecho los mejoran.\\
+Como fue definido en el cap\'itulo dos, a trav\'es del Teorema de Finetti; la intercambiabilidad es una propiedad de la cual se deriva que sin importar la reordenaci\'on de las observaciones, \'estas tienen la misma probabilidad de ocurrir. Las implicaciones del teorema de intercambiabilidad, de acuerdo con \cite{goldstein2013observables}, son sorprendentemente simples. Debido a la simetr\'ia con la que se aplica el concepto de intercambiabilidad sobre las observaciones, es como si se estuviera muestreando independientemente del modelo de los valores desconocidos de las observaciones con una distribuci\'on previa sobre el par\'ametro, retomando los conceptos de incertidumbre epist\'emica y aleatoria. De este modo, mediante la observaci\'on de las variables observables y la aplicaci\'on del paradigma bayesiano, se reduce la incertidumbre al actualizar la informaci\'on sobre las variables y facilitando la inferencia.\\
 \\
-En el desarrollo de este trabajo de investigaci\'on, veremos que la estimaci\'on del modelo general de probabilidad no se puede realizar a trav\'es de m\'etodos anal\'iticos cerrados, por lo que se sugiere la utilizaci\'on de m\'etodos num\'ericos. El m\'etodo n\'umerico a utilizar, por la naturaleza del estudio, ser\'a el Muestreador de Gibbs, que se describe en la siguiente secci\'on.
-
-\section{El Muestreador de Gibbs}
+Otra de las mayores implicaciones del teorema de intercambiabilidad es muy intuitivo, pues la distribuci\'on de las observaciones no es mas que el resultado de todas las posibles observaciones futuras; y la divisi\'on entre los componentes epist\'emicos y aleatorios de incertidumbre de esta estructura es nuestro propio juicio sobre dichas observaciones futuras. De igual modo, esto da una entrada natural a la inferencia.\\
+\\
+%Como enunciado en \cite{smith2010bayesian}, en el modelo bayesiano de inferencia, como descrito anteriormente; la evidencia, las observaciones y los argumentos cient\'ificos se utilizan para soportar la distribuci\'on de probabilidad del modelo propuesto. Por otro lado, en el an\'alisis bayesiano de decisi\'on el Tomador de Decisiones debe tomar este sustento evidencial y cient\'ifico para resolver el problema espec\'ifico que se encuentre.\\
+%\\
+%Es decir, en un ambiente de incertidumbre tenemos el espacio de decisi\'on $A$ donde cualquier decisi\'on puede ser tomada por el Tomador de Decisi\'on y $\Phi$ es el espacio de posibles resultados $\phi$. El Tomador de Decisiones debe cuantificar las consecuencias de elegir cada decisi\'on $a \in A$ para todos los posibles resultados $\phi \in \Phi$. Con esta informaci\'on se deben especificar la funci\'on de p\'erdida $L(a,\phi)$, en la cual se mide la p\'erdida de tomar la decisi\'on $a$ con el resultado $\phi$. Otra funci\'on a especificar es la funci\'on de probabilidad $p(\phi)$ que da las probabilidades de los posibles resultados $\phi$ antes de tomar la decisi\'on $a$; esta funci\'on representa la incertidumbre que enfrenta el Tomador de Decisi\'on. De este modo, la mejor decisi\'on que se puede tomar es aquella que minimice la p\'erdida esperada,
+%\begin{align*}
+%\bar{L}(a)= \int_{\phi \in \Phi} L(a,\phi)p(\phi)
+%\end{align*}
+Con el enfoque del an\'alisis bayesiano los problemas cl\'asicos de inferencia como la estimaci\'on puntual, estimaci\'on por regiones y contraste de hip\'otesis pueden resolverse de esta manera. Adem\'as, los estimadores obtenidos no solo suelen coincidir con los estimadores cl\'asicos en algunos casos, sino en otros casos de hecho los mejoran.\\
+\\
+En el desarrollo de este trabajo de investigaci\'on, veremos que la estimaci\'on del modelo general de probabilidad no se puede realizar a trav\'es de m\'etodos anal\'iticos cerrados, por lo que se sugiere la utilizaci\'on de m\'etodos num\'ericos. El m\'etodo n\'umerico a utilizar, por la naturaleza del estudio, ser\'a el Muestreador de Gibbs, que se describe en la siguiente secci\'on.\\
+\\
 Como mencionado en el cap\'itulo anterior, la estimaci\'on de par\'ametros del modelo general de probabilidad que se utilizar\'a en este trabajo no se puede hacer a trav\'es de m\'etodos anal\'iticos tradicionales, por lo que se utilizar\'an m\'etodos num\'ericos. Existen varios m\'etodos, entre estos se encuentran el algoritmo EM y el Muestreador de Gibbs, el algoritmo EM ser\'a m\'as desarrolado en la secci\'on anterior y aunque \'util para el an\'alisis del modelo presentado, el Muestreador de Gibbs tiene una interpretaci\'on m\'as simple.\\
 \\
-De acuerdo con \cite{gelman2014bayesian}, la simulaci\'on a trav\'es de las cadenas de Markov tambi\'en llamadas Cadenas de Markov v\'ia simulaci\'on Monte Carlo (MCMC, por sus siglas en ingl\'es) consiste en construir una Cadena de Markov cuya distribuci\'on estacionaria (l\'imite) sea una distribuci\'on de la cual se pretenda simular. Una de estas simulaciones MCMC es el Muestreador de Gibbs.\\
-\\
-Aunque el Muestreador de Gibbs pueda ser \'util en la visi\'on cl\'asica de la estad\'istica, normalmente el Muestreador Gibbs se asocia con la estad\'istica bayesiana, como es el caso de este trabajo. Seg\'un \cite{casella1992explaining} este algoritmo es una t\'ecnica que genera variables aleatorias indirectamente de distribuciones marginales sin tener que calcular la densidad, debido a que se basa en las propiedades principales de las Cadenas de Markov como la estacionareidad para simplificar c\'alculos y tener estimados m\'as precisos.\\
-\\
-Siguiendo la ilustraci\'on de \cite{casella1992explaining}, supongamos que tenemos una distribuci\'on conjunta $f(\theta,y_1,y_2,...,y_p)$\\
-\[f(\theta)=\int \cdots \int f(\theta,y_1,y_2,...,y_p) dy_1,dy_2,...,dy_p\]
-Si el inter\'es se encuentra en la marginal $f(\theta)$ y \'esta es demasiado complicada para calcularse directamente, con el Muestreador de Gibb se puede generar una muestra $\theta_1,...,\theta_m \sim f(\theta)$ sin la necesidad de calcular la distribuci\'on marginal. Esto permite obtener informaci\'on de la misma con alto grado de precisi\'on.\\
-\\
-Para ejemplificar mejor el mecanismo del Muestreador de Gibbs se toman dos variables aleatorias $(\Theta,Y)$. El algoritmo genera una muestra de $f(\theta)$ muestreando de las distribuciones condicionales $f(\theta|y)$ y $f(y|\theta)$ que son la que normalmente se conocen en los modelos estad\'isticos. Esta muestra se obtiene mediante, lo que \cite{casella1992explaining} nombra como, una secuencia de Gibbs $(Y'_0,\theta'_0,Y'_1,\theta'_1,...,Y'_k,\theta'_k)$ que de manera iterativa genera variables aleatorias a partir de valores iniciales especificados $(Y'_0=y'_0)$.\\
-\\El proceso iterativo es como sigue\\
-\begin{align*}
-\theta'_j \sim f(\theta|Y'_j=y'_j)\\
-Y'_{j+1} \sim f(y|\theta'_j=\theta'_j)
-\end{align*}
-Si la muestra es suficientemente grande, es decir, que si $k \rightarrow \infty$ la distribuci\'on de $\theta'_k$ converger\'a con la verdadera distribuci\'on marginal de $\theta$.\\
-\\
-El Muestreador de Gibbs puede pensarse como una implementaci\'on pr\'actica del concepto de que solo conociendo las distribuciones marginales se puede determinar la distribici\'on conjunta. Esto ser\'ia cierto en la mayor\'ia de los casos bivariados, el procedamiento no es tan directo para los casos multivariados.\\
-\\
-De acuerdo con \cite{casella1992explaining} para el caso bivariado, suponemos dos variables aleatorias $\theta,Y$, de las cuales se conocen sus distribuciones condicionales $f_{\Theta|Y}(\theta|y)$ y $f_{Y|\Theta}(y|\theta)$. A partir de estas podr\'iamos calcular la funci\'on marginal de $\theta$ y la distribuci\'on conjunta de ambas variables, mediante  el siguiente argumento:\\
-\[f_\theta(\theta)=\int f_{\theta Y}(\theta,y)dy\]
-donde la distribuci\'on conjunta es a\'un desconocida, tomando el hecho que $f_{\theta Y}(\theta,y)=f_{\theta|Y}(\theta|y)f_Y(y)$ tendr\'iamos que,\\
-\[f_\theta(\theta)=\int f_{\theta|Y}(\theta|y)f_Y(y) dy\]
-Asimismo, si sustituimos la distribuci\'on marginal de $y$ ($f_Y(y)$) con el mismo argumento utilizado para la distribuci\'on marginal de $\theta$, se tiene que
-\begin{eqnarray*}
-f_\theta(\theta) &=& \int f_{\theta|Y}(\theta|y) f_{Y|\theta}(y|t) f_\theta(t)dt dy\\
-       &=& \int [ \int  f_{\theta|Y}(\theta|y)f_{Y|\theta}(y|t) dy]  f_\theta(t) dt
-\end{eqnarray*}
-Esta ecuaci\'on es una forma limitada de la iteraci\'on de Gibbs, ilustrando como las distribuciones condicionales producen una distribuci\'on marginal. Aunque la distribuci\'on conjunta de las variables determinan las distribuciones condicionales y marginales, no siempre las condicionales determinen de manera tan directa la distribuci\'on marginal. Esto es cierto no solo para los casos bivariados, sino que se extiende a los multivariados.\\
-\\
-En cuantas m\'as variables existan, el problema se vuelve m\'as complejo pues la relaci\'on entre las condicionales, marginales y conjuntas se vuelve m\'as intrincada. Por ejemplo, la relaci\'on $condicional \times marginal = conjunta$ no se sontiene para todas las condicionales y marginales. Pero se pueden hacer varios conjuntos de variables y construir las ecuaciones integrales para calcular la distribuci\'on marginal de inter\'es.\\
-\\
-Para casos multivariados \cite{casella1992explaining} supone las variables aleatorias $X,Y,Z$ con inter\'es en la distribuci\'on $f_X(x)$. Para esto, se toman las variables $(Y,Z)$ como una sola variable, lo que resultar\'ia en\\
-\[f_X(x)= \int [ \int \int f_{X|YX}(x|y,z)f_{YZ|X}(y,z|t)dy dz] f_X(t) dt\]
-De esta manera, muestreando iterativamente de $f_{X|YZ}$ y $f_{YZ|X}$ resultar\'ian en una serie de variables aleatorias que convergen en $f_X(x)$. Por otro lado, el Muestreador de Gibb muestrear\'ia iterativamente las distribuciones $f_{X|YZ}, f_{Y|XZ}, f_{Z|X}$, de tal modo que en la j-\'esima iteraci\'on se tendr\'ia,\\
-\begin{align*}
-X'_j \sim f(x|Y'_j = y'_j, Z'_j=z'_j)\\
-Y'_{j+1} \sim f(y|X'_j=x'_j, Z'_j=z'_j)\\
-Z'_{j+1} \sim f(z|X'_j=x'_j, Y'_{j+1}=y'_{j+1})
-\end{align*}
-Este esquema de iteraciones nos produce una secuencia de Gibbs,\\
-\[Y'_0,Z'_0,X'_0,Y'_1,Z'_1,X'_1,...\]
-con la misma propiedad de convergencia que en el caso bivariado, ente m\'as grande es la $k$, $X'_k=x'_k$ es un punto de la distribuci\'on marginal $f(x)$.\\
-\\
-De este modo queda evidenciada la utilidad del Muestreador de Gibbs en el ahorro de c\'alculos y la precisi\'on de sus resultados. Como mencionado en la secci\'on anterior, esta t\'ecnica inferencial es muy \'util tanto en la estad\'istica bayesiana como en la cl\'asica, en la primera para calcular la distribuci\'on posterior y en la \'ultima, para calcular la funci\'on de verosimilitud. Seg\'un \cite{gelman2014bayesian}, la clave del \'exito de este m\'etodo es la iteraci\'on en la cual las distribuciones aproximadas mejoran hasta converger en la distribuci\'on deseada.\\
-\\
-El Muestreador de Gibbs tradicional puede ser un poco limitado en lo que se refiere a su aplicaci\'on en un problema que se desarrolla a trav\'es del tiempo; sin embargo, este se puede adaptar a los requerimientos particulares del caso. \cite{carter1996markov} exponen un caso particular en el contexto de Modelos Espacio-Estado Gaussianos, que aunque no es exactamente el modelo planteado en este trabajo, algunas de las ideas expuestas pueden ser extendidas.\\
-\\
-El modelo planteado por \cite{carter1996markov} es,
-\begin{align*}
-y_i=h_i'x_i+\gamma_ie_i; \qquad x_i=F_ix_{i-1}+\Gamma_iu_i
-\end{align*}
-Donde las observaciones $y_i$ son escalares y $x_i$ es el vector de estados de dimensi\'on $m\times 1$. Los errores $e_i$ y $u_i$ son independientes y se distribuyen $N(0,\sigma^2)$ y $N(0,\tau^2I_m)$. Los coeficientes $h_i,\gamma_i,F_i,\Gamma_i$ son determinados por la variable discreta $K_i$. Usando la notaci\'on para el vector de observaciones de $Y:=(y_1,...,y_n)'$, el vector total de estados $X:=(x_1',...,x_n')'$, $K:=(K_1,...,K_n)$. Sea $g_i:=h_i'x_i$, por lo que $G:=(g_1,...,g_n)'$. Asumiendo que $\sigma^2, \tau^2$ y $K$ son independientes; las distribuciones priori es Gamma Inversa y la distribuci\'on priori de $K$ es una Cadena de Markov con probabilidades de transici\'on conocidas. Tambi\'en se asume que dado $K_1$ y $\tau^2$, la distribuci\'on de $x_1$ es normal.\\
-\\
-Se propone el siguiente muestreador para estimar $X,K,\sigma^2$ y $\tau^2$, mediante la generaci\'on de las siguientes distribuciones condicionales,
-\begin{enumerate}
-\item $p(\tau^2|Y,G,K,\sigma^2)$ que se puede reescribir como $p(\tau^2|G,K)$.
-\item $p(K_i|Y,K_{j \neq i},\sigma^2,\tau^2)$ para $i=1,...,n$.
-\item $p(X|Y,K,\sigma^2,\tau^2)$.
-\item $p(\sigma^2|Y,X,K,\tau^2)$ que se puede reescribir como $p(\sigma^2|Y,G,K)$.
-\end{enumerate}
-Este muestreador que se propone, a diferencia del Muestreador de Gibbs, la variable $K_i$ es generada sin estar condicionada a la variable de estados $X$. Es decir, que se pueden hacer modificaciones a los muestreadores de tal manera que se adapten al modelo a trav\'es del tiempo manteniendo la estructura MCMC.\\
-\\
+De acuerdo con \cite{gelman2014bayesian}, la simulaci\'on a trav\'es de las cadenas de Markov tambi\'en llamadas Cadenas de Markov v\'ia simulaci\'on Monte Carlo (MCMC, por sus siglas en ingl\'es) consiste en construir una Cadena de Markov cuya distribuci\'on estacionaria (l\'imite) sea una distribuci\'on de la cual se pretenda simular. Una de estas simulaciones MCMC es el Muestreador de Gibbs, el cual est\'a descrito con m\'as detalle en el ap\'endice.\\
 %Para la implementaci\'on del Muestreador de Gibbs en este trabajo se utilizar\'a el programa JAGS (Solo Otro Muestreador de Gibbs, por sus siglas en ingl\'es). Este programa es una extensi\'on del programa BUGS (Inferencia Bayesiana Usando el Muestreador de Gibbs, por sus siglas en ingl\'es), que normalmente es utilizado para la exploraci\'on de modelos Markov multivariados en el contexto de estad\'istica actuarial. JAGS es un programa que autom\'aticamente construye las cadenas de Matkov v\'ia simulaci\'on Monte Carlo (MCMC) para modelos multivariados.\\
 %\\
 %Para lograr expresar estos problemas con BUGS, explicado por sus creadores \cite{plummer2003jags}, se necesitan tomar en cuenta dos distribuciones:
@@ -130,4 +74,113 @@ Este muestreador que se propone, a diferencia del Muestreador de Gibbs, la varia
 %\end{itemize}
 %La necesidad de estas distribuciones aunado a la necesidad de una herramienta que ayude a explorar modelos gr\'aficos es lo que da origen a JAGS. Es decir, el programa toma la descripci\'on del modelo general de probabilidad multivariado y regresa un muestreo de MCMC de la distribuci\'on posterior.\\
 \\
-De este modo, se establece no solo las bases para la inferencia y predicci\'on de futuras observaciones en base a la verosimilud extendida y la resoluci\'on de su funci\'on sino tambi\'en la implementaci\'on num\'erica de la misma. Una vez que se definieron estas herramientas, lo que resta es la adaptaci\'on del modelo a la ilustraci\'on con los datos, esto se explorar\'a m\'as adelante.
+De este modo, se establece no solo las bases para la inferencia y predicci\'on de futuras observaciones en base a la verosimilud extendida y la resoluci\'on de su funci\'on sino tambi\'en la implementaci\'on num\'erica de la misma. Una vez que se definieron estas herramientas, lo que resta es la adaptaci\'on del modelo a la ilustraci\'on con los datos, esto se explorar\'a m\'as adelante.  
+\section{Desarrollo del algoritmo para el modelo de duraci\'on marcada}
+Una vez que se ha definido el Muestreador de Gibbs de manera general, se necesitan desarrollar las distribuciones particulares al modelo de duraci\'on marcada. En el cap\'itulo anterior se definieron las distribuciones de las variables latentes condicionadas a las observaciones,
+\[f_{\theta|d}(\theta|d) \propto \theta^{\alpha_d+\alpha_\theta-1} e^{\{-\theta(d+\beta_\theta)\}}\]
+Para la variable latente correspondiente a la duraci\'on y para los costos,
+\[f_{\gamma|d,c}(\gamma|d,c) \propto (\frac{1}{\gamma})^{d+\alpha_\gamma+1} \quad e^{-\{(\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d\}}\]
+
+De este modo, las distribuciones que resultan de los c\'alculos anteriores son la llave que se necesita para empezar a hacer inferencia, tomando estas distribuciones se redefine la verosimilitud de un solo individuo como
+\begin{eqnarray*}
+&&V(\{\alpha_d,\alpha_\theta,\beta_\theta,\alpha_\gamma,\beta_\gamma\},\{\theta_i,\gamma_i\}_{j=1}^{N(t)}|\{d_j,c_j\}_{i=1}^I)=\\ 
+&&\prod_{j=1}^{N(t)} Gamma(d_j|\alpha_d,\theta_j) Gamma(\theta_j|\alpha_d+\alpha_\theta,d_{j-1}+\beta_\theta)\times \\
+&&Weibull(c_j|d_j,\gamma_j)(\frac{1}{\gamma})^{d_{j-1}+\alpha_\gamma+1}e^\{-(\frac{\beta_\gamma}{\gamma}+(\frac{c_{j-1}}{\gamma})^{d_j})\} \times \\
+&&\times \pi(\alpha_d)\pi(\alpha_\theta)\pi(\beta_\theta)\pi(\alpha_\gamma)\pi(\beta_\gamma)
+\end{eqnarray*}
+\\
+Donde para las variables latentes asociada a las duraciones,
+\begin{eqnarray*}
+\pi(\theta_j|\alpha_d,\alpha_\theta,\beta_\theta)&\propto& Gamma(d_j|\alpha_d,\theta_j)\times Gamma(\theta_j|\alpha_d+\alpha_\theta,d_{j-1}+\beta_\theta)\\
+\\
+&=&\frac{\theta_j^{\alpha_d}}{\Gamma(\alpha_d)} d_j^{\alpha_d-1} e^{\{-\theta_jd_j\}}\frac{(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)}\theta_j^{\alpha_d+\alpha_\theta}e^{\{d_{j-1}+\beta_\theta\}}\\
+\\
+&=&\frac{d_j^{\alpha_d-1}(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_d+\alpha_\theta)} \theta_j^{2\alpha_d+\alpha_\theta-1}e^{\{-\theta_j(d_{j-1}+d_j+\beta_\theta)\}}\\
+\\
+&\propto& \theta_j^{2\alpha_d+\alpha_\theta-1}e^{\{-\theta_j(d_{j-1}+d_j+\beta_\theta)\}}\\
+\\
+&\Rightarrow& \theta_j \sim Gamma(2\alpha_d+\alpha_\theta,d_j+d_{j-1}+\beta_\theta)
+\end{eqnarray*}
+Y para la variable latente asociada a los costos,
+\begin{eqnarray*}
+\pi(\gamma_j|\alpha_\gamma,\beta_\gamma,d_j,c_{j-1})&\propto& Weibull(c_j|d_j,\gamma_j)\times (\frac{1}{\gamma_j})^{d_j +\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{j-1}}{\gamma_j})^{d_j}\}}\\
+&=&\frac{d_j}{\gamma_j^{d_j}}c_j^{d_j-1}e^{\{-(\frac{c_j}{\gamma_j})\}}(\frac{1}{\gamma_j})^{d_j+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{j-1}}{\gamma_j})^{d_j})\}}\\
+&=&d_j c_j^{d_j-1}(\frac{1}{\gamma_j})^{2d_j+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{j-1}}{\gamma_j})^{d_j}+(\frac{c_j}{\gamma_j})^{d_j})\}}\\
+&\propto&(\frac{1}{\gamma_j})^{2d_j+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{j-1}+c_j}{\gamma_j})^{d_j}\}}
+\end{eqnarray*}
+De manera an\'aloga, las distribuciones que corresponden a los par\'ametros para un solo individuo $i$,
+\begin{eqnarray*}
+\pi(\alpha_d|...)&\propto& \prod_{j=1}^{N(t_i)} Gamma(\theta_j|\alpha_d+\alpha_\theta,d_{j-1}+\beta_\theta)\times Gamma(\alpha_d|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{j=1}^{N(t_i)}\frac{(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_j^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_j(d_{j-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
+\\
+&\propto&\prod_{j=1}^{N(t_i)}\frac{(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_j^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\alpha_\theta|...)&\propto&\prod_{j=1}^{N(t_i)} Gamma(\theta_j|\alpha_d+\alpha_\theta,d_{j-1}+\beta_\theta)\times Gamma(\alpha_\theta|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{j=1}^{N(t_i)}\frac{(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_j^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_j(d_{j-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
+\\
+&\propto& \prod_{j=1}^{N(t_i)}\frac{(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_j^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\beta_\theta|...)&\propto&\prod_{j=1}^{N(t_i)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\beta_\theta|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\theta^{\alpha_0-1}e^{\{-\beta_\theta\beta_0\}}\\
+\\
+&\propto&\prod_{j=1}^{N(t)}(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_j+\beta_0)\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\alpha_\gamma|...)&\propto&\prod_{j=1}^{N(t)} \pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{j-1})\times Gamma(\alpha_\gamma|\alpha_0,\beta_0)\\
+&=&\prod_{j=1}^{N(t)}(\frac{1}{\gamma_i})^{d_j+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{j-1}}{\gamma_j})^{d_j})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
+\\
+&\propto&\prod_{j=1}^{N(t)} (\frac{1}{\gamma_j})^{\alpha_\gamma}\alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\beta_\gamma|...)&\propto&\prod_{i=2}^{N(t)} \pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})\times Gamma(\beta_\gamma|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{i=2}^{N(t)}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma\beta_0\}}\\
+&\propto&\beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_i}+\beta_0)\}}\\
+\\
+&\Rightarrow& \beta_\gamma \sim Gamma(\alpha_0,\frac{1}{\gamma_i}+\beta_0)
+\end{eqnarray*}
+Los par\'ametros a estimar son aquellos correspondientes a las variables latentes, cuyo kernel se estima para cada momento $j$ ($j=1,...,N(t)$), y a las variables observables del modelo. Las verosimilitudes mostradas para los par\'ametros deben ser extendidas para incluir toda la poblaci\'on muestreada, de este modo,%Dado el uso de las variables latentes no existir\'a un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos num\'ericos no solo para la estimaci\'on de los par\'ametros y variables latentes sino para analizar las distribuciones que no tienen expresi\'on anal\'itica cerrada, como aquellas de los par\'ametros $\alpha_d,\alpha_\theta,\alpha_\gamma$ y la variable latente $\gamma_i$.\\
+\begin{eqnarray*}
+\pi(\alpha_d|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_d|\theta_{ij},...)\\
+&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
+&\propto & (\frac{\alpha_d^{\alpha_0 -1}}{\Gamma(\alpha_d+\alpha_\theta)})^{\sum_{i=1}^I N(t_i)} (\sum_{i=1}^I N(t_i) e^{\{-\alpha_d\beta_0\}}) \times \\
+&\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d} \theta_{ij}^{\alpha_d}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\alpha_\theta|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_\theta|\theta_{ij},...)\\
+&\propto &\prod_{i=1}^I \prod_{j=1}^{N(t_i)} \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
+&\propto & (\frac{\alpha_\theta^{\alpha_0 -1}}{\Gamma(\alpha_d+\alpha_\theta)})^{\sum_{i=1}^I N(t_i)} (\sum_{i=1}^I N(t_i) e^{\{-\alpha_\theta\beta_0\}}) \times \\
+&\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d} \theta_{ij}^{\alpha_\theta}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\beta_\theta|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\beta_\theta|\theta_{ij},...)\\
+&\propto &\prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_ij+\beta_0)\}}\\
+&\propto & (\beta_\theta^{\alpha_0-1})^{\sum_{i=1}^I N(t_i)} e^{\{-\beta_\theta(\sum_{i=1}^I \sum_{j=1}^{N(t_i)}(\theta_ij+\beta_0))\}} \times \\
+&\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\alpha_\gamma|(\gamma_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_\gamma|\gamma_{ij},...)\\
+&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (\frac{1}{\gamma_ij})^{\alpha_\gamma} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
+&\propto & (\alpha_\gamma^{\alpha_0-1})^{\sum_{i=1}^I N(t_i)} (\sum_{i=1}^I N(t_i) e^{\{-\alpha_\gamma \beta_0\}}) \times \\
+&\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)}(\frac{1}{\gamma_ij})^{\alpha_\gamma}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\beta_\gamma|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\beta_\gamma|\gamma_{ij},...)\\
+&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_{ij}}+\beta_0)\}}\\
+&\propto & (\beta_\gamma^{\alpha_0-1})^{\sum_{i=1}^I N(t_i)} e^{\{-\beta_\gamma(\sum_{i=1}^I \sum_{j=1}^{N(t_i)}\frac{1}{\gamma_{ij}}+\beta_0)\}}
+\end{eqnarray*}
+\\
+Una vez que se definen las distribuciones particulares del modelo y los m\'etodos num\'ericos con los que se realizar\'a la inferencia, en el siguiente cap\'itulo se implementar\'a con una base de datos espec\'ifica. Es importante mencionar que, independientemente de la base de datos con la que se trabaje, las distribuciones y la forma del algoritmo es la correspondiente al modelo general de probabilidad.

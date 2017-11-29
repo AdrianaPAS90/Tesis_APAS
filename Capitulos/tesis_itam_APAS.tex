@@ -1,0 +1,169 @@
+\documentclass[letterpaper,oneside,11pt,review]{book}
+\usepackage{breakcites}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[latin1]{inputenc}
+\usepackage{babel}
+\usepackage{picture}
+\usepackage{mathrsfs}
+\usepackage{amssymb,amsthm,amsmath,latexsym}
+\theoremstyle{plain}
+\newtheorem{teo}{Teorema}
+\newtheorem{prop}[teo]{Proposicion}
+\newtheorem{defi}[teo]{Definicion}
+\newtheorem{obs}[teo]{Observacion}
+\newtheorem{lem}[teo]{Lema}
+\newtheorem{cor}[teo]{Corolario}
+\usepackage[pdftex]{color,graphicx}
+\newcommand{\sgn}{\mathop{\mathrm{sgn}}}
+\usepackage[paperwidth=17cm, paperheight=22.5cm, bottom=2.5cm, right=2.5cm]{geometry}
+\usepackage{algorithm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm} %paquete para s\'imbolo matem\'aticos
+\usepackage[spanish]{babel} %francais, polish, spanish, ...
+\usepackage{enumerate}
+\usepackage{fancyhdr} %%Fancy headings
+\usepackage{fancyvrb}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[toc,page]{appendix}
+\usepackage[pdftex,
+            pdfauthor={Adriana P\'erez Arciniega Sober\'on},
+            pdftitle={T\'iTULO DE LA TESIS},
+            pdfsubject={\'aREA DE LA TESIS},
+            pdfkeywords={PALABRAS CLAVE},
+            pdfproducer={Latex con hyperref},
+            pdfcreator={pdflatex}]{hyperref}
+\usepackage{url}
+\usepackage{setspace}
+\onehalfspacing       %% 1,5-spacing
+
+\begin{document}
+
+\pagestyle{empty} %No headings for the first pages.
+
+\title{Tesis_APAS} %Con este nombre se guardar\'a el proyecto en writeLaTex
+
+\begin{titlepage}
+\begin{center}
+
+\textsc{\Large Instituto Tecnol\'ogico Aut\'onomo de M\'exico}\\[4em]
+
+%Figura
+\begin{center}
+	\includegraphics{DocumentosLaTex/ITAM_2016}
+\end{center}
+
+\vspace{2em}
+
+{\sc \huge {\bf Procesos de Duraci\'on Marcados para el estudio de trayectorias de padecimientos cr\'onico-degenerativos}}\\[2em]
+
+\textsc{\large Tesis}\\[1em]
+
+\textsc{que para obtener el t\'itulo}\\[1em]
+
+\textsc{Licenciada en Actuar\'ia}\\[1em]
+
+\textsc{presenta}\\[1em]
+
+\textsc{\Large ADRIANA P\'EREZ ARCINIEGA SOBER\'ON }\\[1em]
+
+\textsc{\large Asesor:}\\
+\textsc{DR. JUAN CARLOS MART\'INEZ OVANDO}\\[1em]
+
+\end{center}
+
+\vspace*{\fill}
+\textsc{M\'exico, D.F. \hspace*{\fill} 2017}
+
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%   DECLARACI\'oN
+%----------------------------------------------------------------------------------------
+\thispagestyle{empty}
+\vspace*{\fill}
+\begingroup
+"Con fundamento en los art\'iculos 21 y 27 de la Ley Federal del Derecho de Autor y como titular de los derechos moral y patrimonial de la obra titulada "\textbf{T\'ITULO DE LA TESIS}", otorgo de manera gratuita y permanente al Instituto Tecnol\'ogico Aut\'onomo de M\'exico y a la Biblioteca Ra\'ul Baill\'eres Jr., la autorizaci\'on para que fijen la obra en cualquier medio, incluido el electr\'onico, y la divulguen entre sus usuarios, profesores, estudiantes o terceras personas, sin que pueda percibir por tal divulgaci\'on una contraprestaci\'on".
+
+\centering
+
+\hspace{3em}
+
+\textsc{AUTOR}
+
+\vspace{5em}
+
+\rule[1em]{20em}{0.5pt} % L\'inea para la fecha
+
+\textsc{Fecha}
+ 
+\vspace{8em}
+
+\rule[1em]{20em}{0.5pt} % L\'inea para la firma
+
+\textsc{Firma}
+
+\endgroup
+\vspace*{\fill}
+\tableofcontents
+
+%----------------------------------------------------------------------------------------
+%   DEDICATORIA
+%----------------------------------------------------------------------------------------
+%\pagestyle{empty}
+%\frontmatter
+%
+%\chapter*{}
+%\begin{flushright}
+%\textit{DEDICATORIA}
+%\end{flushright}
+
+
+%----------------------------------------------------------------------------------------
+%   AGRADECIMIENTOS
+%----------------------------------------------------------------------------------------
+\chapter*{Agradecimientos}
+%\markboth{AGRADECIMIENTOS23}{AGRADECIMIENTOS} % encabezado 
+
+Muchas gracias a todos!
+
+
+%----------------------------------------------------------------------------------------
+%   PREFACIO
+%----------------------------------------------------------------------------------------
+%\pagestyle{plain}
+%\chapter*{capitulo0}
+%\markboth{PREFACIO23}{PREFACIO} % encabezado 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Capitulos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{plain}
+\include{Cap1}
+\include{Cap2}
+\include{Cap3}
+\include{Cap4}
+\include{Cap5}
+\include{Cap6}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Bibliografia
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{apalike} %Style of Bibliography: plain / apalike / amsalpha / ...
+\bibliography{bib} %You need a file 'literature.bib' for this.
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Apendices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{appendices}
+
+\include{ApI}
+\include{ApII}
+
+\end{appendices}
+
+\end{document}

@@ -7,36 +7,33 @@ Despu\'es de que el proceso puntual sea definido m\'as adelante, se introduce el
 Es importante remarcar que la historia de los procesos puntuales siempre ha estado unida a la de la estad\'istica actuarial y de seguros, como nos mencionan \cite{daley2003} al referirse a las tablas de mortalidad como el primer estudio de procesos de intervalos, en particular, los procesos de renovaci\'on \footnote{Seg\'un \cite{daley2003} es el estudio de la secuencia de intervalos entre reemplazos sucesivos de un componente que es susceptible a fallar y es reemplazado por un nuevo componente cada vez que ocurre un fallo.}. Por lo que el empleo de estos procesos como un m\'etodo de tarificaci\'on es solamente otra colaboraci\'on en la larga lista de estas dos disciplinas.
 \\
 \section{Definiciones y notaci\'on}
-Para el objeto de este estudio consideramos que contamos con una muestra de microcostos de enfermedades cr\'onicas de un cierto n\'umero de individuos a los que se les ha observado durante un per\'iodo de tiempo. A su vez, cada uno de los individuos puede tener asociadas covariables sociodemogr\'aficas, socioecon\'omicas y m\'edicas particulares; la inclusi\'on de estas covariables en el modelo no est\'a dentro del alcance de esta tesis. Aunque las covariables asociadas a los individuos inciden en la trayectoria del padecimiento, estas relaciones son un tema a explorarse en un trabajo de investigaci\'on futuro.\\
+Para el objeto de este estudio consideramos que contamos con una muestra de microcostos de enfermedades cr\'onicas de un cierto n\'umero de individuos a los que se les ha observado durante un per\'iodo de tiempo equidistante. A su vez, cada uno de los individuos puede tener asociadas covariables sociodemogr\'aficas, socioecon\'omicas y m\'edicas particulares; la inclusi\'on de estas covariables en el modelo no est\'a dentro del alcance de esta tesis. Aunque las covariables asociadas a los individuos inciden en la trayectoria del padecimiento, estas relaciones son un tema a explorarse en un trabajo de investigaci\'on futuro.\\
 \\
 De este modo, podr\'iamos decir que tenemos $i=1,...,I$ individuos, donde $I$ es el n\'umero total de individuos observados por un per\'iodo de tiempo con costos asociados a su padecimiento. El objetivo es no solo modelar y predecir la duraci\'on y el costo de las etapas de estos padecimientos por individuo, sino tambi\'en, introducir la estructura de dependencia entre \'estas de manera intuitiva. De acuerdo a \cite{daley2003}, las relaciones de dependencia entre las variables pueden llegar a ser muy complejas, por lo que la ejecuci\'on del modelo se vuelve m\'as complicada.\\ 
 \\
 Entonces, supongamos que empezamos el estudio de un individuo $i$ en el tiempo $t_{i0}=0$, es decir, este es el tiempo en el que el individuo $i$ entra al panel de estudio. La duraci\'on del estudio para el individuo es denotada por $T_i$, esto no quiere decir que no puedan ocurrir observaciones posteriores a $T_i$, a esto se le conoce como datos con censura por la derecha.\\
 \\
-Seg\'un \cite{intropp}, un proceso puntual es una medida aleatoria en un espacio m\'etrico separado $S$ tomando valores en los enteros no negativos $Z^+$ donde $N(t)$, en un caso particular, es un proceso de conteo del n\'umero de puntos que ocurren antes del tiempo $t$.\\
+Seg\'un \cite{intropp}, un proceso puntual es una medida aleatoria en un espacio m\'etrico separable $S$ tomando valores en los enteros no negativos $Z^+$ donde $N(t)$, en un caso particular, es un proceso de conteo del n\'umero de puntos que ocurren antes del tiempo $t$.\\
 \\
 Sea $t_{ij} \in (t_{i0},T_i]$ el momento en el que ocurre el $j$-\'esimo cambio de tratamiento del $i$-\'esimo individuo, por lo que definimos la variable aleatoria $N(t)$ que cuenta el n\'umero de cortes o cambios en el intervalo. Aunque, en la implementaci\'on de este trabajo, se trabaje con tiempos discretos y se conozcan los cortes en los intervalos.\\
 \\
 Dado que la muestra consiste en microcostos a trav\'es del tiempo de un individuo $i$, decimos que a cada $t_{ij}$ se le asocia la variable costo de tratamiento; es decir, a cada momento en que ocurre un cambio de tratamiento le corresponde un nuevo precio de tratamiento $p_{ij}$. De este modo, para cualquier $i$ tenemos una sucesi\'on de variables asociadas $\{t_{i1},p_{i1}\},\{t_{i2},p_{i2}\},...,\{t_{ik},p_{ik}\}$, donde $k$ indica la variable de cambio de diagn\'ostico. De este modo la sucesi\'on de variables es una colecci\'on aleatoria de puntos en un espacio con una marca asociada a cada punto, as\'i ya se pueden modelar los datos como en un proceso puntual marcado.\\
 \\
-\cite{daley2003} definen el proceso puntual marcado como un proceso localizado en un espacio m\'etrico completamente separado \footnote{De acuerdo con \cite{schervish2012theory} se define un espacio m\'etrico completamente separado como
-\begin{defi}
-Sea $\chi$ un espacio topol\'ogico. Un subconjunto $D$ de $\chi$ es denso si para cada $x \in \chi$ y cada conjunto abierto $U$ que contenga $x$, hay un elemento de $D$ en $U$. Si existe un subconjunto denso contable de $\chi$, entonces $\chi$ es separable. Suponemos que $\chi$ es un espacio m\'etrico con m\'etrica $d$. Una secuencia $(x_n)_{n=1}^{\infty}$ es Cauchy si, para cada $\epsilon$, existe una $N$ tal que $m,n \geq N$ implica $d(x_n,x_m) <\epsilon$. Un espacio m\'etrico $\chi$ es completo si cada secuencia Cauchy converge. De este modo, un espacio m\'etrico completamente separado es conocido como un espacio polaco.
-\end{defi}} $\chi$ y las marcas en otro espacio m\'etrico completamente separado $\kappa$, entonces $\{(\chi_i,\kappa_i)\}$ en $\chi \times \kappa$ es un proceso puntual marcado con la propiedad adicional de que el proceso primario $N(t)$ es a su vez un proceso puntual.\\
+\cite{daley2003} definen el proceso puntual marcado como un proceso localizado en un espacio m\'etrico completamente separable \footnote{De acuerdo con \cite{schervish2012theory} un espacio m\'etrico completo $\chi$ se dice que es separable si existe un subconjunto numerable $D$ tal que los elementos de $D$ pueden usarse para aproximar cualquier elemento de $\chi$.} $\chi$ y las marcas en otro espacio m\'etrico completamente separado $\kappa$, entonces $\{(\chi_i,\kappa_i)\}$ en $\chi \times \kappa$ es un proceso puntual marcado con la propiedad adicional de que el proceso primario $N(t)$ es a su vez un proceso puntual.\\
 \\
 Desde un punto de vista pr\'actico, para un solo individuo, deseamos caracterizar;
 \begin{align}
-P(t_{i1},...,t_{ik},p_{i1},...,p_{ik})=P(t_{i1},...,t_{ik},p_{i1},...,p_{ik}|N(t_i)=k)
+P(t_{i1},...,t_{ik},p_{i1},...,p_{ik}|N(t_i)=k)
 \end{align}
 \\
-Es decir, la funci\'on de distribuci\'on conjunta del tiempo de ocurrencia de los eventos y los precios asociados a estos es igual a la funci\'on de distribuci\'on de estas variables condicionados por la variable aleatoria del n\'umero de eventos en el intervalo $(t_{i0},T_i]$. Sin embargo, dado que al usar las variables en sus valores absolutos estas pueden dar saltos muy altos entre si, se deben usar variables alternas.\\
+Es decir, la funci\'on de distribuci\'on conjunta del tiempo de ocurrencia de los eventos y los precios asociados condicionados por la variable aleatoria del n\'umero de eventos en el intervalo $(t_{i0},T_i]$. Sin embargo, dado que al usar las variables en sus valores absolutos estas pueden dar saltos muy altos entre si, se deben usar variables alternas.\\
 \\
-Definimos las siguientes variables para un individuo $i$:
+De acuerdo a \cite{daley2003}, al tener un proceso puntual o de conteo $N(\cdot)$, se puede establecer una relaci\'on entre el proceso de conteo y los intervalos, si definimos $t_i(N)=inf\{t:N(t) \geq i\}$, por lo tanto, se define el siguiente intervalo $\tau_i(N)=t_i(N)-t_{i-1}(N)$, donde $\sum_{i=1}^\infty \tau_i=\infty$. Esta definici\'on es an\'aloga a aquella que define $t_i$ como el $i$-\'esimo cambio de tratamiento para un solo individuo y los intervalos como las duraciones; el concepto de intervalos se hace extensivo para los costos de la siguiente manera para un solo individuo $i$:
 \begin{itemize}
 \item $d_{ij}=t_{ij}-t_{ij-1}$, donde $d_{ij}$ es la duraci\'on entre los tiempos de ocurrencia de cada individuo.
 \item $c_{ij}=c_{ij}-c_{ij-1}$, donde $c_{ij}$ representa el costo, es decir, la diferencia entre los precios en cada tiempo de ocurrencia de cada individuo.
 \end{itemize}
-\begin{figure}[h!]
+\begin{figure}
 \begin{center}
 \begin{picture}(200,100)
 \put(0,0){\vector(1,0){200}} \put(0,0){\vector(0,1){100}}
@@ -81,9 +78,10 @@ Definimos las siguientes variables para un individuo $i$:
 \caption{Trayectorias del individuo $i$.}
 \end{figure}
 .\\
-De este modo,
+\\
+Es importante mencionar, como lo hacen \cite{daley2003}, que hay una correspondencia de uno a uno entre las distribuciones de probabilidad del proceso puntual y las distribuciones de los intervalos, es por eso que el modelo inicial de probabilidad con las variables de tiempos y precios, les corresponde una medida de probabilidad distinta a aquella de las variables de duraciones y costos. De este modo,
 \begin{align}
-P_{t,p}(t_{i1},...,t_{ik},p_{i1},...,p_{ik}|N(t_i)=k) \cong P(d_{i1},...,d_{ik},c_{i1},...,c_{ik}|N(t_i)=k)
+Q(t_{i1},...,t_{ik},p_{i1},...,p_{ik}|N(t_i)=k) \cong P(d_{i1},...,d_{ik},c_{i1},...,c_{ik}|N(t_i)=k)
 \end{align}
 Esto quiere decir que calcular la funci\'on de distribuci\'on conjunta de los tiempos de ocurrencia y los precios asociados a \'estos es an\'alogo a a calcular la funci\'on de distribuci\'on conjunta de las duraciones y los costos asociados condicionados a la variable aleatoria del n\'umero de eventos en el intervalo de tiempo. As\'i pasamos de un proceso puntual marcado a uno de duraci\'on marcada.\\
 \\
@@ -242,53 +240,59 @@ Es decir,\\
 \\
 El Modelo Oculto de Markov es un modelo muy flexible, seg\'un \cite{ghahramani2001introduction}, puede ser utilizado para modelar cualquier distribuci\'on con un n\'umero infinito de componentes y con las adecuaciones correspondientes se pueden modelar un sinn\'umero de de problemas din\'amicos no-lineales; esta misma flexibilidad es lo que le resta fiabilidad a la inferencia. Aunado a esto, el modelo se basa en la relaci\'on existente entre los estados en el tiempo del par\'ametro, es decir, $P(\theta_i|\theta_{i-1})$, esta relaci\'on no es conocida en el problema de estudio del presente trabajo por lo que el Modelo Oculto de Markov no es el que mejor se adapta.\\
 \\
-Tomando como base los Modelos Din\'amicos Lineales descritos por \cite{harrison1999bayesian}, el proceso de la variable latente para el caso de las duraciones, ser\'ia\\
+Los Modelos Din\'amicos Lineales descritos por \cite{harrison1999bayesian} son parecidos en el planetamieno a los Modelos Ocultos de Markov, de este modo, el proceso de la variable latente para el caso de las duraciones, ser\'ia\\
 \\
-Ecuaci\'on de Observaci\'on: $d_{j}|\theta_j \sim f_{d|\Theta}(\cdot|\theta_j)$\\
+Ecuaci\'on de Observaci\'on: $d_j=\theta_j + \epsilon_j$\\
+\\
+Ecuaci\'on de Sistema: $\theta_j=\theta_{j-1}+ \nu_j$\\
+\\
+Donde los errores $\epsilon_j$ y $\nu_j$ son mutuamente independientes. El modelo din\'amico lineal es an\'alogo para las variables de duraci\'on y costos. Adem\'as de que no se conoce la distribuci\'on marginal de las observaciones.\\
+\\
+Siguendo con el argumento propuesto por \cite{pitt2002constructing}, necesitamos una variable latente sobre la cual se pueda hacer inferencia. Haciendo el s\'imil con los modelos din\'amicos lineales, incorporando la variable latente para la variable de duraci\'on; este s\'imil es an\'alogo a aquel para la variable de costos,\\
+\\
+Ecuaci\'on de Observaci\'on: $d_j|\theta_j \sim f_{d|\Theta}(\cdot|\theta_j)$\\
 \\
 Ecuaci\'on de Sistema: $\theta_j|d_{j-1} \sim f_{\Theta|d}(\cdot|d_{j-1})$\\
 \\
-Una vez que tenemos el modelo para la variable de las duraciones, lo hacemos extensivo para los costos. De este modo, el proceso de variables latentes quedar\'ia\\
-\\
-Ecuaci\'on de Observaci\'on: $c_{j}|\gamma_j \sim f_{c|\gamma}(\cdot|\gamma_j)$\\
-\\
-Ecuaci\'on de Sistema: $\gamma_j|c_{j-1} \sim f_{\gamma|c}(\cdot|c_{j-1})$\\
-\\
-Dado que el Modelo Oculto de Markov no necesariamente es estacionario afectando as\'i la capacidad inferencial del mismo, el modelo que se construye a trav\'es de las estructuras de ecuaciones de observaci\'on y sistema que se acaban de definir, es estacionario por construcci\'on y es capaz de modelar la observaci\'on actual en relaci\'on a la observaci\'on anterior. Tomando solamente la variable duraci\'on junto con su par\'ametro $\theta$, la representaci\'on gr\'afica de ambos modelos se compara del siguiente modo,\\
+De este modo, podemos definir la probabilidad marginal como,
+\begin{align*}
+P(d_j)=\int p(d_j|d_{j-1})p(d_{j-1})=\int p(d_j|\theta_j)p(\theta_j|d_{j-1})d\theta_j
+\end{align*}
+Dado que el Modelo Oculto de Markov no necesariamente es estacionario afectando as\'i la capacidad inferencial del mismo, el modelo que se construye a trav\'es de las estructuras de dependencia con la variable latente que se acabande definir, es estacionario por construcci\'on y es capaz de modelar la observaci\'on actual en relaci\'on a la observaci\'on anterior. Tomando solamente la variable duraci\'on junto con su par\'ametro $\theta$, la representaci\'on gr\'afica de ambos modelos se compara del siguiente modo,\\
 \begin{figure}[h!]
 \begin{center}
-\begin{picture}(200,100)
-\put(0,100){$d_1$}
-\put(50,100){$d_2$}
-\put(100,100){$\ldots$}
-\put(200,100){$d_t$}
-\put(5,60){\vector(0,1){30}}
-\put(55,60){\vector(0,1){30}}
-\put(205,60){\vector(0,1){30}}
-\put(0,50){$\theta_1$}
-\put(50,50){$\theta_2$}
+\begin{picture}(200,50)
+\put(0,50){$d_1$}
+\put(50,50){$d_2$}
 \put(100,50){$\ldots$}
-\put(200,50){$\theta_t$}
-\put(15,50){\vector(1,0){35}}
-\put(65,50){\vector(1,0){35}}
-\put(170,50){\vector(1,0){30}}
+\put(200,50){$d_t$}
+\put(5,15){\vector(0,1){30}}
+\put(55,15){\vector(0,1){30}}
+\put(205,15){\vector(0,1){30}}
+\put(0,5){$\theta_1$}
+\put(50,5){$\theta_2$}
+\put(100,5){$\ldots$}
+\put(200,5){$\theta_t$}
+\put(15,5){\vector(1,0){35}}
+\put(65,5){\vector(1,0){35}}
+\put(170,5){\vector(1,0){30}}
 %\put(95,10){\vector(-3,1){90}}
 %\put(95,10){\vector(-1,1){37}}
 %\put(95,10){\vector(3,1){110}}
-\color{green}{\put(15,90){\vector(1,-1){30}}}
-\put(58,60){\vector(0,1){30}}
-\put(65,90){\vector(1,-1){30}}
-\put(165,90){\vector(1,-1){30}}
-\put(210,60){\vector(0,1){30}}
+\color{green}{\put(15,45){\vector(1,-1){30}}}
+\put(58,15){\vector(0,1){30}}
+\put(65,45){\vector(1,-1){30}}
+\put(165,45){\vector(1,-1){30}}
+\put(210,15){\vector(0,1){30}}
 %\put(95,15){\vector(-3,1){85}}
 %\put(95,15){\vector(-1,1){32}}
 %\put(95,15){\vector(3,1){105}}
 \end{picture}
 \end{center}
-\caption{Comparaci\'on entre un Modelo Oculto de Markov y un modelo basado en Modelos Dim\'amicos Lineales}
+\caption{Comparaci\'on entre un Modelo Oculto de Markov y un modelo de variables latentes}
 \end{figure}
 \\
-Donde las flechas negras representan un Modelo Oculto de Markov, donde la relaci\'on con el estado anterior se presenta solamente en los par\'ametros $\theta_i|\theta_{i-1}$; mientras que las flechas verdes representan el modelo construido donde los observaciones est\'an condicionadas al par\'ametro y el par\'ametro est\'a condicionado por la observaci\'on anterior.\\
+Las flechas negras representan un Modelo Oculto de Markov, donde la relaci\'on con el estado anterior se presenta solamente en los par\'ametros $\theta_i|\theta_{i-1}$; mientras que las flechas verdes representan el modelo construido donde los observaciones est\'an condicionadas al par\'ametro y el par\'ametro est\'a condicionado por la observaci\'on anterior. La diferencia entre estos modelos reside, en su mayor parte, en que el modelo de variables latentes inducido por \cite{pitt2002constructing} es estacionario por construcci\'on, adem\'as de que se pueden definir las distribuciones condicionales y marginales; mientras que en el modelo oculto de markov no.\\
 \\
 Ahora bien, utilizando las relaciones entre las variables observables y latentes, el proceso de trancisi\'on para una observaci\'on en el modelo general de probabilidad con procesos de variables latentes se escribe asegurando la estacionariedad desde la construcci\'on,
 \begin{eqnarray*}
@@ -300,7 +304,8 @@ P(c_i,d_i|c_{i-1},d_{i-1}) &=&\int P(c_i,d_i|\gamma,\theta)P(\gamma,\theta|c_{i-
 \end{eqnarray*}
 De este modo, el modelo general de la probabilidad es
 \begin{eqnarray*}
-P((d_i,c_i)_{i=1}^k|N(t)=k)&=& P(c_1|d_1)P(d_1) \prod_{i=2}^k P(c_i|d_i,c_{i-1})P(d_i|d_{i-1}) \times P(N(t)=k)%\int f(d_1|\theta_1)f(\theta_1)d\theta_1 \int f(c_1|d_1,\gamma_1 ) f(\gamma_1)d\gamma_1 \times \nonumber \\ 
+P((d_i,c_i)_{i=1}^k|N(t)=k)&=& P(c_1|d_1)P(d_1) \prod_{i=2}^k P(c_i|d_i,c_{i-1})P(d_i|d_{i-1})\\
+&\times & P(N(t)=k)%\int f(d_1|\theta_1)f(\theta_1)d\theta_1 \int f(c_1|d_1,\gamma_1 ) f(\gamma_1)d\gamma_1 \times \nonumber \\ 
 %&& %\times \prod_{j=2}^{N(t)} \int f(d_j|\theta_j) f(\theta_j|d_{j-1}) d\theta_j \times \nonumber\\
 %&&%\times \int f(c_j|d_j,\gamma_j)f(\gamma_j|c_{j-1})d\gamma_j \times P(N(t)=k) \nonumber
 \end{eqnarray*}

@@ -1,13 +1,15 @@
 \chapter{Ilustraci\'on del Modelo con Datos}
 \section{Introducci\'on}
-En los cap\'itulos anteriores se define el modelo general de probabilidad y c\'omo este puede hacer inferencia sobre observaciones. El modelo est\'a definido para describir padecimientos cr\'onico degenerativas, sus duraciones y los costos asociados a las mismas. En este cap\'itulo, este modelo ser\'a aplicado al padecimiento espec\'ifico de diabetes mellitus tipo II con datos de...\\
+Una vez que se han definido el modelo general de probabilidad y los algoritmos relativos a ese modelo de probabilidad en los cap\'itulos anteriores se define el modelo general de probabilidad y c\'omo este puede hacer inferencia sobre observaciones; se puede pensar en una implementaci\'on de este modelo.\\
+\\
+El modelo est\'a definido para describir padecimientos cr\'onico degenerativas, sus duraciones y los costos asociados a las mismas. En este cap\'itulo, este modelo ser\'a implementado al padecimiento espec\'ifico de diabetes mellitus tipo II con datos provenientes del Servicio Nacional de Salud en el Reino Unido, o NHS por sus siglas en ingl\'es, en los a$\tilde{n}$os 2016-2017.\\
 \section{Diabetes Mellitus en el mundo: Costos y Prevalencia}
 En el panorama de salud mundial actual, las enfermedades cr\'onicas han tomado un papel preponderante al ser padecimientos que no tienen cura, que se pueden prolongar de manera indefinida y requieren monitoreo y atenci\'on constante. Uno de los principales problemas de estos padecimientos consiste en la gran carga econ\'omica que estos presentan, junto con sus complicaciones; tanto a pacientes como a los proveedores de servicios de salud. Adem\'as de la decreciente calidad de vida que experimenta el paciente, aunado a la cantidad de procedimientos m\'edicos que va necesitando y que muchas veces, su proveedor de servicios de salud ya no es capaz de suministrar.\\
 \\
 Uno de los padecimientos con m\'as prevalencia y que es m\'as propenso a complicaciones es la diabetes mellitus. La insulina es la hormona que regula el az\'ucar en la sangre, entonces la diabetes mellitus es un padecimiento en el cual el p\'ancreas no produce o produce poca insulina, o bien, las c\'elulas del cuerpo no responden de manera normal a la insulina que se produce. Un elevado nivel de glucosa en la sangre puede, a largo plazo, derivar en una serie de complicaciones oftalmol\'ogicas, renales, cardiacas y de circulaci\'on.\\
 \\
 La \cite{FactSheetDiabetes} %Organizaci\'on Mundial de la Salud
- (OMS) reconoce dos tipos de diabetes: Tipo I y Tipo II. La diabetes mellitus Tipo I (DM-TI) consiste en la falta de producci\'on de insulina en el cuerpo, normalmente se diagnostica en edades tempranas y sus causas a\'un son desconocidas, por lo que no existe ninguna clase de tratamiento preventivo. La diabetes mellitus Tipo II (DM-TII) se debe a que el cuerpo no puede procesar correctamente la insulina, esto debido la combinaci\'on de sobrepeso y falta de actividad f\'isica; antes este padecimiento era exclusivo de la edad adulta, sin embargo, ahora se observa tambi\'en en ni$\tilde{n}$os. La mayor\'ia de enfermos son de tipo dos seg\'un el Atlas de la Diabetes publicado por \cite{atlas2015international}, donde se reporta que entre el 87\% y el 91\% de los enfermos de diabetes tiene DM-TII; esto provoca que no solo sea mayor la carga econ\'omica asociada a ellos, sino que adem\'as son m\'as propensas a desarrollar complicaciones, aunados a la falta de autocuidado del paciente.\\
+ (OMS) reconoce dos tipos de diabetes: Tipo I y Tipo II. La diabetes mellitus Tipo I (DM-TI) consiste en la falta de producci\'on de insulina en el cuerpo, normalmente se diagnostica en edades tempranas y sus causas a\'un son desconocidas, por lo que no existe ninguna clase de tratamiento preventivo. La diabetes mellitus Tipo II (DM-TII) se debe a que el cuerpo no puede procesar correctamente la insulina, esto debido la combinaci\'on de sobrepeso y falta de actividad f\'isica; antes este padecimiento era exclusivo de la edad adulta, sin embargo, ahora se observa tambi\'en en ni$\tilde{n}$os. La mayor\'ia de enfermos son de tipo dos seg\'un el Atlas de la Diabetes publicado por \cite{atlas2015international}, donde se reporta que entre el 87\% y el 91\% de los enfermos de diabetes tiene DM-TII; esto provoca que no solo sea mayor la carga econ\'omica asociada a ellos, sino que adem\'as son m\'as propensas a desarrollar complicaciones  aunados a la falta de autocuidado del paciente.\\
 \\
 Seg\'un la OMS, la prevalencia mundial de esta enfermedad casi se duplic\'o en las personas mayores de 18 a$\tilde{n}$os, de 4.7\% en 1980 a 8.5\% en 2014; adem\'as de provocar m\'as de 2.2 millones de muertes tan solo en el a$\tilde{n}$o 2016 y ser una de las mayores causas de ceguera, fallas renales y amputaci\'on de extremidades. En las estad\'isticas reportadas por la OMS, la diabetes es la cuarta enfermedad que causa m\'as muertes entre las no transmisibles mediante alg\'un agente infeccioso, con un 6.01\% de la mortalidad.\\
 \\
@@ -29,11 +31,70 @@ Seg\'un la FID, del gasto asociado a la regi\'on de Norteam\'erica, los EE.UU. r
 \\
 Como podemos ver por las cifras reportadas, el problema del gasto asociado a la diabetes mellitus es uno de los m\'as grandes retos que existen en el horizonte de la salud p\'ublica. Uno de los mecanismos principales para disminuir la prevalencia y por ende los gastos, se reducen a la prevenci\'on y a la procuraci\'on de un estilo de vida m\'as sano; sobre todo para la DM-TII. Sin embargo, aunado a las recomendaciones para el paciente tambi\'en se necesitan nuevas maneras de hacer estos gastos m\'as efectivos mediante la correcta localizaci\'on del rubro que genera m\'as presi\'on en el gasto y el uso m\'as eficiente de los recursos existentes, para as\'i poder hacerlos m\'as accesibles tanto a los pacientes como a las instituciones proveedoras de salud.\\
 \\
-Como se menciona en \cite{cichon1999modelling} las herramientas estad\'isticas son de gran ayuda para entender la realidad actual y poder elaborar proyecciones futuras, especialmente en el campo de la medici\'on de costos en el sector salud. Son muchas las preguntas que rodean la diabetes mellitus, acerca de su prevalencia, su morbilidad; sin embargo, la que se intenta contestar es cu\'anto cuesta la enfermedad? o cu\'anto costar\'a?. Como respuesta a estas preguntas necesitamos no solo cuantificar los gastos asociados, sino hacer un an\'alisis m\'as profundo sobre la naturaleza de los mismos, para as\'i poder pensar en estrategias para reducirlos y generar mayor bienestar en la poblaci\'on. En este trabajo de investigaci\'on se propone un nuevo modelo estad\'istico para modelar los gastos asociados a la diabetes mellitus, el cual se describe en el siguiente cap\'itulo.\\
+Como se menciona en \cite{cichon1999modelling} las herramientas estad\'isticas son de gran ayuda para entender la realidad actual y poder elaborar proyecciones futuras, especialmente en el campo de la medici\'on de costos en el sector salud. Son muchas las preguntas que rodean la diabetes mellitus, acerca de su prevalencia, su morbilidad y sus costos. En este trabajo de investigaci\'on se busca hacer uso de las herramientas estad\'isticas mencionadas en los cap\'itulos anteriores para contestar las preguntas sobre el costo que puede tener la enfermedad seg\'un la trayectoria del padecimiento. Es importante mencionar que para efectos del an\'alisis que se realizar\'a en esta implementaci\'on del modelo general de probabilidad, solo se tomar\'an en consideraci\'on los costos directos generados por la enfermedad no aquellos relativos a las complicaciones. %es cu\'anto cuesta la enfermedad? o cu\'anto costar\'a?. Como respuesta a estas preguntas necesitamos no solo cuantificar los gastos asociados, sino hacer un an\'alisis m\'as profundo sobre la naturaleza de los mismos, para as\'i poder pensar en estrategias para reducirlos y generar mayor bienestar en la poblaci\'on. En este trabajo de investigaci\'on se propone un nuevo modelo estad\'istico para modelar los gastos asociados a la diabetes mellitus, el cual se describe en el siguiente cap\'itulo.\\
+\section{Escasez de datos}
+Como mencionado en la secci\'on anterior, se cuenta con mucha informaci\'on sobre la prevalencia y los costos de la diabetes mellitus tipo-II en el mundo. La mayor\'ia de esta informaci\'on es obtenida de distintas fuentes aunque se refieran al mismo pa\'is, en el caso particular de M\'exico, se han realizado varios estudios tratando de estimar la prevalencia y los costos de este padecimiento; varios de ellos analizados en la secci\'on anterior.\\
 \\
-\section{Descripci\'on de los datos}
-Descripci\'on del comportamienro de los datos con estos modelos, particularmente los datos de diabetes mellitus en el estado de Michigan EEUU.
-
+De acuerdo con \cite{barquera2013diabetes}, los mayores registros sobre las trayectorias de las enfermedades y los gastos asociados a los tratamientos son elaborados por las distintas instituciones p\'ublicas de salud como el IMSS, ISSSTE y la Secretar\'ia de Salud, que son exclusivas para uso interno administrativo por lo que no se ha podido elaborar una base de datos consistente y precisa con la que se pueda realizar un an\'alisis epidemiol\'ogico y estad\'istico. Aunque se cuenta con la ENSANUT como un estudio general para la prevalencia y costos y con el INEGI para las estad\'isticas de mortalidad desagregadas por causa, \'estas no cuentan con la informaci\'on individual de los pacientes y sus trayectorias. Es por esta raz\'on que este trabajo de investigaci\'on no se pudo realizar con informaci\'on sobre pacientes de M\'exico.\\
+\\
+El problema de la falta de bases de datos con las trayectorias de los pacientes de cualquier padecimiento no solo afecta a M\'exico. Tambi\'en a pa\'ises como Estados Unidos de Norteam\'erica donde existen tantas instancias que estudian el padecimiento de diabetes como la AHRQ, la Asociaci\'on Americana de la Diabetes, el Centro para el Control y Prevenci\'on de Enfermedades; que resulta inexistente una base consolidada de datos con la informaci\'on de los diagn\'osticos y tratamientos de los pacientes. Incluso, la OMS solo cuenta con la informaci\'on general de prevalencia, costos y mortalidad con ayuda de la Federaci\'on Internacional de la Diabetes.\\
+\\
+Sin embargo, el NHS de Reino Unido ha hecho un esfuerzo por elaborar este tipo de bases de datos con las trayectorias completas de los pacientes. Es por este motivo que en este trabajo de investigaci\'on se utilizar\'a esta base de datos para la implementaci\'on del modelo.\\
+\\
+Esta base de datos comprende las trayectorias de padecimiento a trav\'es del tiempo de 500 pacientes en un arreglo de datos panel, donde se combina una dimensi\'on transversal para los individuos $(i=1,...,I)$ con una dimensi\'on longitudinal o temporal que describe la trayectoria del padecimiento del individuo $(j=1,...,T_i)$. En la pr\'oxima secci\'on se describir\'a con m\'as detalle las caracter\'isticas de este panel de datos.
+\section{Descripci\'on de Datos}
+Como mencionado en la secci\'on anterior, la base de datos describe las trayectorias individuales de 500 pacientes a trav\'es del tiempo. Las trayectorias de cada paciente tienen a su vez dos dimensiones, la dimensi\'on del tratamiento o prescipci\'on y el costo de cada una de las prescripciones.\\
+\\
+Es importante mencionar que la dimensi\'on de la prescripci\'on solo hace referencia al diagn\'ostico inicial de DM-TII; es decir, que no se refiere a tratamientos por complicaciones de la enfermedad como pueden ser padecimientos card\'iacos, nefrol\'ogicos, circulatorios, etc; como mencionado anteriormente en este cap\'itulo. Por lo tanto, para esta base, existen doce tipos de tratamientos recetados para las distintas etapas del padecimiento descritas en la siguiente tabla,
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{\makecell{C\'odigo de\\ tratamiento}} & \textbf{Tratamiento}\\
+\hline 
+1 & Total primary care (all BNF) \\ \hline
+2 & Drugs used for Diabetes (BNF 6.1) \\ \hline
+3 & Insulins (BNF 6.1.1) \\ \hline
+4 & Short-acting insulins (BNF 6.1.1.1) \\ \hline
+5 & Intermediate and long-acting insulins (BNF 6.1.1.2) \\ \hline
+6 & Antidiabetic drugs (BNF 6.1.2) \\ \hline
+7 & Sulfonylureas (BNF 6.1.2.1) \\ \hline
+8 & Biguanides (BNF 6.1.2.2) \\ \hline
+9 & Other antidiabetic drugs (BNF 6.1.2.3) \\ \hline
+10 & Diagnostic and monitoring devices (BNF 6.1.6) \\ \hline
+11 & Human analogue insulins \\ \hline
+12 & Other insulins \\ \hline
+\end{tabular}
+\caption{C\'odigos de Tratamientos}
+\end{center}
+\end{table}
+\\
+Cada uno de estos tratamientos tiene asociado un precio. Para la representaci\'on de estos precios se tomar\'a el precio efectivo por dosis, pues un tratamiento puede requerir m\'as de una dosis en cada aplicaci\'on o toma. Los precios considerados por tratamiento son los precios reales; esto quiere decir que se toma como a$\tilde{n}$ base a 2016/2017 excluyendo de esta manera el efecto de la inflaci\'on. Tambi\'en cabe mencionar que los precios est\'an expresados en libras esterlinas (\pounds), por lo que se convierten a pesos a una tipo de cambio de 23.0625 pesos por libra. De este modo,\\
+\\
+\begin{table}[h!]
+\begin{flushleft}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{\makecell{C\'odigo de\\ tratamiento}} & \textbf{Tratamiento} & \textbf{\makecell{Precio\\(GBP/Unidad)}} & \textbf{\makecell{Precio\\(MXN/\\Unidad)}} \\
+\hline 
+1 & \makecell{Total primary care\\ (all BNF)} & 8.16 & 188.19\\ \hline
+2 & \makecell{Drugs used for Diabetes\\ (BNF 6.1)} & 18.91 & 436.19\\ \hline
+3 & \makecell{Insulins\\ (BNF 6.1.1)} & 49.33 & 1,137.72\\ \hline
+4 & \makecell{Short-acting insulins\\ (BNF 6.1.1.1)} & 46.57 & 1,074.04\\ \hline
+5 & \makecell{Intermediate and\\ long-acting insulins\\ (BNF 6.1.1.2)} & 50.62 & 1,167.33\\ \hline
+6 & \makecell{Antidiabetic drugs\\ (BNF 6.1.2)} & 11.86 & 273.41\\ \hline
+7 & \makecell{Sulfonylureas\\ (BNF 6.1.2.1)} & 3.19 & 73.58\\ \hline
+8 & \makecell{Biguanides\\ (BNF 6.1.2.2)} & 4.53 & 104.44\\ \hline
+9 & \makecell{Other antidiabetic drugs\\ (BNF 6.1.2.3)} & 39.38 & 908.09\\ \hline
+10 & \makecell{Diagnostic and\\ monitoring devices\\ (BNF 6.1.6)} & 25.93 & 597.96\\ \hline
+11 & Human analogue insulins & 53.10 & 1,224.64\\ \hline
+12 & Other insulins & 33.49 & 772.45\\ \hline
+\end{tabular}
+\caption{Precios por Tratamiento}
+\end{flushleft}
+\end{table}
+\\
+Una vez que est\'an definidos los tratamientos y los costos que caracterizan las trayectorias individuales de los padecimientos de cada paciente, se puede empezar a realizar un an\'alisis exploratorio y descriptivo de los datos.
 \section{An\'alisis Descriptivo}
 
 \section{Resultados}
