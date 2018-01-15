@@ -7,13 +7,34 @@ source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/slice.sampler/uni.slice.R
 source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_d_demo.R")
 source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_theta_demo.R")
 source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_beta_theta_demo.R")
-source("Code/bayesmpp_alpha_gamma_demo.R")
+source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_alpha_gamma_demo.R")
 source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_gamma.R")
 source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_theta.R")
 source("C:/Users/SONY/Documents/GitHub/Tesis_APAS/Code/bayesmpp_beta_gamma.R")
 
-#datos<-read.csv...
+datos<-read.csv("datos_agregados.csv", header = TRUE)
 #n <-nrow(datos)
+M<- 10000
+pac.num<-as.matrix(sort(unique(datos$paciente)))
+N<-as.numeric(pac.num[dim(pac.num)[1], ])
+
+#Escanear pacientes y crear el "subset" del primer paciente
+n<-1
+#indices_1<-which(datos$paciente==pac.num[n])
+data_aux<-datos[c(3,7,8)]
+data_aux
+T_n<-dim(data_aux)[1]
+
+t<-data_aux$duration
+t1<-t(t)
+d<-t(t1)
+
+a<-data_aux$cost
+a1<-t(a)
+c<-t(a1)
+
+alpha_0 = 2
+beta_0 = 0.3
 bayesmpp <- function(alpha_0 =2,beta_0 = 0.3,  d, c, n, M){
 	# datos - arreglo de nx3 (col1-individuo, col2-duraciones, col3-costos)
  	# M - numero de simulacion del gibbs sampler
