@@ -1,0 +1,61 @@
+\chapter{El Muestreador de Gibbs}
+\section{El Muestreador de Gibbs general}
+Aunque el Muestreador de Gibbs pueda ser \'util en la visi\'on cl\'asica de la estad\'istica, normalmente el Muestreador Gibbs se asocia con la estad\'istica bayesiana, como es el caso de este trabajo. Seg\'un \cite{casella1992explaining} este algoritmo es una t\'ecnica que genera variables aleatorias indirectamente de distribuciones marginales sin tener que calcular la densidad, debido a que se basa en las propiedades principales de las Cadenas de Markov como la estacionareidad para simplificar c\'alculos y tener estimados m\'as precisos.\\
+\\
+Siguiendo la ilustraci\'on de \cite{casella1992explaining}, supongamos que tenemos una distribuci\'on conjunta $f(\theta,y_1,y_2,...,y_p)$\\
+\[f(\theta)=\int \cdots \int f(\theta,y_1,y_2,...,y_p) dy_1,dy_2,...,dy_p\]
+Si el inter\'es se encuentra en la marginal $f(\theta)$ y \'esta es demasiado complicada para calcularse directamente, con el Muestreador de Gibb se puede generar una muestra $\theta_1,...,\theta_m \sim f(\theta)$ sin la necesidad de calcular la distribuci\'on marginal. Esto permite obtener informaci\'on de la misma con alto grado de precisi\'on.\\
+\\
+Para ejemplificar mejor el mecanismo del Muestreador de Gibbs se toman dos variables aleatorias $(\Theta,Y)$. El algoritmo genera una muestra de $f(\theta)$ muestreando de las distribuciones condicionales $f(\theta|y)$ y $f(y|\theta)$ que son la que normalmente se conocen en los modelos estad\'isticos. Esta muestra se obtiene mediante, lo que \cite{casella1992explaining} nombra como, una secuencia de Gibbs $(Y'_0,\theta'_0,Y'_1,\theta'_1,...,Y'_k,\theta'_k)$ que de manera iterativa genera variables aleatorias a partir de valores iniciales especificados $(Y'_0=y'_0)$.\\
+\\El proceso iterativo es como sigue\\
+\begin{align*}
+\theta'_j \sim f(\theta|Y'_j=y'_j)\\
+Y'_{j+1} \sim f(y|\theta'_j=\theta'_j)
+\end{align*}
+Si la muestra es suficientemente grande, es decir, que si $k \rightarrow \infty$ la distribuci\'on de $\theta'_k$ converger\'a con la verdadera distribuci\'on marginal de $\theta$.\\
+\\
+El Muestreador de Gibbs puede pensarse como una implementaci\'on pr\'actica del concepto de que solo conociendo las distribuciones marginales se puede determinar la distribici\'on conjunta. Esto ser\'ia cierto en la mayor\'ia de los casos bivariados, el procedamiento no es tan directo para los casos multivariados.\\
+\\
+De acuerdo con \cite{casella1992explaining} para el caso bivariado, suponemos dos variables aleatorias $\theta,Y$, de las cuales se conocen sus distribuciones condicionales $f_{\Theta|Y}(\theta|y)$ y $f_{Y|\Theta}(y|\theta)$. A partir de estas podr\'iamos calcular la funci\'on marginal de $\theta$ y la distribuci\'on conjunta de ambas variables, mediante  el siguiente argumento:\\
+\[f_\theta(\theta)=\int f_{\theta Y}(\theta,y)dy\]
+donde la distribuci\'on conjunta es a\'un desconocida, tomando el hecho que $f_{\theta Y}(\theta,y)=f_{\theta|Y}(\theta|y)f_Y(y)$ tendr\'iamos que,\\
+\[f_\theta(\theta)=\int f_{\theta|Y}(\theta|y)f_Y(y) dy\]
+Asimismo, si sustituimos la distribuci\'on marginal de $y$ ($f_Y(y)$) con el mismo argumento utilizado para la distribuci\'on marginal de $\theta$, se tiene que
+\begin{eqnarray*}
+f_\theta(\theta) &=& \int f_{\theta|Y}(\theta|y) f_{Y|\theta}(y|t) f_\theta(t)dt dy\\
+       &=& \int [ \int  f_{\theta|Y}(\theta|y)f_{Y|\theta}(y|t) dy]  f_\theta(t) dt
+\end{eqnarray*}
+Esta ecuaci\'on es una forma limitada de la iteraci\'on de Gibbs, ilustrando como las distribuciones condicionales producen una distribuci\'on marginal. Aunque la distribuci\'on conjunta de las variables determinan las distribuciones condicionales y marginales, no siempre las condicionales determinen de manera tan directa la distribuci\'on marginal. Esto es cierto no solo para los casos bivariados, sino que se extiende a los multivariados.\\
+\\
+En cuantas m\'as variables existan, el problema se vuelve m\'as complejo pues la relaci\'on entre las condicionales, marginales y conjuntas se vuelve m\'as intrincada. Por ejemplo, la relaci\'on $condicional \times marginal = conjunta$ no se sontiene para todas las condicionales y marginales. Pero se pueden hacer varios conjuntos de variables y construir las ecuaciones integrales para calcular la distribuci\'on marginal de inter\'es.\\
+\\
+Para casos multivariados \cite{casella1992explaining} supone las variables aleatorias $X,Y,Z$ con inter\'es en la distribuci\'on $f_X(x)$. Para esto, se toman las variables $(Y,Z)$ como una sola variable, lo que resultar\'ia en\\
+\[f_X(x)= \int [ \int \int f_{X|YX}(x|y,z)f_{YZ|X}(y,z|t)dy dz] f_X(t) dt\]
+De esta manera, muestreando iterativamente de $f_{X|YZ}$ y $f_{YZ|X}$ resultar\'ian en una serie de variables aleatorias que convergen en $f_X(x)$. Por otro lado, el Muestreador de Gibb muestrear\'ia iterativamente las distribuciones $f_{X|YZ}, f_{Y|XZ}, f_{Z|X}$, de tal modo que en la j-\'esima iteraci\'on se tendr\'ia,\\
+\begin{align*}
+X'_j \sim f(x|Y'_j = y'_j, Z'_j=z'_j)\\
+Y'_{j+1} \sim f(y|X'_j=x'_j, Z'_j=z'_j)\\
+Z'_{j+1} \sim f(z|X'_j=x'_j, Y'_{j+1}=y'_{j+1})
+\end{align*}
+Este esquema de iteraciones nos produce una secuencia de Gibbs,\\
+\[Y'_0,Z'_0,X'_0,Y'_1,Z'_1,X'_1,...\]
+con la misma propiedad de convergencia que en el caso bivariado, ente m\'as grande es la $k$, $X'_k=x'_k$ es un punto de la distribuci\'on marginal $f(x)$.\\
+\\
+De este modo queda evidenciada la utilidad del Muestreador de Gibbs en el ahorro de c\'alculos y la precisi\'on de sus resultados. Como mencionado en la secci\'on anterior, esta t\'ecnica inferencial es muy \'util tanto en la estad\'istica bayesiana como en la cl\'asica, en la primera para calcular la distribuci\'on posterior y en la \'ultima, para calcular la funci\'on de verosimilitud. Seg\'un \cite{gelman2014bayesian}, la clave del \'exito de este m\'etodo es la iteraci\'on en la cual las distribuciones aproximadas mejoran hasta converger en la distribuci\'on deseada.\\
+\section{El Muestreador de Gibbs para modelos espacio-estado}
+El Muestreador de Gibbs tradicional puede ser un poco limitado en lo que se refiere a su aplicaci\'on en un problema que se desarrolla a trav\'es del tiempo; sin embargo, este se puede adaptar a los requerimientos particulares del caso. \cite{carter1996markov} exponen un caso particular en el contexto de Modelos Espacio-Estado Gaussianos, que aunque no es exactamente el modelo planteado en este trabajo, algunas de las ideas expuestas pueden ser extendidas.\\
+\\
+El modelo planteado por \cite{carter1996markov} es,
+\begin{align*}
+y_i=h_i'x_i+\gamma_ie_i; \qquad x_i=F_ix_{i-1}+\Gamma_iu_i
+\end{align*}
+Donde las observaciones $y_i$ son escalares y $x_i$ es el vector de estados de dimensi\'on $m\times 1$. Los errores $e_i$ y $u_i$ son independientes y se distribuyen $N(0,\sigma^2)$ y $N(0,\tau^2I_m)$. Los coeficientes $h_i,\gamma_i,F_i,\Gamma_i$ son determinados por la variable discreta $K_i$. Usando la notaci\'on para el vector de observaciones de $Y:=(y_1,...,y_n)'$, el vector total de estados $X:=(x_1',...,x_n')'$, $K:=(K_1,...,K_n)$. Sea $g_i:=h_i'x_i$, por lo que $G:=(g_1,...,g_n)'$. Asumiendo que $\sigma^2, \tau^2$ y $K$ son independientes; las distribuciones priori es Gamma Inversa y la distribuci\'on priori de $K$ es una Cadena de Markov con probabilidades de transici\'on conocidas. Tambi\'en se asume que dado $K_1$ y $\tau^2$, la distribuci\'on de $x_1$ es normal.\\
+\\
+Se propone el siguiente muestreador para estimar $X,K,\sigma^2$ y $\tau^2$, mediante la generaci\'on de las siguientes distribuciones condicionales,
+\begin{enumerate}
+\item $p(\tau^2|Y,G,K,\sigma^2)$ que se puede reescribir como $p(\tau^2|G,K)$.
+\item $p(K_i|Y,K_{j \neq i},\sigma^2,\tau^2)$ para $i=1,...,n$.
+\item $p(X|Y,K,\sigma^2,\tau^2)$.
+\item $p(\sigma^2|Y,X,K,\tau^2)$ que se puede reescribir como $p(\sigma^2|Y,G,K)$.
+\end{enumerate}
+Este muestreador que se propone, a diferencia del Muestreador de Gibbs, la variable $K_i$ es generada sin estar condicionada a la variable de estados $X$. Es decir, que se pueden hacer modificaciones a los muestreadores de tal manera que se adapten al modelo a trav\'es del tiempo manteniendo la estructura MCMC.

@@ -2,19 +2,17 @@
 \section{Introducci\'on}
 En el cap\'itulo anterior se describi\'o el modelo general de probabilidad que describe el proceso de duraciones y costos en un padecimiento cr\'onico degenerativo, por lo que el siguiente paso ser\'ia hacer inferencia sobre el mismo. En este tipo de modelos, el objetivo de hacer inferencia es predecir futuras observaciones en base a los datos ya observados. En este cap\'itulo se sentar\'an las bases para realizar esta inferencia.\\
 \\
-El primer paso para realizar inferencia es la construcci\'on de la funci\'on de verosimilitud, en este caso extendida a las variables latentes y a los par\'ametros correspondientes a sus distribuciones de todos los individuos de la poblaci\'on. Una vez que se determinaron las funciones de verosimilitud, se analizan los m\'etodos de estimaci\'on que se podr\'ian usar para la predicci\'on de futuras observaciones. %De este modo se puede completar la parte te\'orica de este trabajo de investigaci\'on.
+El primer paso para realizar inferencia es la definici\'on de la funci\'on de verosimilitud, en este caso extendida a las variables latentes y a los par\'ametros correspondientes a sus distribuciones de todos los individuos de la poblaci\'on. Una vez que se determinaron las funciones de verosimilitud, se analizan los m\'etodos de estimaci\'on que se podr\'ian usar para la predicci\'on de futuras observaciones. %De este modo se puede completar la parte te\'orica de este trabajo de investigaci\'on.
 \section{Verosimilitud Extendida}
 Como especificado en la secci\'on anterior, una vez que el modelo de probabilidad describe de manera precisa los datos del problema podemos empezar a hacer inferencia sobre observaciones futuras. La base sobre la que se puede hacer predicci\'on en base a los datos ya observados es la funci\'on de verosimilitud definida como la funci\'on de de distribuci\'on conjunta de los datos.\\
 \\
-As\'i, para un modelo de probabilidad donde los datos se caracterizan mediante $p(x_j|\theta)$; la funci\'on de verosimilitud seg\'un \cite{held2014applied}, se define como
-\begin{defi}
-La funci\'on de verosimilitud $V(\theta)$ es la funci\'on masa o la funci\'on de densidad de los datos observados $x$, entendidos en funci\'on del par\'ametro desconocido $\theta$.
-\end{defi}
-En este caso las variables observables se definen en funci\'on de las variables latentes, estas a su vez se describen en funci\'on de sus par\'ametros. De esto se desprende la noci\'on de verosimilitud extendida para incluir las variables latentes. Como se especifica en \cite{pitt2002constructing}, la construcci\'on de la funci\'on de verosimilitud resulta sencilla, incluso intuitiva. Sin embargo, la estimaci\'on de los par\'ametros mediante m\'axima verosimilitud no es tan sencilla pues no tiene una soluci\'on que se pueda expresar de manera anal\'itica cerrada. Usando esta construcci\'on, se escribe una funci\'on de verosimilitud para el modelo general de probabilidad de duraciones y costos de un solo individuo\\
-\begin{eqnarray}
-V(\{\theta_j\},\{\gamma_j\},\{d_j\},\{c_j\}) &=& f(d_1|\theta_1)f(c_1|d_1,\gamma_1)f(\gamma_1) f(\theta_1)\times\nonumber\\
-& \times & \prod_{j=2}^{N(t)} f(d_j|\theta_j)f(\theta_j|d_{j-1})f(c_j|d_j,\gamma_j)f(\gamma_j|c_{j-1})\nonumber
-\end{eqnarray}
+As\'i, para un modelo de probabilidad para un individuo $i$ como el expuesto en el cap\'itulo anterior, donde los datos de duraciones con su respectiva variable latente se se caracterizan mediante $p(d_{ij}|\theta)$; de acuerdo a \cite{held2014applied}, la funci\'on de verosimilitud $V(\theta)$ se define como la funci\'on masa o la funci\'on de densidad de los datos observados $d_i$, entendidos en funci\'on del par\'ametro desconocido o latente $\theta$.\\
+\\
+Es decir, que en este caso las variables observables se definen en funci\'on de las variables latentes, estas a su vez se describen en funci\'on de sus par\'ametros. De esto se desprende la noci\'on de verosimilitud extendida para incluir las variables latentes. Como se especifica en \cite{pitt2002constructing}, la construcci\'on de la funci\'on de verosimilitud resulta sencilla, incluso intuitiva. Sin embargo, la estimaci\'on de los par\'ametros mediante m\'axima verosimilitud no es tan sencilla pues no tiene una soluci\'on que se pueda expresar de manera anal\'itica cerrada. Usando esta construcci\'on, se escribe una funci\'on de verosimilitud para el modelo general de probabilidad de duraciones y costos de un solo individuo\\
+\begin{multline*}
+V(\{\theta_j\},\{\gamma_j\},\{d_j\},\{c_j\}) ) = f(d_1|\theta_1)f(c_1|d_1,\gamma_1)f(\gamma_1) f(\theta_1)\times\\
+ \times  \prod_{j=2}^{N(t)} f(d_j|\theta_j)f(\theta_j|d_{j-1})f(c_j|d_j,\gamma_j)f(\gamma_j|c_{j-1})
+\end{multline*}
 Para poder calcular la funci\'on de verosimilitud que permite hacer inferencia, es necesario conocer las distribuciones de las variables latentes con base en las observaciones anteriores para ambas variables observables, duraciones y costos.\\
 \\Para la primera variable observable se toma en cuenta la relaci\'on 
 \[f_{\theta|d}(\theta|d)\propto f_{d|\theta}(d|\theta)f(\theta)\]
@@ -33,7 +31,7 @@ Para la variable de duraciones, la distribuci\'on de la variable latente que dep
 \begin{eqnarray*}
 f_{\gamma|d,c}(\gamma|d,c) &\propto& \frac{d}{\gamma^d}\quad c^{d-1} e^{\{-(\frac{c}{\gamma})^d\}} \times \frac{\beta_\gamma^{\alpha_\gamma}}{\Gamma(\alpha_\gamma)}\quad (\frac{1}{\gamma})^{\alpha_\gamma+1} \quad e^{\{-(\frac{\beta_\gamma}{\gamma})\}}\\
 &=&\frac{d\beta_\gamma^{\alpha_\gamma} c^{d-1}}{\Gamma(\alpha_\gamma)}\quad (\frac{1}{\gamma})^{d+\alpha_\gamma+1}\quad e^{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}\\
-&\propto&(\frac{1}{\gamma})^{d+\alpha_\gamma+1}\quad e^{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}
+&\propto&\left(\frac{1}{\gamma}\right)^{d+\alpha_\gamma+1}\quad e^{-((\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d)}
 \end{eqnarray*}
 \\
 Para la variable de costos, la distribuci\'on de la variable latente seg\'un la observaci\'on anterior no tiene una forma anal\'itica cerrada como distribuci\'on, sin embargo, el kernel se puede simular con un slice sampler; este m\'etodo se explicar\'a con detalle en el ap\'endice. \\
@@ -70,71 +68,32 @@ Una vez que queda definidas las distribuciones de las variables latentes con bas
 \\
 Es importante mencionar que las distribuciones desarrolladas de duraciones y costos, adem\'as de aquellas correspondientes a las variables latentes y a los par\'ametros, que no tienen forma anal\'itica cerrada son funciones log-c\'oncavas. Esta propiedad se explorar\'a con mayor detalle en la siguiente secci\'on.
 \section{Log-concavidad en las funciones de distribuci\'on}
-Las funciones log-c\'oncavas son, de acuerdo con \cite{bagnoli2005log}, funciones que se grafican con una curva c\'oncava en los n\'umeros reales positivos y cuyo logaritmo es tambi\'en una funci\'on c\'oncava; o bien, seg\'un \cite{an1996log} un vector aleatorio se distribuye de manera log-c\'oncava  si es logaritmo de la distribuci\'on de densidad es c\'oncavo en su soporte, es decir
-\begin{defi}
-Un vector de variables aleatorias, $X$, est\'a distribuido de manera log-c\'oncava si para cada $x_1, x_2 \in \Omega$ y cualquiera $\lambda \in [0,1]$,
-\[f(\lambda x_1+(1-\lambda)x_2) \geq [f(x_1)]^\lambda [f(x_2)]^{1-\lambda}\] 
-\end{defi}
-
-Estas funciones tienen el siguiente teorema,
-\begin{teo}
-Sea $F$ sea una funci\'on doblemente diferenciable que toma valores positivos con soporte en $(a,b)$ y sea $t$ una funci\'on doblemente diferenciable y monot\'onica que va de $(a',b')$ a $(a,b)=(t(a'),t(b'))$. Se define la funci\'on $\hat{F}$ con soporte en $(a',b')$ para toda $x \in (a',b'), \quad \hat{F}(x)=F(t(x))$. Si F es log-c\'oncava y t una funci\'on c\'oncava, entonces $\hat{F}$ es log-c\'oncava.
-\end{teo}
-Este teorema tiene el siguiente corolario,
-\begin{cor}
-Sea F una funci\'on con soporte en (a,b). Sea $t$ una transformaci\'on lineal de la l\'inea real hacia si misma, y se define una funci\'on $\hat{F}$ con soporte en $(t(a),t(b))$ tal que $\hat{F}(x)=F(t(x))$. Si F es log-c\'oncava entonces $\hat{F}$ es log-c\'oncava. 
-\end{cor}
-Seg\'un \cite{bagnoli2005log} y \cite{an1996log}, la distribuci\'on Weibull cumple con las caracter\'isticas de log-concavidad si su par\'ametro de forma es mayor o igual a uno, para el caso de la distribuci\'on de los costos este par\'ametro corresponde a la duraci\'on, que por definici\'on es mayor a uno. Tambi\'en la distribuci\'on Gamma de $\alpha_d,\alpha_\theta, \alpha_\gamma$ debe tener el par\'ametro de forma mayor a uno, como sucede para la distribuci\'on Weibull, esta condici\'on se cumple por construcci\'on. Una de las propiedades de las distribuciones log-c\'oncavas es,
-\begin{prop}
-Sea $X$ una variable aleatoria cuya funci\'on de densidad $f(x)$ es log-c\'oncava. Entonces, para cada $\alpha \neq 0$, la variable aleatoria $Y=\alpha X+\beta$ es log-c\'oncava.
-\end{prop}
-Es decir, que toda transformaci\'on lineal de la variable aleatoria no afecta su propiedad de log-concavidad. En el contexto de este trabajo de investigaci\'on, es importante la proposici\'on que estipula \cite{an1996log} para las distribuciones multivariadas,
-\begin{prop}
-Sea $X = (X_1,...,X_k)$. Si las $X_i$'s son independientes y cada una de ellas tiene una funci\'on de densidad log-c\'oncava, entonces su densidad conjunta tambi\'en es log-c\'oncava.
-\end{prop}
+Las funciones log-c\'oncavas son funciones que se grafican con una curva c\'oncava en los n\'umeros reales positivos y cuyo logaritmo es tambi\'en una funci\'on c\'oncava (\cite{bagnoli2005log}); o bien, un vector aleatorio se distribuye de manera log-c\'oncava  si es logaritmo de la distribuci\'on de densidad es c\'oncavo en su soporte (\cite{an1996log}). Es decir, que el vector de variables aleatorias de las duraciones del individuo $i$, $D_i$, est\'a distribuido de manera log-c\'oncava si para cada $D_{i1}, D_{i2}$ en el espacio de los reales positivos y cualquiera $\lambda \in [0,1]$, \\
+\[f(\lambda D_{i1}+(1-\lambda)D_{i2}) \geq [f(D_{i1})]^\lambda [f(D_{i2})]^{1-\lambda}\] 
+\\
+Esta misma propiedad se hace extensiva para las variables de costos y los par\'ametros de las distribuciones.\\
+%\begin{teo}
+%Sea $F$ sea una funci\'on doblemente diferenciable que toma valores positivos con soporte en $(a,b)$ y sea $t$ una funci\'on doblemente diferenciable y monot\'onica que va de $(a',b')$ a $(a,b)=(t(a'),t(b'))$. Se define la funci\'on $\hat{F}$ con soporte en $(a',b')$ para toda $x \in (a',b'), \quad \hat{F}(x)=F(t(x))$. Si F es log-c\'oncava y t una funci\'on c\'oncava, entonces $\hat{F}$ es log-c\'oncava.
+%\end{teo}
+%Este teorema tiene el siguiente corolario,
+%\begin{cor}
+%Sea F una funci\'on con soporte en (a,b). Sea $t$ una transformaci\'on lineal de la l\'inea real hacia si misma, y se define una funci\'on $\hat{F}$ con soporte en $(t(a),t(b))$ tal que $\hat{F}(x)=F(t(x))$. Si F es log-c\'oncava entonces $\hat{F}$ es log-c\'oncava. 
+%\end{cor}
+\\
+De acuerdo a lo descrito en el cap\'itulo anterior referente a las duraciones siguiendo un modelo Gamma- Gamma y los costos un modelo Gamma Inversa-Weibull, seg\'un \cite{bagnoli2005log} y \cite{an1996log}, la distribuci\'on Weibull cumple con las caracter\'isticas de log-concavidad si su par\'ametro de forma es mayor o igual a uno, para el caso de la distribuci\'on de los costos este par\'ametro corresponde a la duraci\'on, que por definici\'on es mayor a uno. Tambi\'en la distribuci\'on Gamma de $\alpha_d,\alpha_\theta, \alpha_\gamma$ debe tener el par\'ametro de forma mayor a uno, como sucede para la distribuci\'on Weibull, esta condici\'on se cumple por construcci\'on. Una de las propiedades de las distribuciones log-c\'oncavas es que cualquier transformaci\'on lineal de una variable aleatoria no afecta su propiedad de log-concavidad. 
+%\begin{prop}
+%Sea $X$ una variable aleatoria cuya funci\'on de densidad $f(x)$ es log-c\'oncava. Entonces, para cada $\alpha \neq 0$, la variable aleatoria $Y=\alpha X+\beta$ es log-c\'oncava.
+%\end{prop}
+%Es decir, que toda transformaci\'on lineal de la variable aleatoria no afecta su propiedad de log-concavidad. 
+En el contexto de este trabajo de investigaci\'on, es importante la proposici\'on que estipula \cite{an1996log} para las distribuciones multivariadas, donde si las variables aleatorias son independientes y con distribuciones log-c\'oncavas, la densidad conjunta tambi\'en es log-c\'oncava.\\
+\\
+%\begin{prop}
+%Sea $X = (X_1,...,X_k)$. Si las $X_i$'s son independientes y cada una de ellas tiene una funci\'on de densidad log-c\'oncava, entonces su densidad conjunta tambi\'en es log-c\'oncava.
+%\end{prop}
 Esto quiere decir que si podemos demostrar log-concavidad para una de las distribuciones, esta propiedad se extiende a la distribuci\'on conjunta. De este modo aseguramos la log-concavidad para estas distribuciones que no tienen una f\'ormula anal\'itica cerrada y que se muestrearan de manera previa a la estimaci\'on de par\'ametros para el modelo general de probabilidad.
 \section{Inferencia en modelos con variables latentes.}
-Una vez que se especifican las distribuciones de los par\'ametros a estimar y las propiedades de los mismos, se necesitan m\'etodos que los puedan estimar. \cite{pitt2002constructing} especifica que la estimaci\'on de m\'axima verosimilitud puede resolverse mediante el algoritmo EM, aunque tambi\'en, debido a que las densidades son dos condicionales de la densidad conjunta puede ligarse con el Muestreador Gibbs.\\
+Una vez que se especifican las distribuciones de los par\'ametros a estimar y las propiedades de los mismos, se necesitan m\'etodos que los puedan estimar. \cite{pitt2002constructing} especifica que la estimaci\'on de m\'axima verosimilitud puede resolverse mediante el algoritmo EM (\cite{dempster1977maximum}) , aunque tambi\'en, debido a que las densidades son dos condicionales de la densidad conjunta puede ligarse con el Muestreador Gibbs.\\
 \\
-El algoritmo EM es un algoritmo para calcular el estimador de m\'axima verosimilitud, que de acuerdo con \cite{held2014applied}, se define como
-\begin{defi}
-El Estimador de M\'axima Verosimilitud (EMV) $\hat{\theta}_{MV}$ del par\'ametro $\theta$ se obtiene maximizando la funci\'on de verosimilitud.
-\begin{align*}
-\hat{\theta}_{MV}=max_{\theta \in \Theta} L(\theta)
-\end{align*} 
-\end{defi}
-Seg\'un \cite{dempster1977maximum} el algoritmo EM calcula el EML mediante iteraciones, cada iteraci\'on consiste en un paso d\'onde se calcula la esperanza y en otro  se maximiza la misma, de ah\'i el nombre de EM. Este algoritmo se relaciona con las variables latentes suponiendo dos variables $x$ y $y$ las cuales se relacionan $x \to y(x)$, donde $y$ son los datos observables.\\
+El algoritmo EM es un algoritmo para calcular el estimador de m\'axima verosimilitud o el EML mediante iteraciones, cada iteraci\'on consiste en un paso donde se calcula la esperanza y en otro se maximiza la misma, de ah\'i el nombre de EM. Este algoritmo se explica con m\'as detalle en el ap\'endice II.\\
 \\
-De este modo, an\'alogamente a lo expresado en el cap\'itulo anterior por \cite{pitt2002constructing}, se proponen las siguientes funciones de densidad $f(x|\phi)$ y $g(y|\phi)$; en las cuales, de acuerdo a \cite{dempster1977maximum} los datos completos (variables latentes) $f(x|\cdot)$ se relacionan con los datos incompletos (variables observadas) $g(y|\cdot)$ mediante
-\begin{align*}
-g(y|\phi)=\int_{\chi(y)} f(x|\phi)dx
-\end{align*}
-El algoritmo EM se dedica a encontrar un valor de $\phi$ que maximice $g(y|\phi)$ dada la $y$ observada usando la familia asociada de $f(x|\phi)$. Una de las caracterizaciones m\'as simples supone $\phi^{(p)}$ es el valor actual de $\phi$ despu\'es de $p$ iteraciones y $t(x)$ como el estad\'istico suficientes de los datos completos, es decir, el estimador de la variable latente; por lo que la siguiente iteraci\'on se puede desglosar en los siguientes dos pasos:
-\begin{itemize}
-\item Paso E: Estimar los estad\'isticos suficientes de los datos completos.
-	\begin{align*}
-	t^{(p)}=E[t(x)|y,\phi^{(p)}]
-	\end{align*}
-\item Paso M: Determinar $\phi^{(p+1)}$ como soluci\'on a la ecuaci\'on
-	\begin{align*}
-	E[t(x)|\phi]=t^{(p)}
-	\end{align*}
-\end{itemize}
-Es decir, que si suponemos que $t^{(p)}$ es el estad\'istico suficiente calculado de $x$ observada en la distribuci\'on $f(x|\phi)$ entonces la ecuaci\'on definida en el Paso M se define como el EMV. Este concepto se hace general al definir la siguiente funci\'on
-\begin{align*}
-Q(\phi'|\phi)=E[log f(x|\phi')|y,\phi]
-\end{align*}
-Esta funci\'on se asume que existe para toda pareja $(\phi',\phi)$. Se define la iteraci\'on EM para $\phi^{(p)} \to \phi^{(p+1)}$,
-\begin{itemize}
-\item Calcular $Q(\phi,\phi^{(p)})$.
-\item Determinar $\phi^{(p+1)}$ tal que maximice $Q(\phi,\phi^{(p)})$.
-\end{itemize}
-La idea central es tomar una $\phi'$ que maximice $log f(x|\phi)$, dado que esta distribuci\'on y su correspondiente logaritmo no necesariamente se conoce, se puede maximizar los datos observados y $\phi^{(p)}$.\\
-\\
-El algoritmo EM es muy \'util pues por su estructura iterativa puede dar resultados a modelos de probabilidad muy complejos, adem\'as de que al igual que el Muestreador de Gibbs, utiliza una estructura subyacente o de variables latentes.\\
-\\
-A pesar de reconocer la utilidad del algoritmo EM, el m\'etodo num\'erico que se utilizar\'a para la estimaci\'on en este trabajo ser\'a el Muestreador de Gibbs, el cual se explicar\'a con m\'as detalle en el capi\'itulo siguiente. De manera general, tomando la verosimilitud extendida definida anteriormente se fijan los valores iniciales para los par\'ametros $\alpha_d^{(0)},\alpha_\theta^{(0)},\beta_\theta^{(0)},\alpha_\gamma^{(0)},\beta_\gamma^{(0)}$ y para las variables latentes $\{\theta_i^{(0)}\}_{i=1}^{N(t)},\{\gamma_i^{(0)}\}_{i=1}^{N(t)}$ y para cada $k=1,...,N(t)$ tenemos la siguiente distribuci\'on que es proporcional a la verosimilitud,
-\begin{align*}
-\pi(\alpha_d^{(k)},\alpha_\theta^{(k)},\beta_\theta^{(k)},\alpha_\gamma^{(k)},\beta_\gamma^{(k)}|\{\theta_i^{(k-1)}\}_{i=2}^{N(t)},\{\gamma_i^{(k-1)}\}_{i=2}^{N(t)},\{d_i,c_i\}_{i=1}^{N(t)})
-\end{align*}
-Este es el principio necesario para utilizar el Muestreador de Gibbs de modo que se estimen los par\'ametros en base a las variables latentes que a su vez se estiman en base a las observaciones para que con los par\'ametros estimados se estimen las variables latentes que ayuden a predecir futuras observaciones. %Una vez que se tiene el concepto general de la aplicaci\'on de esta t\'ecnica de muestreo para el objetivo de este trabajo, es necesario considerar las maneras de implementarlo.\\
+A pesar de reconocer la utilidad del algoritmo EM, el m\'etodo num\'erico que se utilizar\'a para la estimaci\'on en este trabajo ser\'a el Muestreador de Gibbs, el cual se explicar\'a con m\'as detalle en el ap\'endice. Debido a que el modelo general de probabilidad ha sido construido mediante el concepto bayesiano de las distribuciones conjugadas. 

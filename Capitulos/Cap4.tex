@@ -1,8 +1,8 @@
 \chapter{Inferencia Bayesiana}
 \section{Introducci\'on}
-En los cap\'itulos anteriores se determinaron el modelo general de probabilidad y las distribuciones de los par\'ametros sobre las que se busca hacer inferencia. Existen varios m\'etodos de estimaci\'on que se podr\'ian utilizar en la inferencia de este trabajo de investigaci\'on, en este cap\'itulo se pretende desarrollar la justificaci\'on para la utilizaci\'on de un enfoque bayesiano para la estimaci\'on.\\
+En los cap\'itulos anteriores se especificaron el modelo general de probabilidad y las distribuciones de las variables sobre las que se busca hacer inferencia. Existen varios m\'etodos de estimaci\'on que se podr\'ian utilizar en la inferencia de este trabajo de investigaci\'on, en este cap\'itulo se pretende desarrollar la justificaci\'on para la utilizaci\'on de un enfoque bayesiano para la estimaci\'on.\\
 \\
-En la primera secci\'on se da una breve introducci\'on al paradigma bayesiano en general, para despu\'es desarrollar sobre el Muestreador de Gibbs como m\'etodo de estimaci\'on para los par\'ametros y variables latentes. De este modo se puede completar la parte te\'orica de este trabajo de investigaci\'on.  
+En la primera secci\'on se da una breve introducci\'on al paradigma bayesiano en general, para despu\'es desarrollar sobre el muestreador de Gibbs como m\'etodo de estimaci\'on para los par\'ametros y variables latentes. De este modo se puede completar la parte te\'orica de este trabajo de investigaci\'on.  
 \section{Paradigma Bayesiano}
 El paradigma bayesiano se refiere a una manera de hacer inferencia basado en el trabajo del ingl\'es Thomas Bayes. En este paradigma se establece que la hip\'otesis se va actualizando de acuerdo a la nueva informaci\'on  relevante. Seg\'un \cite{gelman2014bayesian}, una de las principales razones para el pensamiento bayesiano es que facilita la interpretaci\'on basada en el sentido com\'un de conclusiones estad\'isticas. \\
 %\cite{kruschke2014doing} al principio la distribuci\'on de probabilidades entre las opciones posibles se realiza al conocimiento previo que se tenga de la situaci\'on; por lo que la inferencia bayesiana consiste en la relocaci\'on o actualizaci\'on de las probabilidades entre las opciones conforme se vayan realizando nuevas observaciones.\\
@@ -19,7 +19,7 @@ Tomando en cuenta esta definici\'on de la probabilidad condicional, el teorema d
 \begin{align*}
 p(y|x)=\frac{p(x|y)p(y)}{p(x)}
 \end{align*}
-El Teorema de Bayes resulta muy \'util cuando el modelo de probabilidad se basa en variables observables y  par\'ametros, $D$ y $\theta$ respectivamente. De este modo, el modelo se escribe como
+El Teorema de Bayes resulta muy \'util cuando el modelo de probabilidad se basa en variables observables y  variables latentes, $D$ y $\theta$ respectivamente. De este modo, el modelo se escribe como
 \begin{align*}
 p(\theta|D)=\frac{p(D|\theta)p(\theta)}{p(D)}
 \end{align*}
@@ -34,21 +34,21 @@ Esta misma ecuaci\'on se puede reescribir como,
 \begin{eqnarray*}
 p(\theta|D)&=&\frac{p(D|\theta)p(\theta)}{p(D)}\\
 		   &\propto & p(D|\theta)p(\theta)\\
-		   &\propto & verosimilitud \times inicial
+		   &\propto & verosimilitud \times inicial.
 \end{eqnarray*}
 La distribuci\'on posterior est\'a en funci\'on del par\'ametro, por lo que la distribuci\'on posterior es proporcional a la multiplicaci\'on de la funci\'on de verosimilitud por la distribuci\'on inicial del par\'ametro. En otras palabras, la distribuci\'on previa del par\'ametro es la informaci\'on a priori del mismo, que se va actualizando con las observaciones, tomando la informaci\'on relevante al par\'ametro. Este mismo principio puede extenderse para varios par\'ametros.\\
 \\
-Como describe \cite{gelman2014bayesian}, esta l\'ogica es similar para hacer inferencias sobre futuras observaciones. Una vez que se tienen todas las observaciones $D=(d_1,...,d_n)$ se quiere inferir la siguiente observaci\'on $d_{n+1}$. La distribuci\'on de esta observaci\'on se llama la distribuci\'on llamada distribuci\'on posterior predictiva, posterior porque toma la informaci\'on de las observaciones pasadas y predictiva porque predice la siguiente observaci\'on,
+Como describe \cite{gelman2014bayesian}, esta l\'ogica es similar para hacer inferencias sobre futuras observaciones. Una vez que se tienen todas las observaciones $D=(d_1,...,d_n)$ se quiere inferir la siguiente observaci\'on $d_{n+1}$. La distribuci\'on de esta observaci\'on se llama la distribuci\'on posterior predictiva, posterior porque toma la informaci\'on de las observaciones pasadas y predictiva porque predice la siguiente observaci\'on,
 \begin{eqnarray*}
 p(d_{n+1}|D)&=&\int p(d_{n+1},\theta|D) d\theta \\
 			&=& \int p(d_{n+1}|\theta,D)p(\theta|D)d\theta \\
-			&=& \int p(d_{n+1}|\theta)p(\theta|D)d\theta
+			&=& \int p(d_{n+1}|\theta)p(\theta|D)d\theta.
 \end{eqnarray*}
 En la segunda y tercera l\'inea de la ecuaci\'on se muestra la distribuci\'on posterior predictiva como un promedio de las distribuciones predictivas condicionales de la distribuci\'on posterior del par\'ametro $\theta$. En la \'ultima l\'inea se asume la independencia condicional de $D$ y $d_{n+1}$ dado $\theta$.\\
 \\
 Tomando estas mismas ideas en un conexto m\'as general, como el planteado por \cite{goldstein2013observables}, donde la incertidumbre espist\'emica se expresa a trav\'es la distribui\'on previa del par\'ametro y la incertidumbre aleatoria como la funci\'on de verosimilitud dada por las observaciones. Por lo que se podr\'ia decir que la distribuci\'on posterior, es una mezcla entre ambas incertidumbres. En el an\'alisis estad\'istico, se necesitan construir modelos basados en los valores desconocidos de la distribuci\'on de las observaciones, es decir, de incertidumbre espist\'emica pero tomando valores de un modelo param\'etrico o de incertidumbre aleatoria; esto se logra mediante el concepto de intercambiabilidad.\\
 \\
-Como fue definido en el cap\'itulo dos, a trav\'es del Teorema de Finetti; la intercambiabilidad es una propiedad de la cual se deriva que sin importar la reordenaci\'on de las observaciones, \'estas tienen la misma probabilidad de ocurrir. Las implicaciones del teorema de intercambiabilidad, de acuerdo con \cite{goldstein2013observables}, son sorprendentemente simples. Debido a la simetr\'ia con la que se aplica el concepto de intercambiabilidad sobre las observaciones, es como si se estuviera muestreando independientemente del modelo de los valores desconocidos de las observaciones con una distribuci\'on previa sobre el par\'ametro, retomando los conceptos de incertidumbre epist\'emica y aleatoria. De este modo, mediante la observaci\'on de las variables observables y la aplicaci\'on del paradigma bayesiano, se reduce la incertidumbre al actualizar la informaci\'on sobre las variables y facilitando la inferencia.\\
+Como fue definido en el cap\'itulo dos, a trav\'es del Teorema de De Finetti; la intercambiabilidad es una propiedad de la cual se deriva que sin importar la reordenaci\'on de las observaciones, \'estas tienen la misma probabilidad de ocurrir. Las implicaciones del supuesto de intercambiabilidad, de acuerdo con \cite{goldstein2013observables}, son sorprendentemente simples. Debido a la simetr\'ia con la que se aplica el concepto de intercambiabilidad sobre las observaciones, es como si se estuviera muestreando independientemente del modelo de los valores desconocidos de las observaciones con una distribuci\'on previa sobre el par\'ametro, retomando los conceptos de incertidumbre epist\'emica y aleatoria. De este modo, mediante la observaci\'on de las variables observables y la aplicaci\'on del paradigma bayesiano, se reduce la incertidumbre al actualizar la informaci\'on sobre las variables y facilitando la inferencia.\\
 \\
 Otra de las mayores implicaciones del teorema de intercambiabilidad es muy intuitivo, pues la distribuci\'on de las observaciones no es mas que el resultado de todas las posibles observaciones futuras; y la divisi\'on entre los componentes epist\'emicos y aleatorios de incertidumbre de esta estructura es nuestro propio juicio sobre dichas observaciones futuras. De igual modo, esto da una entrada natural a la inferencia.\\
 \\
@@ -60,11 +60,11 @@ Otra de las mayores implicaciones del teorema de intercambiabilidad es muy intui
 %\end{align*}
 Con el enfoque del an\'alisis bayesiano los problemas cl\'asicos de inferencia como la estimaci\'on puntual, estimaci\'on por regiones y contraste de hip\'otesis pueden resolverse de esta manera. Adem\'as, los estimadores obtenidos no solo suelen coincidir con los estimadores cl\'asicos en algunos casos, sino en otros casos de hecho los mejoran.\\
 \\
-En el desarrollo de este trabajo de investigaci\'on, veremos que la estimaci\'on del modelo general de probabilidad no se puede realizar a trav\'es de m\'etodos anal\'iticos cerrados, por lo que se sugiere la utilizaci\'on de m\'etodos num\'ericos. El m\'etodo n\'umerico a utilizar, por la naturaleza del estudio, ser\'a el Muestreador de Gibbs, que se describe en la siguiente secci\'on.\\
+En el desarrollo de este trabajo de investigaci\'on, veremos que la estimaci\'on del modelo general de probabilidad no se puede realizar a trav\'es de m\'etodos anal\'iticos cerrados, por lo que se sugiere la utilizaci\'on de m\'etodos num\'ericos. El m\'etodo n\'umerico a utilizar, por la naturaleza del estudio, ser\'a el Muestreador de Gibbs, que se describe con m\'as detalle en el ap\'endice.\\
 \\
-Como mencionado en el cap\'itulo anterior, la estimaci\'on de par\'ametros del modelo general de probabilidad que se utilizar\'a en este trabajo no se puede hacer a trav\'es de m\'etodos anal\'iticos tradicionales, por lo que se utilizar\'an m\'etodos num\'ericos. Existen varios m\'etodos, entre estos se encuentran el algoritmo EM y el Muestreador de Gibbs, el algoritmo EM ser\'a m\'as desarrolado en la secci\'on anterior y aunque \'util para el an\'alisis del modelo presentado, el Muestreador de Gibbs tiene una interpretaci\'on m\'as simple.\\
+Como mencionado en el cap\'itulo anterior, la estimaci\'on de par\'ametros del modelo general de probabilidad que se utilizar\'a en este trabajo no se puede hacer a trav\'es de m\'etodos anal\'iticos tradicionales, por lo que se utilizar\'an m\'etodos num\'ericos. Existen varios m\'etodos, entre estos se encuentran el algoritmo EM y el Muestreador de Gibbs (\cite{casella1992explaining}), el algoritmo EM ser\'a m\'as desarrolado en la secci\'on anterior y aunque \'util para el an\'alisis del modelo presentado, el Muestreador de Gibbs tiene una interpretaci\'on m\'as simple.\\
 \\
-De acuerdo con \cite{gelman2014bayesian}, la simulaci\'on a trav\'es de las cadenas de Markov tambi\'en llamadas Cadenas de Markov v\'ia simulaci\'on Monte Carlo (MCMC, por sus siglas en ingl\'es) consiste en construir una Cadena de Markov cuya distribuci\'on estacionaria (l\'imite) sea una distribuci\'on de la cual se pretenda simular. Una de estas simulaciones MCMC es el Muestreador de Gibbs, el cual est\'a descrito con m\'as detalle en el ap\'endice.\\
+De acuerdo con \cite{gelman2014bayesian}, la simulaci\'on a trav\'es de las cadenas de Markov tambi\'en llamadas Cadenas de Markov v\'ia simulaci\'on Monte Carlo (MCMC, por sus siglas en ingl\'es) consiste en construir una Cadena de Markov cuya distribuci\'on estacionaria (l\'imite) sea una distribuci\'on de la cual se pretenda simular. Una de estas simulaciones MCMC es el Muestreador de Gibbs.\\
 %Para la implementaci\'on del Muestreador de Gibbs en este trabajo se utilizar\'a el programa JAGS (Solo Otro Muestreador de Gibbs, por sus siglas en ingl\'es). Este programa es una extensi\'on del programa BUGS (Inferencia Bayesiana Usando el Muestreador de Gibbs, por sus siglas en ingl\'es), que normalmente es utilizado para la exploraci\'on de modelos Markov multivariados en el contexto de estad\'istica actuarial. JAGS es un programa que autom\'aticamente construye las cadenas de Matkov v\'ia simulaci\'on Monte Carlo (MCMC) para modelos multivariados.\\
 %\\
 %Para lograr expresar estos problemas con BUGS, explicado por sus creadores \cite{plummer2003jags}, se necesitan tomar en cuenta dos distribuciones:
@@ -75,112 +75,145 @@ De acuerdo con \cite{gelman2014bayesian}, la simulaci\'on a trav\'es de las cade
 %La necesidad de estas distribuciones aunado a la necesidad de una herramienta que ayude a explorar modelos gr\'aficos es lo que da origen a JAGS. Es decir, el programa toma la descripci\'on del modelo general de probabilidad multivariado y regresa un muestreo de MCMC de la distribuci\'on posterior.\\
 \\
 De este modo, se establece no solo las bases para la inferencia y predicci\'on de futuras observaciones en base a la verosimilud extendida y la resoluci\'on de su funci\'on sino tambi\'en la implementaci\'on num\'erica de la misma. Una vez que se definieron estas herramientas, lo que resta es la adaptaci\'on del modelo a la ilustraci\'on con los datos, esto se explorar\'a m\'as adelante.  
-\section{Desarrollo del algoritmo para el modelo de duraci\'on marcada}
-Una vez que se ha definido el Muestreador de Gibbs de manera general, se necesitan desarrollar las distribuciones particulares al modelo de duraci\'on marcada. En el cap\'itulo anterior se definieron las distribuciones de las variables latentes condicionadas a las observaciones,
+\section{Algoritmo para el modelo de duraci\'on marcada}
+Una vez que se han enunciado las nociones del paradigma bayesiano de manera general, se necesitan desarrollar las distribuciones particulares al modelo de duraci\'on marcada. En el cap\'itulo anterior se definieron las distribuciones de las variables latentes condicionadas a las observaciones. As\'i, la distribuci\'on posterior de la variable latente $\theta$ condicionada a las duraciones observadas es,
 \[f_{\theta|d}(\theta|d) \propto \theta^{\alpha_d+\alpha_\theta-1} e^{\{-\theta(d+\beta_\theta)\}}\]
-Para la variable latente correspondiente a la duraci\'on y para los costos,
-\[f_{\gamma|d,c}(\gamma|d,c) \propto (\frac{1}{\gamma})^{d+\alpha_\gamma+1} \quad e^{-\{(\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d\}}\]
-
-De este modo, las distribuciones que resultan de los c\'alculos anteriores son la llave que se necesita para empezar a hacer inferencia, tomando estas distribuciones se redefine la verosimilitud de un solo individuo como
+De igual modo, la distribuci\'on de la variable latente $\gamma$ condicionada a las duraciones y costos observados es,
+\[f_{\gamma|d,c}(\gamma|d,c) \propto \left(\frac{1}{\gamma}\right)^{d+\alpha_\gamma+1} \quad e^{-\{(\frac{\beta_\gamma}{\gamma})+(\frac{c}{\gamma})^d\}}\]
+De este modo, las distribuciones que resultan de los c\'alculos anteriores son la llave que se necesita para empezar a hacer inferencia, tomando estas distribuciones se redefine la verosimilitud de un solo individuo $i$ como,
 \begin{eqnarray*}
-&&V(\{\alpha_d,\alpha_\theta,\beta_\theta,\alpha_\gamma,\beta_\gamma\},\{\theta_i,\gamma_i\}_{j=1}^{N(t)}|\{d_j,c_j\}_{i=1}^I)=\\ 
-&&\prod_{j=1}^{N(t)} Gamma(d_j|\alpha_d,\theta_j) Gamma(\theta_j|\alpha_d+\alpha_\theta,d_{j-1}+\beta_\theta)\times \\
-&&Weibull(c_j|d_j,\gamma_j)(\frac{1}{\gamma})^{d_{j-1}+\alpha_\gamma+1}e^\{-(\frac{\beta_\gamma}{\gamma}+(\frac{c_{j-1}}{\gamma})^{d_j})\} \times \\
+&&V(\{\alpha_d,\alpha_\theta,\beta_\theta,\alpha_\gamma,\beta_\gamma\},\{\theta_i,\gamma_i\}_{j=1}^{N(T_i)}|\{d_j,c_j\}_{i=1}^I)=\\ 
+&&\prod_{j=1}^{N(T_i)} Gamma(d_j|\alpha_d,\theta_j) Gamma(\theta_j|\alpha_d+\alpha_\theta,d_{j-1}+\beta_\theta)\times \\
+&&Weibull(c_j|d_j,\gamma_j)\left(\frac{1}{\gamma}\right)^{d_{ij-1}+\alpha_\gamma+1}e^\{-(\frac{\beta_\gamma}{\gamma}+(\frac{c_{j-1}}{\gamma})^{d_{ij}})\} \times \\
 &&\times \pi(\alpha_d)\pi(\alpha_\theta)\pi(\beta_\theta)\pi(\alpha_\gamma)\pi(\beta_\gamma)
 \end{eqnarray*}
 \\
 Donde para las variables latentes asociada a las duraciones,
 \begin{eqnarray*}
-\pi(\theta_j|\alpha_d,\alpha_\theta,\beta_\theta)&\propto& Gamma(d_j|\alpha_d,\theta_j)\times Gamma(\theta_j|\alpha_d+\alpha_\theta,d_{j-1}+\beta_\theta)\\
+\pi(\theta_{ij}|\alpha_d,\alpha_\theta,\beta_\theta)&\propto& Gamma(d_{ij}|\alpha_d,\theta_{ij})\times\\ &\times& Gamma(\theta_{ij}|\alpha_d+\alpha_\theta,d_{ij-1}+\beta_\theta)\\
 \\
-&=&\frac{\theta_j^{\alpha_d}}{\Gamma(\alpha_d)} d_j^{\alpha_d-1} e^{\{-\theta_jd_j\}}\frac{(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)}\theta_j^{\alpha_d+\alpha_\theta}e^{\{d_{j-1}+\beta_\theta\}}\\
+&=&\frac{\theta_{ij}^{\alpha_d}}{\Gamma(\alpha_d)} d_{ij}^{\alpha_d-1} e^{\{-\theta_{ij} d_{ij}\}}\times\\      &\times& \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)}\theta_{ij}^{\alpha_d+\alpha_\theta}e^{\{d_{ij-1}+\beta_\theta\}}\\
 \\
-&=&\frac{d_j^{\alpha_d-1}(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_d+\alpha_\theta)} \theta_j^{2\alpha_d+\alpha_\theta-1}e^{\{-\theta_j(d_{j-1}+d_j+\beta_\theta)\}}\\
+&=&\frac{d_{ij}^{\alpha_d-1}(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{2\alpha_d+\alpha_\theta-1}\times \\
+&\times& e^{\{-\theta_{ij}(d_{ij-1}+d_{ij}+\beta_\theta)\}}\\
 \\
-&\propto& \theta_j^{2\alpha_d+\alpha_\theta-1}e^{\{-\theta_j(d_{j-1}+d_j+\beta_\theta)\}}\\
+&\propto& \theta_{ij}^{2\alpha_d+\alpha_\theta-1}e^{\{-\theta_{ij}(d_{ij-1}+d_{ij}+\beta_\theta)\}}\\
 \\
-&\Rightarrow& \theta_j \sim Gamma(2\alpha_d+\alpha_\theta,d_j+d_{j-1}+\beta_\theta)
+&\Rightarrow& \theta_{ij} \sim Gamma(2\alpha_d+\alpha_\theta,d_{ij}+d_{ij-1}+\beta_\theta)
 \end{eqnarray*}
+%\begin{multline*}
+%\pi(\theta_{ij}|\alpha_d,\alpha_\theta,\beta_\theta)\propto Gamma(d_{ij}|\alpha_d,\theta_{ij})\times\\ \times Gamma(\theta_{ij}|\alpha_d+\alpha_\theta,d_{ij-1}+\beta_\theta)\\
+%\\
+%=\frac{\theta_{ij}^{\alpha_d}}{\Gamma(\alpha_d)} d_{ij}^{\alpha_d-1} e^{\{-\theta_{ij} d_{ij}\}}\times \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)}\theta_{ij}^{\alpha_d+\alpha_\theta}e^{\{d_{ij-1}+\beta_\theta\}}\\
+%\\
+%=\frac{d_{ij}^{\alpha_d-1}(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d)\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{2\alpha_d+\alpha_\theta-1}\times e^{\{-\theta_{ij}(d_{ij-1}+d_{ij}+\beta_\theta)\}}\\
+%\\
+%\propto \theta_{ij}^{2\alpha_d+\alpha_\theta-1}e^{\{-\theta_{ij}(d_{ij-1}+d_{ij}+\beta_\theta)\}}\\
+%\\
+%\Rightarrow \theta_{ij} \sim Gamma(2\alpha_d+\alpha_\theta,d_{ij}+d_{ij-1}+\beta_\theta)
+%\end{multline*}
 Y para la variable latente asociada a los costos,
 \begin{eqnarray*}
-\pi(\gamma_j|\alpha_\gamma,\beta_\gamma,d_j,c_{j-1})&\propto& Weibull(c_j|d_j,\gamma_j)\times (\frac{1}{\gamma_j})^{d_j +\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{j-1}}{\gamma_j})^{d_j}\}}\\
-&=&\frac{d_j}{\gamma_j^{d_j}}c_j^{d_j-1}e^{\{-(\frac{c_j}{\gamma_j})\}}(\frac{1}{\gamma_j})^{d_j+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{j-1}}{\gamma_j})^{d_j})\}}\\
-&=&d_j c_j^{d_j-1}(\frac{1}{\gamma_j})^{2d_j+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{j-1}}{\gamma_j})^{d_j}+(\frac{c_j}{\gamma_j})^{d_j})\}}\\
-&\propto&(\frac{1}{\gamma_j})^{2d_j+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{j-1}+c_j}{\gamma_j})^{d_j}\}}
+\pi(\gamma_{ij}|\alpha_\gamma,\beta_\gamma,d_{ij},c_{ij-1})&\propto& Weibull(c_{ij}|d_{ij},\gamma_{ij})\times\\
+&\times& (\frac{1}{\gamma_{ij}})^{d_{ij} +\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_{ij}}+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij}}\}}\\
+\\
+&=&\frac{d_{ij}}{\gamma_{ij}^{d_{ij}}}c_{ij}^{d_{ij-1}}e^{\{-(\frac{c_{ij}}{\gamma_{ij}})\}}\times\\
+&\times&(\frac{1}{\gamma_{ij}})^{d_{ij}+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_{ij}}+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij}})\}}\\
+\\
+&=&d_{ij} c_{ij}^{d_{ij}-1}(\frac{1}{\gamma_{ij}})^{2d_{ij}+\alpha_\gamma+1}\times \\
+&\times&e^{\{-(\frac{\beta_\gamma}{\gamma_{ij}}+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij}}+(\frac{c_{ij}}{\gamma_{ij}})^{d_{ij}})\}}\\
+\\
+&\propto&\left(\frac{1}{\gamma_j}\right)^{2d_j+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{ij-1}+c_{ij}}{\gamma_{ij}})^{d_{ij}}\}}
 \end{eqnarray*}
-De manera an\'aloga, las distribuciones que corresponden a los par\'ametros para un solo individuo $i$,
+De manera an\'aloga, las distribuciones que corresponden a los par\'ametros para un solo individuo $i$. En primer lugar tenemos las distribuciones relativas a los par\'ametros del modelo Gamma-Gamma correspondiente a la variable observable de las duraciones $\alpha_d, \alpha_\theta, \beta_\theta$,
 \begin{eqnarray*}
-\pi(\alpha_d|...)&\propto& \prod_{j=1}^{N(t_i)} Gamma(\theta_j|\alpha_d+\alpha_\theta,d_{j-1}+\beta_\theta)\times Gamma(\alpha_d|\alpha_0,\beta_0)\\
+\pi(\alpha_d|...)&\propto& \prod_{j=1}^{N(T_i)} Gamma(\theta_{ij}|\alpha_d+\alpha_\theta,d_{ij-1}+\beta_\theta)\times\\
+&\times& Gamma(\alpha_d|\alpha_0,\beta_0)\\
 \\
-&=&\prod_{j=1}^{N(t_i)}\frac{(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_j^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_j(d_{j-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
+&=&\prod_{j=1}^{N(T_i)}\frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_{ij}(d_{ij-1}+\beta_\theta)\}}\times\\
+&\times&\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
 \\
-&\propto&\prod_{j=1}^{N(t_i)}\frac{(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_j^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}
-\end{eqnarray*}
-\\
-\begin{eqnarray*}
-\pi(\alpha_\theta|...)&\propto&\prod_{j=1}^{N(t_i)} Gamma(\theta_j|\alpha_d+\alpha_\theta,d_{j-1}+\beta_\theta)\times Gamma(\alpha_\theta|\alpha_0,\beta_0)\\
-\\
-&=&\prod_{j=1}^{N(t_i)}\frac{(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_j^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_j(d_{j-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
-\\
-&\propto& \prod_{j=1}^{N(t_i)}\frac{(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_j^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}
-\end{eqnarray*}
-\\
-\begin{eqnarray*}
-\pi(\beta_\theta|...)&\propto&\prod_{j=1}^{N(t_i)} Gamma(\theta_i|\alpha_d+\alpha_\theta,d_{i-1}+\beta_\theta)\times Gamma(\beta_\theta|\alpha_0,\beta_0)\\
-\\
-&=&\prod_{i=2}^{N(t)}\frac{(d_{i-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_i^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_i(d_{i-1}+\beta_\theta)\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\theta^{\alpha_0-1}e^{\{-\beta_\theta\beta_0\}}\\
-\\
-&\propto&\prod_{j=1}^{N(t)}(d_{j-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_j+\beta_0)\}}
+&\propto&\prod_{j=1}^{N(T_i)}\frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\alpha_\gamma|...)&\propto&\prod_{j=1}^{N(t)} \pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{j-1})\times Gamma(\alpha_\gamma|\alpha_0,\beta_0)\\
-&=&\prod_{j=1}^{N(t)}(\frac{1}{\gamma_i})^{d_j+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{j-1}}{\gamma_j})^{d_j})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
+\pi(\alpha_\theta|...)&\propto&\prod_{j=1}^{N(T_i)} Gamma(\theta_{ij}|\alpha_d+\alpha_\theta,d_{ij-1}+\beta_\theta)\times\\
+&\times& Gamma(\alpha_\theta|\alpha_0,\beta_0)\\
 \\
-&\propto&\prod_{j=1}^{N(t)} (\frac{1}{\gamma_j})^{\alpha_\gamma}\alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}
+&=&\prod_{j=1}^{N(T_i)}\frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_{ij}(d_{ij-1}+\beta_\theta)\}}\times\\
+&\times&\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
+\\
+&\propto& \prod_{j=1}^{N(T_i)}\frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\beta_\gamma|...)&\propto&\prod_{i=2}^{N(t)} \pi(\gamma_i|\alpha_\gamma,\beta_\gamma,d_i,c_{i-1})\times Gamma(\beta_\gamma|\alpha_0,\beta_0)\\
+\pi(\beta_\theta|...)&\propto&\prod_{j=1}^{N(T_i)} Gamma(\theta_{ij}|\alpha_d+\alpha_\theta,d_{ij-1}+\beta_\theta)\times\\
+&\times& Gamma(\beta_\theta|\alpha_0,\beta_0)\\
 \\
-&=&\prod_{i=2}^{N(t)}(\frac{1}{\gamma_i})^{d_i+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_i}+(\frac{c_{i-1}}{\gamma_i})^{d_i})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma\beta_0\}}\\
-&\propto&\beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_i}+\beta_0)\}}\\
+&=&\prod_{j=2}^{N(T_i)}\frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_{ij}(d_{ij-1}+\beta_\theta)\}}\times\\
+&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\theta^{\alpha_0-1}e^{\{-\beta_\theta\beta_0\}}\\
 \\
-&\Rightarrow& \beta_\gamma \sim Gamma(\alpha_0,\frac{1}{\gamma_i}+\beta_0)
-\end{eqnarray*}
-Los par\'ametros a estimar son aquellos correspondientes a las variables latentes, cuyo kernel se estima para cada momento $j$ ($j=1,...,N(t)$), y a las variables observables del modelo. Las verosimilitudes mostradas para los par\'ametros deben ser extendidas para incluir toda la poblaci\'on muestreada, de este modo,%Dado el uso de las variables latentes no existir\'a un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos num\'ericos no solo para la estimaci\'on de los par\'ametros y variables latentes sino para analizar las distribuciones que no tienen expresi\'on anal\'itica cerrada, como aquellas de los par\'ametros $\alpha_d,\alpha_\theta,\alpha_\gamma$ y la variable latente $\gamma_i$.\\
-\begin{eqnarray*}
-\pi(\alpha_d|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_d|\theta_{ij},...)\\
-&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
-&\propto & (\frac{\alpha_d^{\alpha_0 -1}}{\Gamma(\alpha_d+\alpha_\theta)})^{\sum_{i=1}^I N(t_i)} (\sum_{i=1}^I N(t_i) e^{\{-\alpha_d\beta_0\}}) \times \\
-&\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d} \theta_{ij}^{\alpha_d}
+&\propto&\prod_{j=2}^{N(T_i)}(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_{ij}+\beta_0)\}}
 \end{eqnarray*}
 \\
+De igual modo, tenemos las distribuciones para los par\'ametros del modelo Gamma Inversa-Weibull que describe el comportamiento de los costos a trav\'es de la variable latente $\gamma$, $\alpha_\gamma, \beta_\gamma$,\\
+\\
 \begin{eqnarray*}
-\pi(\alpha_\theta|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_\theta|\theta_{ij},...)\\
-&\propto &\prod_{i=1}^I \prod_{j=1}^{N(t_i)} \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
-&\propto & (\frac{\alpha_\theta^{\alpha_0 -1}}{\Gamma(\alpha_d+\alpha_\theta)})^{\sum_{i=1}^I N(t_i)} (\sum_{i=1}^I N(t_i) e^{\{-\alpha_\theta\beta_0\}}) \times \\
-&\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d} \theta_{ij}^{\alpha_\theta}
+\pi(\alpha_\gamma|...)&\propto&\prod_{j=1}^{N(T_i)} \pi(\gamma_{ij}|\alpha_\gamma,\beta_\gamma,d_{ij},c_{ij-1})\times Gamma(\alpha_\gamma|\alpha_0,\beta_0)\\
+&=&\prod_{j=1}^{N(T_i)}\left(\frac{1}{\gamma_{ij}}\right)^{d_{ij}+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_{ij}}+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij}})\}}\times \\
+&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
+\\
+&\propto&\prod_{j=1}^{N(T_i)} \left(\frac{1}{\gamma_{ij}}\right)^{\alpha_\gamma}\alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\beta_\theta|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\beta_\theta|\theta_{ij},...)\\
-&\propto &\prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_ij+\beta_0)\}}\\
-&\propto & (\beta_\theta^{\alpha_0-1})^{\sum_{i=1}^I N(t_i)} e^{\{-\beta_\theta(\sum_{i=1}^I \sum_{j=1}^{N(t_i)}(\theta_ij+\beta_0))\}} \times \\
-&\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d}
+\pi(\beta_\gamma|...)&\propto&\prod_{j=2}^{N(T_i)} \pi(\gamma_{ij}|\alpha_\gamma,\beta_\gamma,d_{ij},c_{ij-1})\times Gamma(\beta_\gamma|\alpha_0,\beta_0)\\
+\\
+&=&\prod_{j=2}^{N(T_i)}\left(\frac{1}{\gamma_{ij}}\right)^{d_{ij}+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_{ij}}+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij}})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma\beta_0\}}\\
+&\propto&\beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_{ij}}+\beta_0)\}}\\
+\\
+&\propto& \beta_\gamma \sim Gamma(\alpha_0,\frac{1}{\gamma_i}+\beta_0)
+\end{eqnarray*}
+Los par\'ametros a estimar son aquellos correspondientes a las variables latentes, cuyo kernel se estima para cada momento $j$ ($j=1,...,N(T_i)$), y a las variables observables del modelo de cada individup $i$. Las verosimilitudes mostradas para los par\'ametros deben ser extendidas para incluir toda la poblaci\'on muestreada. De este modo, desarrollamos las verosimilitudes extendidas para los par\'ametros que corresponden al modelo Gamma-Gamma que describen las duraciones y la variable latente $\theta$; $\alpha_d, \alpha_\theta, \beta_\theta$, %Dado el uso de las variables latentes no existir\'a un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos num\'ericos no solo para la estimaci\'on de los par\'ametros y variables latentes sino para analizar las distribuciones que no tienen expresi\'on anal\'itica cerrada, como aquellas de los par\'ametros $\alpha_d,\alpha_\theta,\alpha_\gamma$ y la variable latente $\gamma_i$.\\
+\begin{eqnarray*}
+\pi(\alpha_d|(\theta_{ij})_{i=1}^I ._{j=1}^{N(T_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \pi(\alpha_d|\theta_{ij},...)\\
+&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
+&\propto & \left(\frac{\alpha_d^{\alpha_0 -1}}{\Gamma(\alpha_d+\alpha_\theta)}\quad e^{\{-\alpha_d\beta_0\}}\right)^{\sum_{i=1}^I N(T_i)}  \times \\
+&\times & \prod_{i=1}^I \prod_{j=2}^{N(T_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d} \quad \theta_{ij}^{\alpha_d}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\alpha_\gamma|(\gamma_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\alpha_\gamma|\gamma_{ij},...)\\
-&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} (\frac{1}{\gamma_ij})^{\alpha_\gamma} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
-&\propto & (\alpha_\gamma^{\alpha_0-1})^{\sum_{i=1}^I N(t_i)} (\sum_{i=1}^I N(t_i) e^{\{-\alpha_\gamma \beta_0\}}) \times \\
-&\times & \prod_{i=1}^I \prod_{j=1}^{N(t_i)}(\frac{1}{\gamma_ij})^{\alpha_\gamma}
+\pi(\alpha_\theta|(\theta_{ij})_{i=1}^I ._{j=1}^{N(T_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \pi(\alpha_\theta|\theta_{ij},...)\\
+&\propto &\prod_{i=1}^I \prod_{j=1}^{N(T_i)} \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
+&\propto & \left(\frac{\alpha_\theta^{\alpha_0 -1}}{\Gamma(\alpha_d+\alpha_\theta)}\quad e^{\{-\alpha_\theta\beta_0\}}\right)^{\sum_{i=1}^I N(T_i)} \times \\
+&\times & \prod_{i=1}^I \prod_{j=2}^{N(T_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d} \quad \theta_{ij}^{\alpha_\theta}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\beta_\gamma|(\theta_{ij})_{i=1}^I ._{j=1}^{N(t_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \pi(\beta_\gamma|\gamma_{ij},...)\\
-&\propto & \prod_{i=1}^I \prod_{j=1}^{N(t_i)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_{ij}}+\beta_0)\}}\\
-&\propto & (\beta_\gamma^{\alpha_0-1})^{\sum_{i=1}^I N(t_i)} e^{\{-\beta_\gamma(\sum_{i=1}^I \sum_{j=1}^{N(t_i)}\frac{1}{\gamma_{ij}}+\beta_0)\}}
+\pi(\beta_\theta|(\theta_{ij})_{i=1}^I ._{j=1}^{N(T_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \pi(\beta_\theta|\theta_{ij},...)\\
+&\propto &\prod_{i=1}^I \prod_{j=1}^{N(T_i)} (d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_ij+\beta_0)\}}\\
+&\propto & (\beta_\theta^{\alpha_0-1})^{\sum_{i=1}^I N(T_i)} \quad e^{\{-\beta_\theta(\sum_{i=1}^I \sum_{j=1}^{N(T_i)}(\theta_{ij}+\beta_0))\}} \times \\
+&\times & \prod_{i=1}^I \prod_{j=2}^{N(T_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d}
 \end{eqnarray*}
 \\
+De igual modo, se describen las verosimilitudes extendidas para los par\'ametros del modelo Gamma Inversa-Weibull que describe los costos y su variable latente $\gamma$; $\alpha_\gamma, \beta_\gamma$,
+\begin{eqnarray*}
+\pi(\alpha_\gamma|(\gamma_{ij})_{i=1}^I ._{j=1}^{N(T_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \pi(\alpha_\gamma|\gamma_{ij},...)\\
+&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \left(\frac{1}{\gamma_{ij}}\right)^{\alpha_\gamma} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
+&\propto & (\alpha_\gamma^{\alpha_0-1}\quad e^{\{-\alpha_\gamma \beta_0\}})^{\sum_{i=1}^I N(T_i)}  \times \\
+&\times & \prod_{i=1}^I \prod_{j=1}^{N(T_i)}\left(\frac{1}{\gamma_{ij}}\right)^{\alpha_\gamma}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+\pi(\beta_\gamma|(\theta_{ij})_{i=1}^I ._{j=1}^{N(T_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \pi(\beta_\gamma|\gamma_{ij},...)\\
+&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_{ij}}+\beta_0)\}}\\
+&\propto & (\beta_\gamma^{\alpha_0-1})^{\sum_{i=1}^I N(T_i)} \quad e^{\{-\beta_\gamma(\sum_{i=1}^I \sum_{j=1}^{N(T_i)}\frac{1}{\gamma_{ij}}+\beta_0)\}}
+\end{eqnarray*}
+\\
+Es importante mencionar que las distribuciones resultantes de la verosimilitud extendida cumplen con las propiedades de log-concavidad descritas en el cap\'itulo anterior. De este modo y de  manera general para cada individuo $i$, tomando la verosimilitud extendida definida anteriormente se fijan los valores iniciales para los par\'ametros $\alpha_d^{(0)},\alpha_\theta^{(0)},\beta_\theta^{(0)},\alpha_\gamma^{(0)},\beta_\gamma^{(0)}$ y para las variables latentes $\{\theta_j^{(0)}\}_{j=1}^{N(T_i)},\{\gamma_j^{(0)}\}_{j=1}^{N(T_i)}$ y para cada $k=1,...,N(T_i)$ tenemos la siguiente distribuci\'on que es proporcional a la verosimilitud,
+\begin{align*}
+\pi(\alpha_d^{(k)},\alpha_\theta^{(k)},\beta_\theta^{(k)},\alpha_\gamma^{(k)},\beta_\gamma^{(k)}|\{\theta_i^{(k-1)}\}_{i=2}^{N(t)},\{\gamma_i^{(k-1)}\}_{i=2}^{N(t)},\{d_i,c_i\}_{i=1}^{N(t)})
+\end{align*}
+Este es el principio necesario para utilizar el Muestreador de Gibbs de modo que se estimen los par\'ametros en base a las variables latentes que a su vez se estiman en base a las observaciones para que con los par\'ametros estimados se estimen las variables latentes que ayuden a predecir futuras observaciones. %Una vez que se tiene el concepto general de la aplicaci\'on de esta t\'ecnica de muestreo para el objetivo de este trabajo, es necesario considerar las maneras de implementarlo.\\
+
 Una vez que se definen las distribuciones particulares del modelo y los m\'etodos num\'ericos con los que se realizar\'a la inferencia, en el siguiente cap\'itulo se implementar\'a con una base de datos espec\'ifica. Es importante mencionar que, independientemente de la base de datos con la que se trabaje, las distribuciones y la forma del algoritmo es la correspondiente al modelo general de probabilidad.

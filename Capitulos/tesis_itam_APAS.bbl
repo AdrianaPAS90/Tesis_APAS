@@ -1,0 +1,189 @@
+\begin{thebibliography}{}
+
+\bibitem[AHRQ, ]{MEPSSummary}
+AHRQ.
+\newblock Medical expenditure panel survey, meps.
+\newblock
+  \url{https://meps.ahrq.gov/mepsweb/data_stats/quick_tables_search.jsp?component=2&subcomponent=1}.
+\newblock Accesed: 30-01-2017.
+
+\bibitem[An, 1996]{an1996log}
+An, M.~Y. (1996).
+\newblock Log-concave probability distributions: Theory and statistical
+  testing.
+\newblock {\em Working Papers}, 95(3).
+
+\bibitem[Association et~al., 2013]{american2013economic}
+Association, A.~D. et~al. (2013).
+\newblock Economic costs of diabetes in the us in 2012.
+\newblock {\em Diabetes care}, 36(4):1033--1046.
+
+\bibitem[Bagnoli and Bergstrom, 2005]{bagnoli2005log}
+Bagnoli, M. and Bergstrom, T. (2005).
+\newblock Log-concave probability and its applications.
+\newblock {\em Economic Theory}, 26(2):445--469.
+
+\bibitem[Barcelo et~al., 2003]{barcelo2003cost}
+Barcelo, A., Aedo, C., Rajpathak, S., and Robles, S. (2003).
+\newblock The cost of diabetes in {L}atin {A}merica and the {C}aribbean.
+\newblock {\em Bulletin of the world health organization}, 81(1):19--27.
+
+\bibitem[Barquera et~al., 2013]{barquera2013diabetes}
+Barquera, S., Campos-Nonato, I., Aguilar-Salinas, C., Lopez-Ridaura, R.,
+  Arredondo, A., and Rivera-Dommarco, J. (2013).
+\newblock Diabetes in {M}exico: {C}ost and management of diabetes and its
+  complications and challenges for health policy.
+\newblock {\em Globalization and health}, 9(1):3.
+
+\bibitem[Barraza-Llor{\'e}ns et~al., 2015]{barraza2015carga}
+Barraza-Llor{\'e}ns, M., Guajardo-Barr{\'o}n, V., Pic{\'o}, J., Garc{\'\i}a,
+  R., Hern{\'a}ndez, C., Mora, F., Athi{\'e}, J., Crable, E., and Urtiz, A.
+  (2015).
+\newblock Carga econ{\'o}mica de la diabetes mellitus en m{\'e}xico, 2013.
+\newblock {\em M{\'e}xico, DF: Funsalud}.
+
+\bibitem[Bola{\~n}os et~al., 2010]{bolanos2010costos}
+Bola{\~n}os, R. d. l. {\'A}.~R., Shigematsu, L. M.~R., Ru{\'\i}z, J. A.~J.,
+  M{\'a}rquez, S. A.~J., and {\'A}vila, M.~H. (2010).
+\newblock Costos directos de atenci{\'o}n m{\'e}dica en pacientes con diabetes
+  mellitus tipo 2 en {M}{\'e}xico: {A}n{\'a}lisis de microcosteo.
+\newblock {\em Rev Panam Salud Publica}, 28(6):412--20.
+
+\bibitem[Carter and Kohn, 1996]{carter1996markov}
+Carter, C.~K. and Kohn, R. (1996).
+\newblock Markov chain monte carlo in conditionally gaussian state space
+  models.
+\newblock {\em Biometrika}, 83(3):589--601.
+
+\bibitem[Casella and George, 1992]{casella1992explaining}
+Casella, G. and George, E.~I. (1992).
+\newblock Explaining the gibbs sampler.
+\newblock {\em The American Statistician}, 46(3):167--174.
+
+\bibitem[Cichon et~al., 1999]{cichon1999modelling}
+Cichon, M., Newbrander, W., Yamabana, H., Weber, A., Normand, C., Dror, D., and
+  Preker, A. (1999).
+\newblock {\em Modelling in health care finance: A compendium of quantitative
+  techniques for health care financing}.
+\newblock International Labour Organization.
+
+\bibitem[Daley and Vere-Jones, 2003]{daley2003}
+Daley, D. and Vere-Jones, D. (2003).
+\newblock {\em An Introduction to the Theory of Point Processes: Volume I:
+  Elementary Theory and Methods}.
+\newblock Springer, 2nd edition edition.
+
+\bibitem[de\~la\ Salud, ]{FactSheetDiabetes}
+de\~la\ Salud, O.~M.
+\newblock Diabetes. fact sheet.
+\newblock \url{http://www.who.int/mediacentre/factsheets/fs312/en/}.
+\newblock Accesed: 20-01-2017.
+
+\bibitem[Dempster et~al., 1977]{dempster1977maximum}
+Dempster, A.~P., Laird, N.~M., and Rubin, D.~B. (1977).
+\newblock Maximum likelihood from incomplete data via the em algorithm.
+\newblock {\em Journal of the royal statistical society. Series B}, pages
+  1--38.
+
+\bibitem[Engle and Russell, 1998]{engle1998autoregressive}
+Engle, R.~F. and Russell, J.~R. (1998).
+\newblock Autoregressive conditional duration: a new model for irregularly
+  spaced transaction data.
+\newblock {\em Econometrica}, pages 1127--1162.
+
+\bibitem[Fader and Hardie, 2013]{fader2013gamma}
+Fader, P.~S. and Hardie, B.~G. (2013).
+\newblock The gamma-gamma model of monetary value.
+
+\bibitem[Federaci\'on Internacional de~la Diabetes,
+  2015]{atlas2015international}
+Federaci\'on Internacional de~la Diabetes, B. (2015).
+\newblock Atlas {IDF} diabetes, 2015.
+\newblock {\em Available from:[Last accessed: Enero 2017]}.
+
+\bibitem[for\~Disease\~Control\~and\ Prevention, ]{CDCStatistics}
+for\~Disease\~Control\~and\ Prevention, C.
+\newblock National diabetes statistics report, 2014.
+\newblock
+  \url{https://www.cdc.gov/diabetes/pdfs/data/2014-report-estimates-of-diabetes-and-its-burden-in-the-united-states.pdf}.
+\newblock Accesed: 30-01-2017.
+
+\bibitem[Gelman et~al., 2014]{gelman2014bayesian}
+Gelman, A., Carlin, J.~B., Stern, H.~S., and Rubin, D.~B. (2014).
+\newblock {\em Bayesian data analysis}, volume~2.
+\newblock Chapman \& Hall/CRC Boca Raton, FL, USA.
+
+\bibitem[Ghahramani, 2001]{ghahramani2001introduction}
+Ghahramani, Z. (2001).
+\newblock An introduction to hidden {M}arkov models and {B}ayesian networks.
+\newblock {\em International {J}ournal of {P}attern {R}ecognition and
+  {A}rtificial {I}ntelligence}, 15(01):9--42.
+
+\bibitem[Goldstein, 2013]{goldstein2013observables}
+Goldstein, M. (2013).
+\newblock Observables and models: Exchangeability and the inductive argument.
+\newblock {\em Bayesian Theory and Its Applications}, pages 3--18.
+
+\bibitem[Guti{\'e}rrez et~al., ]{gutierrezencuesta}
+Guti{\'e}rrez, J., Rivera-Dommarco, J., Shamah-Levy, T.,
+  Villalpando-Hern{\'a}ndez, S., Franco, A., Cuevas-Nasu, L., et~al.
+\newblock Encuesta {N}acional de {S}alud y {N}utrici{\'o}n. {ENSANUT} 2012
+  resultados {N}acionales. {C}uernavaca, {M}{\'e}xico: Instituto {N}acional de
+  {S}alud {P}{\'u}blica, 2012 [accedido en enero 2017].
+
+\bibitem[Hahn and Zhang, 2012]{hahn2012exchangeable}
+Hahn, M.~G. and Zhang, G. (2012).
+\newblock Exchangeable random variables.
+\newblock {\em High Dimensional Probability}, 43:111.
+
+\bibitem[Harrison and West, 1999]{harrison1999bayesian}
+Harrison, J. and West, M. (1999).
+\newblock {\em Bayesian forecasting and dynamic models}.
+\newblock Springer New York.
+
+\bibitem[Held and Saban{\'e}s~Bov{\'e}, 2014]{held2014applied}
+Held, L. and Saban{\'e}s~Bov{\'e}, D. (2014).
+\newblock {\em Applied statistical inference}, volume~10.
+\newblock Springer.
+
+\bibitem[Hex et~al., 2012]{hex2012estimating}
+Hex, N., Bartlett, C., Wright, D., Taylor, M., and Varley, D. (2012).
+\newblock Estimating the current and future costs of {T}ype 1 and {T}ype 2
+  diabetes in the {UK}, including direct health costs and indirect societal and
+  productivity costs.
+\newblock {\em Diabetic Medicine}, 29(7):855--862.
+
+\bibitem[Neal, 2003]{neal2003slice}
+Neal, R.~M. (2003).
+\newblock Slice sampling.
+\newblock {\em Annals of statistics}, pages 705--741.
+
+\bibitem[Paik~Schoenberg, 2000]{intropp}
+Paik~Schoenberg, F. (2000).
+\newblock {\em Introduction to Point Processes}.
+\newblock Wiley Online Library.
+
+\bibitem[Pitt et~al., 2002]{pitt2002constructing}
+Pitt, M.~K., Chatfield, C., and Walker, S.~G. (2002).
+\newblock Constructing first order stationary autoregressive models via latent
+  processes.
+\newblock {\em Scandinavian Journal of Statistics}, 29(4):657--663.
+
+\bibitem[Resnick, 1999]{resnickpath}
+Resnick, S.~I. (1999).
+\newblock {\em A Probability Path}.
+\newblock Birkhauser.
+
+\bibitem[Schervish, 2012]{schervish2012theory}
+Schervish, M.~J. (2012).
+\newblock {\em Theory of statistics}.
+\newblock Springer Science \& Business Media.
+
+\bibitem[Zhuo et~al., 2014]{zhuo2014lifetime}
+Zhuo, X., Zhang, P., Barker, L., Albright, A., Thompson, T.~J., and Gregg, E.
+  (2014).
+\newblock The lifetime cost of diabetes and its implications for diabetes
+  prevention.
+\newblock {\em Diabetes care}, 37(9):2557--2564.
+
+\end{thebibliography}

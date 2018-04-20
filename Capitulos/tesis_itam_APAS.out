@@ -1,0 +1,38 @@
+\BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Introducci\363n}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Escasez de datos}{chapter.1}% 3
+\BOOKMARK [0][-]{chapter.2}{Procesos de Duraci\363n Marcada}{}% 4
+\BOOKMARK [1][-]{section.2.1}{Introducci\363n}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.2}{Definiciones y notaci\363n}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.3}{Propiedades de los Procesos de Duraci\363n Marcada}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.4}{Construcci\363n de Procesos v\355a Variables Latentes}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.4.1}{Modelo Latente de Markov}{section.2.4}% 9
+\BOOKMARK [2][-]{subsection.2.4.2}{Modelo Oculto de Markov}{section.2.4}% 10
+\BOOKMARK [2][-]{subsection.2.4.3}{Comparaci\363n entre Modelos Latentes y Ocultos de Markov}{section.2.4}% 11
+\BOOKMARK [1][-]{section.2.5}{Construcci\363n del Modelo de Marcas}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.6}{Discusi\363n}{chapter.2}% 13
+\BOOKMARK [0][-]{chapter.3}{Inferencia y Predicci\363n}{}% 14
+\BOOKMARK [1][-]{section.3.1}{Introducci\363n}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.2}{Verosimilitud Extendida}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.3}{Log-concavidad en las funciones de distribuci\363n}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.4}{Inferencia en modelos con variables latentes.}{chapter.3}% 18
+\BOOKMARK [0][-]{chapter.4}{Inferencia Bayesiana}{}% 19
+\BOOKMARK [1][-]{section.4.1}{Introducci\363n}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.2}{Paradigma Bayesiano}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.3}{Algoritmo para el modelo de duraci\363n marcada}{chapter.4}% 22
+\BOOKMARK [0][-]{chapter.5}{Ilustraci\363n del Modelo}{}% 23
+\BOOKMARK [1][-]{section.5.1}{Introducci\363n}{chapter.5}% 24
+\BOOKMARK [1][-]{section.5.2}{Diabetes Mellitus en el mundo: Costos y Prevalencia}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.3}{Descripci\363n de Datos Simulados}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.4}{An\341lisis Descriptivo}{chapter.5}% 27
+\BOOKMARK [1][-]{section.5.5}{Resultados}{chapter.5}% 28
+\BOOKMARK [0][-]{chapter.6}{Conclusiones}{}% 29
+\BOOKMARK [1][-]{section.6.1}{Qu\351 me deja este trabajo?}{chapter.6}% 30
+\BOOKMARK [1][-]{section.6.2}{Visi\363n Cr\355tica Aut\363noma}{chapter.6}% 31
+\BOOKMARK [1][-]{section.6.3}{Trabajo Futuro}{chapter.6}% 32
+\BOOKMARK [0][-]{section*.14}{Appendices}{}% 33
+\BOOKMARK [0][-]{Apéndice.alph1.Alph1}{Slice Sampler}{}% 34
+\BOOKMARK [0][-]{Apéndice.alph1.Alph2}{El Algoritmo EM}{}% 35
+\BOOKMARK [0][-]{Apéndice.alph1.Alph3}{El Muestreador de Gibbs}{}% 36
+\BOOKMARK [1][-]{section.alph1.Alph3.1}{El Muestreador de Gibbs general}{Apéndice.alph1.Alph3}% 37
+\BOOKMARK [1][-]{section.alph1.Alph3.2}{El Muestreador de Gibbs para modelos espacio-estado}{Apéndice.alph1.Alph3}% 38

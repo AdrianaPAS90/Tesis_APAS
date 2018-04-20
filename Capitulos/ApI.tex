@@ -1,4 +1,4 @@
-\section{Slice Sampler}
+\chapter{Slice Sampler}
 En la funci\'on de verosimilitus definida en la secci\'on anterior, las distribuciones de la variable latente $\gamma_i$ y de los par\'ametros $\alpha_d,\alpha_\theta,\alpha_\gamma$ no se pueden expresar de una forma anal\'itica cerrada. Es por esto que antes de empezar a estimar la funci\'on de verosimilitud es necesario muestrear primero estas distribuciones para lograr que los m\'etodos de estimaci\'on funcionen de la mejor manera. Este primer acercamiento se hace mediante el Slice Sampler.\\
 \\
 De acuerdo con \cite{neal2003slice} existen varias aplicaciones para esta manera de muestrear, desde la manera m\'as simple con una distribuci\'on univariada como alternativa al Muestreador de Gibbs hasta la m\'as compleja donde se pueden adaptar relaciones de dependencia entre las variables, permitiendo mayor flexibilidad al Muestreador de Gibbs. Esta es la clase de Slice Sampler que se utilizar\'a en este trabajo de investigaci\'on.\\
