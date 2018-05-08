@@ -167,11 +167,47 @@ Esto implicar\'ia que el orden de las observaciones importa y que las observacio
 P(D_n,...,D_1)&=&P(D_n|D_{n-1},...,D_1)\times P(D_{n-1}|D_{n-2},...,D_1)\times \cdots\\
                &\times& P(D_2|D_1)\times P(D_1)
 \end{eqnarray*}	
-As\'i si la variable aleatoria depende de su historia, podr\'iamos entonces predecir observaciones futuras. Es decir, que para toda $s \geq 0$
-\begin{eqnarray*}
-P(D_{n+1},D_n,...,D_1)&=&P(D_{n+1}|D_n,...,D_1)\\
-                      &=&P(D_{n+s+1}|D_{n+s},...,D_{1+s}) \nonumber
-\end{eqnarray*}
+As\'i si la variable aleatoria depende de su historia, podr\'iamos entonces predecir observaciones futuras. Es decir, que si para toda $s \geq 0$
+\begin{multline*}
+P(D_{n+1},D_n,...,D_1)=P(D_{n+s+1},...,D_{s+1})\\
+\Rightarrow P(D_{n+1}|D_n,...,D_1) = P(D_{n+s+1}|D_{n+s},...,D_{s+1})
+\end{multline*}
+Esto se prueba por inducci\'on de la siguiente manera,
+\begin{proof}
+Para n=1 se cumple que,\\
+\begin{align*}
+P(D_1,D_2)=P(D_{1+s},D_{2+s})
+\end{align*}
+Luego,\\
+\begin{align*}
+P(D_2|D_1)P(D_1)=P(D_{2+s}|D_{1+s})P(D_{1+s})
+\end{align*}
+Pero por hip\'otesis, $P(D_1)=P(D_{1+s})$\\
+$\Rightarrow P(D_2|D_1)=P(D_{2+s}|D_{1+s})$\\
+\\
+Ahora, supongamos que
+\begin{align*}
+P(D_{n+1},...,D_1) = P(D_{1+s},...,D_{n+s+1}) \quad \forall n
+\end{align*}
+Y,
+\begin{align*}
+P(D_{n+1}|D_n,...,D_1)=P(D_{n+s+1}|D_{n+s},...,D_{1+s})
+\end{align*}
+Para $n+1$ sabemos que,
+\begin{align*}
+P(D_1,...,D_{n+1},D_{n+2})=P(D_{1+s},...,D_{n+s+1},D_{n+s+2})
+\end{align*}
+Luego,
+\begin{multline*}
+P(D_{n+2}|D_{n+1},...,D_1)\times P(D_{n+1}|D_n,...,D_1)\times,...,\times P(D_2|D_1)P(D_1) = \\
+= P(D_{n+s+2}|D_{n+s+1},...,D_{1+s}) \times P(D_{n+s+1}|D_{n+s},...,D_{1+s}) \times,...,\times\\
+P(D_{2+s}|D_{1+s})P(D_{1+s})
+\end{multline*}
+As\'i, por hip\'otesis,
+\begin{align*}
+P(D_{n+s+2}|D_{n+s+1},...,D_{1+s})=P(D_{n+2}|D_{n+1},...,D_1)
+\end{align*}
+\end{proof}
 De este modo, para el proceso de duraci\'on marcada la estacionariedad, junto con la noci\'on desarrollada en la ecuaci\'on $(3)$ sobre la relaci\'on de las marcas con el proceso de duraci\'on, se podr\'ia plantear, para un individuo $i$, como
 \begin{eqnarray*}
 P(d_{i1},c_{i1},...,d_{in_i},c_{in_i}|N(T_i)=n_i)&=&P(d_{i1},c_{i1})\\
