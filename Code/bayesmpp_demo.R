@@ -15,7 +15,8 @@ M.sim <- 10
 
 bayesmpp_out <- bayesmpp(datos,M.sim,alpha_0=2,beta_0=0.3)
   
-save(alpha_0,
+save(datos,
+     alpha_0,
      beta_0,
      M.sim,
      bayesmpp_out,

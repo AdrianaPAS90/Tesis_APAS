@@ -1,7 +1,7 @@
 bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   #
   # datos - Matriz de dimension 
-  #         contador	paciente	num.obs	presc.code	presc.cost
+  #         contador	paciente	num.cambio	duracion	costo
   # M.sim - Numero de simulaciones MCMC
   # alpha_0 - Prior shape parameter for Gamma distribution
   # beta_0 - Prior scale parameter for Gamma distribution
@@ -32,8 +32,8 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   beta_gamma_rep <- array(NaN,M.sim)
   
   # Latentes
-  thetagamma_rep <- array(NaN,dim=c(dim.datos[1],dim.datos[2],M.sim))
-  gamma_rep <- list()
+  thetagamma_rep <- array(NaN,dim=c(dim.datos[1],(dim.datos[2]-1),M.sim))
+  #dim(thetagamma_rep)
 
   #	--- Valores iniciales
   alpha_d_sim <- 1
@@ -42,18 +42,22 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   alpha_gamma_sim <- 1
   beta_gamma_sim <- 1
   
-  theta_sim <- 1
-  gamma_sim <- 1
-  
-  #	--- Gibbs sampler
+  theta_sim <- array(1,dim=c(dim.datos[1],1,1))
+  gamma_sim <- array(1,dim=c(dim.datos[1],1,1))
+
+    #	--- Gibbs sampler
   m <- 1	
   for(m in 1:M.sim){
+    # Parametros
     alpha_d_sim <- alpha_d_sim
     alpha_theta_sim <- alpha_d_sim
     beta_theta_sim <- alpha_d_sim
     alpha_gamma_sim <- alpha_d_sim
     beta_gamma_sim <- alpha_d_sim
     
+    # Latentes
+    theta_sim <- theta_sim
+    gamma_sim <- gamma_sim
     
     #	Almacenamos en el repositorio los parametros.
     alpha_d_rep[m] <- alpha_d_sim
@@ -62,15 +66,17 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
     alpha_gamma_rep[m] <- alpha_gamma_sim
     beta_gamma_rep[m] <- beta_gamma_sim
     
+    thetagamma_rep[,3,m] <- theta_sim
+    thetagamma_rep[,4,m] <- gamma_sim
   }
 
   # --- Output
-  ouput <- list(alpha_d_rep,
+  output <- list(alpha_d_rep,
                 alpha_theta_rep,
                 beta_theta_rep,
                 alpha_gamma_rep,
                 beta_gamma_rep,
                 thetagamma_rep)
 
-  return(ouput)
+  return(output)
 }
