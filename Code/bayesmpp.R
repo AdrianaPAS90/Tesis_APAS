@@ -10,17 +10,20 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   # Preliminar
   source("./Code/slice.sampler/uni.slice.R")  
   
+  # Numero de pacientes
   N.paciente <- length(unique(datos$paciente))
   
+  # Observaciones correspondientes a pacientes
   N.observaciones <- aggregate(datos[,c("paciente","num.obs")],
                                by=list(datos$paciente),
                                FUN=max)
   dim(N.observaciones)
-  head(N.observaciones)
+  colnames(N.observaciones)
 
   dim.datos <- dim(datos)
   
-  # Repositorios
+  # --- Repositorios
+  
   #	Parametros
   alpha_d_rep <- array(NaN,M.sim)
   alpha_theta_rep <- array(NaN,M.sim)
@@ -32,7 +35,7 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   thetagamma_rep <- array(NaN,dim=c(dim.datos[1],dim.datos[2],M.sim))
   gamma_rep <- list()
 
-  #	Valores iniciales
+  #	--- Valores iniciales
   alpha_d_sim <- 1
   alpha_theta_sim <- 1
   beta_theta_sim <- 1
@@ -42,9 +45,15 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   theta_sim <- 1
   gamma_sim <- 1
   
-  #	Gibbs sampler, per se
+  #	--- Gibbs sampler
   m <- 1	
   for(m in 1:M.sim){
+    alpha_d_sim <- alpha_d_sim
+    alpha_theta_sim <- alpha_d_sim
+    beta_theta_sim <- alpha_d_sim
+    alpha_gamma_sim <- alpha_d_sim
+    beta_gamma_sim <- alpha_d_sim
+    
     
     #	Almacenamos en el repositorio los parametros.
     alpha_d_rep[m] <- alpha_d_sim
@@ -55,10 +64,13 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
     
   }
 
-    # Output
-  ouput <- list(alpha_d_rep, alpha_theta_rep, 
-                beta_theta_rep, alpha_gamma_rep,
-                beta_gamma_rep)
+  # --- Output
+  ouput <- list(alpha_d_rep,
+                alpha_theta_rep,
+                beta_theta_rep,
+                alpha_gamma_rep,
+                beta_gamma_rep,
+                thetagamma_rep)
 
-  return(output)
-  }
+  return(ouput)
+}
