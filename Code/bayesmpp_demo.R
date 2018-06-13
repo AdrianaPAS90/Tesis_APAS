@@ -2,9 +2,11 @@
 
 rm(list = ls())
 
-datos<-read.csv("./Diabetes.Marked/diabetes_marked_datos_sim.csv", header = TRUE)
+datos<-read.csv("./Diabetes.Marked/datos_agregados.csv", header = TRUE)
+head(datos)
 
 source("./Code/bayesmpp.R")
+source('./Code/slice.sampler/uni.slice.R')
 
 # Prior
 alpha_0 <- 2

@@ -1,4 +1,4 @@
-"","contador","paciente","num.obs","presc.code","presc.cost","duration","costs"
+"","contador","paciente","num.cambio","presc.code","presc.cost","duration","costs"
 "1",1,"1",1,1,456.35,1,456.35
 "2",2,"1",2,5,2801.59,2,5603.18
 "4",4,"1",4,11,3061.6,1,3061.6

@@ -9,16 +9,17 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   
   # Preliminar
   source("./Code/slice.sampler/uni.slice.R")  
+  source('./Code/alpha_d_slice.R')
   
   # Numero de pacientes
   N.paciente <- length(unique(datos$paciente))
   
   # Observaciones correspondientes a pacientes
-  N.observaciones <- aggregate(datos[,c("paciente","num.obs")],
+  N.observaciones <- aggregate(datos[,c("paciente","num.cambio")],
                                by=list(datos$paciente),
                                FUN=max)
   dim(N.observaciones)
-  colnames(N.observaciones)
+  colnames(N.observaciones) <- c("id","paciente","num.cambios")
 
   dim.datos <- dim(datos)
   
@@ -44,12 +45,19 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   
   theta_sim <- array(1,dim=c(dim.datos[1],1,1))
   gamma_sim <- array(1,dim=c(dim.datos[1],1,1))
+  
+  head(datos)
+  
+  d <- datos[,c("paciente","num.cambio","duration")]
+  head(d)
 
-    #	--- Gibbs sampler
+  #	--- Gibbs sampler
   m <- 1	
   for(m in 1:M.sim){
     # Parametros
-    alpha_d_sim <- alpha_d_sim
+    alpha_d_sim <- alpha_d_slice( alpha_theta_sim,alpha_d_sim,theta_sim,
+                                  alpha_0,beta_0,
+                                  d,N.observaciones) #alpha_d_sim
     alpha_theta_sim <- alpha_d_sim
     beta_theta_sim <- alpha_d_sim
     alpha_gamma_sim <- alpha_d_sim

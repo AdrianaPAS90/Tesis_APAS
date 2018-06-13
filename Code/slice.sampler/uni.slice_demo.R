@@ -17,14 +17,10 @@
 #     on 200 equally spaced points from the sample generated (which are
 #     presumed to be virtually independent)
 
-rm(list=ls())
-
-wpath <- "F:/JCMO.Research/_coding/_r/slice/"
-
 # -------------
 #	code
 # -------------
-source(paste(wpath,'uni.slice.R',sep=''))
+source('./Code/slice.sampler/uni.slice.R')
 
 # -------------
 #	Functions
@@ -96,7 +92,8 @@ m <- Inf
 lower <- -Inf
 upper <- +Inf
 
-undates_1 <- updates(rnorm(1), function(x) -x^2/2 )
+beta <- 0
+undates_1 <- updates(rnorm(1), function(x) -(x-beta)^2/2 )
 display (rnorm(ss),0,"Standard normal")
 
 # Standard normal, reusing density, m = Inf.
