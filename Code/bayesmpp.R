@@ -14,7 +14,8 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   source('./Code/beta_theta_slice.R')
   source('./Code/alpha_gamma_slice.R')
   source('./Code/beta_gamma_slice.R')
-  
+  source('./Code/theta_ij_slice.R')
+
   # Numero de pacientes
   N.paciente <- length(unique(datos$paciente))
   
@@ -50,10 +51,11 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   theta_sim <- array(1,dim=c(dim.datos[1],1,1))
   gamma_sim <- array(1,dim=c(dim.datos[1],1,1))
   
-  head(datos)
+  #head(datos)
   
   d <- datos[,c("paciente","num.cambio","duration")]
-  head(d)
+  
+  #head(d)
 
   #	--- Gibbs sampler
   m <- 1	
@@ -78,7 +80,7 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
                                        alpha_0,beta_0)
     
     # Latentes
-    theta_sim <- theta_sim
+    theta_sim <- theta_ij_slice(alpha_d_sim,alpha_theta_sim,beta_theta_sim,d)#theta_sim
     gamma_sim <- gamma_sim
     
     #	Almacenamos en el repositorio los parametros.
@@ -88,8 +90,8 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
     alpha_gamma_rep[m] <- alpha_gamma_sim
     beta_gamma_rep[m] <- beta_gamma_sim
     
-    thetagamma_rep[,3,m] <- theta_sim
-    thetagamma_rep[,4,m] <- gamma_sim
+    thetagamma_rep[,3,m] <- theta_sim$theta_ij_sim
+    thetagamma_rep[,4,m] <- gamma_sim$gamma_ij_sim
   }
 
   # --- Output
