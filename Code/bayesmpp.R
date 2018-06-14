@@ -10,6 +10,10 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   # Preliminar
   source("./Code/slice.sampler/uni.slice.R")  
   source('./Code/alpha_d_slice.R')
+  source('./Code/alpha_theta_slice.R')
+  source('./Code/beta_theta_slice.R')
+  source('./Code/alpha_gamma_slice.R')
+  source('./Code/beta_gamma_slice.R')
   
   # Numero de pacientes
   N.paciente <- length(unique(datos$paciente))
@@ -55,13 +59,23 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   m <- 1	
   for(m in 1:M.sim){
     # Parametros
-    alpha_d_sim <- alpha_d_slice( alpha_theta_sim,alpha_d_sim,theta_sim,
+    alpha_d_sim <- alpha_d_slice( alpha_theta_sim,alpha_d_sim,beta_theta_sim, theta_sim,
                                   alpha_0,beta_0,
-                                  d,N.observaciones) #alpha_d_sim
-    alpha_theta_sim <- alpha_d_sim
-    beta_theta_sim <- alpha_d_sim
-    alpha_gamma_sim <- alpha_d_sim
-    beta_gamma_sim <- alpha_d_sim
+                                  d,N.observaciones) 
+    
+    alpha_theta_sim <- alpha_theta_slice(alpha_d_sim, alpha_theta_sim,beta_theta_sim, theta_sim,
+                                         alpha_0,beta_0,
+                                         d,N.observaciones)
+    
+    beta_theta_sim <- beta_theta_slice(alpha_d_sim, alpha_theta_sim, beta_theta_sim, theta_sim,
+                                       alpha_0, beta_0,
+                                       d,N.observaciones)
+    
+    alpha_gamma_sim <- alpha_gamma_slice(alpha_gamma_sim, gamma_sim,
+                                         alpha_0,beta_0)
+      
+    beta_gamma_sim <- beta_gamma_slice(beta_gamma_sim, gamma_sim,
+                                       alpha_0,beta_0)
     
     # Latentes
     theta_sim <- theta_sim

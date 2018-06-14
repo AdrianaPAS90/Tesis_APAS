@@ -1,4 +1,4 @@
-alpha_d_slice <- function(alpha_theta_sim,alpha_d_sim,theta_sim,
+alpha_d_slice <- function(alpha_theta_sim,alpha_d_sim,beta_theta_sim, theta_sim,
                           alpha_0,beta_0,
                           d,N.observaciones){
   #
