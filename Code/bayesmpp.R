@@ -54,6 +54,7 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   #head(datos)
   
   d <- datos[,c("paciente","num.cambio","duration")]
+  c <- datos[,c("paciente","num.cambio","costs")]
   
   #head(d)
 

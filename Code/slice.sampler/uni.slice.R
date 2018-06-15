@@ -54,17 +54,17 @@ uni.slice <- function (x0, g, w=1, m=Inf, lower=-Inf, upper=+Inf, gx0=NULL){
 
   # Check the validity of the arguments.
 
-  if (!is.numeric(x0) || length(x0)!=1
-   || !is.function(g) 
-   || !is.numeric(w) || length(w)!=1 || w<=0 
-   || !is.numeric(m) || !is.infinite(m) && (m<=0 || m>1e9 || floor(m)!=m)
-   || !is.numeric(lower) || length(lower)!=1 || x0<lower
-   || !is.numeric(upper) || length(upper)!=1 || x0>upper
-   || upper<=lower 
-   || !is.null(gx0) && (!is.numeric(gx0) || length(gx0)!=1))
-  { 
-    stop ("Invalid slice sampling argument")
-  }
+  #if (!is.numeric(x0) || length(x0)!=1
+   #|| !is.function(g) 
+   #|| !is.numeric(w) || length(w)!=1 || w<=0 
+   #|| !is.numeric(m) || !is.infinite(m) && (m<=0 || m>1e9 || floor(m)!=m)
+   #|| !is.numeric(lower) || length(lower)!=1 || x0<lower
+   #|| !is.numeric(upper) || length(upper)!=1 || x0>upper
+   #|| upper<=lower 
+   #|| !is.null(gx0) && (!is.numeric(gx0) || length(gx0)!=1))
+  #{ 
+    #stop ("Invalid slice sampling argument")
+  #}
 
   # Keep track of the number of calls made to this function.
   uni.slice.calls <- 0	# Number of calls of the slice sampling function
