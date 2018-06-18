@@ -82,7 +82,7 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
     
     # Latentes
     theta_sim <- theta_ij_slice(alpha_d_sim,alpha_theta_sim,beta_theta_sim,d)#theta_sim
-    gamma_sim <- gamma_sim
+    gamma_sim <- gamma_ij_slice (alpha_gamma_sim, beta_gamma_sim, d, c)
     
     #	Almacenamos en el repositorio los parametros.
     alpha_d_rep[m] <- alpha_d_sim
