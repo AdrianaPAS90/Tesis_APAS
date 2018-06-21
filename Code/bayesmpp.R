@@ -15,6 +15,7 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   source('./Code/alpha_gamma_slice.R')
   source('./Code/beta_gamma_slice.R')
   source('./Code/theta_ij_slice.R')
+  source('./Code/gamma_ij_slice.R')
 
   # Numero de pacientes
   N.paciente <- length(unique(datos$paciente))

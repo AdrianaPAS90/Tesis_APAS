@@ -1,18 +1,15 @@
-gamma2_slice<-function(punto_inicial2, alpha_gamma_sim,beta_gamma_sim,
-                       d,c){
-  los.unos.c <- which(c$num.cambio==1)
-  los.unos <- which(d$num.cambio==1)
-  los.no.unos <-which(d$num.cambio>=2)
-  los.no.unos.c <- which(c$num.cambio>=2)
-  
+gamma2_slice<-function(punto_inicial2, 
+                       alpha_gamma_sim,beta_gamma_sim,
+                       d_aux_ij,c_aux_ij,d_aux_ijm,c_aux_ijm){
+
   #a
   #-(d[los.no.unos,"duration"]+  d[los.no.unos-1,"duration"] + alpha_gamma_sim)*log(gamma_sim[los.no.unos.c,1,1])
   
   #b
   #(beta_gamma_sim/gamma_sim[los.no.unos.c,1,1])+ ((c[los.no.unos.c,"costs"])/gamma_sim[los.no.unos.c,1,1])^(d[los.no.unos-1,"duration"]) +((c[los.no.unos.c,"costs"]/gamma_sim[los.no.unos.c,1,1])^(d[los.no.unos,"duration"]))
   
-  uni_gamma2 <- uni.slice(punto_inicial2, function(gamma2) -(d[los.no.unos[i],"duration"]+  d[los.no.unos[i]-1,"duration"] + alpha_gamma_sim)*log(gamma2)
-                          -(beta_gamma_sim/gamma2)+ ((c[los.no.unos.c[i],"costs"])/gamma2)^(d[los.no.unos[i]-1,"duration"]) +((c[los.no.unos.c[i],"costs"]/gamma2)^(d[los.no.unos[i],"duration"])),
+  uni_gamma2 <- uni.slice(punto_inicial2, function(gamma2) -(d_aux_ij + d_aux_ijm + alpha_gamma_sim+1)*log(gamma2)
+                          -( (beta_gamma_sim/gamma2) + ((c_aux_ijm)/gamma2)^(d_aux_ijm) + (c_aux_ij/gamma2)^(d_aux_ij) ),
                           w=1, m=Inf, lower=0, upper=+Inf)
   
   
