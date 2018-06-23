@@ -115,104 +115,135 @@ Donde para las variables latentes asociada a las duraciones,
 Y para la variable latente asociada a los costos,
 \begin{eqnarray*}
 \pi(\gamma_{ij}|\alpha_\gamma,\beta_\gamma,d_{ij},c_{ij-1})&\propto& Weibull(c_{ij}|d_{ij},\gamma_{ij})\times\\
-&\times& (\frac{1}{\gamma_{ij}})^{d_{ij} +\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_{ij}}+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij}}\}}\\
+&\times& \bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij-1} +\alpha_\gamma+1} \quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}\big)}\\
 \\
-&=&\frac{d_{ij}}{\gamma_{ij}^{d_{ij}}}c_{ij}^{d_{ij-1}}e^{\{-(\frac{c_{ij}}{\gamma_{ij}})\}}\times\\
-&\times&(\frac{1}{\gamma_{ij}})^{d_{ij}+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_{ij}}+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij}})\}}\\
+&=&\frac{d_{ij}}{\gamma_{ij}^{d_{ij}}}\quad c_{ij}^{d_{ij-1}}\quad e^{-\big(\frac{c_{ij}}{\gamma_{ij}}\big)^{d_{ij}}}\times\\
+&\times& \bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij-1} +\alpha_\gamma+1} \quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}\big)}\\
 \\
-&=&d_{ij} c_{ij}^{d_{ij}-1}(\frac{1}{\gamma_{ij}})^{2d_{ij}+\alpha_\gamma+1}\times \\
-&\times&e^{\{-(\frac{\beta_\gamma}{\gamma_{ij}}+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij}}+(\frac{c_{ij}}{\gamma_{ij}})^{d_{ij}})\}}\\
+&=&d_{ij}\quad c_{ij}^{d_{ij}-1}\quad\bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij}+d_{ij-1}+\alpha_\gamma+1}\\
 \\
-&\propto&\left(\frac{1}{\gamma_j}\right)^{2d_j+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_j}+(\frac{c_{ij-1}+c_{ij}}{\gamma_{ij}})^{d_{ij}}\}}
+&\times& e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}+(\frac{c_{ij}}{\gamma_{ij}})^{d_{ij}}\big)}\\
+\\
+&\propto&\left(\frac{1}{\gamma_{ij}}\right)^{d_j+d_{ij-1}+\alpha_\gamma+1}e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}+(\frac{c_{ij}}{\gamma_{ij}})^{d_{ij}}\big)}
 \end{eqnarray*}
-De manera an\'aloga, las distribuciones que corresponden a los par\'ametros para un solo individuo $i$. En primer lugar tenemos las distribuciones relativas a los par\'ametros del modelo Gamma-Gamma correspondiente a la variable observable de las duraciones $\alpha_d, \alpha_\theta, \beta_\theta$,
+De manera an\'aloga, podemos desarrollar las distribuciones posteriores de los par\'ametros mediante la noci\'on bayesiana a que \'esta es proporcional la verosimilitud de las variables latentes correspondientes, multiplic\'andolos por la distribuci\'on inicial de cada par\'ametro. En primer lugar tenemos las distribuciones relativas a los par\'ametros del modelo Gamma-Gamma correspondiente a la variable observable de las duraciones $\alpha_d, \alpha_\theta, \beta_\theta$. El par\'ametro $\alpha_d$ es el par\'ametro de forma de la distribuci\'on de la variable observable de las duraciones ,\\
 \begin{eqnarray*}
-\pi(\alpha_d|...)&\propto& \prod_{j=1}^{N(T_i)} Gamma(\theta_{ij}|\alpha_d+\alpha_\theta,d_{ij-1}+\beta_\theta)\times\\
+\pi(\alpha_d|(\theta_{ij})_{j=1}^{n_i}._{i=1}^I) &\propto& \Big(\prod_{i=1}^I Gamma(\theta_{i1}|\alpha_d+\alpha_\theta, d_{i1}+\beta_\theta) \\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} Gamma(\theta_{ij}|2\alpha_d+\alpha_\theta, d_{ij}+d_{ij-1}+\beta_\theta) \Big) \\
 &\times& Gamma(\alpha_d|\alpha_0,\beta_0)\\
-\\
-&=&\prod_{j=1}^{N(T_i)}\frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_{ij}(d_{ij-1}+\beta_\theta)\}}\times\\
-&\times&\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
-\\
-&\propto&\prod_{j=1}^{N(T_i)}\frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\alpha_\theta|...)&\propto&\prod_{j=1}^{N(T_i)} Gamma(\theta_{ij}|\alpha_d+\alpha_\theta,d_{ij-1}+\beta_\theta)\times\\
+&=& \bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1}\quad e^{-\theta_{i1}(d_{i1}+\beta_\theta)} \\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1} \quad e^{-\theta_{ij}(d_{ij}+d_{ij-1}+\beta_\theta)}\bigg)\\
+\\
+&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_d^{\alpha_0-1} e^{-\alpha_d\beta_0}\\
+\\
+\\
+&\propto& \Bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d} \quad \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d}}{\Gamma(2\alpha_d+\alpha_\theta)}\quad\theta_{ij}^{2\alpha_d}\Bigg) \times \alpha_d^{\alpha_0-1} \quad e^{-\alpha_d\beta_0}\\
+\\
+\\
+&\propto& \Big(\frac{1}{\Gamma(\alpha_d+\alpha_\theta)}\Big)^I \Big(\frac{1}{\Gamma(2\alpha_d+\alpha_\theta)}\Big)^{\sum_{i=1}^I n_i} \quad \alpha_d^{\alpha_0-1} e^{-\alpha_d\beta_0} \times \\
+&\times& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d} \quad \theta_{i1}^{\alpha_d}\quad \times \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d}\quad \theta_{ij}^{2\alpha_d}\Bigg)
+\end{eqnarray*}
+\\
+\\
+El par\'ametro $\alpha_\theta$ es el par\'ametro de forma de la distribuci\'on de la variable latente $\theta$, es por esto que la distribuci\'on posterior es tan similar a aquella de $\alpha_d$ al ser los dos par\'ametros de forma,
+\begin{eqnarray*}
+\pi(\alpha_\theta|(\theta_{ij})_{j=1}^{n_i}._{i=1}^I) &\propto& \Bigg(\prod_{i=1}^I Gamma(\theta_{i1}|\alpha_d+\alpha_\theta, d_{i1}+\beta_\theta)\\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} Gamma(\theta_{ij}|2\alpha_d+\alpha_\theta, d_{ij}+d_{ij-1}+\beta_\theta) \Bigg) \\
 &\times& Gamma(\alpha_\theta|\alpha_0,\beta_0)\\
+\end{eqnarray*}
+
+\begin{eqnarray*}
+&=&\Bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1} \quad e^{-\theta_{i1}(d_{i1}+\beta_\theta)}\\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1} \quad e^{-\theta_{ij}(d_{ij}+d_{ij-1}+\beta_\theta)}\Bigg) \\
 \\
-&=&\prod_{j=1}^{N(T_i)}\frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_{ij}(d_{ij-1}+\beta_\theta)\}}\times\\
-&\times&\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
+&\times & \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \quad \alpha_\theta^{\alpha_0-1} e^{-\alpha_\theta\beta_0}\\
 \\
-&\propto& \prod_{j=1}^{N(T_i)}\frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}
+\\
+&\propto& \Bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_\theta} \quad \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)}\quad\theta_{ij}^{\alpha_\theta}\Bigg) \times \alpha_\theta^{\alpha_0-1} \quad e^{-\alpha_\theta\beta_0}\\
+\\
+\\
+\\
+&=&\Big(\frac{1}{\Gamma(\alpha_d+\alpha_\theta)}\Big)^I \Big(\frac{1}{\Gamma(2\alpha_d+\alpha_\theta)}\Big)^{\sum_{i=1}^I n_i} \quad \alpha_\theta^{\alpha_0-1} e^{-\alpha_\theta\beta_0} \times \\
+&\times& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_\theta} \quad \theta_{i1}^{\alpha_\theta}\quad \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{\alpha_\theta} \quad \theta_{ij}^{\alpha_\theta}\Bigg)
 \end{eqnarray*}
 \\
+\\
+El par\'ametro $\beta_\theta$ es el par\'ametro de escala correspondiente a la distribuci\'on de la variable latente de las duraciones, $\theta$,
 \begin{eqnarray*}
-\pi(\beta_\theta|...)&\propto&\prod_{j=1}^{N(T_i)} Gamma(\theta_{ij}|\alpha_d+\alpha_\theta,d_{ij-1}+\beta_\theta)\times\\
+\pi(\beta_\theta|(\theta_{ij})_{j=1}^{n_i}._{i=1}^I) &\propto& \Big(\prod_{i=1}^I Gamma(\theta_{i1}|\alpha_d+\alpha_\theta, d_{i1}+\beta_\theta)\\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} Gamma(\theta_{ij}|2\alpha_d+\alpha_\theta, d_{ij}+d_{ij-1}+\beta_\theta) \Big) \\
 &\times& Gamma(\beta_\theta|\alpha_0,\beta_0)\\
-\\
-&=&\prod_{j=2}^{N(T_i)}\frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d+\alpha_\theta-1} e^{\{-\theta_{ij}(d_{ij-1}+\beta_\theta)\}}\times\\
-&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\theta^{\alpha_0-1}e^{\{-\beta_\theta\beta_0\}}\\
-\\
-&\propto&\prod_{j=2}^{N(T_i)}(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_{ij}+\beta_0)\}}
-\end{eqnarray*}
-\\
-De igual modo, tenemos las distribuciones para los par\'ametros del modelo Gamma Inversa-Weibull que describe el comportamiento de los costos a trav\'es de la variable latente $\gamma$, $\alpha_\gamma, \beta_\gamma$,\\
-\\
-\begin{eqnarray*}
-\pi(\alpha_\gamma|...)&\propto&\prod_{j=1}^{N(T_i)} \pi(\gamma_{ij}|\alpha_\gamma,\beta_\gamma,d_{ij},c_{ij-1})\times Gamma(\alpha_\gamma|\alpha_0,\beta_0)\\
-&=&\prod_{j=1}^{N(T_i)}\left(\frac{1}{\gamma_{ij}}\right)^{d_{ij}+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_{ij}}+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij}})\}}\times \\
-&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
-\\
-&\propto&\prod_{j=1}^{N(T_i)} \left(\frac{1}{\gamma_{ij}}\right)^{\alpha_\gamma}\alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\beta_\gamma|...)&\propto&\prod_{j=2}^{N(T_i)} \pi(\gamma_{ij}|\alpha_\gamma,\beta_\gamma,d_{ij},c_{ij-1})\times Gamma(\beta_\gamma|\alpha_0,\beta_0)\\
+&=&\Bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1} \quad e^{-\theta_{i1}(d_{i1}+\beta_\theta)} \\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1} \quad e^{-\theta_{ij}(d_{ij}+d_{ij-1}+\beta_\theta)}\Bigg) \\
 \\
-&=&\prod_{j=2}^{N(T_i)}\left(\frac{1}{\gamma_{ij}}\right)^{d_{ij}+\alpha_\gamma+1}e^{\{-(\frac{\beta_\gamma}{\gamma_{ij}}+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij}})\}}\frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma\beta_0\}}\\
-&\propto&\beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_{ij}}+\beta_0)\}}\\
+&\times & \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \quad \beta_\theta^{\alpha_0-1} e^{-\beta_\theta\beta_0}\\
 \\
-&\propto& \beta_\gamma \sim Gamma(\alpha_0,\frac{1}{\gamma_i}+\beta_0)
-\end{eqnarray*}
-Los par\'ametros a estimar son aquellos correspondientes a las variables latentes, cuyo kernel se estima para cada momento $j$ ($j=1,...,N(T_i)$), y a las variables observables del modelo de cada individup $i$. Las verosimilitudes mostradas para los par\'ametros deben ser extendidas para incluir toda la poblaci\'on muestreada. De este modo, desarrollamos las verosimilitudes extendidas para los par\'ametros que corresponden al modelo Gamma-Gamma que describen las duraciones y la variable latente $\theta$; $\alpha_d, \alpha_\theta, \beta_\theta$, %Dado el uso de las variables latentes no existir\'a un \'optimo global para las variables, raz\'on por la cual se requiere el uso de m\'etodos num\'ericos no solo para la estimaci\'on de los par\'ametros y variables latentes sino para analizar las distribuciones que no tienen expresi\'on anal\'itica cerrada, como aquellas de los par\'ametros $\alpha_d,\alpha_\theta,\alpha_\gamma$ y la variable latente $\gamma_i$.\\
-\begin{eqnarray*}
-\pi(\alpha_d|(\theta_{ij})_{i=1}^I ._{j=1}^{N(T_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \pi(\alpha_d|\theta_{ij},...)\\
-&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_d}\alpha_d^{\alpha_0-1}e^{\{-\alpha_d\beta_0\}}\\
-&\propto & \left(\frac{\alpha_d^{\alpha_0 -1}}{\Gamma(\alpha_d+\alpha_\theta)}\quad e^{\{-\alpha_d\beta_0\}}\right)^{\sum_{i=1}^I N(T_i)}  \times \\
-&\times & \prod_{i=1}^I \prod_{j=2}^{N(T_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d} \quad \theta_{ij}^{\alpha_d}
-\end{eqnarray*}
 \\
-\begin{eqnarray*}
-\pi(\alpha_\theta|(\theta_{ij})_{i=1}^I ._{j=1}^{N(T_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \pi(\alpha_\theta|\theta_{ij},...)\\
-&\propto &\prod_{i=1}^I \prod_{j=1}^{N(T_i)} \frac{(d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \theta_{ij}^{\alpha_\theta}\alpha_\theta^{\alpha_0-1}e^{\{-\alpha_\theta\beta_0\}}\\
-&\propto & \left(\frac{\alpha_\theta^{\alpha_0 -1}}{\Gamma(\alpha_d+\alpha_\theta)}\quad e^{\{-\alpha_\theta\beta_0\}}\right)^{\sum_{i=1}^I N(T_i)} \times \\
-&\times & \prod_{i=1}^I \prod_{j=2}^{N(T_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d} \quad \theta_{ij}^{\alpha_\theta}
+&\propto& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta} \quad e^{-\theta_{i1}\beta_\theta} \quad \times \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta} \quad e^{-\theta_{ij}\beta_\theta} \Bigg) \\
+\\
+&\times& \beta_\theta^{\alpha_0-1} \quad e^{\beta_\theta \beta_0}\\
+\\
+&=& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\times \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}\quad \Bigg)\\
+&\times& \beta_\theta^{\alpha_0-1} \quad e^{-\beta_\theta\big(\beta_0+\sum_{i=1}^I \sum_{j=1}^{n_i}\theta_{ij}\big)}
 \end{eqnarray*}
 \\
-\begin{eqnarray*}
-\pi(\beta_\theta|(\theta_{ij})_{i=1}^I ._{j=1}^{N(T_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \pi(\beta_\theta|\theta_{ij},...)\\
-&\propto &\prod_{i=1}^I \prod_{j=1}^{N(T_i)} (d_{ij-1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\beta_\theta^{\alpha_0-1} e^{\{-\beta_\theta(\theta_ij+\beta_0)\}}\\
-&\propto & (\beta_\theta^{\alpha_0-1})^{\sum_{i=1}^I N(T_i)} \quad e^{\{-\beta_\theta(\sum_{i=1}^I \sum_{j=1}^{N(T_i)}(\theta_{ij}+\beta_0))\}} \times \\
-&\times & \prod_{i=1}^I \prod_{j=2}^{N(T_i)} (d_{ij-1}+\beta_\theta)^{\alpha_\theta+\alpha_d}
-\end{eqnarray*}
 \\
-De igual modo, se describen las verosimilitudes extendidas para los par\'ametros del modelo Gamma Inversa-Weibull que describe los costos y su variable latente $\gamma$; $\alpha_\gamma, \beta_\gamma$,
+\\
+De igual modo, tenemos las distribuciones para los par\'ametros del modelo Gamma Inversa-Weibull que describe el comportamiento de los costos a trav\'es de la variable latente $\gamma$: $\alpha_\gamma, \beta_\gamma$. El par\'ametro $\alpha_\gamma$ es el par\'ametro de forma correspondiente a la distribuci\'on Inversa Gamma que describe la variable latente,\\
 \begin{eqnarray*}
-\pi(\alpha_\gamma|(\gamma_{ij})_{i=1}^I ._{j=1}^{N(T_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \pi(\alpha_\gamma|\gamma_{ij},...)\\
-&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \left(\frac{1}{\gamma_{ij}}\right)^{\alpha_\gamma} \alpha_\gamma^{\alpha_0-1}e^{\{-\alpha_\gamma\beta_0\}}\\
-&\propto & (\alpha_\gamma^{\alpha_0-1}\quad e^{\{-\alpha_\gamma \beta_0\}})^{\sum_{i=1}^I N(T_i)}  \times \\
-&\times & \prod_{i=1}^I \prod_{j=1}^{N(T_i)}\left(\frac{1}{\gamma_{ij}}\right)^{\alpha_\gamma}
+\pi(\alpha_\gamma|(\gamma_{ij})_{i=1}^I._{j=1}^{n_i}) &\propto& \Bigg(\prod_{i=1}^I \bigg(\frac{1}{\gamma_{i1}}\bigg)^{d_{i1+\alpha_\gamma+1}}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{i1}})+(\frac{c_{i1}}{\gamma_{i1}})^{d_{i1}}\big)}\\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij}+d_{ij-1}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}+(\frac{c_{}ij}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\\
+&\times& Gamma(\alpha_\gamma|\alpha_0,\beta_0)
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-\pi(\beta_\gamma|(\theta_{ij})_{i=1}^I ._{j=1}^{N(T_i)})&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \pi(\beta_\gamma|\gamma_{ij},...)\\
-&\propto & \prod_{i=1}^I \prod_{j=1}^{N(T_i)} \beta_\gamma^{\alpha_0-1}e^{\{-\beta_\gamma(\frac{1}{\gamma_{ij}}+\beta_0)\}}\\
-&\propto & (\beta_\gamma^{\alpha_0-1})^{\sum_{i=1}^I N(T_i)} \quad e^{\{-\beta_\gamma(\sum_{i=1}^I \sum_{j=1}^{N(T_i)}\frac{1}{\gamma_{ij}}+\beta_0)\}}
+&=&\Bigg(\prod_{i=1}^I \bigg(\frac{1}{\gamma_{i1}}\bigg)^{d_{i1+\alpha_\gamma+1}}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{i1}})+(\frac{c_{i1}}{\gamma_{i1}})^{d_{i1}}\big)}\\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij}+d_{ij-1}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}+(\frac{c_{ij}}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\\
+\\
+&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \quad \alpha_\gamma^{\alpha_0-1} e^{-\alpha_\gamma\beta_0}\\
+\\
+\\
+&\propto& \Bigg(\prod_{i=1}^I \Big(\frac{1}{\gamma_{i1}}\Big)^{\alpha_\gamma} \times \prod_{i=1}^I \prod_{j=2}^{n_i}\Big(\frac{1}{\gamma_{ij}}\Big)^{\alpha_\gamma}\Bigg)\quad \alpha_\gamma^{\alpha_0-1}e^{-\alpha_\gamma\beta_0}\\
+\\
+\\
+&=&\Bigg(\prod_{i=1}^I \prod_{j=1}^{n_i} \Big(\frac{1}{\gamma_{ij}}\Big)^{\alpha_\gamma}\Bigg) \quad \alpha_\gamma^{\alpha_0-1}e^{-\alpha_\gamma\beta_0}
 \end{eqnarray*}
 \\
-Es importante mencionar que las distribuciones resultantes de la verosimilitud extendida cumplen con las propiedades de log-concavidad descritas en el cap\'itulo anterior. De este modo y de  manera general para cada individuo $i$, tomando la verosimilitud extendida definida anteriormente se fijan los valores iniciales para los par\'ametros $\alpha_d^{(0)},\alpha_\theta^{(0)},\beta_\theta^{(0)},\alpha_\gamma^{(0)},\beta_\gamma^{(0)}$ y para las variables latentes $\{\theta_j^{(0)}\}_{j=1}^{N(T_i)},\{\gamma_j^{(0)}\}_{j=1}^{N(T_i)}$ y para cada $k=1,...,N(T_i)$ tenemos la siguiente distribuci\'on que es proporcional a la verosimilitud,
+\\
+Mientras que el par\'ametro $\beta_\gamma$ corresponde al par\'ametro de escala correspondiente a la distribuci\'on Inversa Gamma que describe el comportamiento de la variable latente, $\gamma$,\\
+\begin{eqnarray*}
+\pi(\beta_\gamma|(\gamma_{ij})_{i=1}^I._{j=1}^{n_i}) &\propto& \Bigg(\prod_{i=1}^I \bigg(\frac{1}{\gamma_{i1}}\bigg)^{d_{i1+\alpha_\gamma+1}}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{i1}})+(\frac{c_{i1}}{\gamma_{i1}})^{d_{i1}}\big)}\\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij}+d_{ij-1}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}+(\frac{c_{ij}}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg) \\
+\\
+&\times& Gamma(\beta_\gamma|\alpha_0,\beta_0)
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+&=&\Bigg(\prod_{i=1}^I \bigg(\frac{1}{\gamma_{i1}}\bigg)^{d_{i1+\alpha_\gamma+1}}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{i1}})+(\frac{c_{i1}}{\gamma_{i1}})^{d_{i1}}\big)}\\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij}+d_{ij-1}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}+(\frac{c_{ij}}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\\
+\\
+&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \quad \beta_\gamma^{\alpha_0-1} e^{-\beta_\gamma\beta_0}\\
+\\
+\\
+&\propto& \Bigg(\prod_{i=1}^I e^{-\big(\frac{\beta_\gamma}{\gamma_{i1}}\big)}\prod_{i=1}^I \prod_{j=2}^{n_i} e^{-\big(\frac{\beta_\gamma}{\gamma_{ij}}\big)}\Bigg) \quad \beta_\gamma^{\alpha_0-1} e^{-\beta_\gamma\beta_0}\\
+\\
+&=&e^{-\bigg(\sum_{i=1}^I \sum_{j=1}^{n_i}\big(\frac{\beta_\gamma}{\gamma_{ij}}\big)\bigg)}\quad \times \beta_\gamma^{\alpha_0-1}\quad e^{-\beta_\gamma\beta_0}\\
+\\
+&=& \beta_\gamma^{\alpha_0-1} e^{-\beta_\gamma\big(\beta_0+\sum_{i=1}^I \sum_{j=1}^{n_i}\big(\frac{1}{\gamma_{ij}}\big))}\\
+\\
+&\propto& \beta_\gamma \sim Gamma\Bigg(\alpha_0,\beta_0+\sum_{i=1}^I \sum_{j=1}^{n_i}\big(\frac{\beta_\gamma}{\gamma_{ij}}\big)\Bigg)
+\end{eqnarray*}
+\\
+\\
+Es importante mencionar que las distribuciones resultantes de la verosimilitud extendida cumplen con las propiedades de log-concavidad descritas en el cap\'itulo anterior. De este modo y de  manera general para cada individuo $i$, tomando la verosimilitud extendida definida anteriormente se fijan los valores iniciales para los par\'ametros $\alpha_d^{(0)},\alpha_\theta^{(0)},\beta_\theta^{(0)},\alpha_\gamma^{(0)},\beta_\gamma^{(0)}$ y para las variables latentes $\{\theta_j^{(0)}\}_{j=1}^{n_i},\{\gamma_j^{(0)}\}_{j=1}^{n_i}$ y para cada $k=1,...,n_i$ tenemos la siguiente distribuci\'on que es proporcional a la verosimilitud,
 \begin{align*}
-\pi(\alpha_d^{(k)},\alpha_\theta^{(k)},\beta_\theta^{(k)},\alpha_\gamma^{(k)},\beta_\gamma^{(k)}|\{\theta_i^{(k-1)}\}_{i=2}^{N(t)},\{\gamma_i^{(k-1)}\}_{i=2}^{N(t)},\{d_i,c_i\}_{i=1}^{N(t)})
+\pi(\alpha_d^{(k)},\alpha_\theta^{(k)},\beta_\theta^{(k)},\alpha_\gamma^{(k)},\beta_\gamma^{(k)}|\{\theta_i^{(k-1)}\}_{i=2}^{n_i},\{\gamma_i^{(k-1)}\}_{i=2}^{n_i},\{d_i,c_i\}_{i=1}^{n_i})
 \end{align*}
 Este es el principio necesario para utilizar el Muestreador de Gibbs de modo que se estimen los par\'ametros en base a las variables latentes que a su vez se estiman en base a las observaciones para que con los par\'ametros estimados se estimen las variables latentes que ayuden a predecir futuras observaciones. %Una vez que se tiene el concepto general de la aplicaci\'on de esta t\'ecnica de muestreo para el objetivo de este trabajo, es necesario considerar las maneras de implementarlo.\\
 

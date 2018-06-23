@@ -28,14 +28,14 @@
 \end{eqnarray*}
 
 \begin{eqnarray*}
-&=& \bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d+\alpha_\theta} e^{-\theta_{i1}(d_{i1}+\beta_\theta)} \\
-&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1} e^{-\theta_{ij}(d_{ij}+d_{ij-1}+\beta_\theta)}\bigg)\\
+&=& \bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1}\quad e^{-\theta_{i1}(d_{i1}+\beta_\theta)} \\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1} \quad e^{-\theta_{ij}(d_{ij}+d_{ij-1}+\beta_\theta)}\bigg)\\
 &\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \alpha_d^{\alpha_0-1} e^{-\alpha_d\beta_0}
 \end{eqnarray*}
 
 \begin{eqnarray*}
 &\propto& \Big(\frac{1}{\Gamma(\alpha_d+\alpha_\theta)}\Big)^I \Big(\frac{1}{\Gamma(2\alpha_d+\alpha_\theta)}\Big)^{\sum_{i=1}^I n_i} \quad \alpha_d^{\alpha_0-1} e^{-\alpha_d\beta_0} \times \\
-&\times& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1} \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}\quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1}\Bigg)
+&\times& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d} \quad \theta_{i1}^{\alpha_d} \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d}\quad \theta_{ij}^{2\alpha_d}\Bigg)
 \end{eqnarray*}
 \\
 \\
@@ -46,19 +46,19 @@
 \end{eqnarray*}
 
 \begin{eqnarray*}
-&=&\Bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1} e^{-\theta_{i1}(d_{i1}+\beta_\theta)} \times\\
-&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1} e^{-\theta_{ij}(d_{ij}+d_{ij-1}+\beta_\theta)}\Bigg) \times \\
+&=&\Bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1} \quad e^{-\theta_{i1}(d_{i1}+\beta_\theta)} \times\\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1} \quad e^{-\theta_{ij}(d_{ij}+d_{ij-1}+\beta_\theta)}\Bigg) \times \\
 &\times & \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \quad \alpha_\theta^{\alpha_0-1} e^{-\alpha_\theta\beta_0}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-&\propto& \Bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1} \quad \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)}\quad\theta_{ij}^{2\alpha_d+\alpha_\theta-1}\Bigg) \times \alpha_\theta^{\alpha_0-1} \quad e^{-\alpha_\theta\beta_0}
+&\propto& \Bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_\theta} \quad \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)}\quad\theta_{ij}^{\alpha_\theta}\Bigg) \times \alpha_\theta^{\alpha_0-1} \quad e^{-\alpha_\theta\beta_0}
 \end{eqnarray*}
 \\
 \\
 \begin{eqnarray*}
 &=&\Big(\frac{1}{\Gamma(\alpha_d+\alpha_\theta)}\Big)^I \Big(\frac{1}{\Gamma(2\alpha_d+\alpha_\theta)}\Big)^{\sum_{i=1}^I n_i} \quad \alpha_\theta^{\alpha_0-1} e^{-\alpha_\theta\beta_0} \times \\
-&\times& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1}\quad \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1}\Bigg)
+&\times& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_\theta} \quad \theta_{i1}^{\alpha_\theta}\quad \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{\alpha_\theta} \quad \theta_{ij}^{\alpha_\theta}\Bigg)
 \end{eqnarray*}
 \\
 \\
@@ -70,13 +70,18 @@
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-&=&\Bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1} e^{-\theta_{i1}(d_{i1}+\beta_\theta)} \times\\
-&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1} e^{-\theta_{ij}(d_{ij}+d_{ij-1}+\beta_\theta)}\Bigg) \times \\
+&=&\Bigg(\prod_{i=1}^I \frac{(d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}}{\Gamma(\alpha_d+\alpha_\theta)} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1} \quad e^{-\theta_{i1}(d_{i1}+\beta_\theta)} \times\\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \frac{(d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}}{\Gamma(2\alpha_d+\alpha_\theta)} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1} \quad e^{-\theta_{ij}(d_{ij}+d_{ij-1}+\beta_\theta)}\Bigg) \times \\
 &\times & \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \quad \beta_\theta^{\alpha_0-1} e^{-\beta_\theta\beta_0}
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
-&\propto& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\times \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}\quad \Bigg)\times \beta_\theta^{\alpha_0-1} e^{-\beta_\theta\big(\beta_0+\sum_{i=1}^I \sum_{j=1}^{n_i}\theta_{ij}\big)}
+&\propto& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta} \quad e^{-\theta_{i1}\beta_\theta} \quad \times \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta} \quad e^{-\theta_{ij}\beta_\theta} \Bigg) \\
+&\times& \beta_\theta^{\alpha_0-1} \quad e^{\beta_\theta \beta_0}
+\end{eqnarray*}
+\\
+\begin{eqnarray*}
+&=& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta}\times \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}\quad \Bigg)\times \beta_\theta^{\alpha_0-1} e^{-\beta_\theta\big(\beta_0+\sum_{i=1}^I \sum_{j=1}^{n_i}\theta_{ij}\big)}
 \end{eqnarray*}
 \\
 \\
@@ -84,22 +89,17 @@
 \section{$\pi(\alpha_\gamma|(\gamma_{ij})_{i=1}^I._{j=1}^{n_i})$}
 \begin{eqnarray*}
 \pi(\alpha_\gamma|(\gamma_{ij})_{i=1}^I._{j=1}^{n_i}) &\propto& \Bigg(\prod_{i=1}^I \bigg(\frac{1}{\gamma_{i1}}\bigg)^{d_{i1+\alpha_\gamma+1}}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{i1}})+(\frac{c_{i1}}{\gamma_{i1}})^{d_{i1}}\big)}\times\\
-&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{2d_{ij}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij}+c_{ij-1}}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\times \\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij}+d_{ij-1}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}+(\frac{c_{}ij}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\times \\
 &\times& Gamma(\alpha_\gamma|\alpha_0,\beta_0)
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
 &=&\Bigg(\prod_{i=1}^I \bigg(\frac{1}{\gamma_{i1}}\bigg)^{d_{i1+\alpha_\gamma+1}}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{i1}})+(\frac{c_{i1}}{\gamma_{i1}})^{d_{i1}}\big)}\times\\
-&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{2d_{ij}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij}+c_{ij-1}}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\times \\
-&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \quad \alpha_\gamma^{\alpha_0-1} e^{-\alpha_\gamma\beta_0}
-\end{eqnarray*}
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij}+d_{ij-1}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}+(\frac{c_{ij}}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\times \\
+&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \quad \alpha_\gamma^{\alpha_0-1} e^{-\alpha_\gamma\beta_0}\\
 \\
+&\propto& \Bigg(\prod_{i=1}^I \Big(\frac{1}{\gamma_{i1}}\Big)^{\alpha_\gamma} \times \prod_{i=1}^I \prod_{j=2}^{n_i}\Big(\frac{1}{\gamma_{ij}}\Big)^{\alpha_\gamma}\Bigg)\quad \alpha_\gamma^{\alpha_0-1}e^{-\alpha_\gamma\beta_0}\\
 \\
-\begin{eqnarray*}
-&\propto& \Bigg(\prod_{i=1}^I \Big(\frac{1}{\gamma_{i1}}\Big)^{\alpha_\gamma} \times \prod_{i=1}^I \prod_{j=2}^{n_i}\Big(\frac{1}{\gamma_{ij}}\Big)^{\alpha_\gamma}\Bigg)\quad \alpha_\gamma^{\alpha_0-1}e^{-\alpha_\gamma\beta_0}
-\end{eqnarray*}
-\\
-\begin{eqnarray*}
 &=&\Bigg(\prod_{i=1}^I \prod_{j=1}^{n_i} \Big(\frac{1}{\gamma_{ij}}\Big)^{\alpha_\gamma}\Bigg) \quad \alpha_\gamma^{\alpha_0-1}e^{-\alpha_\gamma\beta_0}
 \end{eqnarray*}
 \\
@@ -108,21 +108,18 @@
 \section{$\pi(\beta_\gamma|(\gamma_{ij})_{i=1}^I._{j=1}^{n_i})$}
 \begin{eqnarray*}
 \pi(\alpha_\gamma|(\gamma_{ij})_{i=1}^I._{j=1}^{n_i}) &\propto& \Bigg(\prod_{i=1}^I \bigg(\frac{1}{\gamma_{i1}}\bigg)^{d_{i1+\alpha_\gamma+1}}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{i1}})+(\frac{c_{i1}}{\gamma_{i1}})^{d_{i1}}\big)}\times\\
-&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{2d_{ij}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij}+c_{ij-1}}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\times \\
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij}+d_{ij-1}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}+(\frac{c_{ij}}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\times \\
 &\times& Gamma(\beta_\gamma|\alpha_0,\beta_0)
 \end{eqnarray*}
 \\
 \begin{eqnarray*}
 &=&\Bigg(\prod_{i=1}^I \bigg(\frac{1}{\gamma_{i1}}\bigg)^{d_{i1+\alpha_\gamma+1}}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{i1}})+(\frac{c_{i1}}{\gamma_{i1}})^{d_{i1}}\big)}\times\\
-&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{2d_{ij}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij}+c_{ij-1}}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\times \\
-&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \quad \beta_\gamma^{\alpha_0-1} e^{-\beta_\gamma\beta_0}
-\end{eqnarray*}
+&\times& \prod_{i=1}^I \prod_{j=2}^{n_i} \bigg(\frac{1}{\gamma_{ij}}\bigg)^{d_{ij}+d_{ij-1}+\alpha_\gamma+1}\quad e^{-\big((\frac{\beta_\gamma}{\gamma_{ij}})+(\frac{c_{ij-1}}{\gamma_{ij}})^{d_{ij-1}}+(\frac{c_{ij}}{\gamma_{ij}})^{d_{ij}}\big)}\Bigg)\times \\
+&\times& \frac{\beta_0^{\alpha_0}}{\Gamma(\alpha_0)} \quad \beta_\gamma^{\alpha_0-1} e^{-\beta_\gamma\beta_0}\\
 \\
-\\
-\begin{eqnarray*}
 &\propto& \Bigg(\prod_{i=1}^I e^{-\big(\frac{\beta_\gamma}{\gamma_{i1}}\big)}\prod_{i=1}^I \prod_{j=2}^{n_i} e^{-\big(\frac{\beta_\gamma}{\gamma_{ij}}\big)}\Bigg) \quad \beta_\gamma^{\alpha_0-1} e^{-\beta_\gamma\beta_0}\\
 &=&e^{\{-\sum_{i=1}^I \sum_{j=1}^{n_i}\big(\frac{\beta_\gamma}{\gamma_{ij}}\big)\}}\quad \beta_\gamma^{\alpha_0-1} e^{-\beta_\gamma\beta_0}\\
-&=& \beta_\gamma^{\alpha_0-1} e^{-\beta_\gamma\big(\beta_0+\sum_{i=1}^I \sum_{j=1}^{n_i}\big(\frac{\beta_\gamma}{\gamma_{ij}}\big))}\\
+&=& \beta_\gamma^{\alpha_0-1} e^{-\beta_\gamma\big(\beta_0+\sum_{i=1}^I \sum_{j=1}^{n_i}\big(\frac{1}{\gamma_{ij}}\big))}\\
 \\
 &\propto& \beta_\gamma \sim Gamma\Bigg(\alpha_0,\beta_0+\sum_{i=1}^I \sum_{j=1}^{n_i}\big(\frac{\beta_\gamma}{\gamma_{ij}}\big)\Bigg)
 \end{eqnarray*}
@@ -133,25 +130,23 @@
 \chapter{Log-verosimilitudes}
 \section{$ln(\pi(\alpha_d|(\theta_{ij})_{j=1}^{n_i}._{i=1}^I))$}
 \begin{eqnarray*}
-ln(\pi(\alpha_d|(\theta_{ij})_{j=1}^{n_i}._{i=1}^I)) &=& ln\Bigg(\Big(\frac{1}{\Gamma(\alpha_d+\alpha_\theta)}\Big)^I \Big(\frac{1}{\Gamma(2\alpha_d+\alpha_\theta)}\Big)^{\sum_{i=1}^I n_i} \quad \alpha_d^{\alpha_0-1} e^{-\alpha_d\beta_0} \times \\
-&\times& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1} \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta}\quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1}\Bigg)\Bigg)
+ln(\pi(\alpha_d|(\theta_{ij})_{j=1}^{n_i}._{i=1}^I)) &=& ln\Bigg(\Big(\frac{1}{\Gamma(\alpha_d+\alpha_\theta)}\Big)^I \Big(\frac{1}{\Gamma(2\alpha_d+\alpha_\theta)}\Big)^{\sum_{i=1}^I n_i} \quad \alpha_d^{\alpha_0-1} e^{-\alpha_d\beta_0} \\
+&\times& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d} \quad \theta_{i1}^{\alpha_d} \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d}\quad \theta_{ij}^{2\alpha_d}\Bigg)\Bigg)
 \end{eqnarray*}
 \begin{eqnarray*}
 &=& -I\times ln(\Gamma(\alpha_d+\alpha_\theta))-\sum_{i=1}^I n_i\times ln(\Gamma(2\alpha_d+\alpha_\theta))+(\alpha_0-1)\times ln(\alpha_d)-\alpha_d\beta_0 +\\
-&+&\Bigg(\sum_{i=1}^I(\alpha_d+\alpha_\theta)\times ln(d_{i1}+\beta_\theta)+(\alpha_d+\alpha_\theta-1)\times ln(\theta_{i1})+\\
-&+& \sum_{i=1}^I \sum_{j=2}^{n_i} (2\alpha_d+\alpha_\theta)\times ln(d_{ij}+d_{ij-1}+\beta_\theta)+(2\alpha_d+\alpha_\theta-1)\times ln(\theta_{ij})\Bigg)
+&+&\Bigg(\alpha_d \times \bigg(\sum_{i=1}^I ln(d_{i1}+\beta_\theta)+ ln(\theta_{i1})\bigg)+ 2\alpha_d\times \bigg(\sum_{i=1}^I \sum_{j=2}^{n_i}  ln(d_{ij}+d_{ij-1}+\beta_\theta)+ln(\theta_{ij})\bigg)\Bigg)
 \end{eqnarray*}
 \\
 \\
 \section{$ln(\pi(\alpha_\theta|(\theta_{ij})_{i=1}^I._{j=1}^{n_i}))$}
 \begin{eqnarray*}
 ln(\pi(\alpha_\theta|(\theta_{ij})_{i=1}^I._{j=1}^{n_i})) &=&ln\Bigg(\Big(\frac{1}{\Gamma(\alpha_d+\alpha_\theta)}\Big)^I \Big(\frac{1}{\Gamma(2\alpha_d+\alpha_\theta)}\Big)^{\sum_{i=1}^I n_i} \quad \alpha_\theta^{\alpha_0-1} e^{-\alpha_\theta\beta_0} \times \\
-&\times& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_d+\alpha_\theta} \quad \theta_{i1}^{\alpha_d+\alpha_\theta-1}\quad \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{2\alpha_d+\alpha_\theta} \quad \theta_{ij}^{2\alpha_d+\alpha_\theta-1}\Bigg)\Bigg)
+&\times& \Bigg(\prod_{i=1}^I (d_{i1}+\beta_\theta)^{\alpha_\theta} \quad \theta_{i1}^{\alpha_\theta}\quad \prod_{i=1}^I \prod_{j=2}^{n_i} (d_{ij}+d_{ij-1}+\beta_\theta)^{\alpha_\theta} \quad \theta_{ij}^{\alpha_\theta}\Bigg)\Bigg)
 \end{eqnarray*}
 \begin{eqnarray*}
-&=& -I\times ln(\Gamma(\alpha_d+\alpha_\theta))-\sum_{i=1}^I n_i\times ln(\Gamma(2\alpha_d+\alpha_\theta))+(\alpha_0-1)\times ln(\alpha_\theta)-\alpha_\theta\beta_0 +\\
-&+&\Bigg(\sum_{i=1}^I(\alpha_d+\alpha_\theta)\times ln(d_{i1}+\beta_\theta)+(\alpha_d+\alpha_\theta-1)\times ln(\theta_{i1})+\\
-&+& \sum_{i=1}^I \sum_{j=2}^{n_i} (2\alpha_d+\alpha_\theta)\times ln(d_{ij}+d_{ij-1}+\beta_\theta)+(2\alpha_d+\alpha_\theta-1)\times ln(\theta_{ij})\Bigg)
+&=& -I\times ln(\Gamma(\alpha_d+\alpha_\theta))-\sum_{i=1}^I n_i\times ln(\Gamma(2\alpha_d+\alpha_\theta))+(\alpha_0-1)\times ln(\alpha_\theta)-\alpha_\theta\beta_0 \\
+&+&(\alpha_\theta)\times\Bigg(\sum_{i=1}^I ln(d_{i1}+\beta_\theta)+ ln(\theta_{i1})+ \sum_{i=1}^I \sum_{j=2}^{n_i} ln(d_{ij}+d_{ij-1}+\beta_\theta)+ ln(\theta_{ij})\Bigg)
 \end{eqnarray*}
 \\
 \\

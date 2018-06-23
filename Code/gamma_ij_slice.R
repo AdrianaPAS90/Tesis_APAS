@@ -1,6 +1,5 @@
 gamma_ij_slice<-function(alpha_gamma_sim,beta_gamma_sim,d,c){
   
-  
   #Variable latente de costos
   
   gamma_ij_sim <- c
@@ -9,6 +8,7 @@ gamma_ij_slice<-function(alpha_gamma_sim,beta_gamma_sim,d,c){
   source('./Code/gamma1_slice.R')
   source('./Code/gamma2_slice.R')
   
+  I<-max(datos$paciente)
   i <- 1
   for(i in 1:I){
     gamma_aux <- gamma_ij_sim[which(c$paciente==i),]

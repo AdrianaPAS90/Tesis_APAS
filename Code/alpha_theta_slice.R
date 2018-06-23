@@ -14,6 +14,9 @@ alpha_theta_slice<-function( alpha_d_sim, alpha_theta_sim, beta_theta_sim, theta
 
   #b
   #((alpha_0-1)*log(alpha_theta_sim))-(alpha_theta_sim*beta_0)
+  alpha_theta1<-1
+  ((alpha_theta1)*(sum(log(d[los.unos,"duration"]+beta_theta_sim)+log(theta_sim[los.unos,1,1]))
+                   +sum(log(d[los.no.unos,"duration"]+d[los.no.unos-1,"duration"]+beta_theta_sim)+log(theta_sim[los.no.unos,1,1]))))
   
   #c
   #((alpha_d_sim+alpha_theta_sim)*sum(log(d[los.unos,"duration"]+beta_theta_sim))+((2*alpha_d_sim+alpha_theta_sim)*sum(log(d[los.no.unos,"duration"]+ d[los.no.unos-1,"duration"]+ beta_theta_sim))
@@ -25,10 +28,8 @@ alpha_theta_slice<-function( alpha_d_sim, alpha_theta_sim, beta_theta_sim, theta
   
   uni_alpha_theta<-uni.slice(alpha_theta_sim, function(alpha_theta) (-I*log(gamma(alpha_d_sim+alpha_theta)))-(n.sum*log(gamma(2*alpha_d_sim+alpha_theta)))
                             +((alpha_0-1)*log(alpha_theta))-(alpha_theta*beta_0)
-                            +((alpha_d_sim+alpha_theta)*sum(log(d[los.unos,"duration"]+beta_theta_sim))
-                            +(alpha_d_sim+alpha_theta-1)*log(theta_sim[los.unos,1,1])) 
-                            +((2*alpha_d_sim+alpha_theta)*sum(log(d[los.no.unos,"duration"]+ d[los.no.unos-1,"duration"]+ beta_theta_sim))
-                            +(2*alpha_d_sim+alpha_theta_sim-1)*log(theta_sim[los.no.unos,1,1])),
+                            +((alpha_theta)*(sum(log(d[los.unos,"duration"]+beta_theta_sim)+log(theta_sim[los.unos,1,1]))
+                              +sum(log(d[los.no.unos,"duration"]+d[los.no.unos-1,"duration"]+beta_theta_sim)+log(theta_sim[los.no.unos,1,1])))),
                             w=1, m=Inf, lower=0, upper=+Inf)
   
   alpha_theta_sim <- attr(uni_alpha_theta,"uni.slice.evals")
