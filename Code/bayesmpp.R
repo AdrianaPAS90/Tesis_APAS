@@ -24,7 +24,7 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   N.observaciones <- aggregate(datos[,c("paciente","num.cambio")],
                                by=list(datos$paciente),
                                FUN=max)
-  dim(N.observaciones)
+  #dim(N.observaciones)
   colnames(N.observaciones) <- c("id","paciente","num.cambios")
 
   dim.datos <- dim(datos)
