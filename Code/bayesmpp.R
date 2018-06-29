@@ -97,12 +97,12 @@ bayesmpp <- function(datos,M.sim,alpha_0=2,beta_0=0.3){
   }
 
   # --- Output
-  output <- list(alpha_d_rep,
-                alpha_theta_rep,
-                beta_theta_rep,
-                alpha_gamma_rep,
-                beta_gamma_rep,
-                thetagamma_rep)
+  output <- list(alpha_d=alpha_d_rep,
+                alpha_theta=alpha_theta_rep,
+                beta_theta=beta_theta_rep,
+                alpha_gamma=alpha_gamma_rep,
+                beta_gamma=beta_gamma_rep,
+                thetagamma=thetagamma_rep)
 
   return(output)
 }
